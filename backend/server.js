@@ -15,11 +15,11 @@ import {
   vkontakteMiddleware,
   oauthCallback,
 } from './controllers/auth';
-import { list, create } from './controllers/comments';
+import { list } from './controllers/events';
 
 // Connect to MongoDB
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/movies', {
+mongoose.connect('mongodb://localhost/events', {
   // mongodb://localhost/react-native-comments
   useMongoClient: true,
   /* other options */

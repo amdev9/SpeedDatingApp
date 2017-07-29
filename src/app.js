@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 import {
   StyleSheet,
   Text,
@@ -18,20 +17,20 @@ import { apiMiddleware, reducer } from './redux';
 const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
 
 // Fetch movie data
-store.dispatch({type: 'GET_MOVIE_DATA'});
+store.dispatch({type: 'GET_EVENT_DATA'});
 
-import Movies from './Movies';
+import Events from './Events';
 import Confirmation from './Confirmation';
 import Profile from './Profile';
+import EditProfile from './EditProfile';
 import Login from '../components/login';
 
 const MovieStack = StackNavigator({
-  Movies: { screen: Movies },
-  
   Login: { screen: Login },
   Profile: { screen: Profile },
-  
-  Confirmation: { screen: Confirmation }
+  Events: { screen: Events }, //events
+  Confirmation: { screen: Confirmation },
+  EditProfile: { screen: EditProfile },
 }, {
   // In modal mode screen slides up from the bottom
   // mode: 'modal',
@@ -39,19 +38,14 @@ const MovieStack = StackNavigator({
   headerMode: 'none',
 });
 
-
 export default class App extends Component {
-
   render() {     
     return (
-    // <View style={styles.container}>
-       <Provider store={store}> 
-          <MovieStack /> 
-        </Provider>
-    // </View>
+      <Provider store={store}> 
+        <MovieStack /> 
+      </Provider>
     )
   }
-  
 }
 
 

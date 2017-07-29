@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "node_modules/nodemon/bin/nodemon.js -- node_modules/babel-cli/bin/babel-node.js server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "populate": "node_modules/babel-cli/bin/babel-node.js populate.js"
   },
   "author": "Konstantin Shkut <konstantin.shkut@gmail.com> (http://rationalappdev.com)",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "cookie-session": "^2.0.0-beta.1",
     "express": "^4.15.2",

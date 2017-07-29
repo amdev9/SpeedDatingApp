@@ -13,37 +13,25 @@ import {
 
 import Icon from 'react-native-vector-icons/FontAwesome';
  
-export default class Profile extends Component {
+export default class EditProfile extends Component {
   
   render() {
-    const {user} = this.props.navigation.state.params;
+    // const {user} = this.props.navigation.state.params;
     return (     
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.header}>
-            Welcome {user.name}!
+            Edit !
           </Text>
           <View style={styles.avatar}>
-            <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
+            {/* <Image source={{ uri: user.avatar }} style={styles.avatarImage} /> */}
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
           </View>
           <Text style={styles.text}>
-             {user.name} {'\n'}
+             Editing {'\n'}
              {/* {JSON.stringify(this.props)} */}
              
           </Text>
-
-
-          <Button
-            onPress={() => this.props.navigation.navigate('EditProfile')}
-            title="Edit Profile"
-          />
-
-          <Button
-            onPress={() => this.props.navigation.navigate('Events')}
-            title="Go to Events "
-          />
-          
         </View>
       </View>
     );
@@ -90,5 +78,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
+
 
 

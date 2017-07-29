@@ -10,37 +10,38 @@ import {
   SegmentedControlIOS
 } from 'react-native';
 
-import MoviePoster from './MoviePoster';
-import MoviePopup from './MoviePopup';
+import EventPoster from './EventPoster';
+import EventPopup from './EventPopup';
 
 
 @connect(
   state => ({
-    movies: state.movies,
+    events: state.events,
     loading: state.loading,
   }),
   dispatch => ({
-    refresh: () => dispatch({type: 'GET_MOVIE_DATA'}),
+    refresh: () => dispatch({type: 'GET_EVENT_DATA'}),
   }),
 )
-export default class Movies extends Component {
+export default class Events extends Component {
+  
   state = {
     popupIsOpen: false,
     // Day chosen by user
-    chosenDay: 0,       // choose first day by default
+    // chosenDay: 0,       // choose first day by default
     // Time chosen by user
-    chosenTime: null,
+    // chosenTime: null,
     selectedIndex: 1
   }
 
-  openMovie = (movie) => {
+  openEvent = (event) => {
     this.setState({
       popupIsOpen: true,
-      movie,	
+      event,	
     });
   }
 
-  closeMovie = () => {
+  closeEvent = () => {
     this.setState({
       popupIsOpen: false,
       // Reset values to default ones
@@ -49,36 +50,34 @@ export default class Movies extends Component {
     });
   }
 
-  chooseDay = (day) => {
-    this.setState({
-      chosenDay: day,
-    });
-  }
+  // chooseDay = (day) => {
+  //   this.setState({
+  //     chosenDay: day,
+  //   });
+  // }
 
-  chooseTime = (time) => {
-    this.setState({
-      chosenTime: time,
-    });
-  }
+  // chooseTime = (time) => {
+  //   this.setState({
+  //     chosenTime: time,
+  //   });
+  // }
 
-  bookTicket = () => {
+  bookEvent = () => {
     // Make sure they selected time 
-    if (!this.state.chosenTime) {
-      alert('Please select show time');
-    } else {
+    // if (!this.state.chosenTime) {
+    //   alert('Please select show time');
+    // } else {
       // Close popup
-      this.closeMovie();
+      this.closeEvent();
       const { navigate } = this.props.navigation;
       navigate('Confirmation', { code: Math.random().toString(36).substring(6).toUpperCase() });
       
-    }
+    // }
   }
 
    render() {
-    const { movies, loading, refresh } = this.props;
+    const { events, loading, refresh } = this.props;
     return (
-
-       
 
       <View style={styles.container}>
 
@@ -89,10 +88,8 @@ export default class Movies extends Component {
             this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
           }}
         />
-
              
-
-        {movies
+        {events // and movies participants contains data && this.state.selectedIndex == 1
           ? <ScrollView
               contentContainerStyle={styles.scrollContent}
               // Hide all scroll indicators
@@ -105,9 +102,9 @@ export default class Movies extends Component {
                 />
               }
             >
-              {movies.map((movie, index) => <MoviePoster
-                movie={movie}
-                onOpen={this.openMovie}
+              {events.map((event, index) => <EventPoster
+                event={event}
+                onOpen={this.openEvent}
                 key={index}
               />)}
             </ScrollView>
@@ -117,18 +114,18 @@ export default class Movies extends Component {
               size="large"
             />
         }
-        <MoviePopup
-          movie={this.state.movie}
+        <EventPopup
+          event={this.state.event}
           isOpen={this.state.popupIsOpen}
-          onClose={this.closeMovie}
-          chosenDay={this.state.chosenDay}
-          chosenTime={this.state.chosenTime}
-          onChooseDay={this.chooseDay}
-          onChooseTime={this.chooseTime}
-          onBook={this.bookTicket}
+          onClose={this.closeEvent}
+          onBook={this.bookEvent}
         />
 
-         
+         {/* chosenDay={this.state.chosenDay} */}
+          {/* chosenTime={this.state.chosenTime} */}
+          {/* onChooseDay={this.chooseDay} */}
+          {/* onChooseTime={this.chooseTime} */}
+
       </View>
       
     );

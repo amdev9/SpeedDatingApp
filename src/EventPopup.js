@@ -20,20 +20,20 @@ const { width, height } = Dimensions.get('window');
 // Set default popup height to 67% of screen height
 const defaultHeight = height * 0.67;
 
-export default class MoviePopup extends Component {
+export default class EventPopup extends Component {
 
   static propTypes = {
 	isOpen: PropTypes.bool.isRequired,
     // Movie object that has title, genre, poster, days and times
-    movie: PropTypes.object,
+    event: PropTypes.object,
     // Index of chosen day
-    chosenDay: PropTypes.number,
+    // chosenDay: PropTypes.number,
     // Index of chosem show time
-    chosenTime: PropTypes.number,
+    // chosenTime: PropTypes.number,
     // Gets called when user chooses day
-    onChooseDay: PropTypes.func,
+    // onChooseDay: PropTypes.func,
     // Gets called when user chooses time
-    onChooseTime: PropTypes.func,
+    // onChooseTime: PropTypes.func,
     // Gets called when user books their ticket
     onBook: PropTypes.func,
     // Gets called when popup closed
@@ -213,15 +213,15 @@ export default class MoviePopup extends Component {
 
   render() {
     const {
-      movie,
-      chosenDay,
-      chosenTime,
-      onChooseDay,
-      onChooseTime,
+      event,
+      // chosenDay,
+      // chosenTime,
+      // onChooseDay,
+      // onChooseTime,
       onBook
     } = this.props;
     // Pull out movie data
-    const { title, genre, poster, days, times } = movie || {};
+    const { title, genre, poster, days, times } = event || {};
     // Render nothing if not visible
     if (!this.state.visible) {
       return null;
@@ -259,23 +259,23 @@ export default class MoviePopup extends Component {
               </View>
             </View>
 
-            {/* Showtimes */}
-            <View>
-              {/* Day */}
+              
+            {/* <View>
+              
               <Text style={styles.sectionHeader}>Day</Text>
               <Options
                 values={days}
                 chosen={chosenDay}
                 onChoose={onChooseDay}
                 />
-              {/* Time */}
+               
               <Text style={styles.sectionHeader}>Showtime</Text>
                 <Options
                 values={times}
                 chosen={chosenTime}
                 onChoose={onChooseTime}
                 />
-            </View>
+            </View> */}
 
           </View>
 

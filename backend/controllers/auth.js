@@ -5,7 +5,7 @@ import VkontakteStrategyObj from 'passport-vkontakte';
 const VKontakteStrategy = VkontakteStrategyObj.Strategy;
 
 
-import User from '../models/user';
+import Person from '../models/person';
 // Import Facebook and Google OAuth apps configs
 import { facebook, google, vkontakte } from '../config';
 
@@ -48,27 +48,14 @@ passport.use(new GoogleStrategy(google,
 // Register vk Passport strategy
 passport.use(new VKontakteStrategy(vkontakte,
   async (accessToken, refreshToken, params, profile, done)
-    => done(null, await createOrGetUserFromDatabase(transformVKontakteProfile(profile._json)))
-
-    //  function myVerifyCallbackFn(accessToken, refreshToken, params, profile, done) {
-    // Now that we have user's `profile` as seen by VK, we can
-    // use it to find corresponding database records on our side.
-    // Also we have user's `params` that contains email address (if set in 
-    // scope), token lifetime, etc.
-    // Here, we have a hypothetical `User` class which does what it says.
-    // User.findOrCreate({ vkontakteId: profile.id })
-    //     .then(function (user) { done(null, user); })
-    //     .catch(done);
-    // console.log(JSON.stringify(profile));
-  // }
-      
+    => done(null, await createOrGetUserFromDatabase(transformVKontakteProfile(profile._json)))      
 ));
   
 
 const createOrGetUserFromDatabase = async (userProfile) => {
-  let user = await User.findOne({ 'oauth_id': userProfile.oauth_id }).exec();
+  let user = await Person.findOne({ 'oauth_id': userProfile.oauth_id }).exec();
   if (!user) {
-    user = new User({
+    user = new Person({
       oauth_id: userProfile.oauth_id,
       name: userProfile.name,
       avatar: userProfile.avatar,
