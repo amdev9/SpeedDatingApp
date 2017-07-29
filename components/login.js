@@ -9,8 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 
-export default class Login extends Component {
-
+export default class Login extends Component { 
   // static propTypes = {
   //   onLoggedIn: PropTypes.func.isRequired
   // };
@@ -22,6 +21,7 @@ export default class Login extends Component {
     // Launched from an external URL
     Linking.getInitialURL().then((url) => {
       if (url) {
+        
         this.handleOpenURL({ url });
       }
     });
@@ -39,11 +39,15 @@ export default class Login extends Component {
     const user = JSON.parse(decodeURI(user_string));
     // Call onLoggedIn function of parent component and pass user object
     // this.props.onLoggedIn(user);
+     
+
+    const { navigate } = this.props.navigation;
+    navigate('Profile', { user: user });
+    
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
     }
-    const { navigate } = this.props.navigation;
-    navigate('Profile', { user: user });
+    
     
   };
 

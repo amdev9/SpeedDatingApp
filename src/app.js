@@ -26,28 +26,10 @@ import Profile from './Profile';
 import Login from '../components/login';
 
 const MovieStack = StackNavigator({
-  Login: {
-    screen: Login,
-    path: 'login'
-  },
-  Profile: {
-    screen: Profile,
-    path: 'profile',
-    navigationOptions: ({navigation}) => ({
-      user: navigation.state.params.user,
-    }),
-  },
-  Movies: {
-    screen: Movies,
-    path: 'movies'
-  },
-  Confirmation: {
-    screen: Confirmation,
-    path: 'confirmation/:movie',
-    navigationOptions: ({navigation}) => ({
-      code: navigation.state.params.code,
-    }),
-  }
+  Login: { screen: Login },
+  Profile: { screen: Profile },
+  Movies: { screen: Movies },
+  Confirmation: { screen: Confirmation }
 }, {
   // In modal mode screen slides up from the bottom
   // mode: 'modal',
