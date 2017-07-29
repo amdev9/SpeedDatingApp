@@ -6,7 +6,8 @@ import {
   RefreshControl,
   ScrollView,
   StyleSheet,
-  View
+  View,
+  SegmentedControlIOS
 } from 'react-native';
 
 import MoviePoster from './MoviePoster';
@@ -29,6 +30,7 @@ export default class Movies extends Component {
     chosenDay: 0,       // choose first day by default
     // Time chosen by user
     chosenTime: null,
+    selectedIndex: 1
   }
 
   openMovie = (movie) => {
@@ -75,7 +77,21 @@ export default class Movies extends Component {
    render() {
     const { movies, loading, refresh } = this.props;
     return (
+
+       
+
       <View style={styles.container}>
+
+        <SegmentedControlIOS 
+          values={['My events', 'Find event']}
+          selectedIndex={this.state.selectedIndex}
+          onChange={(event) => {
+            this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
+          }}
+        />
+
+             
+
         {movies
           ? <ScrollView
               contentContainerStyle={styles.scrollContent}
@@ -111,14 +127,18 @@ export default class Movies extends Component {
           onChooseTime={this.chooseTime}
           onBook={this.bookTicket}
         />
+
+         
       </View>
+      
     );
   }
 
 }
 
 const styles = StyleSheet.create({
-   container: {
+  
+  container: {
     flex: 1,                // take up all screen
     paddingTop: 20,         // start below status bar
   },
@@ -128,6 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center', // center vertically
   },
   scrollContent: {
+    paddingTop: 20, 
     flexDirection: 'row',   // arrange posters in rows
     flexWrap: 'wrap',       // allow multiple rows
   },

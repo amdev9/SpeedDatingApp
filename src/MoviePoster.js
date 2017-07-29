@@ -39,10 +39,10 @@ export default class MoviePoster extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 10,
-    marginBottom: 10,
+    marginLeft: 30,
+    marginBottom: 20,
     height: (height - 20 - 20) / rows - 10,
-    width: (width - 10) / cols - 10,
+    width: (width - 60) /// cols - 10,
   },
   imageContainer: {
     flex: 1,                          // take up all available space

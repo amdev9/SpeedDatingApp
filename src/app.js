@@ -26,9 +26,11 @@ import Profile from './Profile';
 import Login from '../components/login';
 
 const MovieStack = StackNavigator({
+  Movies: { screen: Movies },
+  
   Login: { screen: Login },
   Profile: { screen: Profile },
-  Movies: { screen: Movies },
+  
   Confirmation: { screen: Confirmation }
 }, {
   // In modal mode screen slides up from the bottom
