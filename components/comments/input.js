@@ -19,7 +19,7 @@ export default class Input extends Component {
 
   // Update state when input changes
   onChangeText = (text) => this.setState({ text });
-
+  
   // Handle return press on the keyboard
   // NOTE: You don't really need it for this example, because
   // we're using a keyboard without return button, but I left it here

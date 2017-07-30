@@ -70,7 +70,10 @@ export default class Events extends Component {
       // Close popup
       this.closeEvent();
       const { navigate } = this.props.navigation;
-      navigate('Confirmation', { code: Math.random().toString(36).substring(6).toUpperCase() });
+      navigate('Confirmation', {
+        event: this.state.event,
+        participant: this.props.navigation.state.params.person
+      }); // , { code: Math.random().toString(36).substring(6).toUpperCase() }
       
     // }
   }

@@ -7,19 +7,54 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 
+import { put, get } from '../components/api';
 export default class Confirmation extends Component {
-   
+
+
+   _finalBookEvent = async () => {
+    const { event, participant } = this.props.navigation.state.params;
+    // this._scrollView.scrollTo({ y: 0 });
+    try {
+      // Make API call
+      const response = await put('events', {
+        event_id: event._id,
+        participant_id: participant._id,
+      }); 
+
+      console.log(event._id,  participant._id)
+      // Convert response to JSON
+      // const json = await response.json();
+      console.log(response);
+
+    }
+    catch (error) {
+      alert(error);
+    }
+  };
+
+
+
   render() {
-    const { code } = this.props.navigation.state.params;
+    // const { code } = this.props.navigation.state.params;
     const { goBack } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Your confirmation code</Text>
-        <Text style={styles.code}>{code}</Text>
+        {/* <Text style={styles.header}>Your confirmation code</Text> */}
+        {/* <Text style={styles.code}>{code}</Text> */}
+        
         <TouchableOpacity
           style={styles.buttonContainer}
           // Go back when pressed
-          onPress={() => goBack()} // go inside, mark event in my events
+          onPress={() => this._finalBookEvent()} // add to event participants current person profile
+        >
+          <Text style={styles.button}>Final Book Event</Text>
+        </TouchableOpacity>
+
+
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          // Go back when pressed
+          onPress={() => goBack()}  
         >
           <Text style={styles.button}>Done</Text>
         </TouchableOpacity>

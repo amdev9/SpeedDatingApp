@@ -6,7 +6,7 @@ var eventSchema = Schema({
   photo : String,
   description: String, 
   date : Date,
-  participants   : [{ type: Schema.ObjectId, ref: 'Person' }]
+  participants  : [{ type: Schema.ObjectId, ref: 'Person' }]
 });
 
 var DateEvent = mongoose.model('Event', eventSchema);

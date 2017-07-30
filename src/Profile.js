@@ -40,7 +40,9 @@ export default class Profile extends Component {
           />
 
           <Button
-            onPress={() => this.props.navigation.navigate('Events')}
+            onPress={() => this.props.navigation.navigate('Events', {
+              person: user
+            })}
             title="Go to Events "
           />
           

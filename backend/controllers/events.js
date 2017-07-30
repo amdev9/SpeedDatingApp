@@ -1,20 +1,26 @@
 import Event from '../models/event';
-
+ 
 // User relation for .populate()
-const personRelation = {
-  path: 'person',
+const creatorRelation = {
+  path: '_creator', // ['participants', 
   select: ['name', 'avatar'],
   model: 'Person',
 };
 
-///////
+const participantsRelation = {
+  path: 'participants', 
+  select: ['name', 'avatar'],
+  model: 'Person',
+};
+
 
 // List existing comments
 export const list = async (req, res, next) => {
   // Get all comments and populate User models
   const events = await Event.find()
     // .sort({ 'created': -1 })
-    .populate(personRelation)
+    .populate(creatorRelation)
+    .populate(participantsRelation)
     .exec();
 
   res.json({
@@ -22,23 +28,42 @@ export const list = async (req, res, next) => {
   });
 };
 
-// // Create new comment
-// export const create = async (req, res, next) => {
-//   const { user_id, content } = req.body;
-//   // Save comment
-//   const comment = await new Comment({
-//     user: user_id,
-//     content: content,
-//     created: new Date,
-//   }).save();
+export const create = async (req, res, next) => {
+  const { event_id, participant_id } = req.body;
+  Event.findById(event_id, function (err, event) {
+    if (err) {
+      console.log(err);
+    }
+    if (event.participants.indexOf(participant_id) > -1) {
+      res.send(event);
+    } else {
+      event.participants.push(participant_id);
+      event.save(function (err, updatedEvent) {
+        if (err) {
+          console.log(err);
+        }
+        res.send(updatedEvent);
+      });
+    }
+  });
+};
 
-//   res.json({
-//     // Get the comment and populate User model
-//     comment: await Comment.findById(comment._id)
-//       .populate(userRelation)
-//       .exec()
-//   });
-// };
+
+// 
+  // // Save comment
+  // const comment = await new Comment({
+  //   user: user_id,
+  //   content: content,
+  //   created: new Date,
+  // }).save();
+
+  // res.json({
+  //   // Get the comment and populate User model
+  //   comment: await Comment.findById(comment._id)
+  //     .populate(userRelation)
+  //     .exec()
+  // });
+
 
 
 

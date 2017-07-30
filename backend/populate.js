@@ -16,12 +16,7 @@ handleError = (err) => {
 var options = { promiseLibrary: require('bluebird') };
 var db = mongoose.createConnection('mongodb://localhost/events', options);
 
-Band = db.model('band-promises', { name: String });
-
-db.on('open', function() {
-  assert.equal(Band.collection.findOne().constructor, require('bluebird'));
-});
-
+ 
 
 const organizer = new Person ({
   oauth_id: '12312312113',
