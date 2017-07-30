@@ -21,7 +21,7 @@ export default class Confirmation extends Component {
         participant_id: participant._id,
       }); 
 
-      console.log(event._id,  participant._id)
+      // console.log(event._id,  participant._id)
       // Convert response to JSON
       // const json = await response.json();
       console.log(response);

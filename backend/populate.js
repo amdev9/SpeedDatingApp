@@ -8,16 +8,11 @@ handleError = (err) => {
   console.log(err);
 }
 
-// mongoose.connect('mongodb://localhost/events', {
-//   useMongoClient: true,
-//   /* other options */
-// });
-
-var options = { promiseLibrary: require('bluebird') };
-var db = mongoose.createConnection('mongodb://localhost/events', options);
-
+mongoose.connect('mongodb://localhost/events', {
+  useMongoClient: true,
+  /* other options */
+});
  
-
 const organizer = new Person ({
   oauth_id: '12312312113',
   name: 'testname',
