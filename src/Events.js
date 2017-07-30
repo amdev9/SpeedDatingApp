@@ -12,7 +12,7 @@ import {
 
 import EventPoster from './EventPoster';
 import EventPopup from './EventPopup';
-
+var _ = require('lodash');
 
 @connect(
   state => ({
@@ -80,6 +80,8 @@ export default class Events extends Component {
 
    render() {
     const { events, loading, refresh } = this.props;
+    const { person } =  this.props.navigation.state.params;
+
     return (
 
       <View style={styles.container}>
@@ -91,7 +93,7 @@ export default class Events extends Component {
             this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
           }}
         />
-             
+       
         {events // and movies participants contains data && this.state.selectedIndex == 1
           ? <ScrollView
               contentContainerStyle={styles.scrollContent}
@@ -105,11 +107,25 @@ export default class Events extends Component {
                 />
               }
             >
-              {events.map((event, index) => <EventPoster
-                event={event}
-                onOpen={this.openEvent}
-                key={index}
-              />)}
+              {events.map((event, index) => {
+                if (this.state.selectedIndex == 0) {
+                  if ( _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
+                    return <EventPoster
+                      event={event}
+                      onOpen={this.openEvent}
+                      key={index}
+                    /> 
+                  }  
+                } else {
+                  return <EventPoster
+                    event={event}
+                    onOpen={this.openEvent}
+                    key={index}
+                  /> 
+                }
+              }
+
+              )}
             </ScrollView>
           : <ActivityIndicator
               animating={loading}
@@ -117,6 +133,7 @@ export default class Events extends Component {
               size="large"
             />
         }
+            
         <EventPopup
           event={this.state.event}
           isOpen={this.state.popupIsOpen}
@@ -124,11 +141,7 @@ export default class Events extends Component {
           onBook={this.bookEvent}
         />
 
-         {/* chosenDay={this.state.chosenDay} */}
-          {/* chosenTime={this.state.chosenTime} */}
-          {/* onChooseDay={this.chooseDay} */}
-          {/* onChooseTime={this.chooseTime} */}
-
+        
       </View>
       
     );
