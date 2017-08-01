@@ -22,7 +22,7 @@ store.dispatch({type: 'GET_EVENT_DATA'});
 import Events from './Events';
 import Confirmation from './Confirmation';
 import Profile from './Profile';
-import EditProfile from './EditProfile';
+import Edit from './Edit';
 import Login from '../components/login';
 
 const MovieStack = StackNavigator({
@@ -30,7 +30,7 @@ const MovieStack = StackNavigator({
   Profile: { screen: Profile },
   Events: { screen: Events }, //events
   Confirmation: { screen: Confirmation },
-  EditProfile: { screen: EditProfile },
+  Edit: { screen: Edit },
 }, {
   // In modal mode screen slides up from the bottom
   // mode: 'modal',

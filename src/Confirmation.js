@@ -11,7 +11,7 @@ import { put, get } from '../components/api';
 export default class Confirmation extends Component {
 
 
-   _finalBookEvent = async () => {
+  _finalBookEvent = async () => {
     const { event, participant } = this.props.navigation.state.params;
     // this._scrollView.scrollTo({ y: 0 });
     try {
