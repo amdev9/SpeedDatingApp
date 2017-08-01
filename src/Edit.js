@@ -55,23 +55,28 @@ class Edit extends React.Component {
 
   upload = () => {
     const image = this.state.photos[this.state.index].node.image.uri;
-    let photos = this.state.photos;
-    photos.push(image);
-    this.setState({photos: photos});
+    // let photos = this.state.photos;
+    // photos.push(image);
+    // this.setState({photos: photos});
     console.log('Uploading ..', image)
 
-    let files = this.state.photos.map( (file) => {
-      return {
-        name: 'file',
-        filename: _generateUUID() + '.png',
-        filepath: file.uri,
-        filetype: 'image/png',
-      }
-    });
+    // let files = this.state.photos.map( (file) => {
+    //   return {
+    //     name: 'file',
+    //     filename: _generateUUID() + '.png',
+    //     filepath: file.uri,
+    //     filetype: 'image/png',
+    //   }
+    // });
 
     let opts = {
-      url: 'http://localhost:3000/',
-      files: files,
+      url: 'http://localhost:3000/v1/',
+      files: [{
+        name: 'file',
+        filename: _generateUUID() + '.png',
+        filepath: image, //file.uri,
+        filetype: 'image/png',
+      }],//files,
       params: {name: 'test-app'}
     };
 

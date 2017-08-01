@@ -2,9 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import mongoose from 'mongoose';
-
 import morgan from 'morgan';
-import router from './router';
+
 
 import {
   facebookLogin,
@@ -28,6 +27,7 @@ mongoose.connect('mongodb://localhost/events', {
 // Initialize http server
 const app = express();
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -41,15 +41,35 @@ app.get('/auth/facebook/callback', facebookMiddleware, oauthCallback);
 app.get('/auth/google/callback', googleMiddleware, oauthCallback);
 app.get('/auth/vkontakte/callback', vkontakteMiddleware, oauthCallback);
 
-// // Set up comment routes
-// app.route('/comments')
-//   .get(list)
-//   .put(create);
+ 
 
 // Logger that outputs all requests into the console
 app.use(morgan('combined'));
 // Use v1 as prefix for all API endpoints
+
+import router from './router';
+
 app.use('/v1', router);
+
+// app.get('/images', function(req, res) {
+//     router.getImages(function(err, genres) {
+//         if (err) {
+//             throw err;
+//         }
+//         res.json(genres);
+//     });
+// });
+
+// app.get('/images/:id', function(req, res) {
+//     router.getImageById(req.params.id, function(err, genres) {
+//         if (err) { throw err; }
+//         // res.download(genres.path);
+//         res.contentType('image/png');
+//         res.send(fs.readFileSync(genres.path));
+//     });
+// });
+
+
 
 
 // Launch the server on the port 3000
