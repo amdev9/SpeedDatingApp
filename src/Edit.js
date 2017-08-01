@@ -123,13 +123,13 @@ class Edit extends React.Component {
 
 
   render() {
-    const {user} = this.props.navigation.state.params;
+    // const {user} = this.props.navigation.state.params;
     console.log('state :', this.state)
     return (
       <View style={styles.container}>
 
         <Text style={styles.header}>
-            Edit {user.avatar}
+            {/* Edit {user.avatar} */}
           </Text>
           <View style={styles.avatar}>
              {/* <Image source={{ uri: 'http://localhost:8000/images/597f6c1b80135404074684a9' }} style={styles.avatarImage} />  */}

@@ -51,23 +51,23 @@ import router from './router';
 
 app.use('/v1', router);
 
-// app.get('/images', function(req, res) {
-//     router.getImages(function(err, genres) {
-//         if (err) {
-//             throw err;
-//         }
-//         res.json(genres);
-//     });
-// });
+app.get('/images', function(req, res) {
+    router.getImages(function(err, genres) {
+        if (err) {
+            throw err;
+        }
+        res.json(genres);
+    });
+});
 
-// app.get('/images/:id', function(req, res) {
-//     router.getImageById(req.params.id, function(err, genres) {
-//         if (err) { throw err; }
-//         // res.download(genres.path);
-//         res.contentType('image/png');
-//         res.send(fs.readFileSync(genres.path));
-//     });
-// });
+app.get('/images/:id', function(req, res) {
+    router.getImageById(req.params.id, function(err, genres) {
+        if (err) { throw err; }
+        // res.download(genres.path);
+        res.contentType('image/png');
+        res.send(fs.readFileSync(genres.path));
+    });
+});
 
 
 

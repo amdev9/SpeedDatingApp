@@ -26,11 +26,14 @@ import Edit from './Edit';
 import Login from '../components/login';
 
 const MovieStack = StackNavigator({
+  Edit: { screen: Edit },
+
+  
   Login: { screen: Login },
   Profile: { screen: Profile },
   Events: { screen: Events }, //events
   Confirmation: { screen: Confirmation },
-  Edit: { screen: Edit },
+  // edit
 }, {
   // In modal mode screen slides up from the bottom
   // mode: 'modal',
