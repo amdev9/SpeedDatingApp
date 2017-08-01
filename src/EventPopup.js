@@ -214,6 +214,7 @@ export default class EventPopup extends Component {
   render() {
     const {
       event,
+      person,
       // chosenDay,
       // chosenTime,
       // onChooseDay,
@@ -232,8 +233,8 @@ export default class EventPopup extends Component {
         <TouchableWithoutFeedback onPress={this.props.onClose}>
           <Animated.View style={[styles.backdrop, { opacity: this.state.opacity }]}/>
         </TouchableWithoutFeedback>
-        <Animated.View
-          style={[styles.modal, {
+        
+        <Animated.View style={[styles.modal, {
             // Animates height
             height: this.state.height,
             // Animates position on the screen
@@ -241,46 +242,26 @@ export default class EventPopup extends Component {
           }]}
         >
 
-          {/* Content */}
           <View style={styles.content}>
-            {/* Movie poster, title and genre */}
+ 
             <View
               style={[styles.movieContainer, this.getStyles().movieContainer]}
               {...this._panResponder.panHandlers}
             >
-              {/* Poster */}
+ 
               <View style={[styles.imageContainer, this.getStyles().imageContainer]}>
                 <Image source={{ uri: poster }} style={styles.image} />
               </View>
-              {/* Title and genre */}
+
               <View style={[styles.movieInfo, this.getStyles().movieInfo]}>
                 <Text style={[styles.title, this.getStyles().title]}>{title}</Text>
                 <Text style={styles.genre}>{genre}</Text>
               </View>
             </View>
-
-              
-            {/* <View>
-              
-              <Text style={styles.sectionHeader}>Day</Text>
-              <Options
-                values={days}
-                chosen={chosenDay}
-                onChoose={onChooseDay}
-                />
-               
-              <Text style={styles.sectionHeader}>Showtime</Text>
-                <Options
-                values={times}
-                chosen={chosenTime}
-                onChoose={onChooseTime}
-                />
-            </View> */}
-
-          </View>
-
-          {/* Footer */}
-          <View style={styles.footer}>
+           </View>
+            <View style={styles.footer}>
+          { event.participants[0]._id == person._id
+          ?
              <TouchableHighlight
               underlayColor="#9575CD"
               style={styles.buttonContainer}
@@ -288,8 +269,10 @@ export default class EventPopup extends Component {
             >
               <Text style={styles.button}>Book My Tickets</Text>
             </TouchableHighlight> 
+             : <Text style={styles.footer}> Already attend </ Text>
+            }
           </View>
-
+            
         </Animated.View>
       </View>
     );

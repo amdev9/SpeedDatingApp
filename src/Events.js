@@ -136,6 +136,7 @@ export default class Events extends Component {
             
         <EventPopup
           event={this.state.event}
+          person={person}
           isOpen={this.state.popupIsOpen}
           onClose={this.closeEvent}
           onBook={this.bookEvent}
