@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 import {
   Animated,
   Dimensions,
@@ -260,7 +261,8 @@ export default class EventPopup extends Component {
             </View>
            </View>
             <View style={styles.footer}>
-          { event.participants[0]._id == person._id
+          { (typeof event.participants !== 'undefined' && event.participants.length == 0)  || (typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) == -1) //   {/* event.participants[0]._id == person._id // event.participants // &&  */}
+    
           ?
              <TouchableHighlight
               underlayColor="#9575CD"

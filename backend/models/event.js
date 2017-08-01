@@ -6,6 +6,7 @@ var eventSchema = Schema({
   photo : String,
   description: String, 
   date : Date,
+  organizer  : { type: Schema.ObjectId, ref: 'Person' },
   participants  : [{ type: Schema.ObjectId, ref: 'Person' }]
 });
 

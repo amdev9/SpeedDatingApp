@@ -109,7 +109,7 @@ export default class Events extends Component {
             >
               {events.map((event, index) => {
                 if (this.state.selectedIndex == 0) {
-                  if ( _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
+                  if (  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
                     return <EventPoster
                       event={event}
                       onOpen={this.openEvent}

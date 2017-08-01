@@ -34,7 +34,7 @@ export const create = async (req, res, next) => {
     if (err) {
       console.log(err);
     }
-    if (event.participants.indexOf(participant_id) > -1) {
+    if ( typeof event.participants !== 'undefined' && event.participants.length > 0 &&  event.participants.indexOf(participant_id) > -1) {
       res.send(event);
     } else {
       event.participants.push(participant_id);
@@ -42,7 +42,10 @@ export const create = async (req, res, next) => {
         if (err) {
           console.log(err);
         }
-        res.send(updatedEvent);
+        res.json({
+          updatedEvent
+        });
+        // res.send(updatedEvent);
       });
     }
   });

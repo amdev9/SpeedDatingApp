@@ -19,7 +19,7 @@ const organizer = new Person ({
   avatar: 'https://i.imgur.com/po7UezG.jpg',
   age: 24,
   gender: 1,
-  organizer: true,
+  organizer_status: true,
   likes: [],
   events: []
 });
@@ -32,6 +32,7 @@ organizer.save(function (err) {
     photo : 'https://i.imgur.com/po7UezG.jpg',
     description: 'Some description', 
     date : Date.now(),
+    organizer: organizer._id,
     participants   : []
   });
 

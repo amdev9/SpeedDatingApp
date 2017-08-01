@@ -11,7 +11,7 @@ var personSchema = Schema({
   avatar   : String,
   age      : Number,
   gender   : Number,  // (0-girl, 1-man)
-  organizer : Boolean,
+  organizer_status : Boolean,
   likes: Array,
   events : [{ type: Schema.Types.ObjectId, ref: 'DateEvent' }]
 });

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import {
   StyleSheet,
   Text,
@@ -23,40 +24,49 @@ export default class Confirmation extends Component {
 
       // console.log(event._id,  participant._id)
       // Convert response to JSON
-      // const json = await response.json();
-      console.log(response);
+      const json = await response.json();
+      console.log(json);
+       
+      // this.props.navigation.navigate('Events')
+      // , {
+        // event: json
+      // }
 
     }
     catch (error) {
       alert(error);
     }
   };
-
-
-
+  
   render() {
     const { event, participant } = this.props.navigation.state.params;
-
-    console.log('render ---------', event, participant);
     const { goBack } = this.props.navigation;
-    return (
-      <View style={styles.container}>
-        {/* <Text style={styles.header}>Your confirmation code</Text> */}
-        {/* <Text style={styles.code}>{code}</Text> */}
-        
-        {participant._id == event.participants[0]._id
-        ?
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          // Go back when pressed
-          onPress={() => this._finalBookEvent()} // add to event participants current person profile
-        >
+    
+     
+    if ((typeof event.participants !== 'undefined' && event.participants.length == 0)  || (typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(participant._id) == -1) ) {
+      return (
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            // Go back when pressed
+            onPress={() => this._finalBookEvent()} // add to event participants current person profile
+          >
         <Text style={styles.button}>Final Book Event</Text>
         </TouchableOpacity>
-          : <Text> Already attended to event </Text>
-        }
-        
-        <TouchableOpacity
+            <TouchableOpacity
+             style={styles.buttonContainer}
+             onPress={() => goBack()}  
+             >
+         <Text style={styles.button}>Done</Text>
+        </TouchableOpacity>
+      </View>
+            )
+             
+    } else {
+            return (
+             <View style={styles.container}>
+               <Text> Already attended to event </Text>
+            <TouchableOpacity
           style={styles.buttonContainer}
           // Go back when pressed
           onPress={() => goBack()}  
@@ -64,9 +74,21 @@ export default class Confirmation extends Component {
           <Text style={styles.button}>Done</Text>
         </TouchableOpacity>
       </View>
-    );
+            )
+
+             
+          }
+    }
+
+    // else manage event
+         
+      
+  
+        
+    
+    
   }
-}
+
 
 const styles = StyleSheet.create({
   container: {
