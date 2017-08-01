@@ -33,7 +33,7 @@ router.post('/', upload.any(), function(req, res, next) {
             images.push(result._id);
             if ( i == req.files.length - 1) {
                 res.send({
-                    images: JSON.stringify(images)
+                    images: images.join(',')
                 });
             }
         });

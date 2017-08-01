@@ -31,8 +31,26 @@ class Edit extends React.Component {
   state = {
     modalVisible: false,
     photos: [],
-    index: null
+    index: null,
+
+    uploadProgress: 0,
+    uploadTotal: 0,
+    uploadWritten: 0,
   }
+
+  // componentDidMount() {
+  //   DeviceEventEmitter.addListener('RNUploaderProgress', (data) => {
+  //     let bytesWritten = data.totalBytesWritten;
+  //     let bytesTotal   = data.totalBytesExpectedToWrite;
+  //     let progress     = data.progress;
+  //     this.setState({
+  //       uploadProgress: progress, 
+  //       uploadTotal: bytesTotal, 
+  //       uploadWritten: bytesWritten
+  //     });
+  //   });
+  // }
+
 
   setIndex = (index) => {
     if (index === this.state.index) {
@@ -91,7 +109,10 @@ class Edit extends React.Component {
       let responseString = res.data;
       console.log('Upload complete with status ' + status);
       console.log(responseString);
-       
+      let avatar = 'http://localhost:3000/images/'  + JSON.parse(responseString).images;
+      this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
+      this.setState({modalVisible: false});
+
     });
   }
   
@@ -123,16 +144,16 @@ class Edit extends React.Component {
 
 
   render() {
-    // const {user} = this.props.navigation.state.params;
+    const {user} = this.props.navigation.state.params;
     console.log('state :', this.state)
     return (
       <View style={styles.container}>
 
         <Text style={styles.header}>
-            {/* Edit {user.avatar} */}
+            {/* Edit  */}
           </Text>
           <View style={styles.avatar}>
-             {/* <Image source={{ uri: 'http://localhost:8000/images/597f6c1b80135404074684a9' }} style={styles.avatarImage} />  */}
+              <Image source={{ uri: user.avatar }} style={styles.avatarImage} />  
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
           </View>
           <Text style={styles.text}>

@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
-
+import fs from 'fs';
 
 import {
   facebookLogin,
