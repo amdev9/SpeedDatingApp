@@ -24,9 +24,26 @@ let styles
 const { width } = Dimensions.get('window')
 
 class Edit extends React.Component {
-  static navigationOptions = {
-    title: 'Camera Roll App',
-  }
+  // static navigationOptions = {
+  //   title: 'Camera Roll App',
+  //   headerRight: <Button title="Done" onPress={() => this.props.navigation.navigate('Profile')}/>
+  // }
+
+  // static navigationOptions = ({ navigation }) => {
+  //   // const {state, setParams} = navigation;
+  //   // const isInfo = state.params.mode === 'info';
+  //   // const {user} = state.params;
+  //   return {
+  //     title: 'Camera Roll App',
+  //     headerRight: (
+  //       <Button
+  //         title={'Done'}
+  //         onPress={() =>  navigation.navigate('Profile', { user: navigation.state.params.user }) }
+  //       />
+  //     ),
+  //   };
+  // };
+
 
   state = {
     modalVisible: false,
@@ -144,6 +161,7 @@ class Edit extends React.Component {
 
 
   render() {
+    
     const {user} = this.props.navigation.state.params;
     console.log('state :', this.state)
     return (
@@ -151,7 +169,12 @@ class Edit extends React.Component {
 
         <Text style={styles.header}>
             {/* Edit  */}
+
           </Text>
+          <Button
+          title={'Done'}
+          onPress={() =>  this.props.navigation.navigate('Profile', { user: user }) }
+        />
           <View style={styles.avatar}>
               <Image source={{ uri: user.avatar }} style={styles.avatarImage} />  
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}

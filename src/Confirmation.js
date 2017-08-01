@@ -35,22 +35,27 @@ export default class Confirmation extends Component {
 
 
   render() {
-    // const { code } = this.props.navigation.state.params;
+    const { event, participant } = this.props.navigation.state.params;
+
+    console.log('render ---------', event, participant);
     const { goBack } = this.props.navigation;
     return (
       <View style={styles.container}>
         {/* <Text style={styles.header}>Your confirmation code</Text> */}
         {/* <Text style={styles.code}>{code}</Text> */}
         
+        {participant._id == event.participants[0]._id
+        ?
         <TouchableOpacity
           style={styles.buttonContainer}
           // Go back when pressed
           onPress={() => this._finalBookEvent()} // add to event participants current person profile
         >
-          <Text style={styles.button}>Final Book Event</Text>
+        <Text style={styles.button}>Final Book Event</Text>
         </TouchableOpacity>
-
-
+          : <Text> Already attended to event </Text>
+        }
+        
         <TouchableOpacity
           style={styles.buttonContainer}
           // Go back when pressed
