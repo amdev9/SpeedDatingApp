@@ -1,5 +1,6 @@
 import Event from '../models/event';
- 
+import _ from 'lodash';
+
 // User relation for .populate()
 const creatorRelation = {
   path: '_creator', // ['participants', 
@@ -30,6 +31,13 @@ export const list = async (req, res, next) => {
 
 export const create = async (req, res, next) => {
   const { event_id, participant_id } = req.body;
+ 
+  var events = await Event.find()
+    // .sort({ 'created': -1 })
+    .populate(creatorRelation)
+    .populate(participantsRelation)
+    .exec();
+
   Event.findById(event_id, function (err, event) {
     if (err) {
       console.log(err);
@@ -42,50 +50,19 @@ export const create = async (req, res, next) => {
         if (err) {
           console.log(err);
         }
-        res.json({
-          updatedEvent
-        });
+        
+        // console.log(events);
+        _.remove(events, { '_id': event_id});
+        
+        // find by event_id remove event place updatedEvent 
+        res.json([
+            ...events,
+            updatedEvent
+          ]);
         // res.send(updatedEvent);
       });
     }
   });
 };
 
-
-// 
-  // // Save comment
-  // const comment = await new Comment({
-  //   user: user_id,
-  //   content: content,
-  //   created: new Date,
-  // }).save();
-
-  // res.json({
-  //   // Get the comment and populate User model
-  //   comment: await Comment.findById(comment._id)
-  //     .populate(userRelation)
-  //     .exec()
-  // });
-
-
-
-
-// ///////
-
-// // Hardcode the days for the sake of simplicity
-// const days = [ 'Today', 'Tomorrow', moment().add(2, 'days').format('ddd, MMM D') ];
-// // Same for the times
-// const times = [ '9:00 AM', '11:10 AM', '12:00 PM', '1:50 PM', '4:30 PM', '6:00 PM', '7:10 PM', '9:45 PM' ];
-
-// export const index = (req, res, next) => {
-//   // Find all movies and return json response
-//   Movie.find().lean().exec((err, movies) => res.json(
-//     // Iterate through each movie
-//     { movies: movies.map(movie => ({
-//       ...movie,
-//       days,     // and append days
-//       times,    // and times to each
-//     }))}
-//   ));
-// };
-
+ 

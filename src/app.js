@@ -24,17 +24,15 @@ import Confirmation from './Confirmation';
 import Profile from './Profile';
 import Edit from './Edit';
 import Login from '../components/login';
+import ManageScreen from './ManageScreen';
 
 const MovieStack = StackNavigator({
-  
-
-  
   Login: { screen: Login },
   Profile: { screen: Profile },
   Events: { screen: Events }, //events
   Confirmation: { screen: Confirmation },
+  Manage: { screen: ManageScreen },
   Edit: { screen: Edit },
-  // edit
 }, {
   // In modal mode screen slides up from the bottom
   // mode: 'modal',

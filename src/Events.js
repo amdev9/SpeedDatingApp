@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import { connect } from 'react-redux';
 import {
   ActivityIndicator,
   RefreshControl,
@@ -10,9 +8,11 @@ import {
   SegmentedControlIOS
 } from 'react-native';
 
+import _ from 'lodash';
 import EventPoster from './EventPoster';
 import EventPopup from './EventPopup';
-var _ = require('lodash');
+
+import { connect } from 'react-redux';
 
 @connect(
   state => ({
@@ -27,10 +27,6 @@ export default class Events extends Component {
   
   state = {
     popupIsOpen: false,
-    // Day chosen by user
-    // chosenDay: 0,       // choose first day by default
-    // Time chosen by user
-    // chosenTime: null,
     selectedIndex: 1
   }
 
@@ -50,35 +46,26 @@ export default class Events extends Component {
     });
   }
 
-  // chooseDay = (day) => {
-  //   this.setState({
-  //     chosenDay: day,
-  //   });
-  // }
-
-  // chooseTime = (time) => {
-  //   this.setState({
-  //     chosenTime: time,
-  //   });
-  // }
-
+  
   bookEvent = () => {
-    // Make sure they selected time 
-    // if (!this.state.chosenTime) {
-    //   alert('Please select show time');
-    // } else {
-      // Close popup
       this.closeEvent();
       const { navigate } = this.props.navigation;
       navigate('Confirmation', {
         event: this.state.event,
         participant: this.props.navigation.state.params.person
-      }); // , { code: Math.random().toString(36).substring(6).toUpperCase() }
-      
-    // }
+      }); 
   }
 
-   render() {
+  manageEvent = () => {
+      this.closeEvent();
+      const { navigate } = this.props.navigation;
+      navigate('Manage', {
+        event: this.state.event
+      }); 
+  }
+
+
+  render() {
     const { events, loading, refresh } = this.props;
     const { person } =  this.props.navigation.state.params;
 
@@ -140,6 +127,7 @@ export default class Events extends Component {
           isOpen={this.state.popupIsOpen}
           onClose={this.closeEvent}
           onBook={this.bookEvent}
+          onManage={this.manageEvent}
         />
 
         

@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import { put, get } from '../components/api';
 
 const API = Platform.OS === 'android'
   ? 'http://10.0.3.2:3000/v1' // works for Genymotion
@@ -25,7 +26,22 @@ export const apiMiddleware = store => next => action => {
           error
         }));
       break;
-    // Do nothing if the action does not interest us
+    // case 'BOOK_EVENT':
+    //   store.dispatch({type: 'BOOK_EVENT_LOADING'});
+    //   put('events', {
+    //     event_id: event._id, // action.props.
+    //     participant_id: participant._id, // action.props.
+    //   })
+    //   .then(response => response.json())
+    //   .then(data => next({
+    //     type: 'BOOK_EVENT_RECEIVED',
+    //     data
+    //   }))
+    //   .catch(error => next({
+    //       type: 'BOOK_EVENT_ERROR',
+    //       error
+    //     }));
+    //   break;
     default:
       break;
   }

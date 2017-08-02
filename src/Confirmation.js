@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+
 import {
   StyleSheet,
   Text,
@@ -7,12 +8,25 @@ import {
   View
 } from 'react-native';
 import { defaultStyles } from './styles';
-
 import { put, get } from '../components/api';
+import { connect } from 'react-redux';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    refresh: () => dispatch({type: 'GET_EVENT_DATA'}),
+  }),
+)
+
+
 export default class Confirmation extends Component {
-
-
+  
   _finalBookEvent = async () => {
+    const { events, loading, refresh } = this.props;
+    console.log(events, loading, refresh);
     const { event, participant } = this.props.navigation.state.params;
     // this._scrollView.scrollTo({ y: 0 });
     try {
@@ -22,16 +36,14 @@ export default class Confirmation extends Component {
         participant_id: participant._id,
       }); 
 
-      // console.log(event._id,  participant._id)
-      // Convert response to JSON
+
+     
       const json = await response.json();
       console.log(json);
-       
-      // this.props.navigation.navigate('Events')
-      // , {
-        // event: json
-      // }
 
+      // events = json; // get events
+      this.props.navigation.goBack();
+       
     }
     catch (error) {
       alert(error);
@@ -42,7 +54,6 @@ export default class Confirmation extends Component {
     const { event, participant } = this.props.navigation.state.params;
     const { goBack } = this.props.navigation;
     
-     
     if ((typeof event.participants !== 'undefined' && event.participants.length == 0)  || (typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(participant._id) == -1) ) {
       return (
         <View style={styles.container}>

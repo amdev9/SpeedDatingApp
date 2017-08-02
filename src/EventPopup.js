@@ -15,6 +15,7 @@ import {
 
 import { defaultStyles } from './styles';
 import Options from './Options';
+import EventButton from './EventButton';
 
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
@@ -216,11 +217,8 @@ export default class EventPopup extends Component {
     const {
       event,
       person,
-      // chosenDay,
-      // chosenTime,
-      // onChooseDay,
-      // onChooseTime,
-      onBook
+      onBook,
+      onManage
     } = this.props;
     // Pull out movie data
     const { title, genre, poster, days, times } = event || {};
@@ -261,18 +259,13 @@ export default class EventPopup extends Component {
             </View>
            </View>
             <View style={styles.footer}>
-          { (typeof event.participants !== 'undefined' && event.participants.length == 0)  || (typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) == -1) //   {/* event.participants[0]._id == person._id // event.participants // &&  */}
-    
-          ?
-             <TouchableHighlight
-              underlayColor="#9575CD"
-              style={styles.buttonContainer}
-              onPress={onBook}
-            >
-              <Text style={styles.button}>Book My Tickets</Text>
-            </TouchableHighlight> 
-             : <Text style={styles.footer}> Already attend </ Text>
-            }
+
+              <EventButton 
+                event={event}
+                person={person}
+                onBook={onBook}
+                onManage={onManage}
+               />
           </View>
             
         </Animated.View>
