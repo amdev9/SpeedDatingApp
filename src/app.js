@@ -25,6 +25,8 @@ import Profile from './Profile';
 import Edit from './Edit';
 import Login from '../components/login';
 import ManageScreen from './ManageScreen';
+import VotingStatusScreen from './VotingStatusScreen';
+
 
 const MovieStack = StackNavigator({
   Login: { screen: Login },
@@ -32,7 +34,9 @@ const MovieStack = StackNavigator({
   Events: { screen: Events }, //events
   Confirmation: { screen: Confirmation },
   Manage: { screen: ManageScreen },
-  Edit: { screen: Edit },
+  VotingStatus: { screen: VotingStatusScreen },
+  Edit: { screen: Edit }
+ 
 }, {
   // In modal mode screen slides up from the bottom
   // mode: 'modal',

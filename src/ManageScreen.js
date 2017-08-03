@@ -22,6 +22,16 @@ export default class ManageScreen extends Component {
 
   start = () => {
     console.log('start with: ', this.state.selected);
+    // make post request to server
+    // navigate to voting status screen
+
+    if (this.state.selected.length > 0) {
+      const { navigate } = this.props.navigation;
+      navigate('VotingStatus', {
+        final_participants: this.state.selected
+      }); 
+    }
+   
   }
 
   onSelected = (participant) => {
