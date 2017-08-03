@@ -3,7 +3,8 @@ import {
   Image,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native';
  
 
@@ -23,16 +24,19 @@ export default class Participant extends PureComponent {
   };
 
   render() {
+    
+
+
     // Pull comment object out of props
-    const { participant } = this.props;
+    const { participant, onSelected } = this.props;
     // Pull data needed to display a comment out of comment object
     // const { content, created, user } = participant;
     // Pull user name and avatar out of user object
     const { name, avatar } = participant; // user;
     return (
-      <View style={styles.container}>
+      <View style={styles.container} >
+      <TouchableOpacity onPress={ () => onSelected(participant) }>
         <View style={styles.avatarContainer}>
-              
           {avatar && <Image
             resizeMode='contain'
             style={styles.avatar}
@@ -40,9 +44,10 @@ export default class Participant extends PureComponent {
           />}
         </View>
         <View >
-            <Text style={[styles.text, styles.name]}> {name} </Text>
+          <Text style={[styles.text, styles.name]}> {name} </Text>
         </View>
-       
+      </TouchableOpacity>
+
       </View>
     );
   }

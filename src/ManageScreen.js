@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   View, 
   ListView, 
   ScrollView,
@@ -15,22 +16,41 @@ import { defaultStyles } from './styles';
 import Participant from './Participant';
 
 export default class ManageScreen extends Component {
-    render() {
-        
-      const { event } = this.props.navigation.state.params;
-      // Participant
-      return (
-        <View style={styles.container}>
-            <ScrollView
-                ref={(scrollView) => { this._scrollView = scrollView; }}
-               
-            >
+  state = {
+    selected: []
+  };
 
+  start = () => {
+    console.log('start with: ', this.state.selected);
+  }
 
-                {event.participants.map((participant, index) => <Participant participant={participant} key={index} />)}
-            </ScrollView>
-        </View>
-      );
+  onSelected = (participant) => {
+    if(!_.includes(this.state.selected, participant)) {
+      this.state.selected.push(participant)
+    } else {
+      _.remove(this.state.selected, participant);
+    }
+  }
+
+  render() {
+    const { event } = this.props.navigation.state.params;
+    return (
+      <View style={styles.container}>
+          <ScrollView
+            ref={(scrollView) => { this._scrollView = scrollView; }}  
+          >
+            {event.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
+          </ScrollView>
+
+          <TouchableHighlight
+              underlayColor="#9575CD"
+              style={styles.buttonContainer}
+              onPress={this.start}
+              >
+              <Text style={styles.button}>Start</Text>
+          </TouchableHighlight> 
+      </View>
+    );
 
 
     //    refreshControl={
@@ -47,7 +67,6 @@ export default class ManageScreen extends Component {
     //   />
     //  );
   }
-
 }
 
 const styles = StyleSheet.create({
