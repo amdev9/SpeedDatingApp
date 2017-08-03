@@ -15,13 +15,13 @@ import { defaultStyles } from './styles';
 
 
 
-export default class VotingStatusScreen extends Component {
+export default class VotingScreen extends Component {
    
   render() {
-    const { final_participants } = this.props.navigation.state.params;
+    
     return (
       <View style={styles.container}>
-       <Text> Voting status screen</Text>
+       <Text> Voting  screen</Text>
       </View>
     );
 

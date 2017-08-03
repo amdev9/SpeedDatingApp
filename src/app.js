@@ -25,6 +25,7 @@ import Profile from './Profile';
 import Edit from './Edit';
 import Login from '../components/login';
 import ManageScreen from './ManageScreen';
+import VotingScreen from './VotingScreen';
 import VotingStatusScreen from './VotingStatusScreen';
 
 
@@ -34,6 +35,7 @@ const MovieStack = StackNavigator({
   Events: { screen: Events }, //events
   Confirmation: { screen: Confirmation },
   Manage: { screen: ManageScreen },
+  Voting: { screen: VotingScreen },
   VotingStatus: { screen: VotingStatusScreen },
   Edit: { screen: Edit }
  
