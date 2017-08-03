@@ -22,10 +22,11 @@ export default class VotingScreen extends Component {
     return (
       <View style={styles.container}>
        <Text> Voting  screen</Text>
+       
       </View>
     );
 
-
+    // one -> one view with person info
     
   }
 }
