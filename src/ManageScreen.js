@@ -72,7 +72,8 @@ export default class ManageScreen extends Component {
       const { navigate } = this.props.navigation;
       
       navigate('Voting', {
-        participants: this.state.selected
+        participants: this.state.selected,
+        person: this.props.navigation.state.params.person
       }); 
 
       // navigate('VotingStatus', {

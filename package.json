@@ -15,7 +15,7 @@
     "react-native-fetch-blob": "^0.10.6",
     "react-native-safari-view": "^2.0.0",
     "react-native-uploader": "0.0.10",
-    "react-native-vector-icons": "^4.0.1",
+    "react-native-vector-icons": "^4.3.0",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2"

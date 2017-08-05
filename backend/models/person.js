@@ -7,7 +7,6 @@ var personSchema = Schema({
     index: true,
   },
   name     : String,
-  // lastname : String,
   avatar   : String,
   age      : Number,
   gender   : Number,  // (0-girl, 1-man)

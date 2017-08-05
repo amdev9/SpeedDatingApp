@@ -60,7 +60,8 @@ export default class Events extends Component {
       this.closeEvent();
       const { navigate } = this.props.navigation;
       navigate('Manage', {
-        event: this.state.event
+        event: this.state.event,
+        person: this.props.navigation.state.params.person
       }); 
   }
 
