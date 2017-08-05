@@ -14,32 +14,6 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 
-// var ws = new WebSocket('ws://localhost:3000');
-
-// ws.onopen = () => {
-//   // connection opened
-//   console.log(' - onopen - ');
-//   // ws.send('start'); // send a message
-// };
-
-// ws.onmessage = (e) => {
-//   // a message was received
-//   console.log(e.data);
-
-//   if (e.data == 'last') {
-//     console.log('navigate to votingpushscreen');
-//   }
-// };
-
-// ws.onerror = (e) => {
-//   // an error occurred
-//   console.log(e.message);
-// };
-
-// ws.onclose = (e) => {
-//   // connection closed
-//   console.log(e.code, e.reason);
-// };
 
 export default class VotingScreen extends Component {
    

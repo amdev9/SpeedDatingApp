@@ -14,16 +14,11 @@ import {
 import { defaultStyles } from './styles';
 
 
-export default class VotingPushScreen extends Component {
-
-  // send results to server -> go to mymatches screen
-
+export default class MymatchesScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-       <Text> Screen with all results of voting ready to push - user screen</Text>
-
-      
+       <Text> Show all user matches </Text>
       </View>
     );
   }
@@ -62,19 +57,4 @@ const styles = StyleSheet.create({
 
 
 
-
-//  <View style={styles.container}>
-//           <ScrollView
-//             ref={(scrollView) => { this._scrollView = scrollView; }}  
-//           >
-//             {event.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
-//           </ScrollView>
-
-//           <TouchableHighlight
-//               underlayColor="#9575CD"
-//               style={styles.buttonContainer}
-//               onPress={this.start}
-//               >
-//               <Text style={styles.button}>Send results</Text>
-//           </TouchableHighlight> 
-//       </View> 
+ 
