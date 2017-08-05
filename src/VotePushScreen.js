@@ -18,12 +18,27 @@ export default class VotingPushScreen extends Component {
 
   // send results to server -> go to mymatches screen
 
+  state = {
+    likes: []
+  }
+
+  func = () => {
+    // person.likes = this.state.likes;
+    // send current person (with likes ) to server
+    // 
+  };
+
   render() {
+    const { participants } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
        <Text> Screen with all results of voting ready to push - user screen</Text>
+     
+    
+     <TouchableOpacity onPress={this.func}>
+      <Text> Done </Text>
+      </TouchableOpacity>
 
-      
       </View>
     );
   }

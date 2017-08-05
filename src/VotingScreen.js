@@ -17,6 +17,14 @@ import { defaultStyles } from './styles';
 
 export default class VotingScreen extends Component {
    
+  state = {
+    likes: [] 
+  }
+
+  // tap = () => {
+  //   likes.push(person)
+  // }
+
   render() {
     const { participants } = this.props.navigation.state.params;
     // view with person info
