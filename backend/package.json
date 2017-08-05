@@ -22,7 +22,8 @@
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
-    "passport-vkontakte": "^0.3.2"
+    "passport-vkontakte": "^0.3.2",
+    "ws": "^3.1.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",

@@ -4,6 +4,9 @@ import passport from 'passport';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import fs from 'fs';
+import http from 'http';
+import WebSocket from 'ws';
+
 
 import {
   facebookLogin,
@@ -70,10 +73,71 @@ app.get('/images/:id', function(req, res) {
 });
 
 
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+
+
+function mainLogic(ws, obj) {
+  if (obj.command == 'start') {
+
+    // {
+    //   command: "start",
+    //   timeout: 10,
+    //   talk_time: 20,
+    //   count_pair: 10
+    // }
+            
+    var counter = 0;
+    ws.send("Counter is: " + counter);
+    // ticker
+    var seconds = 0;
+    ws.send('- ' + seconds + ' -')
+    var ticker = setInterval(function () {
+        seconds++;
+        ws.send('- ' + (seconds-counter*(obj.timeout + obj.talk_time)) + ' -')
+    }, 1000);
+
+    // first timeout
+    setTimeout(function() {
+        ws.send('timeout ' + counter )
+    }, obj.talk_time * 1000);
+
+    var looper = setInterval(function() { 
+        // console.log('setInterval inside ')
+        var timer = setTimeout(function() {
+            ws.send('timeout ' + counter)
+        }, obj.talk_time * 1000);
+        counter++;
+        ws.send("Counter is: " + counter);
+        if (counter >= obj.count_pair )
+        {
+            clearInterval(looper);
+            clearTimeout(timer);
+            clearTimeout(ticker);
+            ws.send("last"); // Counter: " + counter + " is 
+        }
+    }, (obj.timeout + obj.talk_time) * 1000 );
+
+
+
+  }
+}
+
+wss.on('connection', function connection(ws, req) {
+  // const location = url.parse(req.url, true);
+  // You might use location.query.access_token to authenticate or share sessions
+  // or req.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
+
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+    var obj = JSON.parse(message); 
+    mainLogic(ws, obj);
+  });
+});
 
 
 // Launch the server on the port 3000
-const server = app.listen(3000, () => {
+server.listen(3000, () => {
   const { address, port } = server.address();
   console.log(`Listening at http://${address}:${port}`);
 });

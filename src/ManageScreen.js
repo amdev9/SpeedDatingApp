@@ -19,17 +19,65 @@ export default class ManageScreen extends Component {
   state = {
     selected: []
   };
+  
+  onOpenConnection = () => {
+    console.log(' - onopen - ');
+    // ws.send('start'); // send a message
+  }
+
+  onMessageRecieved = (e) => {
+    // a message was received
+    console.log(e.data);
+    if (e.data == 'last') {
+      const { navigate } = this.props.navigation;
+      navigate('VotePush', {
+        participants: this.state.selected
+      });  
+    }
+  };
+
+  onError = (e) => {
+    // an error occurred
+    console.log(e.message);
+  };
+
+  onClose = (e) => {
+    // connection closed
+    console.log(e.code, e.reason);
+  };
+
+  componentWillMount() {
+    this.ws = new WebSocket('ws://localhost:3000');
+    this.ws.onopen = this.onOpenConnection;
+    this.ws.onmessage = this.onMessageRecieved;
+    this.ws.onerror = this.onError;
+    this.ws.onclose = this.onClose;
+  }
 
   start = () => {
     console.log('start with: ', this.state.selected);
     // make post request to server
     // navigate to voting status screen
 
+    let json = JSON.stringify({
+      command: "start",
+      timeout: 10,
+      talk_time: 20,
+      count_pair: 1
+    });
+    this.ws.send(json);
+
+
     if (this.state.selected.length > 0) {
       const { navigate } = this.props.navigation;
-      navigate('VotingStatus', {
-        final_participants: this.state.selected
+      
+      navigate('Voting', {
+        participants: this.state.selected
       }); 
+
+      // navigate('VotingStatus', {
+      //   final_participants: this.state.selected
+      // }); 
     }
    
   }
