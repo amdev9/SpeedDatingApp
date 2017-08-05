@@ -21,7 +21,7 @@ export default class VotingStatusScreen extends Component {
     const { final_participants } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-       <Text> Voting status screen</Text>
+       <Text> Voting status screen - Manager screen</Text>
       </View>
     );
 

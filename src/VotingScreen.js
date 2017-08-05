@@ -14,19 +14,19 @@ import {
 import { defaultStyles } from './styles';
 
 
-
 export default class VotingScreen extends Component {
    
   render() {
-    
+    // view with person info
+    // pass here array with all users
     return (
       <View style={styles.container}>
-       <Text> Voting  screen</Text>
+       <Text> Voting  screen - User screen</Text>
        
       </View>
     );
 
-    // one -> one view with person info
+    
     
   }
 }
