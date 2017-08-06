@@ -88,3 +88,40 @@ export const oauthCallback = async (req, res) => {
   res.redirect('OAuthLogin://login?user=' + JSON.stringify(req.user));
 };
 
+// likes
+export const post = async (req, res, next) => {
+  
+  // const { event_id, participant_id } = req.body;
+  console.log(req.body);
+
+  var persons = await Person.find()
+    .exec();
+  res.send(persons);
+
+  // Event.findById(event_id, function (err, event) {
+  //   if (err) {
+  //     console.log(err);
+  //   }
+  //   if ( typeof event.participants !== 'undefined' && event.participants.length > 0 &&  event.participants.indexOf(participant_id) > -1) {
+  //     res.send(event);
+  //   } else {
+  //     event.participants.push(participant_id);
+  //     event.save(function (err, updatedEvent) {
+  //       if (err) {
+  //         console.log(err);
+  //       }
+        
+  //       // console.log(events);
+  //       _.remove(events, { '_id': event_id});
+        
+  //       // find by event_id remove event place updatedEvent 
+  //       res.json([
+  //           ...events,
+  //           updatedEvent
+  //         ]);
+  //       // res.send(updatedEvent);
+  //     });
+  //   }
+  // });
+};
+

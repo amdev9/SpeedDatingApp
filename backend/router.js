@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 // Import index action from movies controller
 import { list, create } from './controllers/events';
+import { post } from './controllers/auth';
 
 import multer from 'multer';
 
@@ -41,12 +42,14 @@ router.post('/', upload.any(), function(req, res, next) {
 });
 
 
-
-//////////
-// Handle /movies.json route with index action from movies controller
 router.route('/events')
   .get(list)
   .put(create);
+
+// add route to post likes
+router.route('/likes')
+  .put(post);
+
 
 export default router;
 

@@ -78,6 +78,7 @@ const wss = new WebSocket.Server({ server });
 
 
 function mainLogic(ws, obj) {
+  // add command - 'calculate'
   if (obj.command == 'start') {
 
     // {
@@ -120,6 +121,8 @@ function mainLogic(ws, obj) {
 
 
 
+  } else if (obj.command == 'calculate') {
+    ws.send("sympathy results");
   }
 }
 
