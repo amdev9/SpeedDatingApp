@@ -20,7 +20,7 @@ const organizer = new Person ({
   age: 24,
   gender: 1,
   organizer_status: true,
-  likes: [],
+  likes: {},
   events: []
 });
 
@@ -33,7 +33,8 @@ organizer.save(function (err) {
     description: 'Some description', 
     date : Date.now(),
     organizer: organizer._id,
-    participants   : []
+    participants   : [],
+    matches: {}
   });
 
   event.save(function (err) {
