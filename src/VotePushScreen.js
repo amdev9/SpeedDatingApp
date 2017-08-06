@@ -29,12 +29,12 @@ export default class VotingPushScreen extends Component {
   };
 
   render() {
-    const { participants } = this.props.navigation.state.params;
+    const { person, participants } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
        <Text> Screen with all results of voting ready to push - user screen</Text>
      
-    
+    <Text> { JSON.stringify(person.likes) } </Text>
      <TouchableOpacity onPress={this.func}>
       <Text> Done </Text>
       </TouchableOpacity>

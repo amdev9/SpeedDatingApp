@@ -39,7 +39,8 @@ export default class ManageScreen extends Component {
     if (e.data == 'last') {
       const { navigate } = this.props.navigation;
       navigate('VotePush', {
-        participant: this.state.selected[this.state.index]
+        participants: this.state.selected,
+        person: this.props.navigation.state.params.person
       });  
     }
   };

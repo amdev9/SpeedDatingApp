@@ -21,9 +21,16 @@ export default class VotingScreen extends Component {
    
   
   onClicked = () => {
-    console.log('onClicked');
+    const { 
+      participant, 
+      person 
+    } = this.props.navigation.state.params;
+
+    console.log('onClicked', person, participant);
     
-    // person.likes.push(participant._id);
+    if (!person.likes)
+      person.likes = [];
+    person.likes.push(participant._id);
   }
 
   render() {
