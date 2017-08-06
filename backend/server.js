@@ -89,7 +89,8 @@ function mainLogic(ws, obj) {
     // }
             
     var counter = 0;
-    ws.send("Counter is: " + counter);
+    // ws.send("Counter is: " + counter);
+    ws.send('next');
     // ticker
     var seconds = 0;
     ws.send('- ' + seconds + ' -')
@@ -109,18 +110,19 @@ function mainLogic(ws, obj) {
             ws.send('timeout ' + counter)
         }, obj.talk_time * 1000);
         counter++;
-        ws.send("Counter is: " + counter);
+        // ws.send("Counter is: " + counter);
+       
         if (counter >= obj.count_pair )
         {
             clearInterval(looper);
             clearTimeout(timer);
             clearTimeout(ticker);
             ws.send("last"); // Counter: " + counter + " is 
+        } else {
+            ws.send('next');
         }
     }, (obj.timeout + obj.talk_time) * 1000 );
-
-
-
+    
   } else if (obj.command == 'calculate') {
     ws.send("sympathy results");
   }

@@ -17,32 +17,38 @@ import Participant from './Participant';
 
 export default class ManageScreen extends Component {
   state = {
-    selected: []
+    selected: [],
+    index: 0
   };
   
   onOpenConnection = () => {
     console.log(' - onopen - ');
-    // ws.send('start'); // send a message
   }
 
   onMessageRecieved = (e) => {
-    // a message was received
     console.log(e.data);
+    if (e.data == 'next') {
+      const { navigate } = this.props.navigation;
+      navigate('Voting', {
+        participant: this.state.selected[this.state.index],
+        person: this.props.navigation.state.params.person
+      });  
+      this.state.index++;
+    }
+
     if (e.data == 'last') {
       const { navigate } = this.props.navigation;
       navigate('VotePush', {
-        participants: this.state.selected
+        participant: this.state.selected[this.state.index]
       });  
     }
   };
 
   onError = (e) => {
-    // an error occurred
     console.log(e.message);
   };
 
   onClose = (e) => {
-    // connection closed
     console.log(e.code, e.reason);
   };
 
@@ -56,31 +62,13 @@ export default class ManageScreen extends Component {
 
   start = () => {
     console.log('start with: ', this.state.selected);
-    // make post request to server
-    // navigate to voting status screen
-
     let json = JSON.stringify({
       command: "start",
-      timeout: 10,
-      talk_time: 20,
-      count_pair: 1
+      timeout: 5,
+      talk_time: 10,
+      count_pair: this.state.selected.length
     });
     this.ws.send(json);
-
-
-    if (this.state.selected.length > 0) {
-      const { navigate } = this.props.navigation;
-      
-      navigate('Voting', {
-        participants: this.state.selected,
-        person: this.props.navigation.state.params.person
-      }); 
-
-      // navigate('VotingStatus', {
-      //   final_participants: this.state.selected
-      // }); 
-    }
-   
   }
 
   onSelected = (participant) => {
@@ -100,7 +88,6 @@ export default class ManageScreen extends Component {
           >
             {event.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
           </ScrollView>
-
           <TouchableHighlight
               underlayColor="#9575CD"
               style={styles.buttonContainer}
@@ -110,21 +97,6 @@ export default class ManageScreen extends Component {
           </TouchableHighlight> 
       </View>
     );
-
-
-    //    refreshControl={
-    //                 <RefreshControl
-    //                 refreshing={this.state.refreshing}
-    //                 onRefresh={this.onRefresh}
-    //                 />
-    //             }
-
-
-    //      <ListView
-    //     dataSource={this.state.dataSource}
-    //     renderRow={(rowData) => <Text>{rowData}</Text>}
-    //   />
-    //  );
   }
 }
 

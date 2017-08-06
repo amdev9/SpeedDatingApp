@@ -19,20 +19,20 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class VotingScreen extends Component {
    
-  state = {
-    likes: [] 
-  }
-
+  
   onClicked = () => {
     console.log('onClicked');
+    
+    // person.likes.push(participant._id);
   }
 
-  // tap = () => {
-  //   likes.push(person)
-  // }
-
   render() {
-    const { participants, person } = this.props.navigation.state.params;
+    const { 
+      participant, 
+      person 
+    } = this.props.navigation.state.params;
+
+
     // view with person info
     // pass here array with all users
 
@@ -56,10 +56,10 @@ export default class VotingScreen extends Component {
         <View style={styles.content}>
           <Text> Voting user screen - say hello to participant </Text>
           <View style={styles.avatar}>
-            <Image source={{ uri: participants[0].avatar }} style={styles.avatarImage} />
+            <Image source={{ uri: participant.avatar }} style={styles.avatarImage} />
           </View>
           <Text style={styles.text}>
-             {participants[0].name} 
+             {participant.name} 
           </Text>
           <TouchableOpacity onPress={this.onClicked}>
             <Icon name="ios-heart" size={30} color="#4F8EF7" />

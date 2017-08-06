@@ -26,7 +26,11 @@ const defaultHeight = height * 0.67;
 export default class EventButton extends Component {
     render() {
         const { event, person, onBook, onManage } = this.props;
-        if( event.organizer )
+        
+        // debug version
+        if( event.organizer._id != person._id ) 
+        // right version
+        //  if( event.organizer._id == person._id ) 
         {
             return <TouchableHighlight
                 underlayColor="#9575CD"
