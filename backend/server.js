@@ -150,8 +150,8 @@ function mainLogic(ws, obj) {
                 })
             })
         })
-
-        ws.send(matches);
+        ws.send(JSON.stringify(matches));
+        // console.log(matches);
         // console.log(matches)
     });
   }

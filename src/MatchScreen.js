@@ -21,7 +21,7 @@ export default class MatchScreen extends Component {
     return (
       <View style={styles.container}>
         <Text> Admin matches </Text>
-        <Text> {matches} </Text>
+         <Text> {matches} </Text> 
       </View>
     );
   }
