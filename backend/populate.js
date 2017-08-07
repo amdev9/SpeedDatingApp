@@ -34,6 +34,7 @@ organizer.save(function (err) {
     date : Date.now(),
     organizer: organizer._id,
     participants   : [],
+    likes: [],
     matches: {}
   });
 

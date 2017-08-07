@@ -43,9 +43,10 @@ export default class MymatchesScreen extends Component {
 
 
   _calculate = async () => {
+    const { event } =  this.props.navigation.state.params;
     let json = JSON.stringify({
       command: "calculate",
-      event_id: "598741cec7317a817fd17dbe"
+      event_id: event._id
     });
     this.ws.send(json);
   }

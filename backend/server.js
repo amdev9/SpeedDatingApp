@@ -129,31 +129,31 @@ function mainLogic(ws, obj) {
     }, (obj.timeout + obj.talk_time) * 1000 );
     
   } else if (obj.command == 'calculate') {
-    ws.send("sympathy results");
-
+    // ws.send("sympathy results");
     // search event by id and get likes
-
     Event.findById(obj.event_id, function (err, event) {
         if (err) {
         console.log(err);
         }
+        // console.log(event.likes);    
+        let matches = {};
+        event.likes.forEach( (obj) => {
+            obj.person_likes.forEach( (id) => {
+                event.likes.forEach( (next) => {
+                    if(next.person_id == id) {
+                        if( next.person_likes.includes(obj.person_id) ) {
+                            matches[obj.person_id] = [];
+                            matches[obj.person_id].push(id);
+                            // console.log('matches --> ',obj.person_id, id);
+                        }
+                    }
+                })
+            })
+        })
 
-        console.log(event);    
-        // var likes = event.likes;
-        // let matches = {};
-        // for (var key in likes) {
-        // likes[key].forEach( (person) => {
-        //     if ( likes[person].includes(key) ) {
-        //         matches[key] = [];
-        //         matches[key].push(person);
-        //     }
-        // });
-        // }
-        // console.log(matches);
-     
+        ws.send(matches);
+        // console.log(matches)
     });
-
-
   }
 }
 

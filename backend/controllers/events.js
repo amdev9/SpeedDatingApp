@@ -73,7 +73,11 @@ export const post = async (req, res, next) => {
     if (err) {
       console.log(err);
     }
-    event.likes[person_id] = likes;
+    var obj = {};
+    obj.person_id = person_id;
+    obj.person_likes = likes;
+    event.likes.push(obj);
+    
     event.save(function (err, updatedEvent) {
       if (err) {
         console.log(err);

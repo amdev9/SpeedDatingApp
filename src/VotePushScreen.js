@@ -25,7 +25,7 @@ export default class VotingPushScreen extends Component {
     super(props);
     const { person, participants } = this.props.navigation.state.params;
     this.state = {
-      liked: person.likes
+      liked: person.likes.person_likes
     }
   }
   
@@ -52,7 +52,9 @@ export default class VotingPushScreen extends Component {
       console.log(json);
 
       const { navigate } = this.props.navigation;
-      navigate('Mymatches'); 
+      navigate('Mymatches', {
+        event: event
+      }); 
 
     }
     catch (error) {
