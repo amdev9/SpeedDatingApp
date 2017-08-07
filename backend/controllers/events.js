@@ -65,4 +65,22 @@ export const create = async (req, res, next) => {
   });
 };
 
- 
+  
+export const post = async (req, res, next) => {
+  const { likes, person_id, event_id } = req.body;  
+  // console.log(person_id, likes);
+  Event.findById(event_id, function (err, event) {
+    if (err) {
+      console.log(err);
+    }
+    event.likes[person_id] = likes;
+    event.save(function (err, updatedEvent) {
+      if (err) {
+        console.log(err);
+      }
+      res.send(updatedEvent);
+    });
+  });
+};
+
+

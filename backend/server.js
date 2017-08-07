@@ -7,6 +7,11 @@ import fs from 'fs';
 import http from 'http';
 import WebSocket from 'ws';
 
+//////////////
+
+import Event from './models/event';
+
+/////////////
 
 import {
   facebookLogin,
@@ -125,6 +130,30 @@ function mainLogic(ws, obj) {
     
   } else if (obj.command == 'calculate') {
     ws.send("sympathy results");
+
+    // search event by id and get likes
+
+    Event.findById(obj.event_id, function (err, event) {
+        if (err) {
+        console.log(err);
+        }
+
+        console.log(event);    
+        // var likes = event.likes;
+        // let matches = {};
+        // for (var key in likes) {
+        // likes[key].forEach( (person) => {
+        //     if ( likes[person].includes(key) ) {
+        //         matches[key] = [];
+        //         matches[key].push(person);
+        //     }
+        // });
+        // }
+        // console.log(matches);
+     
+    });
+
+
   }
 }
 

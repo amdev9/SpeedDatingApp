@@ -15,10 +15,49 @@ import { defaultStyles } from './styles';
 
 
 export default class MymatchesScreen extends Component {
+
+   
+  onOpenConnection = () => {
+    console.log(' - onopen - ');
+  }
+
+  onMessageRecieved = (e) => {
+    console.log(e.data);
+  };
+
+  onError = (e) => {
+    console.log(e.message);
+  };
+
+  onClose = (e) => {
+    console.log(e.code, e.reason);
+  };
+
+  componentWillMount() {
+    this.ws = new WebSocket('ws://localhost:3000');
+    this.ws.onopen = this.onOpenConnection;
+    this.ws.onmessage = this.onMessageRecieved;
+    this.ws.onerror = this.onError;
+    this.ws.onclose = this.onClose;
+  }
+
+
+  _calculate = async () => {
+    let json = JSON.stringify({
+      command: "calculate",
+      event_id: "598741cec7317a817fd17dbe"
+    });
+    this.ws.send(json);
+  }
+
   render() {
     return (
       <View style={styles.container}>
-       <Text> Show all user matches </Text>
+        <Text> Show all user matches </Text>
+
+          <TouchableOpacity onPress={this._calculate}>
+            <Text> Calculate results </Text>
+          </TouchableOpacity>
       </View>
     );
   }

@@ -40,7 +40,8 @@ export default class ManageScreen extends Component {
       const { navigate } = this.props.navigation;
       navigate('VotePush', {
         participants: this.state.selected,
-        person: this.props.navigation.state.params.person
+        person: this.props.navigation.state.params.person,
+        event: this.props.navigation.state.params.event
       });  
     }
   };
@@ -65,8 +66,8 @@ export default class ManageScreen extends Component {
     console.log('start with: ', this.state.selected);
     let json = JSON.stringify({
       command: "start",
-      timeout: 5,
-      talk_time: 10,
+      timeout: 2,
+      talk_time: 4,
       count_pair: this.state.selected.length
     });
     this.ws.send(json);

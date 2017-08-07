@@ -13,32 +13,26 @@ import {
   Image
 } from 'react-native';
 import { defaultStyles } from './styles';
-
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
 export default class VotingScreen extends Component {
-   
   
   onClicked = () => {
     const { 
       participant, 
       person 
     } = this.props.navigation.state.params;
-
-    console.log('onClicked', person, participant);
-    
     if (!person.likes)
       person.likes = [];
     person.likes.push(participant._id);
   }
 
+  
   render() {
     const { 
       participant, 
       person 
     } = this.props.navigation.state.params;
-
 
     // view with person info
     // pass here array with all users
@@ -74,9 +68,6 @@ export default class VotingScreen extends Component {
         </View>
       </View>
     );
-
-    
-    
   }
 }
 

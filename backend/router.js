@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 // Import index action from movies controller
-import { list, create } from './controllers/events';
-import { post } from './controllers/auth';
+import { list, create, post } from './controllers/events';
+
 
 import multer from 'multer';
 

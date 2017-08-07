@@ -9,12 +9,7 @@ var eventSchema = Schema({
   organizer  : { type: Schema.ObjectId, ref: 'Person' },
   participants  : [{ type: Schema.ObjectId, ref: 'Person' }],
   matches: Object,
-  // matches: {
-  //   personID1: [ personID2 ],
-  //   personID2: [ personID1, personID3 ],
-  //   personID3: [ personID2 ]
-  //   ..
-  // },
+  likes: Object
 });
 
 var DateEvent = mongoose.model('Event', eventSchema);

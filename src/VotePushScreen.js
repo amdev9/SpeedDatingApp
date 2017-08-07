@@ -11,38 +11,80 @@ import {
   ScrollView,
   RefreshControl
 } from 'react-native';
+
 import { defaultStyles } from './styles';
+import Participant from './Participant';
+import { put, get } from '../components/api';
 
 
 export default class VotingPushScreen extends Component {
 
   // send results to server -> go to mymatches screen
 
-  state = {
-    likes: []
+  constructor(props) {
+    super(props);
+    const { person, participants } = this.props.navigation.state.params;
+    this.state = {
+      liked: person.likes
+    }
   }
-
-  func = () => {
-    // person.likes = this.state.likes;
-    // send current person (with likes ) to server
-    // 
+  
+  onLiked = (participant) => {
+    if( !this.state.liked.includes(participant._id) ) {
+      this.state.liked.push(participant._id)
+    } else {
+      var index = this.state.liked.indexOf(participant._id);
+      this.state.liked.splice(index, 1);
+    }
   };
+ 
+
+  onConfirm = async () => {
+    const { person, participants, event } = this.props.navigation.state.params;
+    try {
+      // Make API call
+      const response = await put('likes', {
+        person_id: person._id,
+        likes: this.state.liked,
+        event_id: event._id
+      }); 
+      const json = await response.json();
+      console.log(json);
+
+      const { navigate } = this.props.navigation;
+      navigate('Mymatches'); 
+
+    }
+    catch (error) {
+      alert(error);
+    }
+  };
+
+
 
   render() {
     const { person, participants } = this.props.navigation.state.params;
     return (
-      <View style={styles.container}>
-       <Text> Screen with all results of voting ready to push - user screen</Text>
-     
-    <Text> { JSON.stringify(person.likes) } </Text>
-     <TouchableOpacity onPress={this.func}>
-      <Text> Done </Text>
-      </TouchableOpacity>
+       <View style={styles.container}>
+          <ScrollView
+            ref={(scrollView) => { this._scrollView = scrollView; }}  
+          >
+            {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked}/>)}
+          </ScrollView>
 
+           
+          <TouchableHighlight
+              underlayColor="#9575CD"
+              style={styles.buttonContainer}
+              onPress={this.onConfirm}
+              >
+              <Text style={styles.button}>Confirm</Text>
+          </TouchableHighlight> 
       </View>
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -74,22 +116,3 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
-
-
-
-
-//  <View style={styles.container}>
-//           <ScrollView
-//             ref={(scrollView) => { this._scrollView = scrollView; }}  
-//           >
-//             {event.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
-//           </ScrollView>
-
-//           <TouchableHighlight
-//               underlayColor="#9575CD"
-//               style={styles.buttonContainer}
-//               onPress={this.start}
-//               >
-//               <Text style={styles.button}>Send results</Text>
-//           </TouchableHighlight> 
-//       </View> 
