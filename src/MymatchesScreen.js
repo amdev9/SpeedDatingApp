@@ -23,6 +23,13 @@ export default class MymatchesScreen extends Component {
 
   onMessageRecieved = (e) => {
     console.log(e.data);
+
+    const { navigate } = this.props.navigation;
+    navigate('Match', {
+      matches: e.data
+    });  
+  
+
   };
 
   onError = (e) => {

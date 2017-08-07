@@ -17,9 +17,11 @@ import { defaultStyles } from './styles';
 export default class MatchScreen extends Component {
 
   render() {
+    const { matches } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         <Text> Admin matches </Text>
+        <Text> {matches} </Text>
       </View>
     );
   }
