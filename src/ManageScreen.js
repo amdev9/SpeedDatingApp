@@ -9,6 +9,7 @@ import {
   View, 
   ListView, 
   ScrollView,
+  TextInput,
   RefreshControl
 } from 'react-native';
 import { defaultStyles } from './styles';
@@ -18,9 +19,10 @@ import Participant from './Participant';
 export default class ManageScreen extends Component {
   state = {
     selected: [],
-    index: 0
+    index: 0,
+    talk_time: '4'
   };
-  
+ 
   onOpenConnection = () => {
     console.log(' - onopen - ');
   }
@@ -63,14 +65,17 @@ export default class ManageScreen extends Component {
   }
 
   start = () => {
-    console.log('start with: ', this.state.selected);
-    let json = JSON.stringify({
-      command: "start",
-      timeout: 2,
-      talk_time: 4,
-      count_pair: this.state.selected.length
-    });
-    this.ws.send(json);
+    if (this.state.selected.length > 0) {
+      let json = JSON.stringify({
+        command: "start",
+        timeout: 2,
+        talk_time: parseInt(this.state.talk_time),
+        count_pair: this.state.selected.length
+      });
+      this.ws.send(json);
+    } else {
+      alert('Select participants to start')
+    }
   }
 
   onSelected = (participant) => {
@@ -82,6 +87,7 @@ export default class ManageScreen extends Component {
   }
 
   render() {
+    // add text field
     const { event } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
@@ -90,6 +96,14 @@ export default class ManageScreen extends Component {
           >
             {event.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
           </ScrollView>
+
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            keyboardType= {'numeric'}
+            onChangeText={(text) => this.setState({ text })}
+            value={this.state.talk_time}
+          />
+          
           <TouchableHighlight
               underlayColor="#9575CD"
               style={styles.buttonContainer}
