@@ -30,6 +30,7 @@ import VotingStatusScreen from './VotingStatusScreen';
 import VotePushScreen from './VotePushScreen';
 import MymatchesScreen from './MymatchesScreen';
 import MatchScreen from './MatchScreen';
+import JoinScreen from './JoinScreen';
 
 const MovieStack = StackNavigator({
   Login: { screen: Login },
@@ -39,6 +40,7 @@ const MovieStack = StackNavigator({
   Edit: { screen: Edit },
   Voting: { screen: VotingScreen },
   Mymatches: { screen: MymatchesScreen },
+  Join: { screen: JoinScreen }, 
   // organizer screen
   VotePush: { screen: VotePushScreen },
   VotingStatus: { screen: VotingStatusScreen },

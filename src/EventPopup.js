@@ -38,6 +38,7 @@ export default class EventPopup extends Component {
     // onChooseTime: PropTypes.func,
     // Gets called when user books their ticket
     onBook: PropTypes.func,
+    onJoin: PropTypes.func,
     // Gets called when popup closed
     onClose: PropTypes.func,
   }
@@ -218,6 +219,7 @@ export default class EventPopup extends Component {
       event,
       person,
       onBook,
+      onJoin,
       onManage
     } = this.props;
     // Pull out movie data
@@ -264,6 +266,7 @@ export default class EventPopup extends Component {
                 event={event}
                 person={person}
                 onBook={onBook}
+                onJoin={onJoin}
                 onManage={onManage}
                />
           </View>

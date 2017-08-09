@@ -17,6 +17,9 @@ import { defaultStyles } from './styles';
 import Participant from './Participant';
 
 export default class ManageScreen extends Component {
+  //   --main ws--
+  // [ ManageScreen -> 'start' -> VotingStatusScreen ] -> MatchScreen
+
   state = {
     selected: [],
     index: 0,
@@ -28,24 +31,17 @@ export default class ManageScreen extends Component {
   }
 
   onMessageRecieved = (e) => {
-    console.log(e.data);
-    if (e.data == 'next') {
-      const { navigate } = this.props.navigation;
-      navigate('Voting', {
-        participant: this.state.selected[this.state.index],
-        person: this.props.navigation.state.params.person
-      });  
-      this.state.index++;
+    var obj = JSON.parse(e.data); 
+    if (obj.type == 'selected') {
+      this.setState({
+        selected: obj.selected
+      })
     }
-
-    if (e.data == 'last') {
-      const { navigate } = this.props.navigation;
-      navigate('VotePush', {
-        participants: this.state.selected,
-        person: this.props.navigation.state.params.person,
-        event: this.props.navigation.state.params.event
-      });  
-    }
+    const { navigate } = this.props.navigation;
+    navigate('VotingStatus', {
+      participants: this.state.selected,
+      person: this.props.navigation.state.params.person
+    });    
   };
 
   onError = (e) => {
@@ -70,7 +66,7 @@ export default class ManageScreen extends Component {
         command: "start",
         timeout: 2,
         talk_time: parseInt(this.state.talk_time),
-        count_pair: this.state.selected.length
+        selected: JSON.stringify(this.state.selected) // .length // send selected id
       });
       this.ws.send(json);
     } else {
@@ -87,7 +83,7 @@ export default class ManageScreen extends Component {
   }
 
   render() {
-    // add text field
+    
     const { event } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>

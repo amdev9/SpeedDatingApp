@@ -25,10 +25,10 @@ const defaultHeight = height * 0.67;
 
 export default class EventButton extends Component {
     render() {
-        const { event, person, onBook, onManage } = this.props;
+        const { event, person, onBook, onManage, onJoin } = this.props;
         
         // debug version
-        if( event.organizer._id != person._id ) 
+        if( event.organizer._id == person._id ) 
         // right version
         //  if( event.organizer._id == person._id ) 
         {
@@ -51,7 +51,19 @@ export default class EventButton extends Component {
                 </TouchableHighlight> 
 
         } else {
-            return <Text style={styles.footer}> Already attend </ Text>
+            return <View>
+                <Text style={styles.footer}> Already attend </ Text>
+
+                <TouchableHighlight
+                underlayColor="#9575CD"
+                style={styles.buttonContainer}
+                onPress={onJoin}
+                >
+                <Text style={styles.button}>Join event room</Text>
+                </TouchableHighlight> 
+
+
+              </View>
         }
     }
 }

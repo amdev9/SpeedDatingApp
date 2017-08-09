@@ -46,13 +46,21 @@ export default class Events extends Component {
     });
   }
 
-  
   bookEvent = () => {
       this.closeEvent();
       const { navigate } = this.props.navigation;
       navigate('Confirmation', {
         event: this.state.event,
         participant: this.props.navigation.state.params.person
+      }); 
+  }
+
+  joinEvent = () => {
+      this.closeEvent();
+      const { navigate } = this.props.navigation;
+      navigate('Join', {
+        event: this.state.event,
+        person: this.props.navigation.state.params.person
       }); 
   }
 
@@ -128,6 +136,7 @@ export default class Events extends Component {
           isOpen={this.state.popupIsOpen}
           onClose={this.closeEvent}
           onBook={this.bookEvent}
+          onJoin={this.joinEvent}
           onManage={this.manageEvent}
         />
 

@@ -7,12 +7,6 @@ import fs from 'fs';
 import http from 'http';
 import WebSocket from 'ws';
 
-//////////////
-
-import Event from './models/event';
-
-/////////////
-
 import {
   facebookLogin,
   facebookMiddleware,
@@ -23,16 +17,14 @@ import {
   oauthCallback,
 } from './controllers/auth';
 import { list } from './controllers/events';
+import Event from './models/event';
+import router from './router';
 
-// Connect to MongoDB
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/events', {
-  // mongodb://localhost/react-native-comments
-  useMongoClient: true,
-  /* other options */
+  useMongoClient: true
 });
 
-// Initialize http server
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,12 +42,9 @@ app.get('/auth/google/callback', googleMiddleware, oauthCallback);
 app.get('/auth/vkontakte/callback', vkontakteMiddleware, oauthCallback);
 
  
-
 // Logger that outputs all requests into the console
 app.use(morgan('combined'));
-// Use v1 as prefix for all API endpoints
 
-import router from './router';
 
 app.use('/v1', router);
 
@@ -71,7 +60,6 @@ app.get('/images', function(req, res) {
 app.get('/images/:id', function(req, res) {
     router.getImageById(req.params.id, function(err, genres) {
         if (err) { throw err; }
-        // res.download(genres.path);
         res.contentType('image/png');
         res.send(fs.readFileSync(genres.path));
     });
@@ -83,53 +71,65 @@ const wss = new WebSocket.Server({ server });
 
 
 function mainLogic(ws, obj) {
-  // add command - 'calculate'
-  if (obj.command == 'start') {
 
-    // {
-    //   command: "start",
-    //   timeout: 10,
-    //   talk_time: 20,
-    //   count_pair: 10
-    // }
-            
+  if (obj.command == 'start') {
     var counter = 0;
-    // ws.send("Counter is: " + counter);
-    ws.send('next');
-    // ticker
+    
+    var selected = JSON.stringify({
+        "type": "selected",
+        "data": obj.selected
+    });
+    var next = JSON.stringify({
+        "type": "next"
+    });
+    var last = JSON.stringify({
+        "type": "last"
+    });
+    timeout = (counter) => {
+        return JSON.stringify({
+          "type": "timeout",
+          "counter": counter
+        });
+    }
+    tick = (seconds) => {
+        return JSON.stringify({
+          "type": "tick",
+          "seconds": seconds
+        });
+    }
+    
+    ws.send(selected);
+    ws.send(next);
     var seconds = 0;
-    ws.send('- ' + seconds + ' -')
+    ws.send(tick(seconds));
     var ticker = setInterval(function () {
         seconds++;
-        ws.send('- ' + (seconds-counter*(obj.timeout + obj.talk_time)) + ' -')
+        ws.send(  tick(seconds-counter*(obj.timeout + obj.talk_time)) )
     }, 1000);
 
-    // first timeout
     setTimeout(function() {
-        ws.send('timeout ' + counter )
+        ws.send( timeout(counter) )
     }, obj.talk_time * 1000);
 
     var looper = setInterval(function() { 
-        // console.log('setInterval inside ')
         var timer = setTimeout(function() {
-            ws.send('timeout ' + counter)
+            ws.send( timeout(counter) )
         }, obj.talk_time * 1000);
         counter++;
-        // ws.send("Counter is: " + counter);
-       
-        if (counter >= obj.count_pair )
+        
+        if (counter >= obj.selected.length )
         {
             clearInterval(looper);
             clearTimeout(timer);
             clearTimeout(ticker);
-            ws.send("last"); // Counter: " + counter + " is 
+            ws.send(last); // return all participants for VotePushScreen
         } else {
-            ws.send('next');
+            ws.send(next); // return new participant for VotingScreen
         }
     }, (obj.timeout + obj.talk_time) * 1000 );
     
   } else if (obj.command == 'calculate') {
-    // ws.send("sympathy results");
+    
     // search event by id and get likes
     Event.findById(obj.event_id, function (err, event) {
         if (err) {
@@ -151,8 +151,6 @@ function mainLogic(ws, obj) {
             })
         })
         ws.send(JSON.stringify(matches));
-        // console.log(matches);
-        // console.log(matches)
     });
   }
 }

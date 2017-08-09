@@ -38,24 +38,7 @@ export default class VotingScreen extends Component {
       person 
     } = this.props.navigation.state.params;
 
-    // view with person info
-    // pass here array with all users
-
-    // {
-    //   oauth_id: {
-    //     type: String,
-    //     unique: true,
-    //     index: true,
-    //   },
-    //   name     : String,
-    //   avatar   : String,
-    //   age      : Number,
-    //   gender   : Number,  // (0-girl, 1-man)
-    //   organizer_status : Boolean,
-    //   likes: Array,   // <------------------------------------
-    //   events : [{ type: Schema.Types.ObjectId, ref: 'DateEvent' }]
-    // }
-
+ 
     return (
        <View style={styles.container}>
         <View style={styles.content}>
