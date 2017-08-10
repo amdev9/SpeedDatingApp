@@ -18,7 +18,7 @@ import Participant from './Participant';
 
 export default class JoinScreen extends Component {
   //   --main ws--
-  // [  JoinScreen -> voting screen -> votingpushscreen  ] -> mymatches 
+  // [  JoinScreen -> voting screen -> votingpushscreen  ] -> 'confirm' -> empty mymatches (waiting for admin 'done')
   
   state = {
     selected: [], // get from websocket

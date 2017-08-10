@@ -16,11 +16,8 @@ import { defaultStyles } from './styles';
 import Participant from './Participant';
 import { put, get } from '../components/api';
 
-
 export default class VotingPushScreen extends Component {
-
-  // send results to server -> go to mymatches screen
-
+  // votingpushscreen  -> 'confirm' -> empty mymatches (waiting for admin 'done')
   constructor(props) {
     super(props);
     const { person, participants } = this.props.navigation.state.params;
@@ -38,7 +35,6 @@ export default class VotingPushScreen extends Component {
     }
   };
  
-
   onConfirm = async () => {
     const { person, participants, event } = this.props.navigation.state.params;
     try {
@@ -50,11 +46,10 @@ export default class VotingPushScreen extends Component {
       }); 
       const json = await response.json();
       console.log(json);
-
       const { navigate } = this.props.navigation;
       navigate('Mymatches', {
         event: event
-      }); 
+      });
 
     }
     catch (error) {
@@ -62,31 +57,26 @@ export default class VotingPushScreen extends Component {
     }
   };
 
-
-
   render() {
     const { person, participants } = this.props.navigation.state.params;
     return (
-       <View style={styles.container}>
-          <ScrollView
-            ref={(scrollView) => { this._scrollView = scrollView; }}  
-          >
-            {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked}/>)}
-          </ScrollView>
-
-           
-          <TouchableHighlight
-              underlayColor="#9575CD"
-              style={styles.buttonContainer}
-              onPress={this.onConfirm}
-              >
-              <Text style={styles.button}>Confirm</Text>
-          </TouchableHighlight> 
+      <View style={styles.container}>
+        <ScrollView
+          ref={(scrollView) => { this._scrollView = scrollView; }}  
+        >
+          {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked}/>)}
+        </ScrollView>
+        <TouchableHighlight
+            underlayColor="#9575CD"
+            style={styles.buttonContainer}
+            onPress={this.onConfirm}
+            >
+            <Text style={styles.button}>Confirm</Text>
+        </TouchableHighlight> 
       </View>
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {

@@ -148,7 +148,12 @@ function mainLogic(ws, obj) {
                 })
             })
         })
-        wss.broadcast(JSON.stringify(matches));
+
+        var calculate = JSON.stringify({
+            type: "calculate",
+            data: JSON.stringify(matches)
+        });
+        wss.broadcast(calculate);
     });
   }
 

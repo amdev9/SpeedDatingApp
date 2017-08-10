@@ -18,7 +18,7 @@ import Participant from './Participant';
 
 export default class ManageScreen extends Component {
   //   --main ws--
-  // [ ManageScreen -> 'start' -> VotingStatusScreen ] -> MatchScreen
+  // [ ManageScreen -> 'start' -> VotingStatusScreen ] -> 'done' ->  MatchScreen
 
   state = {
     selected: [],
@@ -39,15 +39,13 @@ export default class ManageScreen extends Component {
         selected: obj.data
       })
 
-      
       const { navigate } = this.props.navigation;
       navigate('VotingStatus', {
         participants: this.state.selected,
-        person: this.props.navigation.state.params.person
+        person: this.props.navigation.state.params.person,
+        event: this.props.navigation.state.params.event
       });    
-      
     }
-    
   };
 
   onError = (e) => {
@@ -72,7 +70,7 @@ export default class ManageScreen extends Component {
         command: "start",
         timeout: 2,
         talk_time: parseInt(this.state.talk_time),
-        selected: JSON.stringify(this.state.selected) // .length // send selected id
+        selected: JSON.stringify(this.state.selected) 
       });
       this.ws.send(json);
     } else {

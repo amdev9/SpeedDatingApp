@@ -36,7 +36,7 @@ export default class Events extends Component {
       event,	
     });
   }
-
+  
   closeEvent = () => {
     this.setState({
       popupIsOpen: false,
@@ -73,15 +73,12 @@ export default class Events extends Component {
       }); 
   }
 
-
   render() {
     const { events, loading, refresh } = this.props;
     const { person } =  this.props.navigation.state.params;
 
     return (
-
       <View style={styles.container}>
-
         <SegmentedControlIOS 
           values={['My events', 'Find event']}
           selectedIndex={this.state.selectedIndex}
@@ -129,7 +126,6 @@ export default class Events extends Component {
               size="large"
             />
         }
-            
         <EventPopup
           event={this.state.event}
           person={person}
@@ -139,8 +135,6 @@ export default class Events extends Component {
           onJoin={this.joinEvent}
           onManage={this.manageEvent}
         />
-
-        
       </View>
       
     );

@@ -13,29 +13,29 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 
-
 export default class MymatchesScreen extends Component {
-
-   
+  
+  state = {
+    persons: "persons string"
+  }
+  
   onOpenConnection = () => {
     console.log(' - onopen - ');
   }
-
+  
   onMessageRecieved = (e) => {
     console.log(e.data);
-
-    const { navigate } = this.props.navigation;
-    navigate('Match', {
-      matches: e.data
-    });  
-  
-
+    var obj = JSON.parse(e.data); 
+    this.setState({
+      persons: obj.data
+    })
+    // re render screen with new results
   };
-
+  
   onError = (e) => {
     console.log(e.message);
   };
-
+  
   onClose = (e) => {
     console.log(e.code, e.reason);
   };
@@ -48,24 +48,11 @@ export default class MymatchesScreen extends Component {
     this.ws.onclose = this.onClose;
   }
 
-
-  _calculate = async () => {
-    const { event } =  this.props.navigation.state.params;
-    let json = JSON.stringify({
-      command: "calculate",
-      event_id: event._id
-    });
-    this.ws.send(json);
-  }
-
   render() {
     return (
       <View style={styles.container}>
-        <Text> Show all user matches </Text>
-
-          <TouchableOpacity onPress={this._calculate}>
-            <Text> Calculate results </Text>
-          </TouchableOpacity>
+        <Text> Show my matches - User screen </Text>
+        <Text> {this.state.persons} </Text>
       </View>
     );
   }
