@@ -12,7 +12,8 @@ import {
   Dimensions,
   ScrollView,
   RefreshControl,
-  NativeModules
+  NativeModules,
+  TextInput
 } from 'react-native'
 
 var RNUploader = NativeModules.RNUploader;
@@ -24,27 +25,7 @@ let styles
 const { width } = Dimensions.get('window')
 
 class Edit extends React.Component {
-  // static navigationOptions = {
-  //   title: 'Camera Roll App',
-  //   headerRight: <Button title="Done" onPress={() => this.props.navigation.navigate('Profile')}/>
-  // }
-
-  // static navigationOptions = ({ navigation }) => {
-  //   // const {state, setParams} = navigation;
-  //   // const isInfo = state.params.mode === 'info';
-  //   // const {user} = state.params;
-  //   return {
-  //     title: 'Camera Roll App',
-  //     headerRight: (
-  //       <Button
-  //         title={'Done'}
-  //         onPress={() =>  navigation.navigate('Profile', { user: navigation.state.params.user }) }
-  //       />
-  //     ),
-  //   };
-  // };
-
-
+ 
   state = {
     modalVisible: false,
     photos: [],
@@ -184,6 +165,13 @@ class Edit extends React.Component {
              {/* {JSON.stringify(this.props)} */}
              
           </Text>
+          
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.text}
+          />
+
 
         <Button
           title='View Photos'
