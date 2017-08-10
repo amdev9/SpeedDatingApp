@@ -36,12 +36,15 @@ export default class ManageScreen extends Component {
       this.setState({
         selected: obj.selected
       })
+
+      const { navigate } = this.props.navigation;
+      navigate('VotingStatus', {
+        participants: this.state.selected,
+        person: this.props.navigation.state.params.person
+      });    
+      
     }
-    const { navigate } = this.props.navigation;
-    navigate('VotingStatus', {
-      participants: this.state.selected,
-      person: this.props.navigation.state.params.person
-    });    
+    
   };
 
   onError = (e) => {

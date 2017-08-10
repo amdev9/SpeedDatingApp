@@ -76,25 +76,25 @@ function mainLogic(ws, obj) {
     var counter = 0;
     
     var selected = JSON.stringify({
-        "type": "selected",
-        "data": obj.selected
+        type: "selected",
+        data: obj.selected
     });
     var next = JSON.stringify({
-        "type": "next"
+        type: "next"
     });
     var last = JSON.stringify({
-        "type": "last"
+        type: "last"
     });
     timeout = (counter) => {
         return JSON.stringify({
-          "type": "timeout",
-          "counter": counter
+          type: "timeout",
+          counter: counter
         });
     }
     tick = (seconds) => {
         return JSON.stringify({
-          "type": "tick",
-          "seconds": seconds
+          type: "tick",
+          seconds: seconds
         });
     }
     
