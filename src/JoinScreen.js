@@ -32,9 +32,11 @@ export default class JoinScreen extends Component {
   onMessageRecieved = (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
+    
     if (obj.type == 'selected') {
+      var selected_data = JSON.parse(obj.data);
       this.setState({
-        selected: obj.data
+        selected: selected_data
       })
     }
 
@@ -75,10 +77,8 @@ export default class JoinScreen extends Component {
 
     
   render() {
-    // add text field
 
-    const { person } =  this.props.navigation.state.params;
-     
+    const { person } =  this.props.navigation.state.params;     
     return (
       <View style={styles.container}>
          <Text > Join screen </Text>

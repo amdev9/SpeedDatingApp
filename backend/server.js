@@ -71,9 +71,9 @@ const wss = new WebSocket.Server({ server });
 
 
 function mainLogic(ws, obj) {
-wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        // client.send(message);
+// wss.clients.forEach(function each(client) {
+//       if (client !== ws && client.readyState === WebSocket.OPEN) {
+      
      
   if (obj.command == 'start') {
     var counter = 0;
@@ -101,22 +101,22 @@ wss.clients.forEach(function each(client) {
         });
     }
     
-    client.send(selected);
-    client.send(next);
+    wss.broadcast(selected);
+    wss.broadcast(next);
     var seconds = 0;
-    client.send(tick(seconds));
+    wss.broadcast(tick(seconds));
     var ticker = setInterval(function () {
         seconds++;
-        client.send(  tick(seconds-counter*(obj.timeout + obj.talk_time)) )
+        wss.broadcast(  tick(seconds-counter*(obj.timeout + obj.talk_time)) )
     }, 1000);
 
     setTimeout(function() {
-        client.send( timeout(counter) )
+        wss.broadcast( timeout(counter) )
     }, obj.talk_time * 1000);
 
     var looper = setInterval(function() { 
         var timer = setTimeout(function() {
-            client.send( timeout(counter) )
+            wss.broadcast( timeout(counter) )
         }, obj.talk_time * 1000);
         counter++;
         
@@ -125,9 +125,9 @@ wss.clients.forEach(function each(client) {
             clearInterval(looper);
             clearTimeout(timer);
             clearTimeout(ticker);
-            client.send(last); // return all participants for VotePushScreen
+            wss.broadcast(last); // return all participants for VotePushScreen
         } else {
-            client.send(next); // return new participant for VotingScreen
+            wss.broadcast(next); // return new participant for VotingScreen
         }
     }, (obj.timeout + obj.talk_time) * 1000 );
     
@@ -153,13 +153,13 @@ wss.clients.forEach(function each(client) {
                 })
             })
         })
-        client.send(JSON.stringify(matches));
+        wss.broadcast(JSON.stringify(matches));
     });
   }
 
 
-   }
-    });
+//    }
+//     });
 
 }
 

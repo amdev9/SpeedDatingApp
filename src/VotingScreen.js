@@ -17,17 +17,28 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class VotingScreen extends Component {
   
-  onClicked = () => {
-    const { 
-      participant, 
-      person 
-    } = this.props.navigation.state.params;
+  constructor(props) {
+    super(props);
+    const { person, participants } = this.props.navigation.state.params;
     if (!person.likes) {
       person.likes = {
         person_id: person._id,
         person_likes: []
       };
     }
+  }
+
+  onClicked = () => {
+    const { 
+      participant, 
+      person 
+    } = this.props.navigation.state.params;
+    // if (!person.likes) {
+    //   person.likes = {
+    //     person_id: person._id,
+    //     person_likes: []
+    //   };
+    // }
     person.likes.person_likes.push(participant._id);
   }
 
