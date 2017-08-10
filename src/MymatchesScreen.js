@@ -9,7 +9,8 @@ import {
   View, 
   ListView, 
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  Button
 } from 'react-native';
 import { defaultStyles } from './styles';
 
@@ -48,9 +49,18 @@ export default class MymatchesScreen extends Component {
     this.ws.onclose = this.onClose;
   }
 
+
   render() {
+    const { person } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
+        <Button
+          onPress={() => this.props.navigation.navigate('Events', {
+            person: person
+          })}
+          title="Go to Events "
+        />
+
         <Text> Show my matches - User screen </Text>
         <Text> {this.state.persons} </Text>
       </View>

@@ -48,7 +48,7 @@ export default class VotingPushScreen extends Component {
       console.log(json);
       const { navigate } = this.props.navigation;
       navigate('Mymatches', {
-        event: event
+        person: person
       });
 
     }

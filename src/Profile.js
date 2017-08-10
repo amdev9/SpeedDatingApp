@@ -15,11 +15,22 @@ import Icon from 'react-native-vector-icons/FontAwesome';
  
 export default class Profile extends Component {
   
+  
   render() {
     const { user } = this.props.navigation.state.params;
     return (     
       <View style={styles.container}>
+
+        
         <View style={styles.content}>
+
+          <Button
+            onPress={() => this.props.navigation.navigate('Events', {
+              person: user
+            })}
+            title="Go to Events "
+          />
+          
           <Text style={styles.header}>
             Welcome {user.name}!
           </Text>
@@ -38,12 +49,7 @@ export default class Profile extends Component {
             title="Edit Profile"
           />
 
-          <Button
-            onPress={() => this.props.navigation.navigate('Events', {
-              person: user
-            })}
-            title="Go to Events "
-          />
+          
           
         </View>
       </View>

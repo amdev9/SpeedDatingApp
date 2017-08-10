@@ -5,7 +5,8 @@ import {
   ScrollView,
   StyleSheet,
   View,
-  SegmentedControlIOS
+  SegmentedControlIOS,
+  Button
 } from 'react-native';
 
 import _ from 'lodash';
@@ -79,6 +80,20 @@ export default class Events extends Component {
 
     return (
       <View style={styles.container}>
+        <Button
+          onPress={() => this.props.navigation.navigate('Profile', {
+            user: person
+          })}
+          title="Profile"
+        />
+
+         <Button
+          onPress={() => this.props.navigation.navigate('Mymatches', {
+            person: person
+          })}
+          title="My Matches"
+        />
+
         <SegmentedControlIOS 
           values={['My events', 'Find event']}
           selectedIndex={this.state.selectedIndex}
