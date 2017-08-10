@@ -31,11 +31,15 @@ class Edit extends React.Component {
     modalVisible: false,
     photos: [],
     index: null,
-    
+    user_sex: '',
 
     uploadProgress: 0,
     uploadTotal: 0,
     uploadWritten: 0,
+  }
+
+  updateUser = (user_sex) => {
+    this.setState({ user_sex: user_sex })
   }
 
   // componentDidMount() {
@@ -148,113 +152,129 @@ class Edit extends React.Component {
     const {user} = this.props.navigation.state.params;
     console.log('state :', this.state)
     return (
-      <View style={styles.container}>
+      <View  style={styles.container}>
 
-        <Text style={styles.header}>
-          </Text>
-          <Button
-          title={'Done'}
-          onPress={() =>  this.props.navigation.navigate('Profile', { user: user }) }
-        />
-          <Text> {user.name} </Text>
-          <View style={styles.avatar}>
-              <Image source={{ uri: user.avatar }} style={styles.avatarImage} />  
-            {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
-          </View>
-          <Text style={styles.text}>
-             Editing {'\n'}
-             {/* {JSON.stringify(this.props)} */}
-             
-          </Text>
-          {/* current work  */}
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(current_work) => this.setState({ current_work })}
-            value={this.state.current_work}
-          />
-          {/* about user info  */}
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(about) => this.setState({about})}
-            value={this.state.about}
-          />
-          {/* sex  */}
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(sex) => this.setState({sex})}
-            value={this.state.sex}
-          />
-          {/* age  */}
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(age) => this.setState({age})}
-            value={this.state.age}
-          />
-
-
-      
        
 
+          <Picker selectedValue = {this.state.user_sex} onValueChange = {this.updateUser}>
+               <Picker.Item label = "Steve" value = "steve" />
+               <Picker.Item label = "Ellen" value = "ellen" />
+               <Picker.Item label = "Maria" value = "maria" />
+            </Picker>
+          <Text style = {styles.text_sex}>{this.state.user_sex}</Text>
 
 
-        <Button
-          title='View Photos'
-          onPress={() => { this.toggleModal(); this.getPhotos() }}
-        />
-        {/* <Button
-          title='Browse Images'
-          onPress={this.navigate}
-        /> */}
-        <Modal
-          animationType={"slide"}
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => console.log('closed')}
-        >
-          <View style={styles.modalContainer}>
-            <Button
-              title='Close'
-              onPress={this.toggleModal}
+
+
+<Text style={styles.header}>
+</Text>
+<Button
+title={'Done'}
+onPress={() =>  this.props.navigation.navigate('Profile', { user: user }) }
+/>
+<Text> {user.name} </Text>
+<View style={styles.avatar}>
+    <Image source={{ uri: user.avatar }} style={styles.avatarImage} />  
+  {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
+</View>
+<Text style={styles.text}>
+   Editing {'\n'}
+   {/* {JSON.stringify(this.props)} */}
+   
+</Text>
+{/* current work  */}
+<TextInput
+  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+  onChangeText={(current_work) => this.setState({ current_work })}
+  value={this.state.current_work}
+/>
+{/* about user info  */}
+<TextInput
+  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+  onChangeText={(about) => this.setState({about})}
+  value={this.state.about}
+/>
+{/* sex  */}
+<TextInput
+  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+  onChangeText={(sex) => this.setState({sex})}
+  value={this.state.sex}
+/>
+{/* age  */}
+<TextInput
+  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+  onChangeText={(age) => this.setState({age})}
+  value={this.state.age}
+/>
+<Button
+title='View Photos'
+onPress={() => { this.toggleModal(); this.getPhotos() }}
+/>
+{/* <Button
+title='Browse Images'
+onPress={this.navigate}
+/> */}
+<Modal
+animationType={"slide"}
+transparent={false}
+visible={this.state.modalVisible}
+onRequestClose={() => console.log('closed')}
+>
+<View style={styles.modalContainer}>
+  <Button
+    title='Close'
+    onPress={this.toggleModal}
+  />
+  <ScrollView
+    contentContainerStyle={styles.scrollView}>
+    {
+      this.state.photos.map((p, i) => {
+        return (
+          <TouchableHighlight
+            style={{opacity: i === this.state.index ? 0.5 : 1}}
+            key={i}
+            underlayColor='transparent'
+            onPress={() => this.setIndex(i)}
+          >
+            <Image
+              style={{
+                width: width/3,
+                height: width/3
+              }}
+              source={{uri: p.node.image.uri}}
             />
-            <ScrollView
-              contentContainerStyle={styles.scrollView}>
-              {
-                this.state.photos.map((p, i) => {
-                  return (
-                    <TouchableHighlight
-                      style={{opacity: i === this.state.index ? 0.5 : 1}}
-                      key={i}
-                      underlayColor='transparent'
-                      onPress={() => this.setIndex(i)}
-                    >
-                      <Image
-                        style={{
-                          width: width/3,
-                          height: width/3
-                        }}
-                        source={{uri: p.node.image.uri}}
-                      />
-                    </TouchableHighlight>
-                  )
-                })
-              }
-            </ScrollView>
-            {
-              this.state.index !== null  && (
-                <View style={styles.shareButton}>
-                  <Button
-                      title='Upload'
-                      onPress={this.upload}
-                    />
-                </View>
-              )
-            }
-          </View>
-        </Modal>
+          </TouchableHighlight>
+        )
+      })
+    }
+  </ScrollView>
+  {
+    this.state.index !== null  && (
+      <View style={styles.shareButton}>
+        <Button
+            title='Upload'
+            onPress={this.upload}
+          />
       </View>
     )
   }
+</View>
+</Modal>
+
+
+
+      </View>
+
+    )
+  }
 }
+
+
+
+
+           
+
+
 
 
 function _generateUUID() {
@@ -269,10 +289,15 @@ function _generateUUID() {
 
 
 styles = StyleSheet.create({
+  text_sex: {
+    fontSize: 30,
+    alignSelf: 'center',
+    color: 'red'
+  },
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center'
   },
   modalContainer: {
     paddingTop: 20,
