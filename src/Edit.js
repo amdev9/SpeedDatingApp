@@ -13,7 +13,8 @@ import {
   ScrollView,
   RefreshControl,
   NativeModules,
-  TextInput
+  TextInput,
+  Picker
 } from 'react-native'
 
 var RNUploader = NativeModules.RNUploader;
@@ -30,6 +31,7 @@ class Edit extends React.Component {
     modalVisible: false,
     photos: [],
     index: null,
+    
 
     uploadProgress: 0,
     uploadTotal: 0,
@@ -149,13 +151,12 @@ class Edit extends React.Component {
       <View style={styles.container}>
 
         <Text style={styles.header}>
-            {/* Edit  */}
-
           </Text>
           <Button
           title={'Done'}
           onPress={() =>  this.props.navigation.navigate('Profile', { user: user }) }
         />
+          <Text> {user.name} </Text>
           <View style={styles.avatar}>
               <Image source={{ uri: user.avatar }} style={styles.avatarImage} />  
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
@@ -165,12 +166,35 @@ class Edit extends React.Component {
              {/* {JSON.stringify(this.props)} */}
              
           </Text>
-          
+          {/* current work  */}
           <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={(text) => this.setState({text})}
-            value={this.state.text}
+            onChangeText={(current_work) => this.setState({ current_work })}
+            value={this.state.current_work}
           />
+          {/* about user info  */}
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(about) => this.setState({about})}
+            value={this.state.about}
+          />
+          {/* sex  */}
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(sex) => this.setState({sex})}
+            value={this.state.sex}
+          />
+          {/* age  */}
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(age) => this.setState({age})}
+            value={this.state.age}
+          />
+
+
+      
+       
+
 
 
         <Button
