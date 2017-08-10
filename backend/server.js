@@ -117,7 +117,7 @@ function mainLogic(ws, obj) {
         }, obj.talk_time * 1000);
         counter++;
         
-        if (counter >= obj.selected.length )
+        if (counter >= JSON.parse(obj.selected).length )
         {
             clearInterval(looper);
             clearTimeout(timer);

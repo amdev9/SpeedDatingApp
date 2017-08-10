@@ -31,8 +31,8 @@ export default class JoinScreen extends Component {
 
   onMessageRecieved = (e) => {
     console.log(e.data);
+    
     var obj = JSON.parse(e.data); 
-
     if (obj.type == 'selected') {
       this.setState({
         selected: JSON.parse(obj.selected)
