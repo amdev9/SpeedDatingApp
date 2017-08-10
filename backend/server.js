@@ -71,13 +71,9 @@ const wss = new WebSocket.Server({ server });
 
 
 function mainLogic(ws, obj) {
-// wss.clients.forEach(function each(client) {
-//       if (client !== ws && client.readyState === WebSocket.OPEN) {
-      
-     
+
   if (obj.command == 'start') {
     var counter = 0;
-    
     var selected = JSON.stringify({
         type: "selected",
         data: obj.selected
@@ -100,7 +96,6 @@ function mainLogic(ws, obj) {
           seconds: seconds
         });
     }
-    
     wss.broadcast(selected);
     wss.broadcast(next);
     var seconds = 0;
@@ -125,9 +120,9 @@ function mainLogic(ws, obj) {
             clearInterval(looper);
             clearTimeout(timer);
             clearTimeout(ticker);
-            wss.broadcast(last); // return all participants for VotePushScreen
+            wss.broadcast(last); 
         } else {
-            wss.broadcast(next); // return new participant for VotingScreen
+            wss.broadcast(next); 
         }
     }, (obj.timeout + obj.talk_time) * 1000 );
     
@@ -157,10 +152,6 @@ function mainLogic(ws, obj) {
     });
   }
 
-
-//    }
-//     });
-
 }
 
 wss.broadcast = function broadcast(data) {
@@ -180,17 +171,6 @@ wss.on('connection', function connection(ws, req) {
     console.log('received: %s', message);
     var obj = JSON.parse(message); 
     mainLogic(ws, obj);
-
-    
-    ///////////////////////////////
-    // broadcast
-    // wss.clients.forEach(function each(client) {
-    //   if (client !== ws && client.readyState === WebSocket.OPEN) {
-    //     client.send(message);
-    //   }
-    // });
-    ///////////////////////////////
-
   });
 });
 
