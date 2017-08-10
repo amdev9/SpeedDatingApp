@@ -33,11 +33,13 @@ export default class ManageScreen extends Component {
   onMessageRecieved = (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
+    
     if (obj.type == 'selected') {
       this.setState({
-        selected: JSON.parse(obj.selected)
+        selected: obj.data
       })
 
+      
       const { navigate } = this.props.navigation;
       navigate('VotingStatus', {
         participants: this.state.selected,
