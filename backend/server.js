@@ -71,7 +71,10 @@ const wss = new WebSocket.Server({ server });
 
 
 function mainLogic(ws, obj) {
-
+wss.clients.forEach(function each(client) {
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        // client.send(message);
+     
   if (obj.command == 'start') {
     var counter = 0;
     
@@ -98,22 +101,22 @@ function mainLogic(ws, obj) {
         });
     }
     
-    ws.send(selected);
-    ws.send(next);
+    client.send(selected);
+    client.send(next);
     var seconds = 0;
-    ws.send(tick(seconds));
+    client.send(tick(seconds));
     var ticker = setInterval(function () {
         seconds++;
-        ws.send(  tick(seconds-counter*(obj.timeout + obj.talk_time)) )
+        client.send(  tick(seconds-counter*(obj.timeout + obj.talk_time)) )
     }, 1000);
 
     setTimeout(function() {
-        ws.send( timeout(counter) )
+        client.send( timeout(counter) )
     }, obj.talk_time * 1000);
 
     var looper = setInterval(function() { 
         var timer = setTimeout(function() {
-            ws.send( timeout(counter) )
+            client.send( timeout(counter) )
         }, obj.talk_time * 1000);
         counter++;
         
@@ -122,9 +125,9 @@ function mainLogic(ws, obj) {
             clearInterval(looper);
             clearTimeout(timer);
             clearTimeout(ticker);
-            ws.send(last); // return all participants for VotePushScreen
+            client.send(last); // return all participants for VotePushScreen
         } else {
-            ws.send(next); // return new participant for VotingScreen
+            client.send(next); // return new participant for VotingScreen
         }
     }, (obj.timeout + obj.talk_time) * 1000 );
     
@@ -150,10 +153,23 @@ function mainLogic(ws, obj) {
                 })
             })
         })
-        ws.send(JSON.stringify(matches));
+        client.send(JSON.stringify(matches));
     });
   }
+
+
+   }
+    });
+
 }
+
+wss.broadcast = function broadcast(data) {
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(data);
+    }
+  });
+};
 
 wss.on('connection', function connection(ws, req) {
   // const location = url.parse(req.url, true);
@@ -164,6 +180,17 @@ wss.on('connection', function connection(ws, req) {
     console.log('received: %s', message);
     var obj = JSON.parse(message); 
     mainLogic(ws, obj);
+
+    
+    ///////////////////////////////
+    // broadcast
+    // wss.clients.forEach(function each(client) {
+    //   if (client !== ws && client.readyState === WebSocket.OPEN) {
+    //     client.send(message);
+    //   }
+    // });
+    ///////////////////////////////
+
   });
 });
 
