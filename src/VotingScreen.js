@@ -42,14 +42,12 @@ export default class VotingScreen extends Component {
     person.likes.person_likes.push(participant._id);
   }
 
-  
   render() {
     const { 
       participant, 
       person 
     } = this.props.navigation.state.params;
 
- 
     return (
        <View style={styles.container}>
         <View style={styles.content}>

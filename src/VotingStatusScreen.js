@@ -13,7 +13,23 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 
+import Participant from './Participant';
+
+
 export default class VotingStatusScreen extends Component {
+
+ 
+
+
+  onLiked = (participant) => {
+    // if( !this.state.liked.includes(participant._id) ) {
+    //   this.state.liked.push(participant._id)
+    // } else {
+    //   var index = this.state.liked.indexOf(participant._id);
+    //   this.state.liked.splice(index, 1);
+    // }
+  };
+
 
   onOpenConnection = () => {
     console.log(' - onopen - ');
@@ -56,11 +72,16 @@ export default class VotingStatusScreen extends Component {
   }
 
   render() {
-    const { final_participants } = this.props.navigation.state.params;
+    // list with all participants - pushed results status in front of each
+
+    const { participants } = this.props.navigation.state.params;
+    
+    
     return (
       <View style={styles.container}>
         <Text> Voting status screen - Manager screen</Text>
-
+       
+  
         <TouchableOpacity onPress={this._calculate}>
           <Text> Calculate results </Text>
         </TouchableOpacity>
