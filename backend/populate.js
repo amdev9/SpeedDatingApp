@@ -17,7 +17,7 @@ const organizer = new Person ({
   oauth_id: '12312312113',
   name: 'testname',
   avatar: 'https://i.imgur.com/po7UezG.jpg',
-  age: 24,
+  age: '24',
   gender: 1,
   organizer_status: true,
   likes: {},

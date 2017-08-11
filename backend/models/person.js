@@ -6,9 +6,13 @@ var personSchema = Schema({
     unique: true,
     index: true,
   },
+  
   name     : String,
   avatar   : String,
-  age      : Number,
+  age      : String,
+  about : String,
+  current_work: String,
+
   gender   : Number,  // (0-girl, 1-man)
   organizer_status : Boolean,
   events : [{ type: Schema.Types.ObjectId, ref: 'DateEvent' }],

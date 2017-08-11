@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 // Import index action from movies controller
 import { list, create, post } from './controllers/events';
-
+import { update_user } from './controllers/auth';
 
 import multer from 'multer';
 
@@ -49,6 +49,10 @@ router.route('/events')
 // add route to post likes
 router.route('/likes')
   .put(post);
+
+router.route('/user')
+  .put(update_user);
+
 
 
 export default router;

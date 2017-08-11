@@ -80,12 +80,12 @@ export default class Events extends Component {
 
     return (
       <View style={styles.container}>
-        <Button
-          onPress={() => this.props.navigation.navigate('Profile', {
-            user: person
-          })}
-          title="Profile"
-        />
+          <Button
+            onPress={() => this.props.navigation.navigate('Profile', {
+              user: person
+            })}
+            title="Profile"
+          />
 
          <Button
           onPress={() => this.props.navigation.navigate('Mymatches', {

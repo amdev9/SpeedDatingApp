@@ -53,6 +53,8 @@ passport.use(new VKontakteStrategy(vkontakte,
   
 
 const createOrGetUserFromDatabase = async (userProfile) => {
+
+
   let user = await Person.findOne({ 'oauth_id': userProfile.oauth_id }).exec();
   if (!user) {
     user = new Person({
@@ -87,3 +89,31 @@ export const vkontakteMiddleware = passport.authenticate('vkontakte', { failureR
 export const oauthCallback = async (req, res) => {
   res.redirect('OAuthLogin://login?user=' + JSON.stringify(req.user));
 };
+
+// update user info
+export const update_user = async (req, res) => {
+  // 1. find user by id  
+  // 2. update user info
+  // 3. user.save();
+
+  const { user } = req.body;
+  Person.findById(user._id, function (err, person) {
+    if (err) {
+      console.log(err);
+    }
+    
+    person.current_work = user.current_work;
+    person.about = user.about;
+    person.age = user.age;
+    
+    person.save(function (err, updatedPerson) {
+      if (err) {
+        console.log(err);
+      }
+      res.send(updatedPerson);
+    });
+  });
+
+
+
+}

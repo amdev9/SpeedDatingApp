@@ -41,7 +41,6 @@ app.get('/auth/facebook/callback', facebookMiddleware, oauthCallback);
 app.get('/auth/google/callback', googleMiddleware, oauthCallback);
 app.get('/auth/vkontakte/callback', vkontakteMiddleware, oauthCallback);
 
- 
 // Logger that outputs all requests into the console
 app.use(morgan('combined'));
 
@@ -65,10 +64,8 @@ app.get('/images/:id', function(req, res) {
     });
 });
 
-
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-
 
 function mainLogic(ws, obj) {
 
@@ -156,7 +153,6 @@ function mainLogic(ws, obj) {
         wss.broadcast(calculate);
     });
   }
-
 }
 
 wss.broadcast = function broadcast(data) {

@@ -36,8 +36,6 @@ export default class Confirmation extends Component {
         participant_id: participant._id,
       }); 
 
-
-     
       const json = await response.json();
       console.log(json);
 

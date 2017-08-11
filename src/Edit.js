@@ -17,6 +17,9 @@ import {
   Picker
 } from 'react-native'
 
+import { put, get } from '../components/api';
+
+
 var RNUploader = NativeModules.RNUploader;
 
 // import Share from 'react-native-share';
@@ -27,20 +30,71 @@ const { width } = Dimensions.get('window')
 
 class Edit extends React.Component {
  
-  state = {
-    modalVisible: false,
-    photos: [],
-    index: null,
-    user_sex: '',
+  constructor(props) {
+    super(props);
+    const { user } = this.props.navigation.state.params;
+    // this.state = {
+    //   liked: person.likes.person_likes
+    // }
 
-    uploadProgress: 0,
-    uploadTotal: 0,
-    uploadWritten: 0,
+    this.state = {
+      modalVisible: false,
+      photos: [],
+      index: null,
+       
+      uploadProgress: 0,
+      uploadTotal: 0,
+      uploadWritten: 0,
+  
+      current_work: user.current_work ? user.current_work  : '',
+      about: user.about ? user.about  : '',
+      age: user.age ? user.age  : ''
+    }
+
+
   }
 
-  updateUser = (user_sex) => {
-    this.setState({ user_sex: user_sex })
-  }
+
+  // state = {
+  //   modalVisible: false,
+  //   photos: [],
+  //   index: null,
+     
+  //   uploadProgress: 0,
+  //   uploadTotal: 0,
+  //   uploadWritten: 0,
+
+  //   current_work: '',
+  //   about: '',
+  //   age: ''
+  // }
+
+  saveProfile = async () => {
+     
+    const { user } = this.props.navigation.state.params;
+    user.current_work = this.state.current_work;
+    user.about = this.state.about;
+    user.age = this.state.age;
+  
+    try {
+      
+      const response = await put('user', {
+        user: user
+      }); 
+
+      const json = await response.json();
+       
+      alert(JSON.stringify(json) );
+      // events = json; // get events
+      // this.props.navigation.goBack();
+    }
+    catch (error) {
+      alert(error);
+    }
+  };
+
+
+  
 
   // componentDidMount() {
   //   DeviceEventEmitter.addListener('RNUploaderProgress', (data) => {
@@ -121,41 +175,25 @@ class Edit extends React.Component {
   }
   
  
- 
-
-  // navigate = () => {
-  //   const { navigate } = this.props.navigation;
-  //   navigate('ImageBrowser')
-  // }
-
-  // share = () => {
-  //   const image = this.state.photos[this.state.index].node.image.uri
-  //   RNFetchBlob.fs.readFile(image, 'base64')
-  //   .then((data) => {
-  //     let shareOptions = {
-  //       title: "React Native Share Example",
-  //       message: "Check out this photo!",
-  //       url: `data:image/jpg;base64,${data}`,
-  //       subject: "Check out this photo!"
-  //     };
-
-  //     Share.open(shareOptions)
-  //       .then((res) => console.log('res:', res))
-  //       .catch(err => console.log('err', err))
-  //   })
-  // }
-
-
 
   render() {
     
+
     const {user} = this.props.navigation.state.params;
     console.log('state :', this.state)
     return (
+
+
+      
       <View  style={styles.container}>
 
-       
+      <Button
+        title={'Save' }
+        onPress={() => this.saveProfile()}
+      />
 
+
+{/* 
           <Picker selectedValue = {this.state.user_sex} onValueChange = {this.updateUser}>
                <Picker.Item label = "Steve" value = "steve" />
                <Picker.Item label = "Ellen" value = "ellen" />
@@ -163,9 +201,9 @@ class Edit extends React.Component {
             </Picker>
           <Text style = {styles.text_sex}>{this.state.user_sex}</Text>
 
+ */}
 
-
-
+ 
 <Text style={styles.header}>
 </Text>
 <Button
@@ -183,6 +221,9 @@ onPress={() =>  this.props.navigation.navigate('Profile', { user: user }) }
    
 </Text>
 {/* current work  */}
+
+
+ 
 <TextInput
   style={{height: 40, borderColor: 'gray', borderWidth: 1}}
   onChangeText={(current_work) => this.setState({ current_work })}
@@ -194,12 +235,7 @@ onPress={() =>  this.props.navigation.navigate('Profile', { user: user }) }
   onChangeText={(about) => this.setState({about})}
   value={this.state.about}
 />
-{/* sex  */}
-<TextInput
-  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-  onChangeText={(sex) => this.setState({sex})}
-  value={this.state.sex}
-/>
+ 
 {/* age  */}
 <TextInput
   style={{height: 40, borderColor: 'gray', borderWidth: 1}}
@@ -262,18 +298,11 @@ onRequestClose={() => console.log('closed')}
 </Modal>
 
 
-
       </View>
 
     )
   }
 }
-
-
-
-
-           
-
 
 
 
@@ -295,9 +324,9 @@ styles = StyleSheet.create({
     color: 'red'
   },
   container: {
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center'
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   modalContainer: {
     paddingTop: 20,
