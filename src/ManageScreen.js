@@ -35,8 +35,9 @@ export default class ManageScreen extends Component {
     var obj = JSON.parse(e.data); 
     
     if (obj.type == 'selected') {
+      var selected_data = JSON.parse(obj.data);
       this.setState({
-        selected: obj.data
+        selected: selected_data
       })
 
       const { navigate } = this.props.navigation;

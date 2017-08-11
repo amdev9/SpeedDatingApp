@@ -81,7 +81,7 @@ export default class VotingStatusScreen extends Component {
       <View style={styles.container}>
         <Text> Voting status screen - Manager screen</Text>
        
-  
+          {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked}/>)}
         <TouchableOpacity onPress={this._calculate}>
           <Text> Calculate results </Text>
         </TouchableOpacity>
