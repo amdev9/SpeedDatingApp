@@ -105,6 +105,7 @@ export const update_user = async (req, res) => {
     person.current_work = user.current_work;
     person.about = user.about;
     person.age = user.age;
+    person.avatar = user.avatar;
     
     person.save(function (err, updatedPerson) {
       if (err) {

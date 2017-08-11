@@ -18,11 +18,8 @@ import {
 } from 'react-native'
 
 import { put, get } from '../components/api';
-
-
 var RNUploader = NativeModules.RNUploader;
 
-// import Share from 'react-native-share';
 import RNFetchBlob from 'react-native-fetch-blob'
 
 let styles
@@ -33,10 +30,6 @@ class Edit extends React.Component {
   constructor(props) {
     super(props);
     const { user } = this.props.navigation.state.params;
-    // this.state = {
-    //   liked: person.likes.person_likes
-    // }
-
     this.state = {
       modalVisible: false,
       photos: [],
@@ -45,29 +38,13 @@ class Edit extends React.Component {
       uploadProgress: 0,
       uploadTotal: 0,
       uploadWritten: 0,
-  
+      
+      avatar: user.avatar ? user.avatar  : '',
       current_work: user.current_work ? user.current_work  : '',
       about: user.about ? user.about  : '',
       age: user.age ? user.age  : ''
     }
-
-
   }
-
-
-  // state = {
-  //   modalVisible: false,
-  //   photos: [],
-  //   index: null,
-     
-  //   uploadProgress: 0,
-  //   uploadTotal: 0,
-  //   uploadWritten: 0,
-
-  //   current_work: '',
-  //   about: '',
-  //   age: ''
-  // }
 
   saveProfile = async () => {
      
@@ -75,16 +52,15 @@ class Edit extends React.Component {
     user.current_work = this.state.current_work;
     user.about = this.state.about;
     user.age = this.state.age;
-  
+    user.avatar = this.state.avatar;
+
     try {
-      
       const response = await put('user', {
         user: user
       }); 
-
-      const json = await response.json();
-       
-      alert(JSON.stringify(json) );
+      const json = await response.json(); 
+      console.log( JSON.stringify(json) );
+      
       // events = json; // get events
       // this.props.navigation.goBack();
     }
@@ -167,30 +143,27 @@ class Edit extends React.Component {
       let responseString = res.data;
       console.log('Upload complete with status ' + status);
       console.log(responseString);
-      let avatar = 'http://localhost:3000/images/'  + JSON.parse(responseString).images;
-      this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
+      this.setState({ 
+        avatar: 'http://localhost:3000/images/'  + JSON.parse(responseString).images 
+      });
+      // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
       this.setState({modalVisible: false});
 
     });
   }
   
- 
 
   render() {
-    
-
     const {user} = this.props.navigation.state.params;
     console.log('state :', this.state)
     return (
-
-
       
       <View  style={styles.container}>
 
-      <Button
+      {/* <Button
         title={'Save' }
         onPress={() => this.saveProfile()}
-      />
+      /> */}
 
 
 {/* 
@@ -208,22 +181,23 @@ class Edit extends React.Component {
 </Text>
 <Button
 title={'Done'}
-onPress={() =>  this.props.navigation.navigate('Profile', { user: user }) }
+onPress={() =>  {
+    this.saveProfile();
+    this.props.navigation.navigate('Profile', { user: user });
+  }
+}
 />
 <Text> {user.name} </Text>
 <View style={styles.avatar}>
-    <Image source={{ uri: user.avatar }} style={styles.avatarImage} />  
+    <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
   {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
 </View>
-<Text style={styles.text}>
-   Editing {'\n'}
-   {/* {JSON.stringify(this.props)} */}
-   
-</Text>
+<Button
+title='View Photos'
+onPress={() => { this.toggleModal(); this.getPhotos() }}
+/>
+
 {/* current work  */}
-
-
- 
 <TextInput
   style={{height: 40, borderColor: 'gray', borderWidth: 1}}
   onChangeText={(current_work) => this.setState({ current_work })}
@@ -242,10 +216,7 @@ onPress={() =>  this.props.navigation.navigate('Profile', { user: user }) }
   onChangeText={(age) => this.setState({age})}
   value={this.state.age}
 />
-<Button
-title='View Photos'
-onPress={() => { this.toggleModal(); this.getPhotos() }}
-/>
+
 {/* <Button
 title='Browse Images'
 onPress={this.navigate}
