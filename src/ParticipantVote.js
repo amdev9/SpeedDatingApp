@@ -19,6 +19,7 @@ export default class Participant extends PureComponent {
     //   user: PropTypes.shape({
         name: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
+        vote: PropTypes.string.isRequired,
     //   }).isRequired,
     }).isRequired,
   };
@@ -28,11 +29,13 @@ export default class Participant extends PureComponent {
 
 
     // Pull comment object out of props
-    const { participant, onSelected } = this.props;
+    const { participant, onSelected, vote } = this.props;
     // Pull data needed to display a comment out of comment object
     // const { content, created, user } = participant;
     // Pull user name and avatar out of user object
     const { name, avatar } = participant; // user;
+
+    console.log(vote);
     return (
       <View style={styles.container} >
       <TouchableOpacity onPress={ () => onSelected(participant) }>
@@ -45,6 +48,9 @@ export default class Participant extends PureComponent {
         </View>
         <View >
           <Text style={[styles.text, styles.name]}> {name} </Text>
+        </View>
+        <View >
+          <Text style={[styles.text, styles.name]}> { JSON.stringify(vote) } </Text>
         </View>
 
       </TouchableOpacity>
@@ -90,14 +96,3 @@ const styles = StyleSheet.create({
     color: '#BBB',
   },
 });
-
-
-
-
-        //   <Text>
-        //     <Text >{name}</Text>
-        //     {' '}
-           
-        //      <Text style={styles.text}>content</Text> 
-        //   </Text>
-          

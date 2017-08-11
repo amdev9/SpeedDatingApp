@@ -1,5 +1,6 @@
 import Event from '../models/event';
 import _ from 'lodash';
+import { wss } from '../server';
 
 // User relation for .populate()
 const creatorRelation = {
@@ -75,25 +76,30 @@ export const post = async (req, res, next) => {
     }
 
     // event.likes check if contains
+
+    var obj = {};
+    obj.person_id = person_id;
+    obj.person_likes = likes;
+
     if (event.likes.length > 0) {
       if ( !_.map(event.likes, 'person_id').includes(person_id) ) {
-        var obj = {};
-        obj.person_id = person_id;
-        obj.person_likes = likes;
         event.likes.push(obj);
       }
     } else {
-      var obj = {};
-      obj.person_id = person_id;
-      obj.person_likes = likes;
       event.likes.push(obj);
     }
-   
     
     event.save(function (err, updatedEvent) {
       if (err) {
         console.log(err);
       }
+      // make broadcast request
+      var likes_post = JSON.stringify({
+        type: "likes_post",
+        data: JSON.stringify(obj)
+      });
+      wss.broadcast(likes_post);
+      
       res.send(updatedEvent);
     });
   });

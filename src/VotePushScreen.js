@@ -50,7 +50,6 @@ export default class VotingPushScreen extends Component {
       navigate('Mymatches', {
         person: person
       });
-
     }
     catch (error) {
       alert(error);

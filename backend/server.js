@@ -65,7 +65,7 @@ app.get('/images/:id', function(req, res) {
 });
 
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+export const wss = new WebSocket.Server({ server });
 
 function mainLogic(ws, obj) {
 

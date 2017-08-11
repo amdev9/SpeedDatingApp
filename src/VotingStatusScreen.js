@@ -18,8 +18,9 @@ import Participant from './Participant';
 
 export default class VotingStatusScreen extends Component {
 
- 
-
+  state = {
+    liked: []
+  };
 
   onLiked = (participant) => {
     // if( !this.state.liked.includes(participant._id) ) {
@@ -36,6 +37,7 @@ export default class VotingStatusScreen extends Component {
   }
 
   onMessageRecieved = (e) => {
+    // when recieved broadcast 'push event' -> rerender VotingStatusScreen
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     if (obj.type == 'calculate') {
@@ -43,6 +45,11 @@ export default class VotingStatusScreen extends Component {
       navigate('Match', {
         matches: obj.data
       });  
+    } else if ( obj.type == 'likes_post' ) {
+      this.state.liked.push(obj.data)
+      this.setState({
+        liked: this.state.liked
+      });
     }
   };
 
@@ -73,15 +80,14 @@ export default class VotingStatusScreen extends Component {
 
   render() {
     // list with all participants - pushed results status in front of each
-
     const { participants } = this.props.navigation.state.params;
-    
-    
     return (
       <View style={styles.container}>
         <Text> Voting status screen - Manager screen</Text>
-       
-          {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked}/>)}
+
+          <Text> { JSON.stringify(this.state.liked) } </Text>
+
+          {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked} vote={this.state.liked}/>)}
         <TouchableOpacity onPress={this._calculate}>
           <Text> Calculate results </Text>
         </TouchableOpacity>
