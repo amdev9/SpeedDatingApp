@@ -3,17 +3,17 @@ import _ from 'lodash';
 import { wss } from '../server';
 
 // User relation for .populate()
-const creatorRelation = {
-  path: '_creator', // ['participants', 
-  select: ['name', 'avatar', 'likes'],
-  model: 'Person',
-};
+// const creatorRelation = {
+//   path: '_creator', // ['participants', 
+//   select: ['name', 'avatar', 'likes'],
+//   model: 'Person',
+// };
 
-const participantsRelation = {
-  path: 'participants', 
-  select: ['name', 'avatar', 'likes'],
-  model: 'Person',
-};
+// const participantsRelation = {
+//   path: 'participant_ids', 
+//   select: ['name', 'avatar', 'likes'],
+//   model: 'Person',
+// };
 
 
 // List existing comments
@@ -21,8 +21,8 @@ export const list = async (req, res, next) => {
   // Get all comments and populate User models
   const events = await Event.find()
     // .sort({ 'created': -1 })
-    .populate(creatorRelation)
-    .populate(participantsRelation)
+    // .populate(creatorRelation)
+    // .populate(participantsRelation)
     .exec();
 
   res.json({
@@ -35,18 +35,21 @@ export const create = async (req, res, next) => {
  
   var events = await Event.find()
     // .sort({ 'created': -1 })
-    .populate(creatorRelation)
-    .populate(participantsRelation)
+    // .populate(creatorRelation)
+    // .populate(participantsRelation)
     .exec();
 
   Event.findById(event_id, function (err, event) {
     if (err) {
       console.log(err);
     }
-    if ( typeof event.participants !== 'undefined' && event.participants.length > 0 &&  event.participants.indexOf(participant_id) > -1) {
+    // if ( typeof event.participants !== 'undefined' && event.participants.length > 0 &&  event.participants.indexOf(participant_id) > -1) {
+    if (event.participant_ids.includes(participant_id)) {
+      // console.log('----------> first');
       res.send(event);
     } else {
-      event.participants.push(participant_id);
+      // console.log('----------> second');
+      event.participant_ids.push(participant_id);
       event.save(function (err, updatedEvent) {
         if (err) {
           console.log(err);

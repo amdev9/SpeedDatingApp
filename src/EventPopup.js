@@ -220,7 +220,8 @@ export default class EventPopup extends Component {
       person,
       onBook,
       onJoin,
-      onManage
+      onManage,
+      onManageRequest
     } = this.props;
     // Pull out movie data
     const { title, genre, poster, days, times } = event || {};
@@ -268,6 +269,7 @@ export default class EventPopup extends Component {
                 onBook={onBook}
                 onJoin={onJoin}
                 onManage={onManage}
+                onManageRequest={onManageRequest}
                />
           </View>
             

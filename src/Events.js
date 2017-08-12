@@ -48,30 +48,39 @@ export default class Events extends Component {
   }
 
   bookEvent = () => {
-      this.closeEvent();
-      const { navigate } = this.props.navigation;
-      navigate('Confirmation', {
-        event: this.state.event,
-        participant: this.props.navigation.state.params.person
-      }); 
+    this.closeEvent();
+    const { navigate } = this.props.navigation;
+    navigate('Confirmation', {
+      event: this.state.event,
+      participant: this.props.navigation.state.params.person
+    }); 
   }
 
   joinEvent = () => {
-      this.closeEvent();
-      const { navigate } = this.props.navigation;
-      navigate('Join', {
-        event: this.state.event,
-        person: this.props.navigation.state.params.person
-      }); 
+    this.closeEvent();
+    const { navigate } = this.props.navigation;
+    navigate('Join', {
+      event: this.state.event,
+      person: this.props.navigation.state.params.person
+    }); 
   }
 
   manageEvent = () => {
-      this.closeEvent();
-      const { navigate } = this.props.navigation;
-      navigate('Manage', {
-        event: this.state.event,
-        person: this.props.navigation.state.params.person
-      }); 
+    this.closeEvent();
+    const { navigate } = this.props.navigation;
+    navigate('Manage', {
+      event: this.state.event,
+      person: this.props.navigation.state.params.person
+    }); 
+  }
+
+  manageEventRequest = () => {
+    this.closeEvent();
+    const { navigate } = this.props.navigation;
+    navigate('ManagePermission', {
+      event: this.state.event,
+      person: this.props.navigation.state.params.person
+    }); 
   }
 
   render() {
@@ -117,7 +126,7 @@ export default class Events extends Component {
             >
               {events.map((event, index) => {
                 if (this.state.selectedIndex == 0) {
-                  if (  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
+                  if (event.participant_ids.includes(person._id)) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
                     return <EventPoster
                       event={event}
                       onOpen={this.openEvent}
@@ -149,6 +158,7 @@ export default class Events extends Component {
           onBook={this.bookEvent}
           onJoin={this.joinEvent}
           onManage={this.manageEvent}
+          onManageRequest={this.manageEventRequest}
         />
       </View>
       

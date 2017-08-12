@@ -19,12 +19,14 @@ const organizer = new Person ({
   avatar: 'https://i.imgur.com/po7UezG.jpg',
   age: '24',
   gender: 1,
-  organizer_status: true,
   likes: {},
   events: []
 });
 
 organizer.save(function (err) {
+  let manage_ids = [];
+  manage_ids.push(organizer._id);
+
   if (err) return handleError(err);
   var event = new Event({
     title: "Once upon a timex.",
@@ -32,8 +34,10 @@ organizer.save(function (err) {
     photo : 'https://i.imgur.com/po7UezG.jpg',
     description: 'Some description', 
     date : Date.now(),
-    organizer: organizer._id,
-    participants   : [],
+    show_manage: true,
+    manage_ids: manage_ids,
+    participant_ids: [],
+    // participants: [], //// TO REMOVE
     likes: [],
     matches: {}
   });
@@ -43,16 +47,4 @@ organizer.save(function (err) {
     // thats it!
   });
 });
-
-//   {
-//     title: 'La La Land',
-//     poster: 'https://i.imgur.com/po7UezG.jpg',
-//     genre: 'Drama/Romance',
-//   },
-
-// events.map(data => {
-//   // Initialize a model with movie data
-//   const event = new Event(data);
-//   // and save it into the database
-//   event.save();
-// });
+ 

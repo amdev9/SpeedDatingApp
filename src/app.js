@@ -31,6 +31,7 @@ import VotePushScreen from './VotePushScreen';
 import MymatchesScreen from './MymatchesScreen';
 import MatchScreen from './MatchScreen';
 import JoinScreen from './JoinScreen';
+import ManagePermissionScreen from './ManagePermissionScreen';
 
 const MovieStack = StackNavigator({
   Login: { screen: Login },
@@ -45,9 +46,8 @@ const MovieStack = StackNavigator({
   VotePush: { screen: VotePushScreen },
   VotingStatus: { screen: VotingStatusScreen },
   Manage: { screen: ManageScreen },
-  Match: { screen: MatchScreen }
-  
- 
+  Match: { screen: MatchScreen },
+  ManagePermission: { screen: ManagePermissionScreen }
 }, {
   // In modal mode screen slides up from the bottom
   // mode: 'modal',
