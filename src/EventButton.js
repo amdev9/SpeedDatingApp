@@ -28,7 +28,7 @@ export default class EventButton extends Component {
         const { event, person, onBook, onManage, onJoin } = this.props;
         
         // debug version
-        if( event.organizer._id != person._id ) 
+        if( event.organizer._id == person._id ) 
         // right version
         //  if( event.organizer._id == person._id ) 
         {
