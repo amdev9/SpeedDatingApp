@@ -95,6 +95,7 @@ export default class ManageScreen extends Component {
           <ScrollView
             ref={(scrollView) => { this._scrollView = scrollView; }}  
           >
+          {/* fix event.participants to participant_ids */}
             {event.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
           </ScrollView>
 

@@ -17,21 +17,18 @@ import { put, get } from '../components/api';
 
 export default class ManagePermissionScreen extends Component {
     
-  onAttend= async () => {
+  onAttend = async () => {
     const { person, participants, event } = this.props.navigation.state.params;
     try {
-      // Make API call
-      const response = await put('likes', {
+      
+      const response = await put('manage', {
         person_id: person._id,
-        likes: this.state.liked,
         event_id: event._id
       }); 
       const json = await response.json();
       console.log(json);
-      const { navigate } = this.props.navigation;
-      navigate('Mymatches', {
-        person: person
-      });
+       
+      // go back with response - we will contact with you
     }
     catch (error) {
       alert(error);

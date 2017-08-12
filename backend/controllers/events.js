@@ -43,19 +43,15 @@ export const create = async (req, res, next) => {
     if (err) {
       console.log(err);
     }
-    // if ( typeof event.participants !== 'undefined' && event.participants.length > 0 &&  event.participants.indexOf(participant_id) > -1) {
+    
     if (event.participant_ids.includes(participant_id)) {
-      // console.log('----------> first');
       res.send(event);
     } else {
-      // console.log('----------> second');
       event.participant_ids.push(participant_id);
       event.save(function (err, updatedEvent) {
         if (err) {
           console.log(err);
         }
-        
-        // console.log(events);
         _.remove(events, { '_id': event_id});
         
         // find by event_id remove event place updatedEvent 
@@ -109,3 +105,28 @@ export const post = async (req, res, next) => {
 };
 
 
+export const manage = async (req, res, next) => {
+  const {  person_id, event_id } = req.body;  
+  // console.log(person_id, likes);
+  Event.findById(event_id, function (err, event) {
+    if (err) {
+      console.log(err);
+    }
+
+    event.manage_ids.push(person_id); 
+
+    event.save(function (err, updatedEvent) {
+      if (err) {
+        console.log(err);
+      }
+      // make broadcast request // figure out
+      // var likes_post = JSON.stringify({
+      //   type: "likes_post",
+      //   data: JSON.stringify(obj)
+      // });
+      // wss.broadcast(likes_post);
+      
+      res.send(updatedEvent);
+    });
+  });
+};
