@@ -90,8 +90,8 @@ export default class Confirmation extends Component {
         <Text> All info about payment </Text>
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() => this._pressFunc()} // change to yandex pay func
-          // this._finalBookEvent()
+          onPress={() =>  this._finalBookEvent() }//this._pressFunc()} // change to yandex pay func
+          // 
         >
           <Text style={styles.button}>Final Book Event</Text>
         </TouchableOpacity>
