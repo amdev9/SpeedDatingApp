@@ -106,15 +106,13 @@ export const post = async (req, res, next) => {
 
 
 export const manage = async (req, res, next) => {
-  const {  person_id, event_id } = req.body;  
-  // console.log(person_id, likes);
-  Event.findById(event_id, function (err, event) {
+  const {  person_id } = req.body; 
+  
+  Event.findById(req.params.eventId, function (err, event) {
     if (err) {
       console.log(err);
     }
-
     event.manage_ids.push(person_id); 
-
     event.save(function (err, updatedEvent) {
       if (err) {
         console.log(err);

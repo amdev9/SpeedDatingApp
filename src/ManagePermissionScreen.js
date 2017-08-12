@@ -21,9 +21,8 @@ export default class ManagePermissionScreen extends Component {
     const { person, participants, event } = this.props.navigation.state.params;
     try {
       
-      const response = await put('manage', {
-        person_id: person._id,
-        event_id: event._id
+      const response = await put('events/'+ event._id + '/manage', {
+        person_id: person._id
       }); 
       const json = await response.json();
       console.log(json);
