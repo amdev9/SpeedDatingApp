@@ -9,18 +9,25 @@ import {
   View, 
   ListView, 
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  Image
 } from 'react-native';
 import { defaultStyles } from './styles';
 
-import Participant from './Participant';
+// import ParticipantVote from './ParticipantVote';
 
 
 export default class VotingStatusScreen extends Component {
 
-  state = {
-    liked: []
-  };
+  // participants in initial state
+
+  constructor(props) {
+    super(props);
+    const { person, participants } = this.props.navigation.state.params;
+    this.state = {
+      participants: participants
+    };
+  }
 
   onLiked = (participant) => {
     // if( !this.state.liked.includes(participant._id) ) {
@@ -30,7 +37,6 @@ export default class VotingStatusScreen extends Component {
     //   this.state.liked.splice(index, 1);
     // }
   };
-
 
   onOpenConnection = () => {
     console.log(' - onopen - ');
@@ -46,10 +52,37 @@ export default class VotingStatusScreen extends Component {
         matches: obj.data
       });  
     } else if ( obj.type == 'likes_post' ) {
-      this.state.liked.push(obj.data)
+
+      // console.log('particip', this.state.participants);
+      // console.log('likes_post', obj.data);
+      var lik = JSON.parse(obj.data);
+      this.state.participants.map( (participant) => {
+
+        if (participant._id == lik.person_id) {
+          participant.likes = {
+            person_id: lik.person_id,
+            person_likes: lik.person_likes
+          };
+           
+          console.log('participant.likes', participant.likes)
+        }
+        return participant; 
+      })
       this.setState({
-        liked: this.state.liked
+        participants: this.state.participants
       });
+
+      // this.state.participants.forEach( (participant) => {
+      //   if (participant._id == obj.data.person_id) {
+      //     participant.likes = obj.data;
+      //   }
+      // });
+      
+
+      // this.state.liked.push(obj.data)
+      // this.setState({
+      //   liked: this.state.liked
+      // });
     }
   };
 
@@ -80,14 +113,33 @@ export default class VotingStatusScreen extends Component {
 
   render() {
     // list with all participants - pushed results status in front of each
-    const { participants } = this.props.navigation.state.params;
+    
     return (
       <View style={styles.container}>
         <Text> Voting status screen - Manager screen</Text>
 
-          <Text> { JSON.stringify(this.state.liked) } </Text>
+          {/* <Text> { JSON.stringify(this.state.participants) } </Text>  */}
 
-          {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked} vote={this.state.liked}/>)}
+          {this.state.participants.map((participant, index) => 
+           
+            <View style={styles.containerPart} >
+              <TouchableOpacity>
+                <View style={styles.avatarContainer}>
+                  {participant.avatar && <Image
+                    resizeMode='contain'
+                    style={styles.avatar}
+                    source={{ uri: participant.avatar }}
+                  />}
+                </View>
+                <View >
+                  <Text style={[styles.text, styles.name]}> {participant.name} </Text>
+                </View>
+                <View >
+                  <Text style={[styles.text, styles.name]}> { JSON.stringify(participant.likes) } </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
         <TouchableOpacity onPress={this._calculate}>
           <Text> Calculate results </Text>
         </TouchableOpacity>
@@ -97,6 +149,40 @@ export default class VotingStatusScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  containerPart: {
+    flexDirection: 'row',
+  },
+  avatarContainer: {
+    alignItems: 'center',
+    marginLeft: 5,
+    paddingTop: 10,
+    width: 40,
+  },
+  contentContainer: {
+    flex: 1,
+    borderBottomWidth: 1,
+    borderColor: '#EEE',
+    padding: 5,
+  },
+  avatar: {
+    borderWidth: 1,
+    borderColor: '#EEE',
+    borderRadius: 13,
+    width: 26,
+    height: 26,
+  },
+  text: {
+    color: '#000',
+    fontFamily: 'Avenir',
+    fontSize: 15,
+  },
+  name: {
+    fontWeight: 'bold',
+  },
+  created: {
+    color: '#BBB',
+  },
+
   container: {
     flex: 1,
     justifyContent: 'center',

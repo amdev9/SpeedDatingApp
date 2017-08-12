@@ -26,7 +26,6 @@ export default class Participant extends PureComponent {
   render() {
     
 
-
     // Pull comment object out of props
     const { participant, onSelected } = this.props;
     // Pull data needed to display a comment out of comment object

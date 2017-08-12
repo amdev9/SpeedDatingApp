@@ -5,13 +5,13 @@ import { wss } from '../server';
 // User relation for .populate()
 const creatorRelation = {
   path: '_creator', // ['participants', 
-  select: ['name', 'avatar'],
+  select: ['name', 'avatar', 'likes'],
   model: 'Person',
 };
 
 const participantsRelation = {
   path: 'participants', 
-  select: ['name', 'avatar'],
+  select: ['name', 'avatar', 'likes'],
   model: 'Person',
 };
 

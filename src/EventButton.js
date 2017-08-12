@@ -62,7 +62,6 @@ export default class EventButton extends Component {
                 <Text style={styles.button}>Join event room</Text>
                 </TouchableHighlight> 
 
-
               </View>
         }
     }

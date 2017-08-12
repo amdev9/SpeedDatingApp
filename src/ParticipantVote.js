@@ -8,7 +8,7 @@ import {
 } from 'react-native';
  
 
-export default class Participant extends PureComponent {
+export default class ParticipantVote extends PureComponent {
 
   static propTypes = {
     // Comment object shape
@@ -19,23 +19,19 @@ export default class Participant extends PureComponent {
     //   user: PropTypes.shape({
         name: PropTypes.string.isRequired,
         avatar: PropTypes.string.isRequired,
-        vote: PropTypes.string.isRequired,
+        
     //   }).isRequired,
     }).isRequired,
   };
 
   render() {
-    
-
-
     // Pull comment object out of props
-    const { participant, onSelected, vote } = this.props;
+    const { participant, onSelected } = this.props;
     // Pull data needed to display a comment out of comment object
     // const { content, created, user } = participant;
     // Pull user name and avatar out of user object
-    const { name, avatar } = participant; // user;
-
-    console.log(vote);
+    const { name, avatar, likes } = participant; // user;
+    
     return (
       <View style={styles.container} >
       <TouchableOpacity onPress={ () => onSelected(participant) }>
@@ -50,7 +46,7 @@ export default class Participant extends PureComponent {
           <Text style={[styles.text, styles.name]}> {name} </Text>
         </View>
         <View >
-          <Text style={[styles.text, styles.name]}> { JSON.stringify(vote) } </Text>
+          <Text style={[styles.text, styles.name]}> { JSON.stringify(likes) } </Text>
         </View>
 
       </TouchableOpacity>
@@ -62,37 +58,5 @@ export default class Participant extends PureComponent {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-  },
-  avatarContainer: {
-    alignItems: 'center',
-    marginLeft: 5,
-    paddingTop: 10,
-    width: 40,
-  },
-  contentContainer: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderColor: '#EEE',
-    padding: 5,
-  },
-  avatar: {
-    borderWidth: 1,
-    borderColor: '#EEE',
-    borderRadius: 13,
-    width: 26,
-    height: 26,
-  },
-  text: {
-    color: '#000',
-    fontFamily: 'Avenir',
-    fontSize: 15,
-  },
-  name: {
-    fontWeight: 'bold',
-  },
-  created: {
-    color: '#BBB',
-  },
+  
 });
