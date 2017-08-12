@@ -37,7 +37,7 @@ organizer.save(function (err) {
     show_manage: true,
     manage_ids: manage_ids,
     participant_ids: [],
-    // participants: [], //// TO REMOVE
+    participants: [],
     likes: [],
     matches: {}
   });

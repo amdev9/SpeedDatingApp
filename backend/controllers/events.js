@@ -9,11 +9,11 @@ import { wss } from '../server';
 //   model: 'Person',
 // };
 
-// const participantsRelation = {
-//   path: 'participant_ids', 
-//   select: ['name', 'avatar', 'likes'],
-//   model: 'Person',
-// };
+const participantsRelation = {
+  path: 'participants', 
+  select: ['name', 'avatar', 'likes'],
+  model: 'Person',
+};
 
 
 // List existing comments
@@ -22,7 +22,7 @@ export const list = async (req, res, next) => {
   const events = await Event.find()
     // .sort({ 'created': -1 })
     // .populate(creatorRelation)
-    // .populate(participantsRelation)
+    .populate(participantsRelation)
     .exec();
 
   res.json({
@@ -36,7 +36,7 @@ export const create = async (req, res, next) => {
   var events = await Event.find()
     // .sort({ 'created': -1 })
     // .populate(creatorRelation)
-    // .populate(participantsRelation)
+    .populate(participantsRelation)
     .exec();
 
   Event.findById(event_id, function (err, event) {

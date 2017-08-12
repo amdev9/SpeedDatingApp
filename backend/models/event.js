@@ -9,11 +9,12 @@ var eventSchema = Schema({
   show_manage: Boolean,
   manage_ids: Array,
   participant_ids: Array,
+  participants: [{ type: Schema.ObjectId, ref: 'Person' }],  
   matches: Object,
   likes: Array
 });
 
-// participants  : [{ type: Schema.ObjectId, ref: 'Person' }], // TO REMOVE
+
 
 var DateEvent = mongoose.model('Event', eventSchema);
 
