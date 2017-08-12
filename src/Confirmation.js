@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-
 import {
   StyleSheet,
   Text,
@@ -9,12 +8,11 @@ import {
   NativeModules,
   WebView
 } from 'react-native';
-
-const YandexPay = NativeModules.YandexPay;
-
 import { defaultStyles } from './styles';
 import { put, get } from '../components/api';
 import { connect } from 'react-redux';
+
+const YandexPay = NativeModules.YandexPay;
 
 @connect(
   state => ({
@@ -25,14 +23,13 @@ import { connect } from 'react-redux';
     refresh: () => dispatch({type: 'GET_EVENT_DATA'}),
   }),
 )
-
-
 export default class Confirmation extends Component {
   state = {
     request: undefined
   };
 
   _pressFunc = () => {
+    console.log('_pressFunc');
     YandexPay.doTestPayment((error, req) => {
       if (error) {
         console.error(error);
@@ -93,7 +90,7 @@ export default class Confirmation extends Component {
         <Text> All info about payment </Text>
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() => this._pressFunc} // change to yandex pay func
+          onPress={() => this._pressFunc()} // change to yandex pay func
           // this._finalBookEvent()
         >
           <Text style={styles.button}>Final Book Event</Text>

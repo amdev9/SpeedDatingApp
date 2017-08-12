@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -34,6 +35,7 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* OAuthLoginTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* OAuthLoginTests.m */; };
 		305C0E331B874B10A44E5388 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BEB0FEC3617492098E2A8B5 /* Octicons.ttf */; };
+		3E4458FDBA5F4B4182019A62 /* libRNUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 456E4B10066F484B89061574 /* libRNUploader.a */; };
 		43DA04846BC24DBB9A12D45E /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1AE026C0ABEA443B830249EA /* Zocial.ttf */; };
 		43FDE48C365D43CF8E4457A7 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D78D9CD9B6F54CC49A44B9C2 /* Foundation.ttf */; };
 		449CA29D3FD24D979D7EF451 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0C7A923D6D942D9AF0DF3C3 /* MaterialCommunityIcons.ttf */; };
@@ -43,13 +45,14 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A103DC0DA8D946A1B6CC69EB /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A9178EC16B3F4F81824F1138 /* EvilIcons.ttf */; };
 		CBF0131292504A999750A60C /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EE6D0F1EE94085A989864A /* libRNVectorIcons.a */; };
+		CDC4B0925326C2471976FE77 /* Pods_OAuthLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032D2A4C95EE4CAB7FC96764 /* Pods_OAuthLogin.framework */; };
 		D00769594DC7427EB9F8BFA2 /* libSafariViewManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AE2AE62477C4E2590BA2295 /* libSafariViewManager.a */; };
 		D9F8854463334EB6BD86AD54 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF259882654D4D4E912C9C0C /* SimpleLineIcons.ttf */; };
 		E9577C24AF91495EBD21215E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE13A27E01694416A02C3C6C /* FontAwesome.ttf */; };
 		E971C0A438C04B918E75CEDB /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85CDDDBAC2B4C87BAE92CF9 /* Entypo.ttf */; };
+		FA8838301F3EBC5300E899F1 /* YandexPay.m in Sources */ = {isa = PBXBuildFile; fileRef = FA88382F1F3EBC5300E899F1 /* YandexPay.m */; };
 		FA92AE781F3000D900B1B1DA /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA92AE771F30007800B1B1DA /* libRCTCameraRoll.a */; };
 		FF8E11BB735D40BBB88CA845 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF6D61D67C48F780B346A0 /* libRNFetchBlob.a */; };
-		3E4458FDBA5F4B4182019A62 /* libRNUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 456E4B10066F484B89061574 /* libRNUploader.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +273,13 @@
 			remoteGlobalIDString = 2D2A28471D9B043800D4039D;
 			remoteInfo = "RCTLinking-tvOS";
 		};
+		FA88381F1F3EBC1400E899F1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C84E83662E1448269D066F13 /* RNUploader.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNUploader;
+		};
 		FA92AE6E1F30002100B1B1DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E37C17B266304816BFA2C880 /* RNFetchBlob.xcodeproj */;
@@ -296,6 +306,8 @@
 		00E356EE1AD99517003FC87E /* OAuthLoginTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OAuthLoginTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* OAuthLoginTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthLoginTests.m; sourceTree = "<group>"; };
+		032D2A4C95EE4CAB7FC96764 /* Pods_OAuthLogin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OAuthLogin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F71EB77830B56CDA65DEBC5 /* Pods-OAuthLogin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAuthLogin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OAuthLogin/Pods-OAuthLogin.debug.xcconfig"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* OAuthLogin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OAuthLogin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,25 +324,28 @@
 		2D02E4901E0B4A5D006451C7 /* OAuthLogin-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OAuthLogin-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39EE6D0F1EE94085A989864A /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		3B37E0120964476F9A95BAE3 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		456E4B10066F484B89061574 /* libRNUploader.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNUploader.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		73A83921B3DE4113B8A6462D /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		76FF6D61D67C48F780B346A0 /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		7BF5F68E130B66BEFC2CBD0D /* Pods-OAuthLogin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OAuthLogin.release.xcconfig"; path = "Pods/Target Support Files/Pods-OAuthLogin/Pods-OAuthLogin.release.xcconfig"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		89B941CC606347FCBE54E74B /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		8AE2AE62477C4E2590BA2295 /* libSafariViewManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSafariViewManager.a; sourceTree = "<group>"; };
 		8E834AC06E2F4BE08410063C /* SafariViewManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SafariViewManager.xcodeproj; path = "../node_modules/react-native-safari-view/SafariViewManager.xcodeproj"; sourceTree = "<group>"; };
 		A9178EC16B3F4F81824F1138 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		B55ECB891EBA21AB007B8AA4 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		C84E83662E1448269D066F13 /* RNUploader.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNUploader.xcodeproj; path = "../node_modules/react-native-uploader/RNUploader/RNUploader.xcodeproj"; sourceTree = "<group>"; };
 		D78D9CD9B6F54CC49A44B9C2 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		E0C7A923D6D942D9AF0DF3C3 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		E37C17B266304816BFA2C880 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		E85CDDDBAC2B4C87BAE92CF9 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		EF259882654D4D4E912C9C0C /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		FA88382E1F3EBC5300E899F1 /* YandexPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YandexPay.h; sourceTree = "<group>"; };
+		FA88382F1F3EBC5300E899F1 /* YandexPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YandexPay.m; sourceTree = "<group>"; };
 		FA92AE721F30007800B1B1DA /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		FE13A27E01694416A02C3C6C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		C84E83662E1448269D066F13 /* RNUploader.xcodeproj */ = {isa = PBXFileReference; name = "RNUploader.xcodeproj"; path = "../node_modules/react-native-uploader/RNUploader/RNUploader.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		456E4B10066F484B89061574 /* libRNUploader.a */ = {isa = PBXFileReference; name = "libRNUploader.a"; path = "libRNUploader.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,6 +377,7 @@
 				CBF0131292504A999750A60C /* libRNVectorIcons.a in Frameworks */,
 				FF8E11BB735D40BBB88CA845 /* libRNFetchBlob.a in Frameworks */,
 				3E4458FDBA5F4B4182019A62 /* libRNUploader.a in Frameworks */,
+				CDC4B0925326C2471976FE77 /* Pods_OAuthLogin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +493,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				FA88382E1F3EBC5300E899F1 /* YandexPay.h */,
+				FA88382F1F3EBC5300E899F1 /* YandexPay.m */,
 			);
 			name = OAuthLogin;
 			sourceTree = "<group>";
@@ -531,6 +549,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7FF92239E970173D1EE7B293 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				032D2A4C95EE4CAB7FC96764 /* Pods_OAuthLogin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -572,6 +598,8 @@
 				00E356EF1AD99517003FC87E /* OAuthLoginTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				32C008A284A24DD49E079DBF /* Resources */,
+				A4AA8845A08CB239BC5EE21E /* Pods */,
+				7FF92239E970173D1EE7B293 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -586,6 +614,15 @@
 				2D02E4901E0B4A5D006451C7 /* OAuthLogin-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A4AA8845A08CB239BC5EE21E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0F71EB77830B56CDA65DEBC5 /* Pods-OAuthLogin.debug.xcconfig */,
+				7BF5F68E130B66BEFC2CBD0D /* Pods-OAuthLogin.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		B55ECB661EBA20B0007B8AA4 /* Products */ = {
@@ -609,6 +646,14 @@
 			children = (
 				B55ECB8F1EBA21AB007B8AA4 /* libRCTLinking.a */,
 				B55ECB911EBA21AB007B8AA4 /* libRCTLinking-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FA8837FF1F3EBC1400E899F1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA8838201F3EBC1400E899F1 /* libRNUploader.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -654,10 +699,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "OAuthLogin" */;
 			buildPhases = (
+				707BDB38DD61FD8ECD3270DC /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				ED6BBAF32B2A0F4B314710D3 /* [CP] Embed Pods Frameworks */,
+				A60B13504A088BE509C69BD5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -798,6 +846,10 @@
 				{
 					ProductGroup = FA92AE501F30002100B1B1DA /* Products */;
 					ProjectRef = E37C17B266304816BFA2C880 /* RNFetchBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = FA8837FF1F3EBC1400E899F1 /* Products */;
+					ProjectRef = C84E83662E1448269D066F13 /* RNUploader.xcodeproj */;
 				},
 				{
 					ProductGroup = B55ECB661EBA20B0007B8AA4 /* Products */;
@@ -1022,6 +1074,13 @@
 			remoteRef = B55ECB901EBA21AB007B8AA4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		FA8838201F3EBC1400E899F1 /* libRNUploader.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNUploader.a;
+			remoteRef = FA88381F1F3EBC1400E899F1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FA92AE6F1F30002100B1B1DA /* libRNFetchBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1111,6 +1170,57 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		707BDB38DD61FD8ECD3270DC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OAuthLogin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A60B13504A088BE509C69BD5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OAuthLogin/Pods-OAuthLogin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED6BBAF32B2A0F4B314710D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-OAuthLogin/Pods-OAuthLogin-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/YandexMoneySDKObjc/YandexMoneySDKObjc.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YandexMoneySDKObjc.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OAuthLogin/Pods-OAuthLogin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1126,6 +1236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA8838301F3EBC5300E899F1 /* YandexPay.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -1241,6 +1352,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F71EB77830B56CDA65DEBC5 /* Pods-OAuthLogin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1267,6 +1379,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BF5F68E130B66BEFC2CBD0D /* Pods-OAuthLogin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;

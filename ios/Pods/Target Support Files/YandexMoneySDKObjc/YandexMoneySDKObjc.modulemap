@@ -1,0 +1,6 @@
+framework module YandexMoneySDKObjc {
+  umbrella header "YandexMoneySDKObjc-umbrella.h"
+
+  export *
+  module * { export * }
+}
