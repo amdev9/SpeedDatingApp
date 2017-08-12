@@ -46,9 +46,8 @@ router.route('/events')
   .get(list)
   .put(create);
 
-// router.route('/events/:id')
+// router.route('/events/:eventId')
 //   .put(manage);
-
 
 // add route to post likes
 router.route('/likes')
