@@ -1,7 +1,44 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p Events: #{JSON.stringify(events)}
-  p Persons: #{JSON.stringify(persons)} 
+  p Events
+  table
+    thead
+    tbody
+    for object in events
+      tr
+        each val, key in object
+          if (object.hasOwnProperty(key))
+            th= key  
+      tr
+        each val, key in object
+          if (object.hasOwnProperty(key))
+            if (key == 'manage_queue_ids')
+              td 
+                select#manage_queue_ids
+                  each variable in val
+                    option(value=variable) #{variable}
+            else 
+              td= val  
+
+  button(onclick='approve()') Approve
+
+  script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+  script.
+    var approve = function() {
+      var e = document.getElementById("manage_queue_ids");
+      var manageQueueId = e.options[e.selectedIndex].value;
+      console.log(manageQueueId)
+
+      $.ajax({
+          type: "POST",
+          url: '/v1/events/'+ '598f9d3721ef289073b9f93a' + '/approve/' + manageQueueId,
+          //- dataType: "text",
+          success: function(msg) {
+              alert(msg);
+          }
+      });
+    }
+
+
+

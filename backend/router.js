@@ -58,9 +58,8 @@ router.route('/events/:eventId/manage')
   .put(manage);
 
 router.route('/events/:eventId/:decision/:manageQueueId')
-  .put(approve);
+  .post(approve);
 
-  
 
 
 // add route to post likes

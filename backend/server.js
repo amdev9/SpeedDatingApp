@@ -74,8 +74,8 @@ app.get('/admin', async (req, res) => {
     // console.log(persons);
     res.render('index', { 
       title: 'Express',
-      events: events,
-      persons: persons
+      events: JSON.parse(JSON.stringify(events)),
+      persons: JSON.parse(JSON.stringify(persons))
     });
     
 });

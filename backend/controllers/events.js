@@ -133,7 +133,7 @@ export const manage = async (req, res, next) => {
 
 
 export const approve = async (req, res, next) => {
-  const {  person_id } = req.body; 
+  // const {  person_id } = req.body; 
   // form details
 
   Event.findById(req.params.eventId, function (err, event) {
@@ -153,6 +153,8 @@ export const approve = async (req, res, next) => {
       if (err) {
         console.log(err);
       }
+
+      console.log('approve ------------------');
       // make broadcast request // figure out
       // var likes_post = JSON.stringify({
       //   type: "likes_post",
@@ -160,7 +162,7 @@ export const approve = async (req, res, next) => {
       // });
       // wss.broadcast(likes_post);
       
-      res.send(updatedEvent);
+      res.send(JSON.stringify(updatedEvent));
     });
   });
 };
