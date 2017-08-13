@@ -141,11 +141,13 @@ export const approve = async (req, res, next) => {
       console.log(err);
     }
 
-    if (req.params.desicion == 'approve') {
-      _.remove(event.manage_queue_ids, req.params.manageQueueId);
+    if (req.params.decision == 'approve') {
+      let position = event.manage_queue_ids.indexOf(req.params.manageQueueId);
+      if ( ~position ) event.manage_queue_ids.splice(position, 1);
       event.manage_ids.push(req.params.manageQueueId);
-    } else if (req.params.desicion == 'decline') {  
-      _.remove(event.manage_queue_ids, req.params.manageQueueId);
+    } else if (req.params.decision == 'decline') {  
+      let position = event.manage_queue_ids.indexOf(req.params.manageQueueId);
+      if ( ~position ) event.manage_queue_ids.splice(position, 1);
       event.manage_decline_ids.push(req.params.manageQueueId);
     }
 
@@ -154,7 +156,7 @@ export const approve = async (req, res, next) => {
         console.log(err);
       }
 
-      console.log('approve ------------------');
+       
       // make broadcast request // figure out
       // var likes_post = JSON.stringify({
       //   type: "likes_post",
