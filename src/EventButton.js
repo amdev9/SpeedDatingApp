@@ -65,7 +65,35 @@ export default class EventButton extends Component {
               <Text style={styles.button}>Book My Tickets</Text> 
               </TouchableHighlight>
             </View>
-        } else if  ( !event.manage_ids.includes(person._id) && ( event.participant_ids.includes(person._id)) ) {
+        } else if  ( !event.manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id))
+      && event.manage_queue_ids.includes(person._id) ) {
+          return  event.show_manage 
+            ? 
+              <View>
+                <TouchableHighlight
+                  underlayColor="#9575CD"
+                  style={styles.buttonContainer}
+                  onPress={onBook}
+                >
+                <Text style={styles.button}>Book My Tickets</Text> 
+                </TouchableHighlight>
+  
+                <Text>Waiting for approval</Text> 
+              </View>
+            : 
+              <View>
+                <TouchableHighlight
+                  underlayColor="#9575CD"
+                  style={styles.buttonContainer}
+                  onPress={onBook}
+                >
+                <Text style={styles.button}>Book My Tickets</Text> 
+                </TouchableHighlight>
+              </View>
+          }
+        
+        
+        else if  ( !event.manage_ids.includes(person._id) && ( event.participant_ids.includes(person._id)) ) {
           return <View>
               <Text style={styles.footer}> Already attend </ Text>
 

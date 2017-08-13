@@ -105,6 +105,8 @@ export const post = async (req, res, next) => {
 };
 
 
+// in admin panel (web interface) 
+// delete from manage_queue_ids -> add to accepted - manage_ids or add to manage_trash_ids
 export const manage = async (req, res, next) => {
   const {  person_id } = req.body; 
   
@@ -112,7 +114,7 @@ export const manage = async (req, res, next) => {
     if (err) {
       console.log(err);
     }
-    event.manage_ids.push(person_id); 
+    event.manage_queue_ids.push(person_id); 
     event.save(function (err, updatedEvent) {
       if (err) {
         console.log(err);

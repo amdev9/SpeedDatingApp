@@ -7,6 +7,7 @@ var eventSchema = Schema({
   description: String, 
   date: Date,
   show_manage: Boolean,
+  manage_queue_ids: Array,
   manage_ids: Array,
   participant_ids: Array,
   participants: [{ type: Schema.ObjectId, ref: 'Person' }],  

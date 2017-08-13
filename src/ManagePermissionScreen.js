@@ -26,7 +26,7 @@ export default class ManagePermissionScreen extends Component {
       }); 
       const json = await response.json();
       console.log(json);
-       
+      this.props.navigation.goBack();
       // go back with response - we will contact with you
     }
     catch (error) {
