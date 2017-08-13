@@ -16,6 +16,7 @@ import Image from './models/image';
 
 // Initialize the router
 const router = Router();
+ 
 
 router.getImages = function(callback, limit) {
     Image.find(callback).limit(limit);

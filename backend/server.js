@@ -17,7 +17,10 @@ import {
   oauthCallback,
 } from './controllers/auth';
 import { list } from './controllers/events';
+
 import Event from './models/event';
+import Person from './models/person';
+
 import router from './router';
 
 
@@ -50,18 +53,20 @@ app.use(morgan('combined'));
 
 app.use('/v1', router);
 
-app.get('/admin', function(req, res) {
-    var path = __dirname + '/views/';
-    // auth with login and password
-    // resonse with html
-    res.sendFile(path + "index.html");
+app.get('/admin', async (req, res) => {
     
-    // router.getImages(function(err, genres) {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     res.json(genres);
-    // });
+    // auth with login and password
+
+    
+    var events = await Event.find().exec();
+    var persons = await Person.find().exec();
+    // send events , persons to pug template
+    console.log(events)
+    console.log(persons);
+    res.send('ok');
+    
+
+    //
 });
  // return return events,
 // [ list of events          ] 
