@@ -23,7 +23,12 @@
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "passport-vkontakte": "^0.3.2",
-    "ws": "^3.1.0"
+    "ws": "^3.1.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "pug": "~2.0.0-beta11",
+    "serve-favicon": "~2.4.2"
+
   },
   "devDependencies": {
     "babel": "^6.23.0",

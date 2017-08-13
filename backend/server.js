@@ -1,11 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import fs from 'fs';
 import http from 'http';
 import WebSocket from 'ws';
+import path from 'path';
+
 
 import {
   facebookLogin,
@@ -24,9 +27,6 @@ import Person from './models/person';
 import router from './router';
 
 
-
-
-
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/events', {
   useMongoClient: true
@@ -35,6 +35,10 @@ mongoose.connect('mongodb://localhost/events', {
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -53,20 +57,27 @@ app.use(morgan('combined'));
 
 app.use('/v1', router);
 
+
+// admin website part 
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 app.get('/admin', async (req, res) => {
     
     // auth with login and password
 
-    
     var events = await Event.find().exec();
     var persons = await Person.find().exec();
     // send events , persons to pug template
-    console.log(events)
-    console.log(persons);
-    res.send('ok');
+    // console.log(events)
+    // console.log(persons);
+    res.render('index', { 
+      title: 'Express',
+      events: events,
+      persons: persons
+    });
     
-
-    //
 });
  // return return events,
 // [ list of events          ] 
