@@ -48,6 +48,9 @@ export const create = async (req, res, next) => {
       res.send(event);
     } else {
       event.participant_ids.push(participant_id);
+      
+      event.participants.push(participant_id); // works
+
       event.save(function (err, updatedEvent) {
         if (err) {
           console.log(err);
