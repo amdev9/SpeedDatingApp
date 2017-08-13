@@ -20,6 +20,10 @@ import { list } from './controllers/events';
 import Event from './models/event';
 import router from './router';
 
+
+
+
+
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/events', {
   useMongoClient: true
@@ -44,8 +48,25 @@ app.get('/auth/vkontakte/callback', vkontakteMiddleware, oauthCallback);
 // Logger that outputs all requests into the console
 app.use(morgan('combined'));
 
-
 app.use('/v1', router);
+
+app.get('/admin', function(req, res) {
+    var path = __dirname + '/views/';
+    // auth with login and password
+    // resonse with html
+    res.sendFile(path + "index.html");
+    
+    // router.getImages(function(err, genres) {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     res.json(genres);
+    // });
+});
+ // return return events,
+// [ list of events          ] 
+// [ id | selector(manage_queue_ids) |  manage_ids .. ] [Button - Approve]
+
 
 app.get('/images', function(req, res) {
     router.getImages(function(err, genres) {

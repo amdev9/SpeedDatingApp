@@ -105,11 +105,11 @@ export const post = async (req, res, next) => {
 };
 
 
-// in admin panel (web interface) 
-// delete from manage_queue_ids -> add to accepted - manage_ids or add to manage_trash_ids
+
 export const manage = async (req, res, next) => {
   const {  person_id } = req.body; 
-  
+  // form details
+
   Event.findById(req.params.eventId, function (err, event) {
     if (err) {
       console.log(err);
@@ -130,3 +130,40 @@ export const manage = async (req, res, next) => {
     });
   });
 };
+
+
+export const approve = async (req, res, next) => {
+  const {  person_id } = req.body; 
+  // form details
+
+  Event.findById(req.params.eventId, function (err, event) {
+    if (err) {
+      console.log(err);
+    }
+
+    if (req.params.desicion == 'approve') {
+      _.remove(event.manage_queue_ids, req.params.manageQueueId);
+      event.manage_ids.push(req.params.manageQueueId);
+    } else if (req.params.desicion == 'decline') {  
+      _.remove(event.manage_queue_ids, req.params.manageQueueId);
+      event.manage_decline_ids.push(req.params.manageQueueId);
+    }
+
+    event.save(function (err, updatedEvent) {
+      if (err) {
+        console.log(err);
+      }
+      // make broadcast request // figure out
+      // var likes_post = JSON.stringify({
+      //   type: "likes_post",
+      //   data: JSON.stringify(obj)
+      // });
+      // wss.broadcast(likes_post);
+      
+      res.send(updatedEvent);
+    });
+  });
+};
+
+// in admin panel (web interface) 
+// delete from manage_queue_ids -> add to accepted - manage_ids or add to manage_trash_ids

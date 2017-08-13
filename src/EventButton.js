@@ -35,7 +35,7 @@ export default class EventButton extends Component {
           <Text style={styles.button}>Manage this event</Text>
         </TouchableHighlight> 
             
-      } else if  ( !event.manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id)) ) {
+      } else if  ( !event.manage_queue_ids.includes(person._id) && !event.manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id)) ) {
         return  event.show_manage 
           ? 
             <View>
@@ -77,8 +77,7 @@ export default class EventButton extends Component {
                 >
                 <Text style={styles.button}>Book My Tickets</Text> 
                 </TouchableHighlight>
-  
-                <Text>Waiting for approval</Text> 
+                <Text style={styles.footer}>Waiting for approval</Text> 
               </View>
             : 
               <View>
