@@ -95,7 +95,10 @@ export default class ManageScreen extends Component {
           <ScrollView
             ref={(scrollView) => { this._scrollView = scrollView; }}  
           >
-          {/* fix event.participants to participant_ids */}
+          {/* fix event.participants to participant_ids 
+            1. change to state.participants listen on websocket
+            2. when exit from room send ws message -> delete from state.participants
+          */}
             {event.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
           </ScrollView>
 

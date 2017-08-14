@@ -35,12 +35,17 @@ export default class JoinScreen extends Component {
     
     if (obj.type == 'selected') {
       var selected_data = JSON.parse(obj.data);
+      // 3. remove from selected_data - person object with current person._id
       this.setState({
         selected: selected_data
       })
     }
 
     if (obj.type == 'next') {
+      // 4. 
+      // pass from backend next with current participant
+      // this.setState({ participant: obj.data })
+      // change to this.state.participant, remove index
       const { navigate } = this.props.navigation;
       navigate('Voting', {
         participant: this.state.selected[this.state.index], 

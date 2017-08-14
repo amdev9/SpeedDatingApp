@@ -108,7 +108,6 @@ export const post = async (req, res, next) => {
 };
 
 
-
 export const manage = async (req, res, next) => {
   const {  person_id } = req.body; 
   // form details

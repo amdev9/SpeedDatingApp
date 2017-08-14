@@ -39,7 +39,8 @@ export default class VotingScreen extends Component {
     //     person_likes: []
     //   };
     // }
-    person.likes.person_likes.push(participant._id);
+    console.log(participant._id)
+    person.likes.person_likes.push(participant._id); 
   }
 
   render() {

@@ -169,18 +169,19 @@ function mainLogic(ws, obj) {
         }
         // console.log(event.likes);    
         let matches = {};
-        event.likes.forEach( (obj) => {
-            obj.person_likes.forEach( (id) => {
-                event.likes.forEach( (next) => {
-                    if(next.person_id == id) {
-                        if( next.person_likes.includes(obj.person_id) ) {
-                            matches[obj.person_id] = [];
-                            matches[obj.person_id].push(id);
-                            // console.log('matches --> ',obj.person_id, id);
-                        }
-                    }
-                })
-            })
+        event.likes.forEach( (object) => {
+            console.log('--trace----> ', object)
+            // obj.person_likes.forEach( (id) => {
+            //     event.likes.forEach( (next) => {
+            //         if(next.person_id == id) {
+            //             if( next.person_likes.includes(object.person_id) ) {
+            //                 matches[object.person_id] = [];
+            //                 matches[object.person_id].push(id);
+            //                 console.log('matches --> ',object.person_id, id);
+            //             }
+            //         }
+            //     })
+            // })
         })
 
         var calculate = JSON.stringify({
@@ -208,6 +209,7 @@ wss.on('connection', function connection(ws, req) {
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
     var obj = JSON.parse(message); 
+    
     mainLogic(ws, obj);
   });
 });
