@@ -113,7 +113,8 @@ function mainLogic(ws, obj) {
         data: obj.selected
     });
     var next = JSON.stringify({
-        type: "next"
+        // remove current user selected
+        type: "next" // add data like this.state.selected[this.state.index]
     });
     var last = JSON.stringify({
         type: "last"
@@ -171,17 +172,17 @@ function mainLogic(ws, obj) {
         let matches = {};
         event.likes.forEach( (object) => {
             console.log('--trace----> ', object)
-            // obj.person_likes.forEach( (id) => {
-            //     event.likes.forEach( (next) => {
-            //         if(next.person_id == id) {
-            //             if( next.person_likes.includes(object.person_id) ) {
-            //                 matches[object.person_id] = [];
-            //                 matches[object.person_id].push(id);
-            //                 console.log('matches --> ',object.person_id, id);
-            //             }
-            //         }
-            //     })
-            // })
+            object.person_likes.forEach( (id) => {
+                event.likes.forEach( (next) => {
+                    if(next.person_id == id) {
+                        if( next.person_likes.includes(object.person_id) ) {
+                            matches[object.person_id] = [];
+                            matches[object.person_id].push(id);
+                            console.log('matches --> ',object.person_id, id);
+                        }
+                    }
+                })
+            })
         })
 
         var calculate = JSON.stringify({

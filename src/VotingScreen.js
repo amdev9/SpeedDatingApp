@@ -33,12 +33,6 @@ export default class VotingScreen extends Component {
       participant, 
       person 
     } = this.props.navigation.state.params;
-    // if (!person.likes) {
-    //   person.likes = {
-    //     person_id: person._id,
-    //     person_likes: []
-    //   };
-    // }
     console.log(participant._id)
     person.likes.person_likes.push(participant._id); 
   }

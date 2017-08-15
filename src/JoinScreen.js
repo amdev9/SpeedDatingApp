@@ -44,11 +44,13 @@ export default class JoinScreen extends Component {
     if (obj.type == 'next') {
       // 4. 
       // pass from backend next with current participant
-      // this.setState({ participant: obj.data })
-      // change to this.state.participant, remove index
+      var participant = JSON.parse(obj.data);
+      this.setState({
+        participant: participant
+      })
       const { navigate } = this.props.navigation;
       navigate('Voting', {
-        participant: this.state.selected[this.state.index], 
+        participant: this.state.participant,// this.state.selected[this.state.index], 
         person: this.props.navigation.state.params.person
       });  
       this.state.index++;
