@@ -45,6 +45,8 @@ export default class ManageScreen extends Component {
       })
     }
     if (obj.type == 'closed') {
+
+      console.log('----------CLOSED---------------!!!!!!');
       // var participant = JSON.parse(obj.data);
       for (var i = 0; i < this.state.participants.length; i++) {
         if (this.state.participants[i]._id == obj.data._id) {
