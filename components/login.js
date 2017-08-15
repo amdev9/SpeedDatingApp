@@ -9,6 +9,9 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 
+const URL = 'http://192.168.1.34:3000';
+// const URL = 'http://localhost:3000';
+
 export default class Login extends Component { 
   // static propTypes = {
   //   onLoggedIn: PropTypes.func.isRequired
@@ -52,13 +55,13 @@ export default class Login extends Component {
   };
 
   // Handle Login with Facebook button tap
-  loginWithFacebook = () => this.openURL('http://localhost:3000/auth/facebook');
+  loginWithFacebook = () => this.openURL(`${URL}/auth/facebook`);
 
   // Handle Login with Google button tap
-  loginWithGoogle = () => this.openURL('http://localhost:3000/auth/google');
+  loginWithGoogle = () => this.openURL(`${URL}/auth/google`);
 
   // Handle Login with Vk button tap
-  loginWithVk = () => this.openURL('http://localhost:3000/auth/vkontakte');
+  loginWithVk = () => this.openURL(`${URL}/auth/vkontakte`);
   
   // Open URL in a browser
   openURL = (url) => {

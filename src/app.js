@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 
+
+// require('react-devtools-core').connectToDevTools({
+//   host: '192.168.1.34',
+//   port: '8097',
+// });
+
+
 import {
   StyleSheet,
   Text,
