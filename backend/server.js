@@ -169,7 +169,7 @@ function mainLogic(ws, obj) {
     var connected = JSON.stringify({
         // remove current user selected
         type: "connected", // add data like this.state.selected[this.state.index]
-        data: obj.selected
+        data: obj.data
     });
     wss.broadcast(connected); 
 
@@ -178,7 +178,7 @@ function mainLogic(ws, obj) {
     var closed = JSON.stringify({
         // remove current user selected
         type: "closed", // add data like this.state.selected[this.state.index]
-        data: obj.selected
+        data: obj.data
     });
     wss.broadcast(closed); 
 
