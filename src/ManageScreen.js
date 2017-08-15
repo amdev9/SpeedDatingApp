@@ -126,7 +126,7 @@ export default class ManageScreen extends Component {
           
           event
           */}
-            {this.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
+            {this.state.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
           </ScrollView>
 
           <TextInput

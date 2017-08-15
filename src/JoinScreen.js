@@ -30,7 +30,7 @@ export default class JoinScreen extends Component {
     console.log(' - onopen - ');
     // send that user connected 
     var connected = JSON.stringify({
-      type: "connected",
+      command: "connected",
       data: this.props.navigation.state.params.person
     });
     this.ws.send(connected);
@@ -93,11 +93,11 @@ export default class JoinScreen extends Component {
     console.log(e.code, e.reason);
     // send that user connected 
     var closed = JSON.stringify({
-      type: "closed",
+      command: "closed",
       data: this.props.navigation.state.params.person
     });
     this.ws.send(closed);
-    
+
   };
 
   componentWillMount() {

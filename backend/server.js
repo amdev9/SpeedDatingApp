@@ -165,9 +165,23 @@ function mainLogic(ws, obj) {
     }, (obj.timeout + obj.talk_time) * 1000 );
     
   } else if (obj.command == 'connected') {
-    wss.broadcast(obj); 
+    
+    var connected = JSON.stringify({
+        // remove current user selected
+        type: "connected", // add data like this.state.selected[this.state.index]
+        data: obj.selected
+    });
+    wss.broadcast(connected); 
+
   } else if (obj.command == 'closed') {
-    wss.broadcast(obj); 
+
+    var closed = JSON.stringify({
+        // remove current user selected
+        type: "closed", // add data like this.state.selected[this.state.index]
+        data: obj.selected
+    });
+    wss.broadcast(closed); 
+
   } else if (obj.command == 'calculate') {
     // search event by id and get likes
     Event.findById(obj.event_id, function (err, event) {

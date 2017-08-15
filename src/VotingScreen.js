@@ -27,7 +27,7 @@ export default class VotingScreen extends Component {
       };
     }
   }
-
+  
   onClicked = () => {
     const { 
       participant, 
