@@ -114,11 +114,14 @@ function mainLogic(ws, obj) {
     });
     var next = JSON.stringify({
         // remove current user selected
-        type: "next" // add data like this.state.selected[this.state.index]
+        type: "next", // add data like this.state.selected[this.state.index]
+        data: obj.selected
     });
     var last = JSON.stringify({
-        type: "last"
+        type: "last",
+        data: obj.selected
     });
+
     timeout = (counter) => {
         return JSON.stringify({
           type: "timeout",
@@ -150,7 +153,7 @@ function mainLogic(ws, obj) {
         }, obj.talk_time * 1000);
         counter++;
         
-        if (counter >= JSON.parse(obj.selected).length )
+        if (counter >= JSON.parse(obj.selected).length - 1 ) // added - 1 
         {
             clearInterval(looper);
             clearTimeout(timer);
@@ -161,8 +164,11 @@ function mainLogic(ws, obj) {
         }
     }, (obj.timeout + obj.talk_time) * 1000 );
     
+  } else if (obj.command == 'connected') {
+    wss.broadcast(obj); 
+  } else if (obj.command == 'closed') {
+    wss.broadcast(obj); 
   } else if (obj.command == 'calculate') {
-    
     // search event by id and get likes
     Event.findById(obj.event_id, function (err, event) {
         if (err) {

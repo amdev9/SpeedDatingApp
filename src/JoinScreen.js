@@ -22,31 +22,45 @@ export default class JoinScreen extends Component {
   
   state = {
     selected: [], // get from websocket
+    // participant: {},
     index: 0
   };
  
   onOpenConnection = () => {
     console.log(' - onopen - ');
+    // send that user connected 
+    var connected = JSON.stringify({
+      type: "connected",
+      data: this.props.navigation.state.params.person
+    });
+    this.ws.send(connected);
   }
 
   onMessageRecieved = (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
-    if (obj.type == 'selected') {
-      var selected_data = JSON.parse(obj.data);
-      // 3. remove from selected_data - person object with current person._id
-      this.setState({
-        selected: selected_data
-      })
-    }
+    // if (obj.type == 'selected') {
+    //   var selected_data = JSON.parse(obj.data);
+    //   // 3. remove from selected_data - person object with current person._id
+    //   this.setState({
+    //     selected: selected_data
+    //   })
+    // }
 
     if (obj.type == 'next') {
       // 4. 
       // pass from backend next with current participant
       var participant = JSON.parse(obj.data);
+      for (var i = 0; i < participant.length; i++) {
+        if (participant[i]._id == this.props.navigation.state.params.person._id) {
+          participant.splice(i, 1); 
+          break;
+        }
+      }
+
       this.setState({
-        participant: participant
+        participant: participant[this.state.index]
       })
       const { navigate } = this.props.navigation;
       navigate('Voting', {
@@ -57,6 +71,11 @@ export default class JoinScreen extends Component {
     }
 
     if (obj.type == 'last') {
+      var selected_data = JSON.parse(obj.data);
+      // 3. remove from selected_data - person object with current person._id
+      this.setState({
+        selected: selected_data
+      });
       const { navigate } = this.props.navigation;
       navigate('VotePush', {
         participants: this.state.selected,  
@@ -72,6 +91,13 @@ export default class JoinScreen extends Component {
 
   onClose = (e) => {
     console.log(e.code, e.reason);
+    // send that user connected 
+    var closed = JSON.stringify({
+      type: "closed",
+      data: this.props.navigation.state.params.person
+    });
+    this.ws.send(closed);
+    
   };
 
   componentWillMount() {

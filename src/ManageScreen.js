@@ -22,6 +22,7 @@ export default class ManageScreen extends Component {
 
   state = {
     selected: [],
+    participants: [],
     index: 0,
     talk_time: '4'
   };
@@ -31,9 +32,33 @@ export default class ManageScreen extends Component {
   }
 
   onMessageRecieved = (e) => {
+
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
+    // change to listen each on websocket , not all together
+    if (obj.type == 'connected') {
+      var participant = JSON.parse(obj.data);
+      this.state.participants.push(participant);
+      this.setState({
+        participants: this.state.participants
+      })
+    }
+    if (obj.type == 'closed') {
+      var participant = JSON.parse(obj.data);
+      for (var i = 0; i < this.state.participants.length; i++) {
+        if (this.state.participants[i]._id == participant._id) {
+          this.state.participants.splice(i, 1); 
+          break;
+        }
+      }
+      // this.state.participants.push(participant);
+      this.setState({
+        participants: this.state.participants
+      })
+    }
+
+
     if (obj.type == 'selected') {
       var selected_data = JSON.parse(obj.data);
       this.setState({
@@ -98,8 +123,10 @@ export default class ManageScreen extends Component {
           {/* fix event.participants to participant_ids 
             1. change to state.participants listen on websocket
             2. when exit from room send ws message -> delete from state.participants
+          
+          event
           */}
-            {event.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
+            {this.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
           </ScrollView>
 
           <TextInput
