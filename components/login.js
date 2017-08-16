@@ -6,6 +6,9 @@ import {
   Text,
   View
 } from 'react-native';
+
+import Screens from './Screens';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 
@@ -81,8 +84,8 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-
-        <View style={styles.content}>
+        <Screens />
+        {/* <View style={styles.content}>
           <Text style={styles.header}>
             Welcome Stranger!
           </Text>
@@ -93,7 +96,7 @@ export default class Login extends Component {
             Please log in to continue {'\n'}
             to the awesomness
           </Text>
-        </View>
+        </View> */}
 
         <View style={styles.buttons}>
           <Icon.Button
