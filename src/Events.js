@@ -109,7 +109,7 @@ export default class Events extends Component {
   
 
             
-        <SegmentedControlIOS 
+        <SegmentedControlIOS style={styles.bottomContent} 
           values={['My events', 'Find event']}
           selectedIndex={this.state.selectedIndex}
           onChange={(event) => {
@@ -175,20 +175,21 @@ export default class Events extends Component {
 
 const styles = StyleSheet.create({
   // header styles
+  
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
     height: 64,
-    backgroundColor: '#1EAAF1'
+    backgroundColor: '#FFFFFF' //'#1EAAF1'
   },
   navBarButton: {
-    color: '#FFFFFF',
+    color: '#1EAAF1',
     textAlign:'center',
     width: 64
   },
   navBarHeader: {
     flex: 1,
-    color: '#FFFFFF',
+    color: '#1EAAF1',
     fontWeight: 'bold',
     textAlign: 'center'
   },
@@ -206,4 +207,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',   // arrange posters in rows
     flexWrap: 'wrap',       // allow multiple rows
   },
+
+  bottomContent: {
+    margin: 30,
+ 
+  }
 });

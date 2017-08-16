@@ -72,16 +72,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 30,
     height: 64,
-    backgroundColor: '#1EAAF1'
+    backgroundColor: '#FFFFFF' // '#1EAAF1'
   },
   navBarButton: {
-    color: '#FFFFFF',
+    color: '#1EAAF1',
     textAlign:'center',
     width: 64
   },
   navBarHeader: {
     flex: 1,
-    color: '#FFFFFF',
+    color: '#1EAAF1',
     fontWeight: 'bold',
     textAlign: 'center'
   },
