@@ -19,21 +19,21 @@ export default class Profile extends Component {
   render() {
     const { user } = this.props.navigation.state.params;
     return (     
+      
       <View style={styles.container}>
-
-        
         <View style={styles.content}>
-
-          {/* header navigation */}
-          <Text>Profile</Text>
-          <Button
-            onPress={() => this.props.navigation.navigate('Events', {
-              person: user
-            })}
-            title="Go to Events "
-          />
-          {/*  */}
-
+          <View style={styles.navBar}>
+            <Text style={styles.navBarButton}></Text>
+            <Text style={styles.navBarHeader}>Profile</Text>
+            <Button style={styles.navBarButton}
+              onPress={() => this.props.navigation.navigate('Events', {
+                person: user
+              })}
+              title="Go to Events"
+            />
+          </View>
+          
+          
 
           <Text style={styles.header}>
             Welcome {user.name}!
@@ -67,6 +67,24 @@ const iconStyles = {
 };
 
 const styles = StyleSheet.create({
+  // header styles
+  navBar: {
+    flexDirection: 'row',
+    paddingTop: 30,
+    height: 64,
+    backgroundColor: '#1EAAF1'
+  },
+  navBarButton: {
+    color: '#FFFFFF',
+    textAlign:'center',
+    width: 64
+  },
+  navBarHeader: {
+    flex: 1,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
   container: {
     flex: 1,
     backgroundColor: '#FFF',

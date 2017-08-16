@@ -6,7 +6,8 @@ import {
   StyleSheet,
   View,
   SegmentedControlIOS,
-  Button
+  Button,
+  Text
 } from 'react-native';
 
 import _ from 'lodash';
@@ -89,24 +90,25 @@ export default class Events extends Component {
 
     return (
       <View style={styles.container}>
-
-        {/* header navigation */}
-          <Button
+      
+        <View style={styles.navBar}>
+          <Button style={styles.navBarButton}
             onPress={() => this.props.navigation.navigate('Profile', {
               user: person
             })}
             title="Profile"
           />
-          <Button
+          <Text style={styles.navBarHeader}>Events</Text>
+          <Button style={styles.navBarButton}
             onPress={() => this.props.navigation.navigate('Mymatches', {
               person: person
             })}
             title="My Matches"
           />
-        {/*  */}
+        </View>
+  
 
-        
-
+            
         <SegmentedControlIOS 
           values={['My events', 'Find event']}
           selectedIndex={this.state.selectedIndex}
@@ -172,7 +174,24 @@ export default class Events extends Component {
 }
 
 const styles = StyleSheet.create({
-  
+  // header styles
+  navBar: {
+    flexDirection: 'row',
+    paddingTop: 30,
+    height: 64,
+    backgroundColor: '#1EAAF1'
+  },
+  navBarButton: {
+    color: '#FFFFFF',
+    textAlign:'center',
+    width: 64
+  },
+  navBarHeader: {
+    flex: 1,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
   container: {
     flex: 1,                // take up all screen
     paddingTop: 20,         // start below status bar

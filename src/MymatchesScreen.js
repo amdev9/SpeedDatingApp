@@ -55,15 +55,22 @@ export default class MymatchesScreen extends Component {
     return (
       <View style={styles.container}>
         
-        {/* header navigation */}
-        <Button
+        <View style={styles.navBar}>
+          <Button style={styles.navBarButton}
           onPress={() => this.props.navigation.navigate('Events', {
             person: person
           })}
           title="Go to Events "
         />
-        <Text>My matches</Text>
-        {/*  */}
+
+          <Text style={styles.navBarHeader}>My matches</Text>
+          <Text style={styles.navBarButton}></Text>
+        </View>
+
+
+       
+        
+        
 
 
         <Text> Show my matches - User screen </Text>
@@ -74,6 +81,24 @@ export default class MymatchesScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  // header styles
+  navBar: {
+    flexDirection: 'row',
+    paddingTop: 30,
+    height: 64,
+    backgroundColor: '#1EAAF1'
+  },
+  navBarButton: {
+    color: '#FFFFFF',
+    textAlign:'center',
+    width: 64
+  },
+  navBarHeader: {
+    flex: 1,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    textAlign: 'center'
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
