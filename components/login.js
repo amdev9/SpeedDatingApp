@@ -12,8 +12,8 @@ import Screens from './Screens';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 
-const URL = 'http://192.168.1.34:3000';
-// const URL = 'http://localhost:3000';
+// const URL = 'http://192.168.1.34:3000';
+const URL = 'http://localhost:3000';
 
 export default class Login extends Component { 
   // static propTypes = {

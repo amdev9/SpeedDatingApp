@@ -1,6 +1,6 @@
 // Our API backend's URL
-const API = 'http://192.168.1.34:3000/v1';
-// const API = 'http://localhost:3000/v1';
+// const API = 'http://192.168.1.34:3000/v1';
+const API = 'http://localhost:3000/v1';
 
 const headers = {
   'Accept': 'application/json',

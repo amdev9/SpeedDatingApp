@@ -3,8 +3,8 @@ import { put, get } from '../components/api';
 
 const API = Platform.OS === 'android'
   ? 'http://10.0.3.2:3000/v1' // works for Genymotion
-  : 'http://192.168.1.34:3000/v1';
-  // : 'http://localhost:3000/v1';
+  // : 'http://192.168.1.34:3000/v1';
+  : 'http://localhost:3000/v1';
 
 
 export const apiMiddleware = store => next => action => {
