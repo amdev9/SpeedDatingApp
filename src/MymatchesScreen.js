@@ -54,6 +54,7 @@ export default class MymatchesScreen extends Component {
     const { person } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
+      <View style={styles.content}>
         
         <View style={styles.navBar}>
           <Button style={styles.navBarButton}
@@ -68,13 +69,10 @@ export default class MymatchesScreen extends Component {
         </View>
 
 
-       
-        
-        
-
-
+      
         <Text> Show my matches - User screen </Text>
         <Text> {this.state.persons} </Text>
+        </View>
       </View>
     );
   }
@@ -99,11 +97,22 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center'
   },
+  // container: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
+
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
+  },
+  content: {
+    // flex: 1, removed
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   header: {
     ...defaultStyles.text,
     color: '#333',
