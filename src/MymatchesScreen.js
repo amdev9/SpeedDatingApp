@@ -54,12 +54,17 @@ export default class MymatchesScreen extends Component {
     const { person } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
+        
+        {/* header navigation */}
         <Button
           onPress={() => this.props.navigation.navigate('Events', {
             person: person
           })}
           title="Go to Events "
         />
+        <Text>My matches</Text>
+        {/*  */}
+
 
         <Text> Show my matches - User screen </Text>
         <Text> {this.state.persons} </Text>

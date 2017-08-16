@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Platform,
   Text,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 
 import Screens from './Screens';
@@ -12,6 +13,7 @@ import Screens from './Screens';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 
+const { width, height } = Dimensions.get('window');
 // const URL = 'http://192.168.1.34:3000';
 const URL = 'http://localhost:3000';
 
@@ -53,7 +55,6 @@ export default class Login extends Component {
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
     }
-    
     
   };
 
@@ -98,6 +99,9 @@ export default class Login extends Component {
           </Text>
         </View> */}
 
+
+        <View style={styles.contentNew}>
+
         <View style={styles.buttons}>
           <Icon.Button
             name="facebook"
@@ -125,6 +129,7 @@ export default class Login extends Component {
             Login with Vkontakte
           </Icon.Button>
 
+        </View>
         </View>
 
       </View>
@@ -165,11 +170,14 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 5,
   },
+  contentNew: {
+    height: 200,
+    width: width
+  },
   buttons: {
     justifyContent: 'space-between',
     flexDirection: 'column',
-    flex: 0.25,
-    margin: 40,
-    marginBottom: 100,
+    flex: 1,
+    margin: 40
   },
 });

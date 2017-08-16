@@ -24,13 +24,17 @@ export default class Profile extends Component {
         
         <View style={styles.content}>
 
+          {/* header navigation */}
+          <Text>Profile</Text>
           <Button
             onPress={() => this.props.navigation.navigate('Events', {
               person: user
             })}
             title="Go to Events "
           />
-          
+          {/*  */}
+
+
           <Text style={styles.header}>
             Welcome {user.name}!
           </Text>

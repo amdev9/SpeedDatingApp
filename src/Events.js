@@ -89,19 +89,23 @@ export default class Events extends Component {
 
     return (
       <View style={styles.container}>
+
+        {/* header navigation */}
           <Button
             onPress={() => this.props.navigation.navigate('Profile', {
               user: person
             })}
             title="Profile"
           />
+          <Button
+            onPress={() => this.props.navigation.navigate('Mymatches', {
+              person: person
+            })}
+            title="My Matches"
+          />
+        {/*  */}
 
-         <Button
-          onPress={() => this.props.navigation.navigate('Mymatches', {
-            person: person
-          })}
-          title="My Matches"
-        />
+        
 
         <SegmentedControlIOS 
           values={['My events', 'Find event']}
