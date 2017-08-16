@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import Button from './Button';
 import Swiper from './Swiper';
 
 export default class Screens extends Component {

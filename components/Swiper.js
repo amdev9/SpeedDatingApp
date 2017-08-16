@@ -13,7 +13,6 @@ import {
   StyleSheet,       // CSS-like styles
   View,             // Container component
 } from 'react-native';
-import Button from './Button';
 
 // Detect screen width and height
 const { width, height } = Dimensions.get('window');
@@ -230,23 +229,7 @@ export default class OnboardingScreens extends Component {
     );
   }
 
-  /**
-   * Render Continue or Done button
-   */
-  renderButton = () => {
-    const lastScreen = this.state.index === this.state.total - 1;
-    return (
-      <View pointerEvents="box-none" style={[styles.buttonWrapper, styles.fullScreen]}>
-        {lastScreen
-          // Show this button on the last screen
-          // TODO: Add a handler that would send a user to your app after onboarding is complete
-          ? <Button text="Start Now" onPress={() => console.log('Send me to the app')} />
-          // Or this one otherwise
-          : <Button text="Continue" onPress={() => this.swipe()} />
-        }
-      </View>
-    );
-  }
+   
 
   /**
    * Render the component
@@ -259,7 +242,6 @@ export default class OnboardingScreens extends Component {
         {/* Render pagination */}
         {this.renderPagination()}
         {/* Render Continue or Done button */}
-        {this.renderButton()}
       </View>
     );
   }
@@ -307,17 +289,5 @@ const styles = StyleSheet.create({
   // activeDot: {
   //   backgroundColor: '#FFFFFF',
   // },
-  // // Button wrapper
-  // buttonWrapper: {
-  //   backgroundColor: 'transparent',
-  //   flexDirection: 'column',
-  //   position: 'absolute',
-  //   bottom: 0,
-  //   left: 0,
-  //   flex: 1,
-  //   paddingHorizontal: 10,
-  //   paddingVertical: 40,
-  //   justifyContent: 'flex-end',
-  //   alignItems: 'center'
-  // },
+   
 });
