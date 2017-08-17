@@ -198,7 +198,10 @@ function mainLogic(ws, obj) {
                 event.likes.forEach( (next) => {
                     if(next.person_id == id) {
                         if( next.person_likes.includes(object.person_id) ) {
-                            matches[object.person_id] = [];
+                            if (!matches[object.person_id]) {
+                                //  || !Array.isArray(matches[object.person_id])
+                                matches[object.person_id] = [];
+                            }
                             matches[object.person_id].push(id);
                             console.log('matches --> ',object.person_id, id);
                         }

@@ -108,8 +108,10 @@ export default class ManageScreen extends Component {
   onSelected = (participant) => {
     if(!_.includes(this.state.selected, participant)) {
       this.state.selected.push(participant)
+      // add color
     } else {
       _.remove(this.state.selected, participant);
+      // remove color
     }
   }
 

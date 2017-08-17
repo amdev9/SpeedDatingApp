@@ -63,7 +63,7 @@ export default class VotingPushScreen extends Component {
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
-          {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked}/>)}
+          {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked}/>)}
         </ScrollView>
         <TouchableHighlight
             underlayColor="#9575CD"

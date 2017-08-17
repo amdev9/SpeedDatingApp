@@ -17,7 +17,7 @@ import { defaultStyles } from './styles';
 export default class MymatchesScreen extends Component {
   
   state = {
-    persons: "persons string"
+    persons: []
   }
   
   onOpenConnection = () => {
@@ -27,9 +27,26 @@ export default class MymatchesScreen extends Component {
   onMessageRecieved = (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
-    this.setState({
-      persons: obj.data
-    })
+    const { person } = this.props.navigation.state.params;
+    // search for person._id in data 
+    // if found setState if not setState = 'no simpatiy'
+
+    // {"person._id1": [""], ...}
+    // iterate check if person._id == "person._id1" => display iterate through [""]
+
+    // console.log(obj.data);
+    var founded = JSON.parse(obj.data);
+    for (var key in founded ) {
+      console.log(person._id, key);
+      if (person._id == key) {
+        this.state.persons.push( founded[key] );
+        this.setState({
+          persons: this.state.persons
+        })
+      }      
+    }
+    
+    
     // re render screen with new results
   };
   
