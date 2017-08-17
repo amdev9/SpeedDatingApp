@@ -184,7 +184,16 @@ function mainLogic(ws, obj) {
 
   } else if (obj.command == 'calculate') {
     // search event by id and get likes
-    Event.findById(obj.event_id, function (err, event) {
+
+
+    const participantsRelation = {
+        path: 'participants', 
+        select: ['name', 'avatar', 'likes'],
+        model: 'Person',
+    };
+    
+    Event.findById(obj.event_id).populate(participantsRelation).exec( function (err, event) {
+    // Event.findById(obj.event_id, function (err, event) {
         if (err) {
         console.log(err);
         }
@@ -210,25 +219,24 @@ function mainLogic(ws, obj) {
             })
         })
 
+        // console.log(event.participants);
         // from array of ids to array of objects obj.selected
-        // HOW TO GET PERSONS FROM DB
-        // console.log(obj.selected); // undefined ---< pass info to selected 
         // for (var key in matches) {
-        //     matches[key].map((id) => {
-        //         JSON.parse(obj.selected).forEach( (ob) => {
+        //     event.participants.forEach( (ob) => {
+        //         matches[key].map((id) => {
         //             if (ob._id == id) {
         //                 // object_by_id get from by id obj.selected
         //                 return ob;
         //             }
-        //         })
-        //     });
+        //         });
+        //     })
         // }
-
         var calculate = JSON.stringify({
             type: "calculate",
             data: JSON.stringify(matches)
         });
         wss.broadcast(calculate);
+        
     });
   }
 }
