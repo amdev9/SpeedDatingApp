@@ -25,12 +25,12 @@ export default class Profile extends Component {
           <View style={styles.navBar}>
             <Text style={styles.navBarButton}></Text>
             <Text style={styles.navBarHeader}>Profile</Text>
-            <Button style={styles.navBarButton}
+            <Text style={styles.navBarButton}
               onPress={() => this.props.navigation.navigate('Events', {
                 person: user
-              })}
-              title="Go to Events"
-            />
+              })}>
+               Events
+            </Text>
           </View>
           
           

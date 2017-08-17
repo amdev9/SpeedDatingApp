@@ -92,19 +92,21 @@ export default class Events extends Component {
       <View style={styles.container}>
       
         <View style={styles.navBar}>
-          <Button style={styles.navBarButton}
-            onPress={() => this.props.navigation.navigate('Profile', {
+          <Text style={styles.navBarButton}
+            onPress={() =>  this.props.navigation.goBack()}>
+             Profile
+          </Text>
+          {/* this.props.navigation.navigate('Profile', {
               user: person
             })}
-            title="Profile"
-          />
+             */}
           <Text style={styles.navBarHeader}>Events</Text>
-          <Button style={styles.navBarButton}
+          <Text style={styles.navBarButton}
             onPress={() => this.props.navigation.navigate('Mymatches', {
               person: person
-            })}
-            title="My Matches"
-          />
+            })}>
+             Matches
+          </Text>
         </View>
   
 
@@ -195,7 +197,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,                // take up all screen
-    paddingTop: 20,         // start below status bar
+    //paddingTop: 20,         // start below status bar
   },
   loader: {
     flex: 1,
@@ -209,7 +211,11 @@ const styles = StyleSheet.create({
   },
 
   bottomContent: {
-    margin: 30,
+    // margin: 30,
+    marginTop: 20, 
+    marginRight: 30,
+    marginLeft: 30
+
  
   }
 });
