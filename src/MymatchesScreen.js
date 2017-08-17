@@ -92,7 +92,7 @@ export default class MymatchesScreen extends Component {
 
       
         <Text> Show my matches - User screen </Text>
-        <Text> {this.state.persons} </Text>
+        <Text> { JSON.stringify(this.state.persons)} </Text>
         </View>
       </View>
     );

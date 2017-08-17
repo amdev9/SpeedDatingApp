@@ -8,7 +8,7 @@ import fs from 'fs';
 import http from 'http';
 import WebSocket from 'ws';
 import path from 'path';
-
+import _ from 'lodash';
 
 import {
   facebookLogin,
@@ -219,18 +219,20 @@ function mainLogic(ws, obj) {
             })
         })
 
-        // console.log(event.participants);
+        console.log(event.participants);
+        console.log(matches);
         // from array of ids to array of objects obj.selected
-        // for (var key in matches) {
-        //     event.participants.forEach( (ob) => {
-        //         matches[key].map((id) => {
-        //             if (ob._id == id) {
-        //                 // object_by_id get from by id obj.selected
-        //                 return ob;
-        //             }
-        //         });
-        //     })
-        // }
+ 
+        for (var key in matches) {
+        //    console.log(matches[key])
+            matches[key].forEach( (item, i , arr) => {
+                var index = _.findIndex(event.participants, function(o) { return o._id == item; });
+                arr[i] =  event.participants[index];
+            //    participants[index];
+            })
+        }
+        
+
         var calculate = JSON.stringify({
             type: "calculate",
             data: JSON.stringify(matches)
