@@ -37,9 +37,11 @@ export default class MymatchesScreen extends Component {
     // console.log(obj.data);
     var founded = JSON.parse(obj.data);
     for (var key in founded ) {
-      console.log(person._id, key);
+      // console.log(person._id, key);
       if (person._id == key) {
-        this.state.persons.push( founded[key] );
+        founded[key].forEach( (item) => {
+          this.state.persons.push(item);
+        })
         this.setState({
           persons: this.state.persons
         })

@@ -210,6 +210,20 @@ function mainLogic(ws, obj) {
             })
         })
 
+        // from array of ids to array of objects obj.selected
+        // HOW TO GET PERSONS FROM DB
+        // console.log(obj.selected); // undefined ---< pass info to selected 
+        // for (var key in matches) {
+        //     matches[key].map((id) => {
+        //         JSON.parse(obj.selected).forEach( (ob) => {
+        //             if (ob._id == id) {
+        //                 // object_by_id get from by id obj.selected
+        //                 return ob;
+        //             }
+        //         })
+        //     });
+        // }
+
         var calculate = JSON.stringify({
             type: "calculate",
             data: JSON.stringify(matches)
