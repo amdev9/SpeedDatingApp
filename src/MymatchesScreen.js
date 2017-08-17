@@ -14,6 +14,9 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 
+import Participant from './Participant';
+
+
 export default class MymatchesScreen extends Component {
   
   state = {
@@ -68,6 +71,9 @@ export default class MymatchesScreen extends Component {
     this.ws.onclose = this.onClose;
   }
 
+  showMoreInfo = () => {
+    console.log('show more info')
+  }
 
   render() {
     const { person } = this.props.navigation.state.params;
@@ -92,7 +98,16 @@ export default class MymatchesScreen extends Component {
 
       
         <Text> Show my matches - User screen </Text>
-        <Text> { JSON.stringify(this.state.persons)} </Text>
+        {/* <Text> { JSON.stringify(this.state.persons)} </Text> */}
+
+
+        <ScrollView
+          ref={(scrollView) => { this._scrollView = scrollView; }}  
+        >
+          {this.state.persons.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
+        </ScrollView>
+
+
         </View>
       </View>
     );
