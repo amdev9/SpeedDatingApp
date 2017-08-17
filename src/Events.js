@@ -93,12 +93,13 @@ export default class Events extends Component {
       
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}
-            onPress={() =>  this.props.navigation.goBack()}>
+            onPress={() =>  this.props.navigation.navigate('Profile', {
+              user: person
+            })}>
              Profile
           </Text>
-          {/* this.props.navigation.navigate('Profile', {
-              user: person
-            })}
+          {/* 
+          this.props.navigation.goBack()} 
              */}
           <Text style={styles.navBarHeader}>Events</Text>
           <Text style={styles.navBarButton}

@@ -194,17 +194,17 @@ function mainLogic(ws, obj) {
             console.log('--trace----> ', object)
             // person_likes contains wrong!
             
-            // object.person_likes.forEach( (id) => {
-            //     event.likes.forEach( (next) => {
-            //         if(next.person_id == id) {
-            //             if( next.person_likes.includes(object.person_id) ) {
-            //                 matches[object.person_id] = [];
-            //                 matches[object.person_id].push(id);
-            //                 console.log('matches --> ',object.person_id, id);
-            //             }
-            //         }
-            //     })
-            // })
+            object.person_likes.forEach( (id) => {
+                event.likes.forEach( (next) => {
+                    if(next.person_id == id) {
+                        if( next.person_likes.includes(object.person_id) ) {
+                            matches[object.person_id] = [];
+                            matches[object.person_id].push(id);
+                            console.log('matches --> ',object.person_id, id);
+                        }
+                    }
+                })
+            })
         })
 
         var calculate = JSON.stringify({

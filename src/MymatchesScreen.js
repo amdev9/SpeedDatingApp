@@ -58,11 +58,11 @@ export default class MymatchesScreen extends Component {
         
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}
-            onPress={() => this.props.navigation.goBack()}>
-
-            {/* this.props.navigation.navigate('Events', {
+            onPress={() => this.props.navigation.navigate('Events', {
               person: person
-            }) */}
+            }) }>
+
+            {/* this.props.navigation.goBack() */}
              Events  
           </Text>
 
