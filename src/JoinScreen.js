@@ -10,6 +10,7 @@ import {
   ListView, 
   ScrollView,
   TextInput,
+  Button,
   RefreshControl
 } from 'react-native';
 import { defaultStyles } from './styles';
@@ -114,7 +115,13 @@ export default class JoinScreen extends Component {
     const { person } =  this.props.navigation.state.params;     
     return (
       <View style={styles.container}>
-         <Text > Join screen </Text>
+
+        <Button
+          onPress={() => this.props.navigation.goBack() }
+          title="Go Back"
+        />
+        
+        <Text > Join screen </Text>
       </View>
     );
   }

@@ -10,6 +10,7 @@ import {
   ListView, 
   ScrollView,
   TextInput,
+  Button,
   RefreshControl
 } from 'react-native';
 import { defaultStyles } from './styles';
@@ -120,32 +121,37 @@ export default class ManageScreen extends Component {
     const { event } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-          <ScrollView
-            ref={(scrollView) => { this._scrollView = scrollView; }}  
-          >
-          {/* fix event.participants to participant_ids 
-            1. change to state.participants listen on websocket
-            2. when exit from room send ws message -> delete from state.participants
-          
-          event
-          */}
-            {this.state.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
-          </ScrollView>
+        <Button
+          onPress={() => this.props.navigation.goBack() }
+          title="Go Back"
+        />
 
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-            keyboardType= {'numeric'}
-            onChangeText={(text) => this.setState({ text })}
-            value={this.state.talk_time}
-          />
-          
-          <TouchableHighlight
-              underlayColor="#9575CD"
-              style={styles.buttonContainer}
-              onPress={this.start}
-              >
-              <Text style={styles.button}>Start</Text>
-          </TouchableHighlight> 
+        <ScrollView
+          ref={(scrollView) => { this._scrollView = scrollView; }}  
+        >
+        {/* fix event.participants to participant_ids 
+          1. change to state.participants listen on websocket
+          2. when exit from room send ws message -> delete from state.participants
+        
+        event
+        */}
+          {this.state.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
+        </ScrollView>
+
+        <TextInput
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          keyboardType= {'numeric'}
+          onChangeText={(text) => this.setState({ text })}
+          value={this.state.talk_time}
+        />
+        
+        <TouchableHighlight
+            underlayColor="#9575CD"
+            style={styles.buttonContainer}
+            onPress={this.start}
+            >
+            <Text style={styles.button}>Start</Text>
+        </TouchableHighlight> 
       </View>
     );
   }

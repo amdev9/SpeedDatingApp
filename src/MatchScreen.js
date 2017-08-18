@@ -24,7 +24,7 @@ export default class MatchScreen extends Component {
         <Text> Admin matches </Text>
                   
          {matches.map(function(object, i){ 
-           return object.map((participant, index) => {
+            return object.map((participant, index) => {
               return <Participant participant={participant} key={index} /> 
             })
           }) 

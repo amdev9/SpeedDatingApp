@@ -52,7 +52,7 @@ export default class Profile extends Component {
             onPress={() => this.props.navigation.navigate('Edit', { user: user })}
             title="Edit Profile"
           />
-
+        
           
           
         </View>
