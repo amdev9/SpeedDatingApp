@@ -5,8 +5,11 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
+
+// AsyncStorage.clear();
 
 import { StackNavigator } from 'react-navigation';
 
@@ -33,6 +36,7 @@ import MymatchesScreen from './MymatchesScreen';
 import MatchScreen from './MatchScreen';
 import JoinScreen from './JoinScreen';
 import ManagePermissionScreen from './ManagePermissionScreen';
+
 
 const MovieStack = StackNavigator({
   Login: { screen: Login },

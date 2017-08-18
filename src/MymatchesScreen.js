@@ -74,12 +74,14 @@ export default class MymatchesScreen extends Component {
         founded[key].shift();  
         founded[key].forEach( (item) => {
           // push if not duplication
-          this.state.persons.push(item);
+          console.log(this.state.persons)
+          if(!_.some(this.state.persons, item) ) {
+            console.log('not include')
+            this.state.persons.push(item);
+          }
         })
 
         this.saveData(this.state.persons).done()
-
-        
 
         // set new and merge old (overwrite) with current results 
         this.setState({
