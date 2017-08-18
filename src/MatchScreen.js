@@ -22,17 +22,13 @@ export default class MatchScreen extends Component {
     return (
       <View style={styles.container}>
         <Text> Admin matches </Text>
-        {/* <Text> {JSON.stringify(matches)} </Text>    */}
-         <ScrollView
-          ref={(scrollView) => { this._scrollView = scrollView; }}  
-        >
-        
-           { matches[0].map((participant, index) => <Participant participant={participant} key={index} />)
-     
-           }
-        </ScrollView>
-
-
+                  
+         {matches.map(function(object, i){ 
+           return object.map((participant, index) => {
+              return <Participant participant={participant} key={index} /> 
+            })
+          }) 
+          }
       </View>
     );
   }
