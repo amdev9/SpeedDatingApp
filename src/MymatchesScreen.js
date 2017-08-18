@@ -42,7 +42,8 @@ export default class MymatchesScreen extends Component {
     for (var key in founded ) {
       // console.log(person._id, key);
       if (person._id == key) {
-        founded[key].forEach( (item) => {
+        var res = founded[key].shift(); // remove current obj
+        res.forEach( (item) => {
           this.state.persons.push(item);
         })
         this.setState({

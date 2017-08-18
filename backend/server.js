@@ -224,12 +224,17 @@ function mainLogic(ws, obj) {
         // from array of ids to array of objects obj.selected
  
         for (var key in matches) {
+            var key_index = _.findIndex(event.participants, function(o) { return o._id == key; });
         //    console.log(matches[key])
             matches[key].forEach( (item, i , arr) => {
+                
                 var index = _.findIndex(event.participants, function(o) { return o._id == item; });
                 arr[i] =  event.participants[index];
+
             //    participants[index];
             })
+            matches[key].unshift(event.participants[key_index]);
+
         }
         
 

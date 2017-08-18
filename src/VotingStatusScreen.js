@@ -48,8 +48,14 @@ export default class VotingStatusScreen extends Component {
     var obj = JSON.parse(e.data); 
     if (obj.type == 'calculate') {
       const { navigate } = this.props.navigation;
+      var founded = JSON.parse(obj.data);
+      var passed = [];
+      for (var key in founded ) {
+        passed.push(founded[key]);
+      }
+      
       navigate('Match', {
-        matches: obj.data
+        matches: passed
       });  
     } else if ( obj.type == 'likes_post' ) {
 
