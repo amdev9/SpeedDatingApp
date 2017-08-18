@@ -11,7 +11,8 @@ import {
   Image
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
+
  
 export default class Profile extends Component {
   
@@ -25,6 +26,7 @@ export default class Profile extends Component {
           <View style={styles.navBar}>
             <Text style={styles.navBarButton}></Text>
             <Text style={styles.navBarHeader}>Profile</Text>
+            
             <Text style={styles.navBarButton}
               onPress={() => this.props.navigation.navigate('Events', {
                 person: user

@@ -172,9 +172,12 @@ function mainLogic(ws, obj) {
         data: obj.data
     });
     wss.broadcast(connected); 
-    // save obj.data to queue
-    CLIENTS_QUEUE.push(obj.data);
 
+    // save obj.data to queue
+    // if (!_.some(CLIENTS_QUEUE, obj.data)) {
+      CLIENTS_QUEUE.push(obj.data);
+    // }
+    
   } else if (obj.command == 'closed') {
 
     var closed = JSON.stringify({
@@ -183,6 +186,10 @@ function mainLogic(ws, obj) {
         data: obj.data
     });
     wss.broadcast(closed); 
+    // remove obj.data to queue
+    // if (_.some(CLIENTS_QUEUE, obj.data)) {
+        _.remove(CLIENTS_QUEUE, obj.data);
+    // }
 
   } else if (obj.command == 'clients_queue') {
 

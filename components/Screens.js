@@ -10,6 +10,7 @@ import Swiper from './Swiper';
 
 export default class Screens extends Component {
   render() {
+    
     return (
         <Swiper>
         {/* First screen 

@@ -111,25 +111,21 @@ export default class Login extends Component {
           >
             Login with Facebook
           </Icon.Button>
-          {/* <Icon.Button
-            name="google"
-            backgroundColor="#DD4B39"
-            onPress={this.loginWithGoogle}
-            {...iconStyles}
-          >
-            Google
-          </Icon.Button> */}
-
+           
           <Icon.Button
             name="vk"
             backgroundColor="#45668e"
             onPress={this.loginWithVk}
             {...iconStyles}
           >
-            Login with Vkontakte
+            Login with VK
           </Icon.Button>
+          </View>
 
-        </View>
+         
+          
+
+
         </View>
 
       </View>
@@ -137,10 +133,16 @@ export default class Login extends Component {
   }
 }
 
+
 const iconStyles = {
-  borderRadius: 10,
+  borderRadius: 30,
   iconStyle: { paddingVertical: 5 },
+  marginLeft: 40
+  // alignItems: 'center',
 };
+
+ 
+
 
 const styles = StyleSheet.create({
   container: {
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   contentNew: {
-    height: 200,
+    height: 190,
     width: width
   },
   buttons: {
@@ -180,4 +182,5 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 40
   },
+   
 });
