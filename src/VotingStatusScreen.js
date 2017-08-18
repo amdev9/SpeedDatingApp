@@ -53,6 +53,17 @@ export default class VotingStatusScreen extends Component {
       for (var key in founded ) {
         passed.push(founded[key]);
       }
+      // var copy = [];
+      // passed.forEach( (arr ) => {
+      //   copy.push(_.map(arr, '_id').sort());
+      // })
+      // var uniq_copy = _.uniq(copy, function(item) { 
+      //   return JSON.stringify(item); 
+      // });
+      
+      
+      // passed remove duplicate arrays
+      // to array of ids => sort ids => remove duplicates
       
       navigate('Match', {
         matches: passed

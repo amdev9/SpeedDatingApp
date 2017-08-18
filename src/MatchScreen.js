@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 
+import Participant from './Participant';
 
 export default class MatchScreen extends Component {
 
@@ -21,7 +22,17 @@ export default class MatchScreen extends Component {
     return (
       <View style={styles.container}>
         <Text> Admin matches </Text>
-         <Text> { JSON.stringify(matches)} </Text> 
+        {/* <Text> {JSON.stringify(matches)} </Text>    */}
+         <ScrollView
+          ref={(scrollView) => { this._scrollView = scrollView; }}  
+        >
+        
+           { matches[0].map((participant, index) => <Participant participant={participant} key={index} />)
+     
+           }
+        </ScrollView>
+
+
       </View>
     );
   }
