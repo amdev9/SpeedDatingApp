@@ -23,13 +23,19 @@ export default class ManageScreen extends Component {
 
   state = {
     selected: [],
-    participants: [],
+    participants: [], // init on open - get queue from server
     index: 0,
     talk_time: '4'
   };
  
   onOpenConnection = () => {
     console.log(' - onopen - ');
+    // get participants from server queue and clean it
+    // send clients_queue ws req
+    let json = JSON.stringify({
+      command: "clients_queue"
+    });
+    this.ws.send(json);
   }
 
   onMessageRecieved = (e) => {
@@ -37,6 +43,16 @@ export default class ManageScreen extends Component {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
+    if (obj.type == 'response_queue') {
+      console.log('response_queue', '--------------------->', obj.data)
+      obj.data.map( (partic)=> {
+        this.state.participants.push(partic);
+      })
+      this.setState({
+        participants: this.state.participants
+      })
+    }
+
     // change to listen each on websocket , not all together
     if (obj.type == 'connected') {
       // var participant = JSON.parse(obj.data);

@@ -26,6 +26,7 @@ import Person from './models/person';
 
 import router from './router';
 
+var CLIENTS_QUEUE = [];
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/events', {
@@ -167,11 +168,12 @@ function mainLogic(ws, obj) {
   } else if (obj.command == 'connected') {
     
     var connected = JSON.stringify({
-        // remove current user selected
-        type: "connected", // add data like this.state.selected[this.state.index]
+        type: "connected", 
         data: obj.data
     });
     wss.broadcast(connected); 
+    // save obj.data to queue
+    CLIENTS_QUEUE.push(obj.data);
 
   } else if (obj.command == 'closed') {
 
@@ -182,18 +184,24 @@ function mainLogic(ws, obj) {
     });
     wss.broadcast(closed); 
 
+  } else if (obj.command == 'clients_queue') {
+
+    var response_queue = JSON.stringify({
+        type: "response_queue", 
+        data: CLIENTS_QUEUE
+    });
+
+    console.log('----- before broadcast response_queue ---')
+    wss.broadcast(response_queue);
+
   } else if (obj.command == 'calculate') {
     // search event by id and get likes
-
-
     const participantsRelation = {
         path: 'participants', 
         select: ['name', 'avatar', 'likes'],
         model: 'Person',
     };
-    
-    Event.findById(obj.event_id).populate(participantsRelation).exec( function (err, event) {
-    // Event.findById(obj.event_id, function (err, event) {
+    Event.findById(obj.event_id).populate(participantsRelation).exec( function (err, event) { // Event.findById(obj.event_id, function (err, event) {
         if (err) {
         console.log(err);
         }
@@ -202,7 +210,6 @@ function mainLogic(ws, obj) {
         event.likes.forEach( (object) => {
             console.log('--trace----> ', object)
             // person_likes contains wrong!
-            
             object.person_likes.forEach( (id) => {
                 event.likes.forEach( (next) => {
                     if(next.person_id == id) {
@@ -222,28 +229,19 @@ function mainLogic(ws, obj) {
         console.log(event.participants);
         console.log(matches);
         // from array of ids to array of objects obj.selected
- 
         for (var key in matches) {
             var key_index = _.findIndex(event.participants, function(o) { return o._id == key; });
-        //    console.log(matches[key])
             matches[key].forEach( (item, i , arr) => {
-                
                 var index = _.findIndex(event.participants, function(o) { return o._id == item; });
                 arr[i] =  event.participants[index];
-
-            //    participants[index];
             })
             matches[key].unshift(event.participants[key_index]);
-
         }
-        
-
         var calculate = JSON.stringify({
             type: "calculate",
             data: JSON.stringify(matches)
         });
         wss.broadcast(calculate);
-        
     });
   }
 }
