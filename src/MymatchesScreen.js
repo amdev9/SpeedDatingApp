@@ -10,7 +10,8 @@ import {
   ListView, 
   ScrollView,
   RefreshControl,
-  Button
+  Button,
+  AsyncStorage
 } from 'react-native';
 import { defaultStyles } from './styles';
 
@@ -19,10 +20,45 @@ import Participant from './Participant';
 
 export default class MymatchesScreen extends Component {
   
-  state = {
-    persons: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      persons: []
+    }; 
   }
-  
+
+  componentDidMount() {
+    this.fetchData().done()
+  }
+
+  async fetchData() {
+     // on init get from async storage
+    try {
+      const myArray = await AsyncStorage.getItem('@MySuperStore:persons');
+      if (myArray !== null) {
+        console.log('data recieved and not null')
+        var persons = JSON.parse(myArray);
+        this.setState({
+          persons: persons
+        });
+      } else {
+        console.log('data null')
+        
+      }
+    } catch (error) {
+      alert('error get from asyncstorage');
+    }
+  }
+
+  async saveData(myArray) {
+    try {
+      await AsyncStorage.setItem('@MySuperStore:persons', JSON.stringify(myArray));
+    } catch (error) {
+      // Error saving data
+    }
+  }
+
+
   onOpenConnection = () => {
     console.log(' - onopen - ');
   }
@@ -31,21 +67,21 @@ export default class MymatchesScreen extends Component {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     const { person } = this.props.navigation.state.params;
-    // search for person._id in data 
-    // if found setState if not setState = 'no simpatiy'
-
-    // {"person._id1": [""], ...}
-    // iterate check if person._id == "person._id1" => display iterate through [""]
-
-    // console.log(obj.data);
+    
     var founded = JSON.parse(obj.data);
     for (var key in founded ) {
-      // console.log(person._id, key);
       if (person._id == key) {
-        founded[key].shift(); // remove current obj
+        founded[key].shift();  
         founded[key].forEach( (item) => {
+          // push if not duplication
           this.state.persons.push(item);
         })
+
+        this.saveData(this.state.persons).done()
+
+        
+
+        // set new and merge old (overwrite) with current results 
         this.setState({
           persons: this.state.persons
         })
