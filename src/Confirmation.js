@@ -72,10 +72,6 @@ export default class Confirmation extends Component {
   render() {
     const { event, participant } = this.props.navigation.state.params;
     const { goBack } = this.props.navigation;
-    
-    // if ((typeof event.participants !== 'undefined' && event.participants.length == 0)  || (typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(participant._id) == -1) ) {
-    // return (
-
     const { request } = this.state;
     return request
       
@@ -91,7 +87,6 @@ export default class Confirmation extends Component {
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() =>  this._finalBookEvent() }//this._pressFunc()} // change to yandex pay func
-          // 
         >
           <Text style={styles.button}>Final Book Event</Text>
         </TouchableOpacity>
@@ -143,7 +138,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    backgroundColor: '#673AB7',
+    backgroundColor: '#3f88fb',
     borderRadius: 100,
     margin: 20,
     paddingVertical: 10,

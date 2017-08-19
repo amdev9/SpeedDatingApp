@@ -38,7 +38,7 @@ export default class EventButton extends Component {
       } else if  ( !event.manage_queue_ids.includes(person._id) && !event.manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id)) ) {
         return  event.show_manage 
           ? 
-            <View>
+            <View style={styles.doubleButtonContainer}>
               <TouchableHighlight
                 underlayColor="#9575CD"
                 style={styles.buttonContainer}
@@ -170,6 +170,16 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignItems: 'center',
+  },
+  doubleButtonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: 100
+    // backgroundColor: '#3f88fb',//'#673AB7',
+    // borderRadius: 100,
+    // paddingVertical: 10,
+    // paddingHorizontal: 15,
+    // alignItems: 'center',
   },
   button: {
     ...defaultStyles.text,
