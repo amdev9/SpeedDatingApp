@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     ...defaultStyles.text,
     fontSize: 15,
     // fontWeight: 'bold',
-    marginTop: 120,
+    marginTop: (height - 20 - 20) / rows - 10 - 25,
     marginLeft: 10,
     color: '#FFFFFF',
     backgroundColor: 'rgba(0,0,0,0)',

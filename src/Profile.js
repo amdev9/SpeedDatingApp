@@ -26,7 +26,7 @@ export default class Profile extends Component {
         <View style={styles.content}>
           <View style={styles.navBar}>
             <Text style={styles.navBarButton}></Text>
-            <Text style={styles.navBarHeader}>My Profile</Text>
+            <Text style={styles.navBarHeader}>Профиль</Text>
             {/* <Icon style={styles.navBarHeader} name="ios-person" size={30} color="#900" /> */}
             
             {/* <Text style={styles.navBarButton}
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     ...defaultStyles.text,
     fontSize: 15,
-    marginTop: 7
+    // marginTop: 7
   },
   container: {
     flex: 1,

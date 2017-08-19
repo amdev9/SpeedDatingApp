@@ -110,7 +110,7 @@ export default class Events extends Component {
           {/* 
           this.props.navigation.goBack()} 
              */}
-          <Text style={styles.navBarHeader}>Events</Text>
+          <Text style={styles.navBarHeader}>Мероприятия</Text>
 
           {/* <Icon style={styles.navBarHeader} name="ios-calendar" size={30} color="#900" /> */}
          
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     ...defaultStyles.text,
     fontSize: 15,
-    marginTop: 5
+    // marginTop: 5
   },
   container: {
     flex: 1,                // take up all screen

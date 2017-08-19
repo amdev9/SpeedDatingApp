@@ -137,7 +137,7 @@ export default class MymatchesScreen extends Component {
              Events  
           </Text> */}
 
-          <Text style={styles.navBarHeader}>My matches</Text>
+          <Text style={styles.navBarHeader}>Мои совпадения</Text>
           {/* <Icon style={styles.navBarHeader} name="ios-chatboxes" size={30} color="#900" /> */}
           <Text style={styles.navBarButton}></Text>
         </View>
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     ...defaultStyles.text,
     fontSize: 15,
-    marginTop: 5
+    // marginTop: 5
   },
   // container: {
   //   flex: 1,

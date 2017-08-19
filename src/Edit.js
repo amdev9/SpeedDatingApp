@@ -190,13 +190,15 @@ class Edit extends React.Component {
         
           
         <View style={styles.avatar}>
+        <TouchableOpacity onPress={() => { this.toggleModal(); this.getPhotos() }}>
             <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
             
             <View style={styles.circle}>
-          <TouchableOpacity onPress={() => { this.toggleModal(); this.getPhotos() }}>
+          
               <Icon style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
+              </View>
           </TouchableOpacity>
-        </View>
+  
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
         </View>
       
@@ -238,10 +240,13 @@ class Edit extends React.Component {
         onRequestClose={() => console.log('closed')}
         >
         <View style={styles.modalContainer}>
-          <Button
+        <TouchableOpacity onPress={this.toggleModal}>
+          <Text style={styles.closeButton}>Закрыть</Text>
+        </TouchableOpacity>
+        {/* <Button
             title='Close'
             onPress={this.toggleModal}
-          />
+          />   */}
           <ScrollView
             contentContainerStyle={styles.scrollView}>
             {
@@ -268,10 +273,13 @@ class Edit extends React.Component {
           {
             this.state.index !== null  && (
               <View style={styles.shareButton}>
-                <Button
+              <TouchableOpacity onPress={this.upload}>
+                <Text style={styles.uploadButton}>Загрузить</Text>
+                </TouchableOpacity>
+                {/* <Button
                     title='Upload'
                     onPress={this.upload}
-                  />
+                  /> */}
               </View>
             )
           }
@@ -359,7 +367,23 @@ styles = StyleSheet.create({
     bottom: 0,
     left: 0
   },
-    
+  uploadButton: {
+    color: '#3f88fb',
+    textAlign:'center',
+    // width: 64,
+    fontSize: 15,
+    marginBottom: 20,
+    fontWeight: 'bold'
+  },  
+  closeButton: {
+    color: '#3f88fb',
+    textAlign:'center',
+    // width: 64,
+    fontSize: 15,
+    marginTop: 10,
+    marginBottom: 10,
+    fontWeight: 'bold'
+  }, 
   // content: {
   //   flex: 1,
   //   justifyContent: 'center',
