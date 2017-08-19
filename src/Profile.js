@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     ...defaultStyles.text,
     fontSize: 15,
-    marginTop: 5
+    marginTop: 7
   },
   container: {
     flex: 1,

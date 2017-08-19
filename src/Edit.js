@@ -177,7 +177,7 @@ class Edit extends React.Component {
 
           <View style={styles.navBar}>
             <Text style={styles.navBarButton}></Text>
-            <Text style={styles.navBarHeader}></Text>
+            <Text style={styles.navBarHeader}>Изменить</Text>
             <TouchableOpacity onPress={() =>  {
                   this.saveProfile();
                   this.props.navigation.navigate('Profile', { user: user });
@@ -331,7 +331,7 @@ styles = StyleSheet.create({
     textAlign: 'center',
     ...defaultStyles.text,
     fontSize: 15,
-    marginTop: 5
+    // marginTop: 5
   },
   // text_sex: {
   //   fontSize: 30,
