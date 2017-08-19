@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   // Text below header
   text: {
     color: '#FE5068',
-    fontFamily: 'Avenir',
+    fontFamily: 'System',
+    // fontFamily: 'Avenir',
     fontSize: 18,
     // margin: 40,
     marginHorizontal: 40,

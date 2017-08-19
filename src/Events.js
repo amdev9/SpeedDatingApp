@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 30,
     height: 64,
-    backgroundColor: '#FFFFFF' //'#1EAAF1'
+    // backgroundColor: '#FFFFFF' //'#1EAAF1'
   },
   navBarButton: {
     color: '#1EAAF1',
@@ -215,6 +215,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,                // take up all screen
     //paddingTop: 20,         // start below status bar
+    backgroundColor: '#FFFFFF'
   },
   loader: {
     flex: 1,
@@ -230,8 +231,8 @@ const styles = StyleSheet.create({
   bottomContent: {
     // margin: 30,
     marginTop: 20, 
-    marginRight: 30,
-    marginLeft: 30
+    marginRight: 20,
+    marginLeft: 20
 
  
   }
