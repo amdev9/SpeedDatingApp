@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   navBarHeader: {
     flex: 1,
-    color: '#1EAAF1',
+    color: 'rgb(38,38,38)',//'#1EAAF1',
     fontWeight: 'bold',
     textAlign: 'center'
   },

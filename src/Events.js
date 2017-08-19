@@ -128,7 +128,7 @@ export default class Events extends Component {
   
 
             
-        <SegmentedControlIOS style={styles.bottomContent} 
+        <SegmentedControlIOS tintColor="#3f88fb" style={styles.bottomContent} 
           values={['My events', 'Find event']}
           selectedIndex={this.state.selectedIndex}
           onChange={(event) => {
