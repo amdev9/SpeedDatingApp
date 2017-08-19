@@ -19,14 +19,9 @@ import { defaultStyles } from './styles';
 const { width, height } = Dimensions.get('window');
 
 export default class Profile extends Component {
-  
-  
   render() {
     const { user } = this.props.navigation.state.params;
     return (     
-      
-
-      
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.navBar}>
@@ -41,21 +36,12 @@ export default class Profile extends Component {
                Events
             </Text> */}
 
-
             <Icon style={styles.navBarButton}
               onPress={() => this.props.navigation.navigate('Events', {
                 person: user
-              })} name="ios-calendar-outline" size={30} color="#900" />
-
-        
-
-
-            
-      
+              })} name="ios-calendar-outline" size={30} />
           </View>
           
-          
-
           {/* <Text style={styles.header}>
             Welcome {user.name}!
           </Text> */}

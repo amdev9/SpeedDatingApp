@@ -14,12 +14,14 @@ import {
   RefreshControl,
   NativeModules,
   TextInput,
-  Picker
-} from 'react-native'
+  Picker,
+  TouchableOpacity
+} from 'react-native';
 
+import Icon from 'react-native-vector-icons/Ionicons';
+import { defaultStyles } from './styles';
 import { put, get } from '../components/api';
 var RNUploader = NativeModules.RNUploader;
-
 import RNFetchBlob from 'react-native-fetch-blob'
 
 let styles
@@ -163,112 +165,118 @@ class Edit extends React.Component {
       {/* <Button
         title={'Save' }
         onPress={() => this.saveProfile()}
-      /> */}
-
-
-{/* 
+      /> 
           <Picker selectedValue = {this.state.user_sex} onValueChange = {this.updateUser}>
                <Picker.Item label = "Steve" value = "steve" />
                <Picker.Item label = "Ellen" value = "ellen" />
                <Picker.Item label = "Maria" value = "maria" />
             </Picker>
           <Text style = {styles.text_sex}>{this.state.user_sex}</Text>
+        <Text style={styles.header}>
+        </Text> */}
 
- */}
+          <View style={styles.navBar}>
+            <Text style={styles.navBarButton}></Text>
+            <Text style={styles.navBarHeader}></Text>
+            <TouchableOpacity onPress={() =>  {
+                  this.saveProfile();
+                  this.props.navigation.navigate('Profile', { user: user });
+            }}>
+              <Text style={styles.navBarButton}>Готово</Text>
+            </TouchableOpacity>
+          </View>
+        <Text> {user.name} </Text>
+        
+        
+          
+        <View style={styles.avatar}>
+            <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
+            
+            <View style={styles.circle}>
+          <TouchableOpacity onPress={() => { this.toggleModal(); this.getPhotos() }}>
+              <Icon style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
+          </TouchableOpacity>
+        </View>
+            {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
+        </View>
+      
 
- 
-<Text style={styles.header}>
-</Text>
-<Button
-title={'Done'}
-onPress={() =>  {
-    this.saveProfile();
-    this.props.navigation.navigate('Profile', { user: user });
-  }
-}
-/>
-<Text> {user.name} </Text>
-<View style={styles.avatar}>
-    <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
-  {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
-</View>
-<Button
-title='View Photos'
-onPress={() => { this.toggleModal(); this.getPhotos() }}
-/>
+        {/* <Button
+        title='View Photos'
+        onPress={() => { this.toggleModal(); this.getPhotos() }}
+        /> */}
 
-{/* current work  */}
-<TextInput
-  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-  onChangeText={(current_work) => this.setState({ current_work })}
-  value={this.state.current_work}
-/>
-{/* about user info  */}
-<TextInput
-  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-  onChangeText={(about) => this.setState({about})}
-  value={this.state.about}
-/>
- 
-{/* age  */}
-<TextInput
-  style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-  onChangeText={(age) => this.setState({age})}
-  value={this.state.age}
-/>
+        {/* current work  */}
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(current_work) => this.setState({ current_work })}
+          value={this.state.current_work}
+        />
+        {/* about user info  */}
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(about) => this.setState({about})}
+          value={this.state.about}
+        />
+        
+        {/* age  */}
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(age) => this.setState({age})}
+          value={this.state.age}
+        />
 
-{/* <Button
-title='Browse Images'
-onPress={this.navigate}
-/> */}
-<Modal
-animationType={"slide"}
-transparent={false}
-visible={this.state.modalVisible}
-onRequestClose={() => console.log('closed')}
->
-<View style={styles.modalContainer}>
-  <Button
-    title='Close'
-    onPress={this.toggleModal}
-  />
-  <ScrollView
-    contentContainerStyle={styles.scrollView}>
-    {
-      this.state.photos.map((p, i) => {
-        return (
-          <TouchableHighlight
-            style={{opacity: i === this.state.index ? 0.5 : 1}}
-            key={i}
-            underlayColor='transparent'
-            onPress={() => this.setIndex(i)}
-          >
-            <Image
-              style={{
-                width: width/3,
-                height: width/3
-              }}
-              source={{uri: p.node.image.uri}}
-            />
-          </TouchableHighlight>
-        )
-      })
-    }
-  </ScrollView>
-  {
-    this.state.index !== null  && (
-      <View style={styles.shareButton}>
-        <Button
-            title='Upload'
-            onPress={this.upload}
+        {/* <Button
+        title='Browse Images'
+        onPress={this.navigate}
+        /> */}
+
+        <Modal
+        animationType={"slide"}
+        transparent={false}
+        visible={this.state.modalVisible}
+        onRequestClose={() => console.log('closed')}
+        >
+        <View style={styles.modalContainer}>
+          <Button
+            title='Close'
+            onPress={this.toggleModal}
           />
-      </View>
-    )
-  }
-</View>
-</Modal>
-
-
+          <ScrollView
+            contentContainerStyle={styles.scrollView}>
+            {
+              this.state.photos.map((p, i) => {
+                return (
+                  <TouchableHighlight
+                    style={{opacity: i === this.state.index ? 0.5 : 1}}
+                    key={i}
+                    underlayColor='transparent'
+                    onPress={() => this.setIndex(i)}
+                  >
+                    <Image
+                      style={{
+                        width: width/3,
+                        height: width/3
+                      }}
+                      source={{uri: p.node.image.uri}}
+                    />
+                  </TouchableHighlight>
+                )
+              })
+            }
+          </ScrollView>
+          {
+            this.state.index !== null  && (
+              <View style={styles.shareButton}>
+                <Button
+                    title='Upload'
+                    onPress={this.upload}
+                  />
+              </View>
+            )
+          }
+        </View>
+        </Modal>
       </View>
 
     )
@@ -289,15 +297,52 @@ function _generateUUID() {
 
 
 styles = StyleSheet.create({
-  text_sex: {
-    fontSize: 30,
-    alignSelf: 'center',
-    color: 'red'
+  circle: {
+    width: 40,
+    height: 40,
+    borderRadius: 40/2,
+    backgroundColor: '#EFF3F7',
+    position: 'absolute',
+    marginTop: 60,
+    marginLeft: 60,
   },
+  setting: {
+    marginTop: 8,
+    marginLeft: 10,
+    backgroundColor: 'transparent'
+  },
+  navBar: {
+    flexDirection: 'row',
+    paddingTop: 30,
+    height: 64,
+    backgroundColor: '#FFFFFF' // '#1EAAF1'
+  },
+  navBarButton: {
+    color: '#3f88fb',
+    textAlign:'center',
+    width: 64,
+    fontSize: 15,
+    fontWeight: 'bold'
+  },
+  navBarHeader: {
+    flex: 1,
+    color: '#262626',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    ...defaultStyles.text,
+    fontSize: 15,
+    marginTop: 5
+  },
+  // text_sex: {
+  //   fontSize: 30,
+  //   alignSelf: 'center',
+  //   color: 'red'
+  // },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    // justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFF'
   },
   modalContainer: {
     paddingTop: 20,
@@ -315,11 +360,11 @@ styles = StyleSheet.create({
     left: 0
   },
     
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  // content: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
   avatar: {
     margin: 20,
   },
@@ -349,58 +394,4 @@ styles = StyleSheet.create({
 
 export default Edit
 
-
-// import React, { Component } from 'react';
-
-// import {
-//   ActivityIndicator,
-//   RefreshControl,
-//   ScrollView,
-//   StyleSheet,
-//   View,
-//   Text,
-//   Button,
-//   Image
-// } from 'react-native';
-
-// import Icon from 'react-native-vector-icons/FontAwesome';
  
-// export default class Edit extends Component {
-  
-//   // change user.name, user.avatar
-//   // user.name -> textfield
-//   // user.avatar -> upload new file with button -> set current img src to new
-  
-//   render() {
-//     const {user} = this.props.navigation.state.params;
-//     return (     
-//       <View style={styles.container}>
-//         <View style={styles.content}>
-//           <Text style={styles.header}>
-//             Edit 
-//           </Text>
-//           <View style={styles.avatar}>
-//              <Image source={{ uri: 'http://localhost:8000/images/597f6c1b80135404074684a9' }} style={styles.avatarImage} /> 
-//             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
-//           </View>
-//           <Text style={styles.text}>
-//              Editing {'\n'}
-//              {/* {JSON.stringify(this.props)} */}
-             
-//           </Text>
-//         </View>
-//       </View>
-//     );
-//   }
-// }
-
-// const iconStyles = {
-//   borderRadius: 10,
-//   iconStyle: { paddingVertical: 5 },
-// };
-
-// const styles = StyleSheet.create({
-
-
-
-

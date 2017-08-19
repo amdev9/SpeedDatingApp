@@ -144,7 +144,7 @@ export default class MymatchesScreen extends Component {
 
 
       
-        <Text> Show my matches - User screen </Text>
+        {/* <Text> Show my matches - User screen </Text> */}
         {/* <Text> { JSON.stringify(this.state.persons)} </Text> */}
 
 
