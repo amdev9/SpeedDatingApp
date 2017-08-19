@@ -56,9 +56,9 @@ export default class Profile extends Component {
           
           
 
-          <Text style={styles.header}>
+          {/* <Text style={styles.header}>
             Welcome {user.name}!
-          </Text>
+          </Text> */}
           <View style={styles.avatar}>
             <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
@@ -72,15 +72,17 @@ export default class Profile extends Component {
           <View style={styles.barContainer}>
             <View style={styles.rightSide}>
               <TouchableOpacity style={styles.circle}
-                onPress={() => this.props.navigation.navigate('Edit', { user: user })}>
+                onPress={() => this.props.navigation.navigate('Settings', { user: user })}>
                 <Icon style={styles.setting} name="ios-settings" size={25} color="#c4c9d1" />
               </TouchableOpacity>
+              <Text style={styles.barText}> НАСТРОЙКИ </Text>
             </View>
             <View style={styles.leftSide}>
               <TouchableOpacity style={styles.circle}
                 onPress={() => this.props.navigation.navigate('Edit', { user: user })}>
                 <Icon style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
               </TouchableOpacity>
+              <Text style={styles.barText}> ИЗМЕНИТЬ </Text>
             </View>
           </View>
 
@@ -98,6 +100,13 @@ const iconStyles = {
 
 const styles = StyleSheet.create({
   // header styles
+  barText: {
+    color: "#c4c9d1",
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginTop: 10,
+  
+  },
   barContainer: {
     width: width,
     flexDirection: 'row',
@@ -106,9 +115,13 @@ const styles = StyleSheet.create({
   },
   rightSide: {
     margin: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   leftSide: {
-    margin: 30
+    margin: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   setting: {
     marginTop: 8,

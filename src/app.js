@@ -36,7 +36,7 @@ import MymatchesScreen from './MymatchesScreen';
 import MatchScreen from './MatchScreen';
 import JoinScreen from './JoinScreen';
 import ManagePermissionScreen from './ManagePermissionScreen';
-
+import SettingsScreen from './SettingsScreen';
 
 const MovieStack = StackNavigator({
   Login: { screen: Login },
@@ -47,6 +47,7 @@ const MovieStack = StackNavigator({
   Voting: { screen: VotingScreen },
   Mymatches: { screen: MymatchesScreen },
   Join: { screen: JoinScreen }, 
+  Settings: { screen: SettingsScreen },
   // organizer screen
   VotePush: { screen: VotePushScreen },
   VotingStatus: { screen: VotingStatusScreen },
