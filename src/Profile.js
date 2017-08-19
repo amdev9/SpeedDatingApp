@@ -8,12 +8,16 @@ import {
   View,
   Text,
   Button,
-  Image
+  Image,
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { defaultStyles } from './styles';
  
+const { width, height } = Dimensions.get('window');
+
 export default class Profile extends Component {
   
   
@@ -65,12 +69,21 @@ export default class Profile extends Component {
              
           </Text>
 
-          <Button
-            onPress={() => this.props.navigation.navigate('Edit', { user: user })}
-            title="Edit Profile"
-          />
-        
-          
+          <View style={styles.barContainer}>
+            <View style={styles.rightSide}>
+              <TouchableOpacity style={styles.circle}
+                onPress={() => this.props.navigation.navigate('Edit', { user: user })}>
+                <Icon style={styles.setting} name="ios-settings" size={25} color="#c4c9d1" />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.leftSide}>
+              <TouchableOpacity style={styles.circle}
+                onPress={() => this.props.navigation.navigate('Edit', { user: user })}>
+                <Icon style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
+              </TouchableOpacity>
+            </View>
+          </View>
+
           
         </View>
       </View>
@@ -85,6 +98,29 @@ const iconStyles = {
 
 const styles = StyleSheet.create({
   // header styles
+  barContainer: {
+    width: width,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  rightSide: {
+    margin: 30,
+  },
+  leftSide: {
+    margin: 30
+  },
+  setting: {
+    marginTop: 8,
+    marginLeft: 10,
+    backgroundColor: 'transparent'
+  },
+  circle: {
+    width: 40,
+    height: 40,
+    borderRadius: 40/2,
+    backgroundColor: '#EFF3F7'
+  },
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
@@ -92,15 +128,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF' // '#1EAAF1'
   },
   navBarButton: {
-    color: '#1EAAF1',
+    color: '#262626',
     textAlign:'center',
     width: 64
   },
   navBarHeader: {
     flex: 1,
-    color: 'rgb(38,38,38)',//'#1EAAF1',
+    color: '#262626',
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    ...defaultStyles.text,
+    fontSize: 15,
+    marginTop: 5
   },
   container: {
     flex: 1,

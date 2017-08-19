@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
   },
   // Pagination dot
   dot: {
-    backgroundColor: 'rgba(0,0,0,.25)',
+    backgroundColor: 'rgba(255, 197, 67,.25)',
     width: 8,
     height: 8,
     borderRadius: 4,
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
   },
   // Active dot
   activeDot: {
-    backgroundColor: '#FE5068'//'#FFFFFF',
+    backgroundColor: '#3f88fb'//'#FFFFFF',
   },
    
 });

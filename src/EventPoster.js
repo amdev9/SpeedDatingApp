@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 
+import LinearGradient from 'react-native-linear-gradient';
+
 
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
@@ -30,7 +32,12 @@ export default class EventPoster extends Component {
         <View style={styles.imageContainer}>
           <Image source={{ uri: photo }} style={styles.image} />
           
-          <View style={styles.overlay} />
+            
+            <View style={styles.overlay} />
+             
+
+
+          
           <Text style={styles.title} numberOfLines={1}>{title}</Text>
         </View>
         
@@ -41,6 +48,7 @@ export default class EventPoster extends Component {
 }
 
 const styles = StyleSheet.create({
+  
   container: {
     marginLeft: 20,
     marginBottom: 20,
@@ -57,12 +65,13 @@ const styles = StyleSheet.create({
   overlay: {
     borderRadius: 5,   
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.5)'
+    backgroundColor: 'rgba(63, 136, 251, 0.6)' // 63, 136, 251, 1
+    
   },
   title: {
     ...defaultStyles.text,
-    fontSize: 14,
-    fontWeight: 'bold',
+    fontSize: 15,
+    // fontWeight: 'bold',
     marginTop: 120,
     marginLeft: 10,
     color: '#FFFFFF',

@@ -170,15 +170,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF'//'#1EAAF1'
   },
   navBarButton: {
-    color: '#1EAAF1',
+    color: '#262626',
     textAlign:'center',
     width: 64
   },
   navBarHeader: {
     flex: 1,
-    color: '#1EAAF1',
+    color: '#262626',
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    ...defaultStyles.text,
+    fontSize: 15,
+    marginTop: 5
   },
   // container: {
   //   flex: 1,

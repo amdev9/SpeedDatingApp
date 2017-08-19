@@ -41,7 +41,7 @@ export default class Screens extends Component {
 
 const iconStyles = {
   size: 100,
-  color: '#FE5068',
+  color: '#3f88fb',
 }; 
 
 const styles = StyleSheet.create({
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   // Text below header
   text: {
-    color: '#FE5068',
+    color: '#3f88fb',
     fontFamily: 'System',
     // fontFamily: 'Avenir',
     fontSize: 18,

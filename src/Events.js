@@ -10,10 +10,12 @@ import {
   Text
 } from 'react-native';
 
+
 import _ from 'lodash';
 import EventPoster from './EventPoster';
 import EventPopup from './EventPopup';
 
+import { defaultStyles } from './styles';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -198,19 +200,22 @@ const styles = StyleSheet.create({
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
-    height: 64,
+    // height: 64
     // backgroundColor: '#FFFFFF' //'#1EAAF1'
   },
   navBarButton: {
-    color: '#1EAAF1',
+    color: '#262626',
     textAlign:'center',
     width: 64
   },
   navBarHeader: {
     flex: 1,
-    color: '#1EAAF1',
+    color: '#262626',
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    ...defaultStyles.text,
+    fontSize: 15,
+    marginTop: 5
   },
   container: {
     flex: 1,                // take up all screen
@@ -230,10 +235,10 @@ const styles = StyleSheet.create({
 
   bottomContent: {
     // margin: 30,
-    marginTop: 20, 
+    // borderTopColor: '#262626',
+    // borderRadius: 1,
+    marginTop: 15, 
     marginRight: 20,
     marginLeft: 20
-
- 
   }
 });
