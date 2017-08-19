@@ -20,6 +20,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
+
 @connect(
   state => ({
     events: state.events,
@@ -131,7 +132,7 @@ export default class Events extends Component {
 
             
         <SegmentedControlIOS tintColor="#3f88fb" style={styles.bottomContent} 
-          values={['My events', 'Find event']}
+          values={['Мои мероприятия', 'Найти мероприятие']}
           selectedIndex={this.state.selectedIndex}
           onChange={(event) => {
             this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
@@ -177,6 +178,9 @@ export default class Events extends Component {
               size="large"
             />
         }
+
+        
+
         <EventPopup
           event={this.state.event}
           person={person}
@@ -196,7 +200,10 @@ export default class Events extends Component {
 
 const styles = StyleSheet.create({
   // header styles
-  
+  gradient: {
+    width: 400,
+    height: 200,
+  },
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
