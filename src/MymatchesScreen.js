@@ -16,7 +16,7 @@ import {
 import { defaultStyles } from './styles';
 
 import Participant from './Participant';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class MymatchesScreen extends Component {
   
@@ -121,16 +121,24 @@ export default class MymatchesScreen extends Component {
       <View style={styles.content}>
         
         <View style={styles.navBar}>
-          <Text style={styles.navBarButton}
+
+        <Icon style={styles.navBarButton}
+        onPress={() => this.props.navigation.navigate('Events', {
+          person: person
+        }) } name="ios-calendar-outline" size={30} color="#900" />
+
+
+          {/* <Text style={styles.navBarButton}
             onPress={() => this.props.navigation.navigate('Events', {
               person: person
             }) }>
 
-            {/* this.props.navigation.goBack() */}
+       
              Events  
-          </Text>
+          </Text> */}
 
           <Text style={styles.navBarHeader}>My matches</Text>
+          {/* <Icon style={styles.navBarHeader} name="ios-chatboxes" size={30} color="#900" /> */}
           <Text style={styles.navBarButton}></Text>
         </View>
 

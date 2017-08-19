@@ -137,7 +137,7 @@ export default class Login extends Component {
 const iconStyles = {
   borderRadius: 30,
   iconStyle: { paddingVertical: 5 },
-  marginLeft: 40
+  // marginLeft: 40
   // alignItems: 'center',
 };
 

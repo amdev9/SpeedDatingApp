@@ -21,18 +21,33 @@ export default class Profile extends Component {
     const { user } = this.props.navigation.state.params;
     return (     
       
+
+      
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.navBar}>
             <Text style={styles.navBarButton}></Text>
-            <Text style={styles.navBarHeader}>Profile</Text>
+            <Text style={styles.navBarHeader}>My Profile</Text>
+            {/* <Icon style={styles.navBarHeader} name="ios-person" size={30} color="#900" /> */}
             
-            <Text style={styles.navBarButton}
+            {/* <Text style={styles.navBarButton}
               onPress={() => this.props.navigation.navigate('Events', {
                 person: user
               })}>
                Events
-            </Text>
+            </Text> */}
+
+
+            <Icon style={styles.navBarButton}
+              onPress={() => this.props.navigation.navigate('Events', {
+                person: user
+              })} name="ios-calendar-outline" size={30} color="#900" />
+
+        
+
+
+            
+      
           </View>
           
           
