@@ -13,7 +13,7 @@ import { facebook, google, vkontakte } from '../config';
 // and we want to transform them into user objects that have the same set of attributes
 const transformFacebookProfile = (profile) => ({
   oauth_id: profile.id,
-  name: profile.first_name, //.name,
+  name: profile.first_name,  
   avatar: profile.picture.data.url,
   gender: (profile.gender == 'female') ? 1 : 2,
 });

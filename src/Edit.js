@@ -219,7 +219,7 @@ class Edit extends React.Component {
               <TouchableOpacity onPress={() => navigate('Gender', { user: user })}>
 
               <View style={styles.navBarTest}>
-                <Text style={[styles.item, styles.itemTextChoose]}>{ this.state.gender ? 'Мужчина' : 'Женщина'}</Text>
+                <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Мужчина' : 'Женщина'}</Text>
                 <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
               </View>
               </TouchableOpacity>
