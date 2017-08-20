@@ -163,6 +163,7 @@ export default class Events extends Component {
                 } else {
                   return <EventPoster
                     event={event}
+                    person={person}
                     onOpen={this.openEvent}
                     key={index}
                   /> 

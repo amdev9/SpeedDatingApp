@@ -11,7 +11,7 @@ var personSchema = Schema({
   age      : String,
   about : String,
   current_work: String,
-  gender   : Number,  // (0-girl, 1-man)
+  gender   : Number,  //  1 - женский, 2 - мужской, 0 - без указания пола. 
   events : [{ type: Schema.Types.ObjectId, ref: 'DateEvent' }],
   likes: Object
 });

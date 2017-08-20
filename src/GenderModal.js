@@ -15,7 +15,7 @@ import { put, get } from '../components/api';
 const { width,height } = Dimensions.get('window')
 
 export default class GenderModal extends Component {
-  
+  //  1 - женский, 2 - мужской, 0 - без указания пола. 
   constructor(props) {
     super(props);
     const { user } = this.props.navigation.state.params;
@@ -64,24 +64,24 @@ export default class GenderModal extends Component {
           <View style={styles.back}>
           <TouchableOpacity onPress={() =>  {
             this.setState({ 
-              gender: 1
+              gender: 2
             })
           }}>
 
           <View style={styles.navBarTest}>
             <Text style={styles.item}>Мужчина</Text>
-            <Icon style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+            <Icon style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
           </View>
           </TouchableOpacity>
           
           <TouchableOpacity onPress={() =>  {
             this.setState({ 
-              gender: 0
+              gender: 1
             })
           }}>
           <View style={styles.navBarTest}>
             <Text style={styles.item}>Женщина</Text>
-            <Icon  style={ this.state.gender == 0 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+            <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
           </View>
           </TouchableOpacity>
           </View>

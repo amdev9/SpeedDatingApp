@@ -10,7 +10,7 @@ import {
 
 export default class Cost extends Component {
     render() {
-       
+       return <Text>cost </Text>
     }
 }
 

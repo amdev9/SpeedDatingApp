@@ -18,7 +18,7 @@ const organizer = new Person ({
   name: 'testname',
   avatar: 'https://i.imgur.com/po7UezG.jpg',
   age: '24',
-  gender: 1,
+  gender: 2,
   likes: {},
   events: []
 });
@@ -33,6 +33,9 @@ organizer.save(function (err) {
     _creator: organizer._id,    // assign the _id from the person
     photo : 'https://i.imgur.com/po7UezG.jpg',
     description: 'Some description', 
+    places_max: 20,
+    cost_men: 1000,
+    cost_women: 300,
     date : Date.now(),
     show_manage: true,
     manage_ids: manage_ids,

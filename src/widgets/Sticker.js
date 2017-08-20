@@ -10,7 +10,7 @@ import {
 
 export default class Sticker extends Component {
     render() {
-       
+      return <Text>sticker </Text>
     }
 }
 

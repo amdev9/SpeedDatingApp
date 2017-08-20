@@ -13,9 +13,19 @@ import { facebook, google, vkontakte } from '../config';
 // and we want to transform them into user objects that have the same set of attributes
 const transformFacebookProfile = (profile) => ({
   oauth_id: profile.id,
-  name: profile.name,
+  name: profile.first_name, //.name,
   avatar: profile.picture.data.url,
+  gender: (profile.gender == 'female') ? 1 : 2,
 });
+
+// Transform Vkontakte profile into user object 
+const transformVKontakteProfile = (profile) => ({
+  oauth_id: profile.id,
+  name: profile.first_name,
+  avatar: profile.photo,
+  gender: profile.sex,  
+});
+
 
 // Transform Google profile into user object
 const transformGoogleProfile = (profile) => ({
@@ -24,12 +34,6 @@ const transformGoogleProfile = (profile) => ({
   avatar: profile.image.url,
 });
 
-// Transform Vkontakte profile into user object 
-const transformVKontakteProfile = (profile) => ({
-  oauth_id: profile.id,
-  name: profile.first_name,
-  avatar: profile.photo,
-});
 
 // Register Facebook Passport strategy
 passport.use(new FacebookStrategy(facebook,
@@ -51,16 +55,14 @@ passport.use(new VKontakteStrategy(vkontakte,
     => done(null, await createOrGetUserFromDatabase(transformVKontakteProfile(profile._json)))      
 ));
   
-
 const createOrGetUserFromDatabase = async (userProfile) => {
-
-
   let user = await Person.findOne({ 'oauth_id': userProfile.oauth_id }).exec();
   if (!user) {
     user = new Person({
       oauth_id: userProfile.oauth_id,
       name: userProfile.name,
       avatar: userProfile.avatar,
+      gender: userProfile.gender
     });
     await user.save();
   }

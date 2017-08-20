@@ -24,18 +24,23 @@ export default class EventPoster extends Component {
   static propTypes = {
     // Movie object with title, genre, and poster
     event: PropTypes.object.isRequired,
+    person: PropTypes.object.isRequired,
     // Called when user taps on a poster
     onOpen: PropTypes.func.isRequired,
   }
   render() {
-    const { event, event: { title, date, places_max, cost_men, cost_women, show_manage, photo, participant_ids }, onOpen } = this.props;
-    const { person } =  this.props.navigation.state.params;
-    if (person.gender == 0) {
+    const { person, event, person: { gender }, event: { title, date, places_max, cost_men, cost_women, show_manage, photo, participant_ids }, onOpen } = this.props;
+     
+    console.log(person);
+    if (gender == 1) {
       var cost = cost_women;
-    } else {
+    } else if (gender == 2) {
       var cost = cost_men;
     }
+    
     var left_places = places_max - participant_ids.length;
+    
+    console.log(left_places, cost);
     
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(event)}>
@@ -51,7 +56,7 @@ export default class EventPoster extends Component {
           <Text style={styles.date}>{date}</Text>
           <Places style={styles.places} value={left_places} />
           <Sticker style={styles.sticker} value={show_manage} />
-          <Cost style={styles.cost} cost={cost} />
+          <Cost style={styles.cost} cost={cost} /> 
 
         </View>
         

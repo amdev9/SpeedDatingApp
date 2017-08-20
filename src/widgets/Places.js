@@ -10,7 +10,7 @@ import {
 
 export default class Places extends Component {
     render() {
-       
+        return <Text>places </Text>
     }
 }
 
