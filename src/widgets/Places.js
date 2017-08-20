@@ -10,7 +10,9 @@ import {
 
 export default class Places extends Component {
     render() {
-        return <Text>places </Text>
+        const { value } = this.props;
+ 
+        return <Text> {value} </Text>
     }
 }
 

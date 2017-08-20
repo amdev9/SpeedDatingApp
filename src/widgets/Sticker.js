@@ -10,7 +10,9 @@ import {
 
 export default class Sticker extends Component {
     render() {
-      return <Text>sticker </Text>
+      const { value } = this.props;
+      
+      return <Text> {value ? 'true' : 'false'} </Text>
     }
 }
 

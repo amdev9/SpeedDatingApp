@@ -30,18 +30,12 @@ export default class EventPoster extends Component {
   }
   render() {
     const { person, event, person: { gender }, event: { title, date, places_max, cost_men, cost_women, show_manage, photo, participant_ids }, onOpen } = this.props;
-     
-    console.log(person);
     if (gender == 1) {
       var cost = cost_women;
     } else if (gender == 2) {
       var cost = cost_men;
     }
-    
     var left_places = places_max - participant_ids.length;
-    
-    console.log(left_places, cost);
-    
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(event)}>
         <View style={styles.imageContainer}>
@@ -56,10 +50,8 @@ export default class EventPoster extends Component {
           <Text style={styles.date}>{date}</Text>
           <Places style={styles.places} value={left_places} />
           <Sticker style={styles.sticker} value={show_manage} />
-          <Cost style={styles.cost} cost={cost} /> 
-
+          <Cost style={styles.cost} value={cost} /> 
         </View>
-        
         {/* <Text style={styles.genre} numberOfLines={1}>{genre}</Text> */}
       </TouchableOpacity>
     );
@@ -79,7 +71,7 @@ const styles = StyleSheet.create({
     ...defaultStyles.text,
     fontSize: 15,
     // fontWeight: 'bold',
-    marginTop: (height - 20 - 20) / rows - 10 - 25,
+    marginTop: 10,//(height - 20 - 20) / rows - 10 - 25,
     marginLeft: 10,
     color: '#FFFFFF',
     backgroundColor: 'rgba(0,0,0,0)',
