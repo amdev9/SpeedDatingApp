@@ -5,13 +5,40 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { defaultStyles } from './styles';
+import { put, get } from '../components/api';
+const { width,height } = Dimensions.get('window')
 
 export default class GenderModal extends Component {
+  
+  constructor(props) {
+    super(props);
+    const { user } = this.props.navigation.state.params;
+    this.state = {
+      gender: user.gender
+    }
+  }
+    
+  saveUser = async () => {
+    const { user } = this.props.navigation.state.params;
+    user.gender = this.state.gender;
+    try {
+      const response = await put('user', {
+        user: user
+      }); 
+      const json = await response.json(); 
+      console.log( JSON.stringify(json) );
+    }
+    catch (error) {
+      alert(error);
+    }
+  };
+
   render() {
     const { goBack } = this.props.navigation;
     const {user} = this.props.navigation.state.params;
@@ -23,60 +50,78 @@ export default class GenderModal extends Component {
           <Text style={styles.navBarButton}></Text>
           <Text style={styles.navBarHeader}>Я</Text>
           <TouchableOpacity onPress={() =>  {
+            this.saveUser();
             this.props.navigation.navigate('Edit', { user: user });
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
         </View>
        
-      
-          <ScrollView
-              contentContainerStyle={styles.scrollContent}>
-              <Text style={styles.sectionHeader}></Text>
-              <TouchableOpacity onPress={() =>  {
-                console.log('onPress exit');
-              }}>
-              <Text style={styles.item}>Мужчина</Text>
-              <Icon onPress={() => {
-          console.log('check check')}
-          } name="ios-checkmark" size={35} />
-              </TouchableOpacity>
-              <Text style={styles.sectionHeader}></Text>
-              <TouchableOpacity onPress={() =>  {
-                console.log('onPress exit');
-              }}>
-              <Text style={styles.item}>Женщина</Text>
-              <Icon onPress={() => {
-          console.log('check check')}
-          } name="ios-checkmark" size={35} />
-              </TouchableOpacity>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}>
+          
+
+          <View style={styles.back}>
+          <TouchableOpacity onPress={() =>  {
+            this.setState({ 
+              gender: 1
+            })
+          }}>
+
+          <View style={styles.navBarTest}>
+            <Text style={styles.item}>Мужчина</Text>
+            <Icon style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+          </View>
+          </TouchableOpacity>
+          
+          <TouchableOpacity onPress={() =>  {
+            this.setState({ 
+              gender: 0
+            })
+          }}>
+          <View style={styles.navBarTest}>
+            <Text style={styles.item}>Женщина</Text>
+            <Icon  style={ this.state.gender == 0 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+          </View>
+          </TouchableOpacity>
+          </View>
         </ScrollView>
 
-
-
-        {/* <Button
-            onPress={() => goBack()}
-            title="Close Me"
-        /> */}
       </View>
     );
   }
 }
     
 const styles = StyleSheet.create({
+  back: {
+    marginTop: 30,
+    backgroundColor: '#FFFFFF'
+  },
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    // backgroundColor: '#FFF',
     // alignItems: 'center',
     // justifyContent: 'center',
   },
-  
+  transparent: {
+    color: 'transparent'
+  },
+  colorfull: {
+    color: '#3f88fb'
+  },
+  navBarTest: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: width - 20
+  },
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
     height: 64,
     backgroundColor: '#FFFFFF' // '#1EAAF1'
   },
+  
+
   navBarButton: {
     color: '#3f88fb',
     textAlign:'center',
@@ -99,12 +144,12 @@ const styles = StyleSheet.create({
   },
 
   sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
+    // paddingTop: 2,
+    // paddingLeft: 10,
+    // paddingRight: 10,
+    // paddingBottom: 2,
+    // fontSize: 14,
+    // fontWeight: 'bold',
     backgroundColor: 'rgba(247,247,247,1.0)',
   },
   item: {

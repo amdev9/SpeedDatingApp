@@ -46,7 +46,8 @@ class Edit extends React.Component {
       avatar: user.avatar ? user.avatar  : '',
       current_work: user.current_work ? user.current_work  : '',
       about: user.about ? user.about  : '',
-      age: user.age ? user.age  : ''
+      age: user.age ? user.age  : '',
+      gender: user.gender ? user.gender  : 0
     }
   }
 
@@ -57,6 +58,7 @@ class Edit extends React.Component {
     user.about = this.state.about;
     user.age = this.state.age;
     user.avatar = this.state.avatar;
+    user.gender = this.state.gender;
 
     try {
       const response = await put('user', {
@@ -216,10 +218,10 @@ class Edit extends React.Component {
               
               <TouchableOpacity onPress={() => navigate('Gender', { user: user })}>
 
-              
-                <Text style={styles.itemTextChoose}>Мужчина</Text>
-                <Icon style={styles.itemIconChoose} name="ios-arrow-forward" size={25} color="#c4c9d1" />
-              
+              <View style={styles.navBarTest}>
+                <Text style={[styles.item, styles.itemTextChoose]}>{ this.state.gender ? 'Мужчина' : 'Женщина'}</Text>
+                <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              </View>
               </TouchableOpacity>
               <Text style={styles.sectionHeader}><Text> </Text></Text>
 
@@ -328,7 +330,7 @@ function _generateUUID() {
 
 
 styles = StyleSheet.create({
-   
+  
   sectionHeader: {
     paddingTop: 15,
     paddingLeft: 10,
@@ -345,20 +347,20 @@ styles = StyleSheet.create({
     fontFamily: 'System',
     textAlign: 'left',
   },
-   
+  navBarTest: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: width - 20
+  },
   itemTextChoose: {
     padding: 12,
     fontSize: 15,
-    height: 44,
     fontFamily: 'System',
-    // textAlign: 'center',
     fontWeight: 'bold',
     color: '#a5a9af',
-    
   },
   itemIconChoose: {
-    position: 'absolute',
-    marginLeft: width - 30,
+  
     marginTop: 10
   },
   circle: {

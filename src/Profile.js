@@ -166,6 +166,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333',
     marginBottom: 5,
+    fontSize: 22,
+    fontWeight: 'bold',
+    ...defaultStyles.text,
   },
   buttons: {
     justifyContent: 'space-between',
