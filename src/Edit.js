@@ -18,6 +18,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import { defaultStyles } from './styles';
 import { put, get } from '../components/api';
@@ -25,7 +27,7 @@ var RNUploader = NativeModules.RNUploader;
 import RNFetchBlob from 'react-native-fetch-blob'
 
 let styles
-const { width } = Dimensions.get('window')
+const { width,height } = Dimensions.get('window')
 
 class Edit extends React.Component {
  
@@ -157,6 +159,8 @@ class Edit extends React.Component {
 
   render() {
     const {user} = this.props.navigation.state.params;
+    const { navigate } = this.props.navigation;
+    
     console.log('state :', this.state)
     return (
       
@@ -185,50 +189,69 @@ class Edit extends React.Component {
               <Text style={styles.navBarButton}>Готово</Text>
             </TouchableOpacity>
           </View>
-        <Text> {user.name} </Text>
         
         
-          
+        
+        <View style={styles.content}>
+        {/* <Text> {user.name} </Text> */}
         <View style={styles.avatar}>
+          
         <TouchableOpacity onPress={() => { this.toggleModal(); this.getPhotos() }}>
             <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
-            
             <View style={styles.circle}>
-          
-              <Icon style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
+              <Icon style={styles.setting} name="md-create" size={20} color="#c4c9d1" />
               </View>
           </TouchableOpacity>
   
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
         </View>
-      
+      </View>
+
+        <ScrollView
+              contentContainerStyle={styles.scrollContent}>
+              <Text style={styles.sectionHeader}><Text>О пользователе {user.name} </Text></Text>
+              <TextInput style={styles.item} onChangeText={(about) => this.setState({ about })}
+                value={this.state.about}/>
+              <Text style={styles.sectionHeader}>Я</Text>
+              
+              <TouchableOpacity onPress={() => navigate('Gender')}>
+
+              
+                <Text style={styles.itemTextChoose}>Мужчина</Text>
+                <Icon style={styles.itemIconChoose} name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              
+              </TouchableOpacity>
+              <Text style={styles.sectionHeader}><Text> </Text></Text>
+
+        </ScrollView>
+
 
         {/* <Button
         title='View Photos'
         onPress={() => { this.toggleModal(); this.getPhotos() }}
-        /> */}
+        />  
 
-        {/* current work  */}
+        current work   
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(current_work) => this.setState({ current_work })}
           value={this.state.current_work}
         />
-        {/* about user info  */}
+         about user info   
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(about) => this.setState({about})}
           value={this.state.about}
         />
         
-        {/* age  */}
+          age  
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(age) => this.setState({age})}
           value={this.state.age}
         />
 
-        {/* <Button
+       <Button
         title='Browse Images'
         onPress={this.navigate}
         /> */}
@@ -305,18 +328,51 @@ function _generateUUID() {
 
 
 styles = StyleSheet.create({
+   
+  sectionHeader: {
+    paddingTop: 15,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 5,
+    fontSize: 14,
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(247,247,247,1.0)',
+  },
+  item: {
+    padding: 10,
+    fontSize: 15,
+    height: 44,
+    fontFamily: 'System',
+    textAlign: 'left',
+  },
+   
+  itemTextChoose: {
+    padding: 12,
+    fontSize: 15,
+    height: 44,
+    fontFamily: 'System',
+    // textAlign: 'center',
+    fontWeight: 'bold',
+    color: '#a5a9af',
+    
+  },
+  itemIconChoose: {
+    position: 'absolute',
+    marginLeft: width - 30,
+    marginTop: 10
+  },
   circle: {
-    width: 40,
-    height: 40,
-    borderRadius: 40/2,
+    width: 30,
+    height: 30,
+    borderRadius: 30/2,
     backgroundColor: '#EFF3F7',
     position: 'absolute',
-    marginTop: 60,
-    marginLeft: 60,
+    marginTop: 70,
+    marginLeft: 70,
   },
   setting: {
-    marginTop: 8,
-    marginLeft: 10,
+    marginTop: 5,
+    marginLeft: 8,
     backgroundColor: 'transparent'
   },
   navBar: {
@@ -349,7 +405,7 @@ styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: '#FFF'
   },
   modalContainer: {
@@ -389,6 +445,11 @@ styles = StyleSheet.create({
   //   justifyContent: 'center',
   //   alignItems: 'center',
   // },
+  content: {
+    // flex: 1, removed
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   avatar: {
     margin: 20,
   },

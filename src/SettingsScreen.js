@@ -47,7 +47,9 @@ class Settings extends Component {
         <Text style={styles.navBarButton}>Готово</Text>
       </TouchableOpacity>
       </View>
-        <SectionList 
+
+
+        {/* <SectionList 
           renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
           renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
           sections={[
@@ -55,7 +57,19 @@ class Settings extends Component {
             { key: 2, title: ' ', data: [] },
           ]}
           keyExtractor={(item, index) => index}
-        />
+        /> */}
+
+        <ScrollView
+              contentContainerStyle={styles.scrollContent}>
+              <Text style={styles.sectionHeader}></Text>
+              <TouchableOpacity onPress={() =>  {
+                console.log('onPress exit');
+              }}>
+              <Text style={styles.item}>Выйти</Text>
+              </TouchableOpacity>
+              <Text style={styles.sectionHeader}></Text>
+        </ScrollView>
+
       </View>
     )
   }

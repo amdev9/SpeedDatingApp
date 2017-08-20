@@ -129,10 +129,8 @@ export default class Events extends Component {
           </Text> */}
         </View>
   
-
-            
         <SegmentedControlIOS tintColor="#3f88fb" style={styles.bottomContent} 
-          values={['Мои мероприятия', 'Найти мероприятие']}
+          values={['Мои', 'Найти']}
           selectedIndex={this.state.selectedIndex}
           onChange={(event) => {
             this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});

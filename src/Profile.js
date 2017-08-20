@@ -61,14 +61,14 @@ export default class Profile extends Component {
                 onPress={() => this.props.navigation.navigate('Settings', { user: user })}>
                 <Icon style={styles.setting} name="ios-settings" size={25} color="#c4c9d1" />
               </TouchableOpacity>
-              <Text style={styles.barText}> НАСТРОЙКИ </Text>
+              <Text style={styles.barText}>Настройки</Text>
             </View>
             <View style={styles.leftSide}>
               <TouchableOpacity style={styles.circle}
                 onPress={() => this.props.navigation.navigate('Edit', { user: user })}>
                 <Icon style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
               </TouchableOpacity>
-              <Text style={styles.barText}> ИЗМЕНИТЬ </Text>
+              <Text style={styles.barText}>ИЗМЕНИТЬ</Text>
             </View>
           </View>
 
