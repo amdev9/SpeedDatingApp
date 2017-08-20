@@ -3,10 +3,14 @@ import mongoose, { Schema } from 'mongoose';
 var eventSchema = Schema({
   _creator: { type: Schema.ObjectId, ref: 'Person' },
   title: String,
+  date: Date,
   photo: String,
   description: String, 
-  date: Date,
+  places_max: Number,
+  cost_men: Number,
+  cost_women: Number,
   show_manage: Boolean,
+  
   manage_queue_ids: Array,
   manage_decline_ids: Array,
   manage_ids: Array,
@@ -14,6 +18,7 @@ var eventSchema = Schema({
   participants: [{ type: Schema.ObjectId, ref: 'Person' }],  
   matches: Object,
   likes: Array
+
 });
 
 var DateEvent = mongoose.model('Event', eventSchema);

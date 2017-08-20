@@ -50,7 +50,8 @@ export default class Profile extends Component {
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
           </View>
           <Text style={styles.text}>
-             {user.name} {'\n'}
+             {user.name} 
+             {/* {'\n'} */}
              {/* {JSON.stringify(this.props)} */}
              
           </Text>
@@ -164,11 +165,12 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    color: '#333',
+    color: '#4b4d5c',
     marginBottom: 5,
     fontSize: 22,
     fontWeight: 'bold',
-    ...defaultStyles.text,
+    fontFamily: 'Avenir'
+    // ...defaultStyles.text,
   },
   buttons: {
     justifyContent: 'space-between',

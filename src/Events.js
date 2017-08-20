@@ -155,6 +155,7 @@ export default class Events extends Component {
                   if (event.participant_ids.includes(person._id) || event.manage_ids.includes(person._id)) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
                     return <EventPoster
                       event={event}
+                      person={person}
                       onOpen={this.openEvent}
                       key={index}
                     /> 

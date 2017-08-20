@@ -10,6 +10,9 @@ import {
 import { defaultStyles } from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 
+import Places from './widgets/Places';
+import Sticker from './widgets/Sticker';
+import Cost from './widgets/Cost';
 
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
@@ -25,21 +28,31 @@ export default class EventPoster extends Component {
     onOpen: PropTypes.func.isRequired,
   }
   render() {
-    const { event, event: { title, genre, photo }, onOpen } = this.props;
+    const { event, event: { title, date, places_max, cost_men, cost_women, show_manage, photo, participant_ids }, onOpen } = this.props;
+    const { person } =  this.props.navigation.state.params;
+    if (person.gender == 0) {
+      var cost = cost_women;
+    } else {
+      var cost = cost_men;
+    }
+    var left_places = places_max - participant_ids.length;
+    
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(event)}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: photo }} style={styles.image} />
-          
-            
             {/* <View style={styles.overlay} /> */}
             <LinearGradient  start={{x: 0.0, y: 0.1}} end={{x: 1.0, y: 0.6}}
-  locations={[0,0.3,0.7]}
-          colors={[ 'rgba(63, 136, 251, 0.8)', 'rgba(85, 149, 252, 0.8)', 'rgba(79, 69, 100, 0.8)']}
-          style={styles.overlay} />
- 
-          
+              locations={[0,0.3,0.7]}
+                colors={[ 'rgba(63, 136, 251, 0.8)', 'rgba(85, 149, 252, 0.8)', 'rgba(79, 69, 100, 0.8)']}
+                  style={styles.overlay} />
+
           <Text style={styles.title} numberOfLines={1}>{title}</Text>
+          <Text style={styles.date}>{date}</Text>
+          <Places style={styles.places} value={left_places} />
+          <Sticker style={styles.sticker} value={show_manage} />
+          <Cost style={styles.cost} cost={cost} />
+
         </View>
         
         {/* <Text style={styles.genre} numberOfLines={1}>{genre}</Text> */}
@@ -56,6 +69,34 @@ const styles = StyleSheet.create({
     height: (height - 20 - 20) / rows - 10,
     width: (width - 40) /// cols - 10,
   },
+  // WIDGETS
+  title: {
+    ...defaultStyles.text,
+    fontSize: 15,
+    // fontWeight: 'bold',
+    marginTop: (height - 20 - 20) / rows - 10 - 25,
+    marginLeft: 10,
+    color: '#FFFFFF',
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+  date: {
+
+  },
+  places: {
+
+  },
+  sticker: {
+
+  },
+  cost: {
+
+  },
+  // genre: {
+  //   ...defaultStyles.text,
+  //   color: '#BBBBBB',
+  //   fontSize: 12,
+  //   lineHeight: 14,
+  // },
   imageContainer: {
     flex: 1,                          // take up all available space
   },
@@ -66,20 +107,5 @@ const styles = StyleSheet.create({
   overlay: {
     borderRadius: 5,   
     ...StyleSheet.absoluteFillObject, // backgroundColor: 'rgba(63, 136, 251, 0.6)' // 63, 136, 251, 1
-  },
-  title: {
-    ...defaultStyles.text,
-    fontSize: 15,
-    // fontWeight: 'bold',
-    marginTop: (height - 20 - 20) / rows - 10 - 25,
-    marginLeft: 10,
-    color: '#FFFFFF',
-    backgroundColor: 'rgba(0,0,0,0)',
-  },
-  genre: {
-    ...defaultStyles.text,
-    color: '#BBBBBB',
-    fontSize: 12,
-    lineHeight: 14,
-  },
+  }
 });
