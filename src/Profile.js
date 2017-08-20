@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   setting: {
     marginTop: 8,
-    marginLeft: 10,
+    marginLeft: 11,
     backgroundColor: 'transparent'
   },
   circle: {

@@ -214,7 +214,7 @@ class Edit extends React.Component {
                 value={this.state.about}/>
               <Text style={styles.sectionHeader}>Я</Text>
               
-              <TouchableOpacity onPress={() => navigate('Gender')}>
+              <TouchableOpacity onPress={() => navigate('Gender', { user: user })}>
 
               
                 <Text style={styles.itemTextChoose}>Мужчина</Text>
