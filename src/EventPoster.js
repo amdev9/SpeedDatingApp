@@ -13,6 +13,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Places from './widgets/Places';
 import Sticker from './widgets/Sticker';
 import Cost from './widgets/Cost';
+import Date from './widgets/Date';
 
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
@@ -46,20 +47,29 @@ export default class EventPoster extends Component {
                 colors={[ 'rgba(63, 136, 251, 0.8)', 'rgba(85, 149, 252, 0.8)', 'rgba(79, 69, 100, 0.8)']}
                   style={styles.overlay} />
 
-          <Text style={styles.title} numberOfLines={1}>{title}</Text>
-          <Text style={styles.date}>{date}</Text>
-          <Places style={styles.places} value={left_places} />
-          <Sticker style={styles.sticker} value={show_manage} />
-          <Cost style={styles.cost} value={cost} /> 
+          <View style={styles.downPoster}>
+            <Text style={styles.title} numberOfLines={1}>{title}</Text>
+            <Sticker value={show_manage} />
+          </View>
+          <Date style={styles.date} value={'11.09.2017'} /> 
+          {/* {date}   18-00*/}
+          
+          <View style={styles.downPoster}>
+            <Places now={left_places} max={places_max} />
+            <Cost value={cost} />  
+          </View>
         </View>
-        {/* <Text style={styles.genre} numberOfLines={1}>{genre}</Text> */}
+       
       </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  
+  downPoster: {
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  },
   container: {
     marginLeft: 20,
     marginBottom: 20,
@@ -69,25 +79,23 @@ const styles = StyleSheet.create({
   // WIDGETS
   title: {
     ...defaultStyles.text,
-    fontSize: 15,
+    fontSize: 18,
     // fontWeight: 'bold',
     marginTop: 10,//(height - 20 - 20) / rows - 10 - 25,
-    marginLeft: 10,
+    marginLeft: 15,
     color: '#FFFFFF',
     backgroundColor: 'rgba(0,0,0,0)',
   },
   date: {
-
+    ...defaultStyles.text,
+    fontSize: 14,
+    // fontWeight: 'bold',
+    marginTop: (height - 20 - 20) / rows - 120,
+    marginLeft: 15,
+    color: '#FFFFFF',
+    backgroundColor: 'rgba(0,0,0,0)',
   },
-  places: {
-
-  },
-  sticker: {
-
-  },
-  cost: {
-
-  },
+  
   // genre: {
   //   ...defaultStyles.text,
   //   color: '#BBBBBB',

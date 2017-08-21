@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
     // margin: 30,
     // borderTopColor: '#262626',
     // borderRadius: 1,
-    marginTop: 15, 
+    marginTop: 5, 
     marginRight: 20,
     marginLeft: 20
   }
