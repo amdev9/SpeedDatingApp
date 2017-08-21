@@ -11,21 +11,28 @@ import { facebook, google, vkontakte } from '../config';
 
 // Transform Facebook profile because Facebook and Google profile objects look different
 // and we want to transform them into user objects that have the same set of attributes
-const transformFacebookProfile = (profile) => ({
-  oauth_id: profile.id,
-  name: profile.first_name,  
-  avatar: profile.picture.data.url,
-  gender: (profile.gender == 'female') ? 1 : 2,
-});
+const transformFacebookProfile = (profile) => {
+  console.log(profile);
+  
+  return ({
+    oauth_id: profile.id,
+    name: profile.first_name,  
+    avatar: profile.picture.data.url,
+    gender: (profile.gender == 'female') ? 1 : 2,
+  });
+}
 
 // Transform Vkontakte profile into user object 
-const transformVKontakteProfile = (profile) => ({
-  oauth_id: profile.id,
-  name: profile.first_name,
-  avatar: profile.photo,
-  gender: profile.sex,  
-});
-
+const transformVKontakteProfile = (profile) => {
+  
+  console.log(profile)
+  return ({
+    oauth_id: profile.id,
+    name: profile.first_name,
+    avatar: profile.photo,
+    gender: profile.sex,  
+  });
+}
 
 // Transform Google profile into user object
 const transformGoogleProfile = (profile) => ({
@@ -51,11 +58,20 @@ passport.use(new GoogleStrategy(google,
 
 // Register vk Passport strategy
 passport.use(new VKontakteStrategy(vkontakte,
+  // {
+  //   // clientID: ..., clientSecret: ..., callbackURL: ...,
+  //   scope: ['email' /* ... and others, if needed */],
+  //   profileFields: ['email', 'city', 'bdate']
+  // },
   async (accessToken, refreshToken, params, profile, done)
-    => done(null, await createOrGetUserFromDatabase(transformVKontakteProfile(profile._json)))      
+    => {
+      console.log(params)  // email is undefined if phone is used
+      done(null, await createOrGetUserFromDatabase(transformVKontakteProfile(profile._json)))
+    }      
 ));
   
 const createOrGetUserFromDatabase = async (userProfile) => {
+  
   let user = await Person.findOne({ 'oauth_id': userProfile.oauth_id }).exec();
   if (!user) {
     user = new Person({
@@ -76,7 +92,7 @@ passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
 // Facebook
-export const facebookLogin = passport.authenticate('facebook');
+export const facebookLogin = passport.authenticate('facebook', {scope: ['public_profile', 'user_friends', 'user_education_history', 'email', 'user_about_me', 'user_work_history'], authType: 'rerequest'});
 export const facebookMiddleware = passport.authenticate('facebook', { failureRedirect: '/auth/facebook' });
 
 // Google
@@ -84,7 +100,7 @@ export const googleLogin = passport.authenticate('google', { scope: ['profile'] 
 export const googleMiddleware = passport.authenticate('google', { failureRedirect: '/auth/google' });
 
 // Google
-export const vkontakteLogin = passport.authenticate('vkontakte');
+export const vkontakteLogin = passport.authenticate('vkontakte',  { scope: ['status', 'email', 'friends', 'notify'] } );
 export const vkontakteMiddleware = passport.authenticate('vkontakte', { failureRedirect: '/auth/vkontakte' });
 
 // Callback
