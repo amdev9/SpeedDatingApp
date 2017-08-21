@@ -37,6 +37,11 @@ export default class EventPoster extends Component {
       var cost = cost_men;
     }
     var left_places = places_max - participant_ids.length;
+    if (participant_ids.includes(person._id) ) {
+      var part = true;
+    } else {
+      var part = false;
+    }
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(event)}>
         <View style={styles.imageContainer}>
@@ -56,7 +61,7 @@ export default class EventPoster extends Component {
           
           <View style={styles.downPoster}>
             <Places now={left_places} max={places_max} />
-            <Cost value={cost} />  
+            <Cost cost={cost} part={part} />  
           </View>
         </View>
        

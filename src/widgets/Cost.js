@@ -11,18 +11,24 @@ import { defaultStyles } from '../styles';
 
 export default class Cost extends Component {
     render() {
-      const { value } = this.props;
+      const { cost, part } = this.props;
       
-      return  <View
-          underlayColor="#9575CD"
-          style={styles.buttonContainer}
-      >
-        <Text style={styles.places}>{value}</Text>
-        <Icon style={styles.iconic} name="ruble" size={15} color="#FFF" />
-      </View> 
-
-        
+      if (!part) {
+        return  <View
+            underlayColor="#9575CD"
+            style={styles.buttonContainer}
+        >
+          <Text style={styles.places}>{cost}</Text>
+          <Icon style={styles.iconic} name="ruble" size={15} color="#FFF" />
+        </View> 
+      } else {
+        return  <View style={styles.buttonGo}>
+          <Text style={styles.go}>Уже иду</Text>
+          {/* <Icon style={styles.iconic} name="ruble" size={15} color="#FFF" /> */}
+        </View> 
+      }
       
+ 
     }
 }
 
@@ -50,6 +56,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4c745', // 3f88fb
     borderRadius: 100,
     marginRight: 15
+    // marginLeft: 200,
+    // paddingVertical: 10,
+    // paddingHorizontal: 30,
+  },
+  go: {
+    ...defaultStyles.text,
+    fontSize: 14,
+    // fontWeight: 'bold',
+    // marginTop: placesHeight,
+    marginLeft: 21,
+    // marginTop: 7,
+    color: '#FFFFFF',
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
+  buttonGo: {
+    marginTop: 16,
+    height: 30,
+    width: 100,
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'transparent', // 3f88fb
+    borderRadius: 100,
+    marginRight: 15,
+    borderWidth: 1,
+    borderColor: 'white'
     // marginLeft: 200,
     // paddingVertical: 10,
     // paddingHorizontal: 30,
