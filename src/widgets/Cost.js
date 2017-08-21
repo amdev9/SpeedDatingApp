@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Iconic from 'react-native-vector-icons/Ionicons';
 import { defaultStyles } from '../styles';
 
 export default class Cost extends Component {
@@ -23,8 +24,9 @@ export default class Cost extends Component {
         </View> 
       } else {
         return  <View style={styles.buttonGo}>
+          <Iconic style={styles.iconicGo} name="ios-checkmark" size={30} />
           <Text style={styles.go}>Уже иду</Text>
-          {/* <Icon style={styles.iconic} name="ruble" size={15} color="#FFF" /> */}
+         
         </View> 
       }
       
@@ -34,8 +36,14 @@ export default class Cost extends Component {
 
 const styles = StyleSheet.create({
   iconic: {
-    marginLeft: 5,
-    // marginTop: 7,
+    marginLeft: 4,
+    color: '#FFFFFF',
+    marginTop: 1,
+  },
+  iconicGo: {
+    marginLeft: 10,
+    color: '#FFFFFF',
+    marginTop: 1,
   },
   places: {
     ...defaultStyles.text,
@@ -65,7 +73,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     // fontWeight: 'bold',
     // marginTop: placesHeight,
-    marginLeft: 21,
+    marginLeft: 5,
     // marginTop: 7,
     color: '#FFFFFF',
     backgroundColor: 'rgba(0,0,0,0)',
