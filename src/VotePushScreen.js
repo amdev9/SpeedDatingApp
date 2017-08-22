@@ -65,23 +65,26 @@ export default class VotingPushScreen extends Component {
         >
           {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked}/>)}
         </ScrollView>
+
+        
         <TouchableHighlight
-            underlayColor="#9575CD"
             style={styles.buttonContainer}
             onPress={this.onConfirm}
             >
-            <Text style={styles.button}>Confirm</Text>
+            <Text style={styles.button}>Отправить</Text>
         </TouchableHighlight> 
       </View>
     );
   }
 }
 
+{/* underlayColor="#9575CD" */}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 20
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   header: {
     ...defaultStyles.text,
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    backgroundColor: '#673AB7',
+    backgroundColor: '#3f88fb',
     borderRadius: 100,
     margin: 20,
     paddingVertical: 10,

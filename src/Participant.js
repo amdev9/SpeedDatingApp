@@ -7,9 +7,7 @@ import {
   TouchableOpacity
 } from 'react-native';
  
-
 export default class Participant extends PureComponent {
-
   constructor(props) {
     super(props);
     if (this.props.liked && this.props.liked.includes(this.props.participant._id)) {
@@ -44,27 +42,29 @@ export default class Participant extends PureComponent {
     const { name, avatar } = participant; // user; {backgroundColor: 'blue', flex: 0.3}
     return (
       <View style={ this.state.pressStatus ? styles.containerPress : styles.container  } >
-      <TouchableOpacity onPress={ () => { 
-          onSelected(participant); 
-          
-          this.setState({
-            pressStatus: !this.state.pressStatus
-          });
-        } 
-      }>
-        <View style={styles.avatarContainer} > 
-          {avatar && <Image
-            resizeMode='contain'
-            style={styles.avatar}
-            source={{ uri: avatar }}
-          />}
-        </View>
-        <View >
-          <Text style={[styles.text, styles.name]}> {name} </Text>
+        <TouchableOpacity onPress={ () => { 
+            onSelected(participant); 
+            
+            this.setState({
+              pressStatus: !this.state.pressStatus
+            });
+          } 
+        }>
+        
+        <View style={styles.col}>
+          <View style={styles.avatarContainer} > 
+            {avatar && <Image
+              resizeMode='contain'
+              style={styles.avatar}
+              source={{ uri: avatar }}
+            />}
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.text}> {name} </Text>
+          </View>
         </View>
 
-      </TouchableOpacity>
-
+        </TouchableOpacity>
       </View>
     );
   }
@@ -72,52 +72,45 @@ export default class Participant extends PureComponent {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  col: {
+    flex: 1,
     flexDirection: 'row',
+    margin: 10
+  },
+  container: {
+    // flexDirection: 'row',
   },
   containerPress: {
-    flexDirection: 'row',
-    backgroundColor: 'blue'
-  },
-  avatarContainer: {
-    alignItems: 'center',
-    marginLeft: 5,
-    paddingTop: 10,
-    width: 40,
-  },
-  contentContainer: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderColor: '#EEE',
-    padding: 5,
+    // flexDirection: 'row',
+    backgroundColor: 'blue',
   },
   avatar: {
-    borderWidth: 1,
-    borderColor: '#EEE',
-    borderRadius: 13,
-    width: 26,
-    height: 26,
+    borderRadius: 30,
+    width: 60,
+    height: 60,
   },
+  avatarContainer: {        
+    alignItems: 'center',
+    // marginLeft: 5,
+    // paddingTop: 10,
+    width: 60,
+    height: 60
+  },
+  
   text: {
     color: '#000',
-    fontFamily: 'Avenir',
-    fontSize: 15,
-  },
-  name: {
+    fontFamily: 'System',
+    fontSize: 16,
     fontWeight: 'bold',
+    marginTop: 20
   },
-  created: {
-    color: '#BBB',
+
+  textContainer: {
+    width: 120,
+    height: 60,
+    marginLeft: 15
+    
   },
+
 });
 
-
-
-
-        //   <Text>
-        //     <Text >{name}</Text>
-        //     {' '}
-           
-        //      <Text style={styles.text}>content</Text> 
-        //   </Text>
-          
