@@ -63,6 +63,9 @@ export default class VotingPushScreen extends Component {
     //  <Icon name="ios-heart" size={30} color="#4F8EF7" />
     // </TouchableOpacity> 
 
+    // remove from participants
+    _.remove(participants, { '_id': person._id }); 
+
     return (
       <View style={styles.container}>
         <ScrollView
@@ -72,6 +75,7 @@ export default class VotingPushScreen extends Component {
         </ScrollView>
 
         <TouchableHighlight
+            underlayColor="#9575CD"
             style={styles.buttonContainer}
             onPress={this.onConfirm}
             >

@@ -20,6 +20,9 @@ export default class VotingScreen extends Component {
   constructor(props) {
     super(props);
     const { person, participants } = this.props.navigation.state.params;
+    this.state = {
+      liked: false
+    };
     if (!person.likes) {
       person.likes = {
         person_id: person._id,
@@ -33,8 +36,21 @@ export default class VotingScreen extends Component {
       participant, 
       person 
     } = this.props.navigation.state.params;
-    console.log(participant._id)
-    person.likes.person_likes.push(participant._id); 
+    console.log(person.likes.person_likes)
+
+    if(!person.likes.person_likes.includes(participant._id)) { 
+      person.likes.person_likes.push(participant._id); 
+    } else {
+      var index = person.likes.person_likes.indexOf(participant._id);
+      if (index > -1) {
+        person.likes.person_likes.splice(index, 1);
+      }
+    }
+    
+    // click again to unlike
+    this.setState({
+      liked: !this.state.liked
+    })
   }
 
   render() {
@@ -55,9 +71,10 @@ export default class VotingScreen extends Component {
           <Text style={styles.text}>{name}</Text>
         </View>
         <TouchableHighlight
-          style={styles.buttonContainer}
+          underlayColor="#9575CD"
+          style={ this.state.liked ? styles.buttonLikeContainer : styles.buttonContainer}
           onPress={this.onClicked}>
-          <Text style={styles.button}>Like</Text>
+          <Text style={ this.state.liked ? styles.buttonLike : styles.button}> { this.state.liked ? 'Unlike' : 'Like' } </Text>
         </TouchableHighlight> 
       </View>
     );
@@ -101,9 +118,17 @@ const styles = StyleSheet.create({
     margin: 20,
     marginBottom: 30,
   },
-
-
-  // like
+  //
+  buttonLikeContainer: {
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    borderRadius: 100,
+    margin: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderWidth: 1,
+    borderColor: '#3f88fb',
+  },
   buttonContainer: {
     alignItems: 'center',
     backgroundColor: '#3f88fb',
@@ -115,6 +140,11 @@ const styles = StyleSheet.create({
   button: {
     ...defaultStyles.text,
     color: '#FFFFFF',
+    fontSize: 18,
+  },
+  buttonLike: {
+    ...defaultStyles.text,
+    color: '#3f88fb',
     fontSize: 18,
   },
 

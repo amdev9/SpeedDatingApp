@@ -114,6 +114,7 @@ export const wss = new WebSocket.Server({ server });
 function mainLogic(ws, obj) {
 
   if (obj.command == 'start') {
+    CLIENTS_QUEUE = [];
     var counter = 0;
     var selected = JSON.stringify({
         type: "selected",

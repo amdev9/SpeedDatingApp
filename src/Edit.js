@@ -278,6 +278,7 @@ class Edit extends React.Component {
               this.state.photos.map((p, i) => {
                 return (
                   <TouchableHighlight
+                    underlayColor="#9575CD"
                     style={{opacity: i === this.state.index ? 0.5 : 1}}
                     key={i}
                     underlayColor='transparent'

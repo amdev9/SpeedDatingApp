@@ -83,6 +83,7 @@ export default class JoinScreen extends Component {
         person: this.props.navigation.state.params.person,
         event: this.props.navigation.state.params.event
       });  
+      
     }
   };
 

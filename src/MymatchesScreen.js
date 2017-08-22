@@ -19,6 +19,9 @@ import { defaultStyles } from './styles';
 import Participant from './Participant';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+
+// AsyncStorage.clear();
+
 export default class MymatchesScreen extends Component {
   
   constructor(props) {
