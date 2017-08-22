@@ -44,9 +44,7 @@ export default class VotingScreen extends Component {
     } = this.props.navigation.state.params;
     const { avatar, name } = participant;
 
-  //   <TouchableOpacity onPress={this.onClicked}>
-  //   <Icon name="ios-heart" size={30} color="#4F8EF7" />
-  // </TouchableOpacity> 
+
 
     return (
       <View style={styles.container}>

@@ -11,7 +11,8 @@ import {
   ScrollView,
   RefreshControl,
   Button,
-  AsyncStorage
+  AsyncStorage,
+  TextInput
 } from 'react-native';
 import { defaultStyles } from './styles';
 
@@ -23,9 +24,12 @@ export default class MymatchesScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      persons: []
+      persons: [],
+      text: 'Useless Multiline Placeholder',
     }; 
   }
+
+   
 
   componentDidMount() {
     this.fetchData().done()
@@ -118,42 +122,30 @@ export default class MymatchesScreen extends Component {
     const { person } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-      <View style={styles.content}>
-        
-        <View style={styles.navBar}>
-
-        <Icon style={styles.navBarButton}
-        onPress={() => this.props.navigation.navigate('Events', {
-          person: person
-        }) } name="ios-calendar-outline" size={30} color="#900" />
-
-
-          {/* <Text style={styles.navBarButton}
-            onPress={() => this.props.navigation.navigate('Events', {
-              person: person
-            }) }>
-
-       
-             Events  
-          </Text> */}
-
-          <Text style={styles.navBarHeader}>Мои совпадения</Text>
-          {/* <Icon style={styles.navBarHeader} name="ios-chatboxes" size={30} color="#900" /> */}
-          <Text style={styles.navBarButton}></Text>
-        </View>
-
-
-      
-        {/* <Text> Show my matches - User screen </Text> */}
-        {/* <Text> { JSON.stringify(this.state.persons)} </Text> */}
-
-
-        <ScrollView
-          ref={(scrollView) => { this._scrollView = scrollView; }}  
-        >
-          {this.state.persons.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
-        </ScrollView>
-
+        <View style={styles.content}>
+          <View style={styles.navBar}>
+            <Icon style={styles.navBarButton}
+              onPress={() => this.props.navigation.navigate('Events', {
+                person: person
+              }) } name="ios-calendar-outline" size={30} color="#900" /> 
+              <Text style={styles.navBarHeader}>Мои совпадения</Text>
+            <Text style={styles.navBarButton}></Text>
+          </View>
+          
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={(text) => this.setState({text})}
+            value={this.state.text}
+          />
+          
+          <Text>Last event matches</Text>
+          <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
+            {this.state.persons.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
+          </ScrollView> 
+          <Text>All matches</Text>
+          <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}>
+            {this.state.persons.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
+          </ScrollView> 
 
         </View>
       </View>

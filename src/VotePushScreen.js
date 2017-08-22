@@ -58,6 +58,11 @@ export default class VotingPushScreen extends Component {
 
   render() {
     const { person, participants } = this.props.navigation.state.params;
+
+    // <TouchableOpacity onPress={this.onClicked}>
+    //  <Icon name="ios-heart" size={30} color="#4F8EF7" />
+    // </TouchableOpacity> 
+
     return (
       <View style={styles.container}>
         <ScrollView
@@ -66,7 +71,6 @@ export default class VotingPushScreen extends Component {
           {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked}/>)}
         </ScrollView>
 
-        
         <TouchableHighlight
             style={styles.buttonContainer}
             onPress={this.onConfirm}
