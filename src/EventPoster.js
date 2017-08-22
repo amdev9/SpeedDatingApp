@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
   // WIDGETS
   title: {
     ...defaultStyles.text,
-    fontSize: 18,
-    // fontWeight: 'bold',
+    fontSize: 17,
+    fontWeight: '500',
     marginTop: 10,//(height - 20 - 20) / rows - 10 - 25,
     marginLeft: 15,
     color: '#FFFFFF',

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   places: {
     ...defaultStyles.text,
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: 'bold',
     // marginTop: placesHeight,
     // marginLeft: 15,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginTop: 40,  
     marginLeft: 15,
     // height: 30,
-    width: 82,
+    width: 75,
     alignItems: 'center',
     // flexDirection: 'row',
     backgroundColor: '#FFF', // 3f88fb

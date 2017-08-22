@@ -1,6 +1,6 @@
 import passport from 'passport';
 import FacebookStrategy from 'passport-facebook';
-import GoogleStrategy from 'passport-google-oauth20';
+// import GoogleStrategy from 'passport-google-oauth20';
 import VkontakteStrategyObj from 'passport-vkontakte';
 const VKontakteStrategy = VkontakteStrategyObj.Strategy;
 
@@ -9,10 +9,15 @@ import Person from '../models/person';
 // Import Facebook and Google OAuth apps configs
 import { facebook, google, vkontakte } from '../config';
 
+////
+import request from 'request-promise';  
+////
+
+
 // Transform Facebook profile because Facebook and Google profile objects look different
 // and we want to transform them into user objects that have the same set of attributes
 const transformFacebookProfile = (profile) => {
-  console.log(profile);
+  // console.log(profile);
   
   return ({
     oauth_id: profile.id,
@@ -25,7 +30,7 @@ const transformFacebookProfile = (profile) => {
 // Transform Vkontakte profile into user object 
 const transformVKontakteProfile = (profile) => {
   
-  console.log(profile)
+  // console.log(profile)
   return ({
     oauth_id: profile.id,
     name: profile.first_name,
@@ -34,12 +39,12 @@ const transformVKontakteProfile = (profile) => {
   });
 }
 
-// Transform Google profile into user object
-const transformGoogleProfile = (profile) => ({
-  oauth_id: profile.id,
-  name: profile.displayName,
-  avatar: profile.image.url,
-});
+// // Transform Google profile into user object
+// const transformGoogleProfile = (profile) => ({
+//   oauth_id: profile.id,
+//   name: profile.displayName,
+//   avatar: profile.image.url,
+// });
 
 
 // Register Facebook Passport strategy
@@ -47,14 +52,45 @@ passport.use(new FacebookStrategy(facebook,
   // Gets called when user authorizes access to their profile
   async (accessToken, refreshToken, profile, done)
     // Return done callback and pass transformed user object
-    => done(null, await createOrGetUserFromDatabase(transformFacebookProfile(profile._json)))
+    => {
+      console.log(accessToken)
+
+      // app.get('/facebook-search/:id', (req, res) => {
+    
+          // you need permission for most of these fields
+          const userFieldSet = 'id, work, education';//name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture, photos, feed';
+          const options = {
+            method: 'GET',
+            uri: `https://graph.facebook.com/v2.10/1359694324147112`, //${req.params.id} //'https://graph.facebook.com/me', //
+            qs: {
+              access_token: accessToken, //user_access_token,
+              fields: userFieldSet
+            }
+          };
+          request(options)
+            .then(fbRes => {
+              console.log(fbRes)
+              var w = JSON.parse(fbRes);
+              console.log( w.work[0].employer.name, w.work[0].position.name);
+              console.log( w.education[0].school.name, w.education[0].type);
+              // "work":[{"employer":{"id":"111093018915008","name":"Free Lance"},"position":{"id":"116139221729464","name":"Freelance Business"},"start_date":"0000-00","id":"1403175076465703"}]
+              // res.json(fbRes);
+            })
+        // })
+
+
+
+      done(null, await createOrGetUserFromDatabase(transformFacebookProfile(profile._json)))
+    }
 ));
 
-// Register Google Passport strategy
-passport.use(new GoogleStrategy(google,
-  async (accessToken, refreshToken, profile, done)
-    => done(null, await createOrGetUserFromDatabase(transformGoogleProfile(profile._json)))
-));
+// // Register Google Passport strategy
+// passport.use(new GoogleStrategy(google,
+//   async (accessToken, refreshToken, profile, done)
+//     => {
+//       done(null, await createOrGetUserFromDatabase(transformGoogleProfile(profile._json)))
+//     }
+// ));
 
 // Register vk Passport strategy
 passport.use(new VKontakteStrategy(vkontakte,
@@ -65,7 +101,29 @@ passport.use(new VKontakteStrategy(vkontakte,
   // },
   async (accessToken, refreshToken, params, profile, done)
     => {
+      console.log(accessToken)
       console.log(params)  // email is undefined if phone is used
+
+      const userFieldSet = 'bdate, career, education';//name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture, photos, feed';
+      const options = {
+        method: 'GET',
+        uri: `https://api.vk.com/method/users.get?user_ids=${params.user_id}`, //${req.params.id} //'https://graph.facebook.com/me', //
+        qs: { // &fields=bdate&v=5.68
+          access_token: accessToken, //user_access_token,s
+          fields: userFieldSet,
+          v: '5.68'
+        }
+      };
+      request(options)
+        .then(fbRes => {
+          console.log(fbRes)
+     
+          // "work":[{"employer":{"id":"111093018915008","name":"Free Lance"},"position":{"id":"116139221729464","name":"Freelance Business"},"start_date":"0000-00","id":"1403175076465703"}]
+          // res.json(fbRes);
+        })
+
+      
+
       done(null, await createOrGetUserFromDatabase(transformVKontakteProfile(profile._json)))
     }      
 ));
