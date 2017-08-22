@@ -134,19 +134,19 @@ export default class MymatchesScreen extends Component {
               <Text style={styles.navBarHeader}>Мои совпадения</Text>
             <Text style={styles.navBarButton}></Text>
           </View>
-          
+          {/* search by name of matchers */}
           <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            style={styles.search}
             onChangeText={(text) => this.setState({text})}
             value={this.state.text}
           />
           
-          <Text>Last event matches</Text>
-          <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
+          <Text style={styles.horizontalText}>Last event matches</Text>
+          <ScrollView style={styles.horizontal} ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
             {this.state.persons.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
           </ScrollView> 
-          <Text>All matches</Text>
-          <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}>
+          <Text style={styles.verticalText}>All matches</Text>
+          <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
             {this.state.persons.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
           </ScrollView> 
 
@@ -157,7 +157,6 @@ export default class MymatchesScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  // header styles
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
@@ -178,21 +177,49 @@ const styles = StyleSheet.create({
     fontSize: 15,
     // marginTop: 5
   },
-  // container: {
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  // },
-
   container: {
     flex: 1,
     backgroundColor: '#FFF',
   },
+  search: {
+    height: 30, 
+    borderColor: 'lightgray', 
+    borderWidth: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 10,
+    borderRadius: 5,
+    backgroundColor: 'lightgray',
+    fontSize: 15,
+    
+  },
+  horizontalText: {
+    marginTop: 10,
+    marginLeft: 10,
+    fontWeight: 'bold'
+  },
+  verticalText: {
+    marginLeft: 10,
+    fontWeight: 'bold'
+  },
+  horizontal: {
+    marginLeft: 10,
+    height: 80
+  },
+  vertical: {
+    marginLeft: 10,
+    marginRight: 10,
+    // flex: 1
+  },
+  
   content: {
     // flex: 1, removed
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
+  
+
+
 
   header: {
     ...defaultStyles.text,

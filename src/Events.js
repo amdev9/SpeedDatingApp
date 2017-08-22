@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center', // center vertically
   },
   scrollContent: {
-    paddingTop: 20, 
+    paddingTop: 10, 
     flexDirection: 'row',   // arrange posters in rows
     flexWrap: 'wrap',       // allow multiple rows
   },
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     // borderTopColor: '#262626',
     // borderRadius: 1,
     marginTop: 5, 
-    marginRight: 20,
-    marginLeft: 20
+    marginRight: 10,
+    marginLeft: 10
   }
 });

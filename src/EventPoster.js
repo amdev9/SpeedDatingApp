@@ -76,10 +76,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   container: {
-    marginLeft: 20,
-    marginBottom: 20,
+    marginLeft: 10,
+    marginBottom: 10,
     height: (height - 20 - 20) / rows - 10,
-    width: (width - 40) /// cols - 10,
+    width: (width - 20) /// cols - 10,
   },
   // WIDGETS
   title: {
