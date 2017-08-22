@@ -42,21 +42,25 @@ export default class VotingScreen extends Component {
       participant, 
       person 
     } = this.props.navigation.state.params;
+    const { avatar, name } = participant;
+
+  //   <TouchableOpacity onPress={this.onClicked}>
+  //   <Icon name="ios-heart" size={30} color="#4F8EF7" />
+  // </TouchableOpacity> 
 
     return (
-       <View style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.content}>
-          <Text> Voting user screen - say hello to participant </Text>
           <View style={styles.avatar}>
-            <Image source={{ uri: participant.avatar }} style={styles.avatarImage} />
+            <Image source={{ uri: avatar }} style={styles.avatarImage} />
           </View>
-          <Text style={styles.text}>
-             {participant.name} 
-          </Text>
-          <TouchableOpacity onPress={this.onClicked}>
-            <Icon name="ios-heart" size={30} color="#4F8EF7" />
-          </TouchableOpacity>
+          <Text style={styles.text}>{name}</Text>
         </View>
+        <TouchableHighlight
+          style={styles.buttonContainer}
+          onPress={this.onClicked}>
+          <Text style={styles.button}>Like</Text>
+        </TouchableHighlight> 
       </View>
     );
   }
@@ -90,6 +94,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333',
     marginBottom: 5,
+    fontSize: 16,
+    fontWeight: 'bold'
   },
   buttons: {
     justifyContent: 'space-between',
@@ -97,4 +103,21 @@ const styles = StyleSheet.create({
     margin: 20,
     marginBottom: 30,
   },
+
+
+  // like
+  buttonContainer: {
+    alignItems: 'center',
+    backgroundColor: '#3f88fb',
+    borderRadius: 100,
+    margin: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+  },
+  button: {
+    ...defaultStyles.text,
+    color: '#FFFFFF',
+    fontSize: 18,
+  },
+
 });
