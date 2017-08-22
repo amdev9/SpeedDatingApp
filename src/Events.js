@@ -115,8 +115,6 @@ export default class Events extends Component {
 
           {/* <Icon style={styles.navBarHeader} name="ios-calendar" size={30} color="#900" /> */}
          
-
-
           <Icon style={styles.navBarButton}
             onPress={() => this.props.navigation.navigate('Mymatches', {
               person: person

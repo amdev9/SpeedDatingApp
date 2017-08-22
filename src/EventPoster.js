@@ -46,11 +46,11 @@ export default class EventPoster extends Component {
       <TouchableOpacity style={styles.container} onPress={() => onOpen(event)}>
         <View style={styles.imageContainer}>
           <Image source={{ uri: photo }} style={styles.image} />
-            {/* <View style={styles.overlay} /> */}
-            <LinearGradient  start={{x: 0.0, y: 0.1}} end={{x: 1.0, y: 0.6}}
+            <View style={styles.overlay} />
+            {/* <LinearGradient  start={{x: 0.0, y: 0.1}} end={{x: 1.0, y: 0.6}}
               locations={[0,0.3,0.7]}
                 colors={[ 'rgba(63, 136, 251, 0.8)', 'rgba(85, 149, 252, 0.8)', 'rgba(79, 69, 100, 0.8)']}
-                  style={styles.overlay} />
+                  style={styles.overlay} /> */}
 
           <View style={styles.downPoster}>
             <Text style={styles.title} numberOfLines={1}>{title}</Text>
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     borderRadius: 5,   
-    ...StyleSheet.absoluteFillObject, // backgroundColor: 'rgba(63, 136, 251, 0.6)' // 63, 136, 251, 1
+    ...StyleSheet.absoluteFillObject, // 
+    backgroundColor: 'rgba(79, 69, 100, 0.8)'//rgba(63, 136, 251, 0.6)' // 63, 136, 251, 1
   }
 });
