@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
 import {
+  SafariView,
+  Linking,
+  Platform,
   View,
   Text,
   TouchableHighlight,
@@ -22,18 +25,31 @@ import {
 import { defaultStyles } from './styles';
 
 
+// const URL = 'http://192.168.1.34:3000';
+const URL = 'http://localhost:3000';
+
+
 class Settings extends Component {
-   
-  // constructor() {
-  //   super();
-  //   const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-  //   this.state = {
-  //     dataSource: ds.cloneWithRows(['row 1', 'row 2']), // add logout here
-  //   };
-  // }
+  
+  logout = async () => {
+    const { navigate } = this.props.navigation;
+    try {
+      let response =  await fetch(`${URL}/logout`);
+      let responseJson = await response.json();
+      // alert(responseJson);
+      if (responseJson == 'ok') {
+        
+        navigate('Login');
+      }
+      
+    } catch(error) {
+      console.error(error);
+    }
+  }
 
   render() {
     const {user} = this.props.navigation.state.params;
+
     return (
 
       <View style={styles.container}>
@@ -64,6 +80,7 @@ class Settings extends Component {
               <Text style={styles.sectionHeader}></Text>
               <TouchableOpacity onPress={() =>  {
                 console.log('onPress exit');
+                this.logout();
               }}>
               <Text style={styles.item}>Выйти</Text>
               </TouchableOpacity>

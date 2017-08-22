@@ -53,6 +53,12 @@ app.get('/auth/facebook/callback', facebookMiddleware, oauthCallback);
 app.get('/auth/google/callback', googleMiddleware, oauthCallback);
 app.get('/auth/vkontakte/callback', vkontakteMiddleware, oauthCallback);
 
+app.get('/logout', function(req, res) {
+    req.logout();
+    // res.redirect('/');
+    res.json("ok");
+});
+
 // Logger that outputs all requests into the console
 app.use(morgan('combined'));
 

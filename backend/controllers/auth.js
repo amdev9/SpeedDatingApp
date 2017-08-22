@@ -69,12 +69,11 @@ passport.use(new FacebookStrategy(facebook,
           };
           request(options)
             .then(fbRes => {
-              console.log(fbRes)
+              // console.log(fbRes)
               var w = JSON.parse(fbRes);
-              console.log( w.work[0].employer.name, w.work[0].position.name);
-              console.log( w.education[0].school.name, w.education[0].type);
-              // "work":[{"employer":{"id":"111093018915008","name":"Free Lance"},"position":{"id":"116139221729464","name":"Freelance Business"},"start_date":"0000-00","id":"1403175076465703"}]
-              // res.json(fbRes);
+              // console.log( w.work[0].employer.name, w.work[0].position.name);
+              // console.log( w.education[0].school.name, w.education[0].type);
+               
             })
         // })
 
@@ -116,14 +115,12 @@ passport.use(new VKontakteStrategy(vkontakte,
       };
       request(options)
         .then(fbRes => {
-          console.log(fbRes)
-     
-          // "work":[{"employer":{"id":"111093018915008","name":"Free Lance"},"position":{"id":"116139221729464","name":"Freelance Business"},"start_date":"0000-00","id":"1403175076465703"}]
-          // res.json(fbRes);
+          // console.log(fbRes)
+          var w = JSON.parse(fbRes);
+          // console.log( w.response[0].career[0].company )//.career[0].company, w.company[0].position);
+          // console.log( w.response[0].university_name, w.response[0].faculty_name); //  
         })
-
-      
-
+        
       done(null, await createOrGetUserFromDatabase(transformVKontakteProfile(profile._json)))
     }      
 ));
