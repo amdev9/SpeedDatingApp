@@ -201,7 +201,8 @@ class Edit extends React.Component {
         <TouchableOpacity onPress={() => { this.toggleModal(); this.getPhotos() }}>
             <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
             <View style={styles.circle}>
-              <Icon style={styles.setting} name="md-create" size={20} color="#c4c9d1" />
+              <Icon style={styles.setting} name="md-create" size={20} color="#FFFF" /> 
+              {/* c4c9d1 */}
               </View>
           </TouchableOpacity>
   
@@ -368,7 +369,7 @@ styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 30/2,
-    backgroundColor: '#EFF3F7',
+    backgroundColor: '#3f88fb', //'#EFF3F7',
     position: 'absolute',
     marginTop: 70,
     marginLeft: 70,

@@ -35,22 +35,43 @@ export default class Participant extends PureComponent {
   render() {
     
     // Pull comment object out of props
-    const { participant, onSelected, liked } = this.props;
+    const { participant, onSelected, liked, vision } = this.props;
     // Pull data needed to display a comment out of comment object
     // const { content, created, user } = participant;
     // Pull user name and avatar out of user object
     const { name, avatar } = participant; // user; {backgroundColor: 'blue', flex: 0.3}
-    return (
-      <View style={ this.state.pressStatus ? styles.containerPress : styles.container  } >
-        <TouchableOpacity onPress={ () => { 
-            onSelected(participant); 
-            
-            this.setState({
-              pressStatus: !this.state.pressStatus
-            });
-          } 
-        }>
-        
+
+    if (vision == 'mymatch_horizontal') {
+
+      return <TouchableOpacity onPress={ () => { 
+          onSelected(participant); 
+          this.setState({
+            pressStatus: !this.state.pressStatus
+          });
+        } 
+      }>
+        <View style={styles.col_hor}>
+          <View style={styles.avatarContainer_hor} > 
+            {avatar && <Image
+              resizeMode='contain'
+              style={styles.avatar}
+              source={{ uri: avatar }}
+            />}
+          </View>
+          <View style={styles.textContainer_hor}>
+            <Text style={styles.text_hor}> {name} </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+
+    } else if (vision == 'mymatch_vertical') {
+      return <TouchableOpacity onPress={ () => { 
+          onSelected(participant); 
+          this.setState({
+            pressStatus: !this.state.pressStatus
+          });
+        } 
+      }>
         <View style={styles.col}>
           <View style={styles.avatarContainer} > 
             {avatar && <Image
@@ -63,15 +84,63 @@ export default class Participant extends PureComponent {
             <Text style={styles.text}> {name} </Text>
           </View>
         </View>
-
-        </TouchableOpacity>
-      </View>
-    );
+      </TouchableOpacity>
+    } else {
+      return (
+        <View style={ this.state.pressStatus ? styles.containerPress : styles.container  } >
+          <TouchableOpacity onPress={ () => { 
+              onSelected(participant); 
+              this.setState({
+                pressStatus: !this.state.pressStatus
+              });
+            } 
+          }>
+            <View style={styles.col}>
+              <View style={styles.avatarContainer} > 
+                {avatar && <Image
+                  resizeMode='contain'
+                  style={styles.avatar}
+                  source={{ uri: avatar }}
+                />}
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}> {name} </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   }
-
 }
 
 const styles = StyleSheet.create({
+  col_hor: {
+    flexDirection: 'column',
+    width: 80,
+  },
+  avatarContainer_hor: {        
+    alignItems: 'center',
+    // marginLeft: 8,
+    marginTop: 5,
+   
+    height: 60
+  },
+  text_hor: {
+    color: '#000',
+    fontFamily: 'System',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginTop: 5
+  },
+  textContainer_hor: {
+    alignItems: 'center',
+    // width: 80,
+    // height: 60,
+    // marginLeft: 15
+  },
+
+  //////////////////
   col: {
     flex: 1,
     flexDirection: 'row',
@@ -96,7 +165,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60
   },
-  
   text: {
     color: '#000',
     fontFamily: 'System',
@@ -104,13 +172,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 20
   },
-
   textContainer: {
     width: 120,
     height: 60,
     marginLeft: 15
-    
   },
-
 });
 

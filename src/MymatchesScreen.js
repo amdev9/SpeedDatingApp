@@ -28,7 +28,7 @@ export default class MymatchesScreen extends Component {
     super(props);
     this.state = {
       persons: [],
-      text: 'Useless Multiline Placeholder',
+      // text: 'Useless Multiline Placeholder',
     }; 
   }
 
@@ -134,21 +134,28 @@ export default class MymatchesScreen extends Component {
               <Text style={styles.navBarHeader}>Мои совпадения</Text>
             <Text style={styles.navBarButton}></Text>
           </View>
-          {/* search by name of matchers */}
-          <TextInput
-            style={styles.search}
-            onChangeText={(text) => this.setState({text})}
-            value={this.state.text}
-          />
-          
+          {/* search by name of matchers --- clearTextOnFocus={true} */}
+          <View>
+            <Icon name="ios-search" size={20} color="#000"/>
+            <TextInput
+              style={styles.search} 
+              
+              placeholder="text"
+              placeholderTextColor="#888888"
+              selectionColor="#3f88fb"
+              onChangeText={(text) => this.setState({text})}
+              value={this.state.text}
+            />
+          </View>
+ 
           <Text style={styles.horizontalText}>Last event matches</Text>
           <ScrollView style={styles.horizontal} ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
-            {this.state.persons.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
+            {this.state.persons.map((participant, index) => <Participant vision={'mymatch_horizontal'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
           </ScrollView> 
           <Text style={styles.verticalText}>All matches</Text>
           <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
-            {this.state.persons.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
-          </ScrollView> 
+            {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
+          </ScrollView>   
 
         </View>
       </View>
@@ -181,30 +188,37 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
+
+  ////
   search: {
     height: 30, 
-    borderColor: 'lightgray', 
+    borderColor: '#F0F0F0', 
     borderWidth: 1,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 10,
     borderRadius: 5,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#F0F0F0',
     fontSize: 15,
-    
+    // fontColor: '#888888'
   },
+  
+
+  ///
   horizontalText: {
     marginTop: 10,
     marginLeft: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#3f88fb'
   },
   verticalText: {
     marginLeft: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#3f88fb'
   },
   horizontal: {
     marginLeft: 10,
-    height: 80
+    height: 90
   },
   vertical: {
     marginLeft: 10,
