@@ -19,7 +19,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import _ from 'lodash';
 
 // AsyncStorage.clear();
-
+var pech = [];
  
 
 export default class MymatchesScreen extends Component {
@@ -66,6 +66,8 @@ export default class MymatchesScreen extends Component {
       if (myArray !== null) {
         console.log('data recieved and not null')
         var persons = JSON.parse(myArray);
+        pech = persons;
+        
         this.setState({
           persons: persons
         });
