@@ -20,29 +20,35 @@ import _ from 'lodash';
 
 // AsyncStorage.clear();
 
+ 
+
 export default class MymatchesScreen extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
       persons: [],
-      // text: 'Useless Multiline Placeholder',
+      text: '',
     }; 
   }
 
 
   setSearchText(text) {
     this.setState({text})
-    let filteredData = this.filterNotes(text, this.state.persons);
+     // pech
+    let filteredData = this.filterNotes(text, pech);
     this.setState({
       persons: filteredData
     })
   }
 
   filterNotes(searchText, notes) {
+    console.log(notes);
     let text = searchText.toLowerCase();
+    console.log(text);
     return _.filter(notes, (n) => {
-      let note = n.body.toLowerCase();
+      let note = n.name.toLowerCase();
+      console.log(note);
       return note.search(text) !== -1;
     });
   }
@@ -100,6 +106,7 @@ export default class MymatchesScreen extends Component {
           if(!_.some(this.state.persons, item) ) {
             console.log('not include')
             this.state.persons.push(item);
+            
           }
         })
 
