@@ -136,7 +136,7 @@ export default class MymatchesScreen extends Component {
           </View>
           {/* search by name of matchers --- clearTextOnFocus={true} */}
           <View>
-            <Icon name="ios-search" size={20} color="#000"/>
+            
             <TextInput
               style={styles.search} 
               
@@ -146,14 +146,17 @@ export default class MymatchesScreen extends Component {
               onChangeText={(text) => this.setState({text})}
               value={this.state.text}
             />
+            <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
           </View>
  
           <Text style={styles.horizontalText}>Last event matches</Text>
           <ScrollView style={styles.horizontal} ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
+            {/* this.state.persons */}
             {this.state.persons.map((participant, index) => <Participant vision={'mymatch_horizontal'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
           </ScrollView> 
           <Text style={styles.verticalText}>All matches</Text>
           <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
+            {/* this.state.persons + async storage */}
             {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
           </ScrollView>   
 
@@ -200,7 +203,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#F0F0F0',
     fontSize: 15,
+    textAlign: 'center'
     // fontColor: '#888888'
+  },
+  searchIcon: {
+    position: 'absolute',
+    marginTop: 15,
+    marginLeft: 20,
+    backgroundColor: '#F0F0F0',
+    color: '#888888'
   },
   
 
