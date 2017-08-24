@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
-
 import {
   StyleSheet,
   Text,
@@ -18,7 +16,7 @@ import { defaultStyles } from './styles';
 
 import Participant from './Participant';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import _ from 'lodash';
 
 // AsyncStorage.clear();
 
@@ -32,7 +30,24 @@ export default class MymatchesScreen extends Component {
     }; 
   }
 
-   
+
+  setSearchText(text) {
+    this.setState({text})
+    let filteredData = this.filterNotes(text, this.state.persons);
+    this.setState({
+      persons: filteredData
+    })
+  }
+
+  filterNotes(searchText, notes) {
+    let text = searchText.toLowerCase();
+    return _.filter(notes, (n) => {
+      let note = n.body.toLowerCase();
+      return note.search(text) !== -1;
+    });
+  }
+  
+
 
   componentDidMount() {
     this.fetchData().done()
@@ -143,7 +158,7 @@ export default class MymatchesScreen extends Component {
               placeholder="text"
               placeholderTextColor="#888888"
               selectionColor="#3f88fb"
-              onChangeText={(text) => this.setState({text})}
+              onChangeText={this.setSearchText.bind(this)}
               value={this.state.text}
             />
             <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
