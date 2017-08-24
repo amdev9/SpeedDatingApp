@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center', // center vertically
   },
   scrollContent: {
-    paddingTop: 10, 
+    paddingTop: 20, 
     flexDirection: 'row',   // arrange posters in rows
     flexWrap: 'wrap',       // allow multiple rows
   },
