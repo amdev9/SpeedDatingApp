@@ -70,8 +70,9 @@ export default class Events extends Component {
       // alert('U Selecte table ' + this.state.chosenTable);
       this.closeEvent();
       const { navigate } = this.props.navigation;
+      this.props.navigation.state.params.person.table = this.state.chosenTable;
       navigate('Join', {
-        table: this.state.chosenTable,
+        // table: this.state.chosenTable,
         event: this.state.event,
         person: this.props.navigation.state.params.person
       }); 

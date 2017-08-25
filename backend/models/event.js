@@ -18,8 +18,9 @@ var eventSchema = Schema({
   participants: [{ type: Schema.ObjectId, ref: 'Person' }],  
   matches: Object,
   likes: Array,
-
-  tables: Array
+  
+  table_max: Number,
+  
 
 });
 

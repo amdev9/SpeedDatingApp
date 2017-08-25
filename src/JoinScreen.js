@@ -26,7 +26,7 @@ export default class JoinScreen extends Component {
     // participant: {},
     index: 0
   };
- 
+  
   onOpenConnection = () => {
     console.log(' - onopen - ');
     // send that user connected 
@@ -36,7 +36,7 @@ export default class JoinScreen extends Component {
     });
     this.ws.send(connected);
   }
-
+  
   onMessageRecieved = (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 

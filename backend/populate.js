@@ -44,7 +44,8 @@ organizer.save(function (err) {
     participants: [],
     likes: [],
     matches: {},
-    tables: _.range(1, 11)
+    table_max: 10
+    // tables: _.range(1, 11)
   });
 
   event.save(function (err) {

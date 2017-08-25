@@ -76,7 +76,6 @@ export default class ManageScreen extends Component {
       })
     }
 
-
     if (obj.type == 'selected') {
       var selected_data = JSON.parse(obj.data);
       this.setState({

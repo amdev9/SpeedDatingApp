@@ -228,7 +228,7 @@ export default class EventPopup extends Component {
       onChooseTable,
     } = this.props;
     // Pull out movie data
-    const { title, photo, tables } = event || {}; // , genre, poster,  times
+    const { title, photo, table_max } = event || {}; // , genre, poster,  times
     // Render nothing if not visible
     if (!this.state.visible) {
       return null;
@@ -272,7 +272,7 @@ export default class EventPopup extends Component {
               <View style={styles.sectionTables}>
                 <Text style={styles.sectionHeader}>Choose table</Text>
                 <Options
-                  values={tables}
+                  values={_.range(1, table_max + 1)}
                   chosen={chosenTable}
                   onChoose={onChooseTable}
                 />

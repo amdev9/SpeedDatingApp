@@ -120,11 +120,24 @@ function mainLogic(ws, obj) {
         type: "selected",
         data: obj.selected
     });
-    var next = JSON.stringify({
-        // remove current user selected
-        type: "next", // add data like this.state.selected[this.state.index]
-        data: obj.selected
-    });
+    next = () => { 
+        // table_max --> ?
+        var parsed = JSON.parse(obj.selected);
+        parsed.map((participant, index) => {
+            if (participant.table == table_max) {
+                participant.table = 1;
+            } else {
+                participant.table++;
+            }
+            return participant;
+        });
+
+        return JSON.stringify({
+            type: "next", 
+            data: obj.selected
+            // add current table info
+        });
+    }
     var last = JSON.stringify({
         type: "last",
         data: obj.selected
@@ -134,6 +147,7 @@ function mainLogic(ws, obj) {
         return JSON.stringify({
           type: "timeout",
           counter: counter
+          // send next table number
         });
     }
     tick = (seconds) => {
@@ -143,7 +157,7 @@ function mainLogic(ws, obj) {
         });
     }
     wss.broadcast(selected);
-    wss.broadcast(next);
+    wss.broadcast(next() );
     var seconds = 0;
     wss.broadcast(tick(seconds));
     var ticker = setInterval(function () {
@@ -161,14 +175,15 @@ function mainLogic(ws, obj) {
         }, obj.talk_time * 1000);
         counter++;
         
-        if (counter >= JSON.parse(obj.selected).length - 1 ) // added - 1 
+        if (counter >= JSON.parse(obj.selected).length - 1 ) 
         {
             clearInterval(looper);
             clearTimeout(timer);
             clearTimeout(ticker);
             wss.broadcast(last); 
         } else {
-            wss.broadcast(next); 
+
+            wss.broadcast(next()); // change to function next() --> table auto increment
         }
     }, (obj.timeout + obj.talk_time) * 1000 );
     
@@ -177,6 +192,7 @@ function mainLogic(ws, obj) {
     var connected = JSON.stringify({
         type: "connected", 
         data: obj.data
+        // add table number
     });
     wss.broadcast(connected); 
 
@@ -188,8 +204,7 @@ function mainLogic(ws, obj) {
   } else if (obj.command == 'closed') {
 
     var closed = JSON.stringify({
-        // remove current user selected
-        type: "closed", // add data like this.state.selected[this.state.index]
+        type: "closed", 
         data: obj.data
     });
     wss.broadcast(closed); 
