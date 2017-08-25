@@ -12,6 +12,7 @@ import {
   RefreshControl
 } from 'react-native';
 
+
 import { defaultStyles } from './styles';
 import Participant from './Participant';
 import { put, get } from '../components/api';
@@ -58,22 +59,17 @@ export default class VotingPushScreen extends Component {
 
   render() {
     const { person, participants } = this.props.navigation.state.params;
-
-    // <TouchableOpacity onPress={this.onClicked}>
-    //  <Icon name="ios-heart" size={30} color="#4F8EF7" />
-    // </TouchableOpacity> 
-
+    //this.onClicked
     // remove from participants
     _.remove(participants, { '_id': person._id }); 
-
     return (
       <View style={styles.container}>
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
-          {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked}/>)}
+          {participants.map((participant, index) => <Participant vision={'votepush'} participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked}/>)}
+        
         </ScrollView>
-
         <TouchableHighlight
             underlayColor="#9575CD"
             style={styles.buttonContainer}

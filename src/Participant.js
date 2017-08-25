@@ -6,7 +6,8 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
- 
+import Icon from 'react-native-vector-icons/Ionicons';
+
 export default class Participant extends PureComponent {
   constructor(props) {
     super(props);
@@ -85,6 +86,34 @@ export default class Participant extends PureComponent {
           </View>
         </View>
       </TouchableOpacity>
+    } else if (vision == 'votepush') {
+      return (
+        <View style={ this.state.pressStatus ? styles.containerPress : styles.container  } >
+          <TouchableOpacity onPress={ () => { 
+              onSelected(participant); 
+              this.setState({
+                pressStatus: !this.state.pressStatus
+              });
+            } 
+          }>
+            <View style={styles.col}>
+              <View style={styles.avatarContainer} > 
+                {avatar && <Image
+                  resizeMode='contain'
+                  style={styles.avatar}
+                  source={{ uri: avatar }}
+                />}
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.text}> {name} </Text>
+              </View>
+              <TouchableOpacity onPress={this.onLiked}> 
+                <Icon name="ios-heart" size={30} color="#4F8EF7" />
+              </TouchableOpacity>  
+            </View>
+          </TouchableOpacity>
+        </View>
+      );
     } else {
       return (
         <View style={ this.state.pressStatus ? styles.containerPress : styles.container  } >

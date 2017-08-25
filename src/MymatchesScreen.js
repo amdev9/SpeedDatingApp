@@ -94,28 +94,31 @@ export default class MymatchesScreen extends Component {
     var obj = JSON.parse(e.data); 
     const { person } = this.props.navigation.state.params;
     
-    var founded = JSON.parse(obj.data);
-    for (var key in founded ) {
-      if (person._id == key) {
-        founded[key].shift();  
-        founded[key].forEach( (item) => {
-          // push if not duplication
-          console.log(this.state.persons)
-          if(!_.some(this.state.persons, item) ) {
-            console.log('not include')
-            this.state.persons.push(item);
-            
-          }
-        })
-
-        this.saveData(this.state.persons).done()
-
-        // set new and merge old (overwrite) with current results 
-        this.setState({
-          persons: this.state.persons
-        })
-      }      
+    if(obj && typeof(obj.data) !== 'undefined') {
+      var founded = JSON.parse(obj.data);
+      for (var key in founded ) {
+        if (person._id == key) {
+          founded[key].shift();  
+          founded[key].forEach( (item) => {
+            // push if not duplication
+            console.log(this.state.persons)
+            if(!_.some(this.state.persons, item) ) {
+              console.log('not include')
+              this.state.persons.push(item);
+              
+            }
+          })
+  
+          this.saveData(this.state.persons).done()
+  
+          // set new and merge old (overwrite) with current results 
+          this.setState({
+            persons: this.state.persons
+          })
+        }      
+      }
     }
+    
     // re render screen with new results
   };
   
