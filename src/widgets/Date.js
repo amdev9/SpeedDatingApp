@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   buttonContainer: {
-    marginTop: 40,  
+    marginTop: 30,   //////// fix
     marginLeft: 15,
     // height: 30,
     width: 75,

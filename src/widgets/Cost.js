@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   buttonContainer: {
-    marginTop: 16,
+    // marginTop: 16,
     height: 30,
     width: 100,
     alignItems: 'center',
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   buttonGo: {
-    marginTop: 16,
+    // marginTop: 16,
     height: 30,
     width: 100,
     alignItems: 'center',
@@ -89,9 +89,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
     borderWidth: 1,
     borderColor: 'white'
-    // marginLeft: 200,
-    // paddingVertical: 10,
-    // paddingHorizontal: 30,
+     
   },
 });
 

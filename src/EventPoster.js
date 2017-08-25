@@ -73,7 +73,8 @@ export default class EventPoster extends Component {
 const styles = StyleSheet.create({
   downPoster: {
     justifyContent: 'space-between',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    // marginBottom: 0
   },
   container: {
     marginLeft: 10,
@@ -91,15 +92,15 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     backgroundColor: 'rgba(0,0,0,0)',
   },
-  date: {
-    ...defaultStyles.text,
-    fontSize: 14,
-    // fontWeight: 'bold',
-    marginTop: (height - 20 - 20) / rows - 120,
-    marginLeft: 15,
-    color: '#FFFFFF',
-    backgroundColor: 'rgba(0,0,0,0)',
-  },
+  // date: {
+  //   ...defaultStyles.text,
+  //   fontSize: 14,
+  //   // fontWeight: 'bold',
+  //   // marginTop: (height - 20 - 20) / rows - 130,
+  //   marginLeft: 15,
+  //   color: '#FFFFFF',
+  //   backgroundColor: 'rgba(0,0,0,0)',
+  // },
   
   // genre: {
   //   ...defaultStyles.text,
