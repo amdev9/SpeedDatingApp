@@ -3,10 +3,15 @@ import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 
 import { defaultStyles } from '../styles';
+
+const { width, height } = Dimensions.get('window');
+const cols = 3, rows = 4;
+const placesHeight = (height - 20 - 20) / rows - 100;
 
 export default class Date extends Component {
   render() {
@@ -36,7 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   buttonContainer: {
-    marginTop: 30,   //////// fix
+    marginTop: placesHeight, //30,   //////// fix
     marginLeft: 15,
     // height: 30,
     width: 75,

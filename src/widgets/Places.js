@@ -29,7 +29,7 @@ export default class Places extends Component {
     }
     rectangleFull = (max, now) => {
         return {
-            width:  (145 / max) * now, //120,
+            width:  145 - (145 / max) * now, //120,
             height: 3,
             // marginLeft: 15,
             backgroundColor: 'white',
