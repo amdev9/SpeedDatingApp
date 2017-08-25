@@ -32,7 +32,6 @@ export default class MymatchesScreen extends Component {
     }; 
   }
 
-
   setSearchText(text) {
     this.setState({text})
      // pech
@@ -53,8 +52,6 @@ export default class MymatchesScreen extends Component {
     });
   }
   
-
-
   componentDidMount() {
     this.fetchData().done()
   }
@@ -88,7 +85,6 @@ export default class MymatchesScreen extends Component {
     }
   }
 
-
   onOpenConnection = () => {
     console.log(' - onopen - ');
   }
@@ -120,8 +116,6 @@ export default class MymatchesScreen extends Component {
         })
       }      
     }
-    
-    
     // re render screen with new results
   };
   
@@ -147,50 +141,71 @@ export default class MymatchesScreen extends Component {
 
   render() {
     const { person } = this.props.navigation.state.params;
-    return (
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <View style={styles.navBar}>
-            <Icon style={styles.navBarButton}
-              onPress={() => this.props.navigation.navigate('Events', {
-                person: person
-              }) } name="ios-calendar-outline" size={30} color="#900" /> 
-              <Text style={styles.navBarHeader}>Мои совпадения</Text>
-            <Text style={styles.navBarButton}></Text>
-          </View>
-          {/* search by name of matchers --- clearTextOnFocus={true} */}
-          <View>
-            
-            <TextInput
-              style={styles.search} 
+    if (this.state.persons.length + pech.length > 0) {
+      return (
+        <View style={styles.container}>
+          <View style={styles.content}>
+            <View style={styles.navBar}>
+              <Icon style={styles.navBarButton}
+                onPress={() => this.props.navigation.navigate('Events', {
+                  person: person
+                }) } name="ios-calendar-outline" size={30} color="#900" /> 
+                <Text style={styles.navBarHeader}>Мои совпадения</Text>
+              <Text style={styles.navBarButton}></Text>
+            </View>
+            {/* search by name of matchers --- clearTextOnFocus={true} */}
+            <View>
               
-              placeholder="text"
-              placeholderTextColor="#888888"
-              selectionColor="#3f88fb"
-              onChangeText={this.setSearchText.bind(this)}
-              value={this.state.text}
-            />
-            <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
+              <TextInput
+                style={styles.search} 
+                
+                placeholder="text"
+                placeholderTextColor="#888888"
+                selectionColor="#3f88fb"
+                onChangeText={this.setSearchText.bind(this)}
+                value={this.state.text}
+              />
+              <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
+            </View>
+   
+            <Text style={styles.horizontalText}>Last event matches</Text>
+            <ScrollView style={styles.horizontal} ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
+              {/* this.state.persons */}
+              {this.state.persons.map((participant, index) => <Participant vision={'mymatch_horizontal'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
+            </ScrollView> 
+            <Text style={styles.verticalText}>All matches</Text>
+            <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
+              {/* this.state.persons + async storage */}
+              {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
+            </ScrollView>   
+  
           </View>
- 
-          <Text style={styles.horizontalText}>Last event matches</Text>
-          <ScrollView style={styles.horizontal} ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
-            {/* this.state.persons */}
-            {this.state.persons.map((participant, index) => <Participant vision={'mymatch_horizontal'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
-          </ScrollView> 
-          <Text style={styles.verticalText}>All matches</Text>
-          <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
-            {/* this.state.persons + async storage */}
-            {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
-          </ScrollView>   
-
         </View>
-      </View>
-    );
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <View style={styles.content}>
+            <View style={styles.navBar}>
+              <Icon style={styles.navBarButton}
+                onPress={() => this.props.navigation.navigate('Events', {
+                  person: person
+                }) } name="ios-calendar-outline" size={30} color="#900" /> 
+                <Text style={styles.navBarHeader}>Мои совпадения</Text>
+              <Text style={styles.navBarButton}></Text>
+            </View>
+            <Text style={{textAlign: 'center'}}>No matches yet</Text>
+          </View>
+        </View>
+      );
+    }
+    
   }
 }
 
 const styles = StyleSheet.create({
+ 
+
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
