@@ -110,10 +110,8 @@ export default class JoinScreen extends Component {
     this.ws.onclose = this.onClose;
   }
 
-    
   render() {
-
-    const { person } =  this.props.navigation.state.params;     
+    const { person, table } =  this.props.navigation.state.params;     
     return (
       <View style={styles.container}>
 
@@ -123,6 +121,8 @@ export default class JoinScreen extends Component {
         />
         
         <Text > Join screen </Text>
+        <Text > Table {table} </Text>
+
       </View>
     );
   }

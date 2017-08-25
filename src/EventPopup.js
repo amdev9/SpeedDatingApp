@@ -264,37 +264,32 @@ export default class EventPopup extends Component {
                 {/* <Text style={styles.genre}>{genre}</Text> */}
               </View>
             </View>
-           </View>
+          </View>
 
-
-           {/* Showtables - add if condition */}
-           <View style={styles.sectionTables}>
-              {/* Day */}
-              <Text style={styles.sectionHeader}>Choose table</Text>
-              <Options
-                values={tables}
-                chosen={chosenTable}
-                onChoose={onChooseTable}
-                />
-              {/* Time 
-              <Text style={styles.sectionHeader}>Showtime</Text>
+          {/* Showtables - add if condition */}
+          { ( !event.manage_ids.includes(person._id) && ( event.participant_ids.includes(person._id)) ) 
+            ? 
+              <View style={styles.sectionTables}>
+                <Text style={styles.sectionHeader}>Choose table</Text>
                 <Options
-                values={times}
-                chosen={chosenTime}
-                onChoose={onChooseTime}
-                />*/}
-            </View>
+                  values={tables}
+                  chosen={chosenTable}
+                  onChoose={onChooseTable}
+                />
+              </View>
+            :
+              <View></View>
+          }
             
-            <View style={styles.footer}>
-
-              <EventButton 
-                event={event}
-                person={person}
-                onBook={onBook}
-                onJoin={onJoin}
-                onManage={onManage}
-                onManageRequest={onManageRequest}
-               />
+          <View style={styles.footer}>
+            <EventButton 
+              event={event}
+              person={person}
+              onBook={onBook}
+              onJoin={onJoin}
+              onManage={onManage}
+              onManageRequest={onManageRequest}
+            />
           </View>
             
         </Animated.View>

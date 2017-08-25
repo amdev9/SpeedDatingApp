@@ -35,7 +35,7 @@ export default class Events extends Component {
   state = {
     popupIsOpen: false,
     selectedIndex: 1,
-    chosenTable: 0,       // choose first day by default
+    chosenTable: null,       // choose first day by default
   }
 
   openEvent = (event) => {
@@ -64,12 +64,18 @@ export default class Events extends Component {
   }
 
   joinEvent = () => {
-    this.closeEvent();
-    const { navigate } = this.props.navigation;
-    navigate('Join', {
-      event: this.state.event,
-      person: this.props.navigation.state.params.person
-    }); 
+    if ( this.state.chosenTable == null) {
+      alert('Please select table');
+    } else {
+      // alert('U Selecte table ' + this.state.chosenTable);
+      this.closeEvent();
+      const { navigate } = this.props.navigation;
+      navigate('Join', {
+        table: this.state.chosenTable,
+        event: this.state.event,
+        person: this.props.navigation.state.params.person
+      }); 
+    }
   }
 
   manageEvent = () => {
