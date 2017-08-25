@@ -8,7 +8,7 @@ import {
 import Option from './Option';
 
 const { width } = Dimensions.get('window');
-const optionWith = (width - 0) / 3 - 10;
+const optionWith = (width - 0) / 4 - 10;
 
 export default class Options extends Component {
 

@@ -34,7 +34,8 @@ export default class Events extends Component {
   
   state = {
     popupIsOpen: false,
-    selectedIndex: 1
+    selectedIndex: 1,
+    chosenTable: 0,       // choose first day by default
   }
 
   openEvent = (event) => {
@@ -87,6 +88,12 @@ export default class Events extends Component {
       event: this.state.event,
       person: this.props.navigation.state.params.person
     }); 
+  }
+
+  chooseTable = (table) => {
+    this.setState({
+      chosenTable: table,
+    });
   }
 
   render() {
@@ -188,6 +195,8 @@ export default class Events extends Component {
           onJoin={this.joinEvent}
           onManage={this.manageEvent}
           onManageRequest={this.manageEventRequest}
+          chosenTable={this.state.chosenTable}
+          onChooseTable={this.chooseTable}
         />
       </View>
       

@@ -17,6 +17,8 @@ import { defaultStyles } from './styles';
 import Options from './Options';
 import EventButton from './EventButton';
 
+
+
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
 // Set default popup height to 67% of screen height
@@ -29,11 +31,11 @@ export default class EventPopup extends Component {
     // Movie object that has title, genre, poster, days and times
     event: PropTypes.object,
     // Index of chosen day
-    // chosenDay: PropTypes.number,
+    chosenTable: PropTypes.number,
     // Index of chosem show time
     // chosenTime: PropTypes.number,
     // Gets called when user chooses day
-    // onChooseDay: PropTypes.func,
+    onChooseTable: PropTypes.func,
     // Gets called when user chooses time
     // onChooseTime: PropTypes.func,
     // Gets called when user books their ticket
@@ -221,10 +223,12 @@ export default class EventPopup extends Component {
       onBook,
       onJoin,
       onManage,
-      onManageRequest
+      onManageRequest,
+      chosenTable,
+      onChooseTable,
     } = this.props;
     // Pull out movie data
-    const { title, genre, poster, days, times } = event || {};
+    const { title, photo, tables } = event || {}; // , genre, poster,  times
     // Render nothing if not visible
     if (!this.state.visible) {
       return null;
@@ -252,15 +256,35 @@ export default class EventPopup extends Component {
             >
  
               <View style={[styles.imageContainer, this.getStyles().imageContainer]}>
-                <Image source={{ uri: poster }} style={styles.image} />
+                <Image source={{ uri: photo }} style={styles.image} />
               </View>
 
               <View style={[styles.movieInfo, this.getStyles().movieInfo]}>
                 <Text style={[styles.title, this.getStyles().title]}>{title}</Text>
-                <Text style={styles.genre}>{genre}</Text>
+                {/* <Text style={styles.genre}>{genre}</Text> */}
               </View>
             </View>
            </View>
+
+
+           {/* Showtables - add if condition */}
+           <View style={styles.sectionTables}>
+              {/* Day */}
+              <Text style={styles.sectionHeader}>Choose table</Text>
+              <Options
+                values={tables}
+                chosen={chosenTable}
+                onChoose={onChooseTable}
+                />
+              {/* Time 
+              <Text style={styles.sectionHeader}>Showtime</Text>
+                <Options
+                values={times}
+                chosen={chosenTime}
+                onChoose={onChooseTime}
+                />*/}
+            </View>
+            
             <View style={styles.footer}>
 
               <EventButton 
@@ -329,6 +353,9 @@ const styles = StyleSheet.create({
   sectionHeader: {
     ...defaultStyles.text,
     color: '#AAAAAA',
+  },
+  sectionTables: {
+    marginLeft: 20
   },
   // Footer
   footer: {

@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import Event from './models/event';
 import Person from './models/person';
 import assert from 'assert';
+import _ from 'lodash';
 
 
 handleError = (err) => {
@@ -42,7 +43,8 @@ organizer.save(function (err) {
     participant_ids: [],
     participants: [],
     likes: [],
-    matches: {}
+    matches: {},
+    tables: _.range(1, 11)
   });
 
   event.save(function (err) {

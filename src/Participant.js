@@ -32,6 +32,7 @@ export default class Participant extends PureComponent {
     //   }).isRequired,
     }).isRequired,
   };
+ 
 
   render() {
     
@@ -49,6 +50,7 @@ export default class Participant extends PureComponent {
           this.setState({
             pressStatus: !this.state.pressStatus
           });
+          // change to ios-heart
         } 
       }>
         <View style={styles.col_hor}>
@@ -97,19 +99,21 @@ export default class Participant extends PureComponent {
             } 
           }>
             <View style={styles.col}>
-              <View style={styles.avatarContainer} > 
+              <View style={[styles.avatarContainer, {
+                marginLeft: 20,
+              }]} > 
                 {avatar && <Image
                   resizeMode='contain'
                   style={styles.avatar}
                   source={{ uri: avatar }}
                 />}
               </View>
-              <View style={styles.textContainer}>
-                <Text style={styles.text}> {name} </Text>
+              <View style={styles.textContainer}> 
+                <Text style={ this.state.pressStatus ? styles.textLiked : styles.text}> {name} </Text>
               </View>
-              <TouchableOpacity onPress={this.onLiked}> 
-                <Icon name="ios-heart" size={30} color="#4F8EF7" />
-              </TouchableOpacity>  
+              <View style={styles.iconic}>
+                { this.state.pressStatus ? <Icon name="ios-heart" size={30} color="#f2aab8" /> : <Icon name="ios-heart-outline" size={30} color="#4F8EF7" /> }
+              </View>
             </View>
           </TouchableOpacity>
         </View>
@@ -180,7 +184,7 @@ const styles = StyleSheet.create({
   },
   containerPress: {
     // flexDirection: 'row',
-    backgroundColor: 'blue',
+    backgroundColor: '#3f88fb',
   },
   avatar: {
     borderRadius: 30,
@@ -189,13 +193,20 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {        
     alignItems: 'center',
-    // marginLeft: 5,
+    
     // paddingTop: 10,
     width: 60,
     height: 60
   },
   text: {
-    color: '#000',
+    color: '#4b4d5c',
+    fontFamily: 'System',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 20
+  },
+  textLiked: {
+    color: 'white',
     fontFamily: 'System',
     fontSize: 16,
     fontWeight: 'bold',
@@ -206,5 +217,9 @@ const styles = StyleSheet.create({
     height: 60,
     marginLeft: 15
   },
+  iconic: { 
+    marginTop: 15, 
+    marginLeft: 30
+  }
 });
 
