@@ -59,10 +59,8 @@ export default class VotingScreen extends Component {
       person 
     } = this.props.navigation.state.params;
     const { avatar, name } = participant;
-
-
-
     return (
+      // add table number here
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.avatar}>
