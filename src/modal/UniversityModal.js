@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import { defaultStyles } from './styles';
-import { put, get } from '../components/api';
+import { defaultStyles } from '../styles';
+import { put, get } from '../../components/api';
 const { width,height } = Dimensions.get('window')
 
 export default class UniversityModal extends Component {
@@ -49,7 +49,7 @@ export default class UniversityModal extends Component {
       <View style={styles.container}>
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}></Text>
-          <Text style={styles.navBarHeader}>Я</Text>
+          <Text style={styles.navBarHeader}>Университет</Text>
           <TouchableOpacity onPress={() =>  {
             this.saveUser();
             this.props.navigation.navigate('Edit', { user: user });
@@ -69,6 +69,7 @@ export default class UniversityModal extends Component {
             })
           }}>
 
+          {/* for each from user.university */}
           <View style={styles.navBarTest}>
             <Text style={styles.item}>Мужчина</Text>
             <Icon style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />

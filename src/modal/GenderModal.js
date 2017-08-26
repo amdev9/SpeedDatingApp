@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import { defaultStyles } from './styles';
-import { put, get } from '../components/api';
+import { defaultStyles } from '../styles';
+import { put, get } from '../../components/api';
 const { width,height } = Dimensions.get('window')
 
 export default class GenderModal extends Component {
@@ -43,8 +43,7 @@ export default class GenderModal extends Component {
     const { goBack } = this.props.navigation;
     const {user} = this.props.navigation.state.params;
     return (
-      // add two buttons with transparent checkbox icons
-      // on press make checkbox with color and set value to clicked
+   
       <View style={styles.container}>
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}></Text>
