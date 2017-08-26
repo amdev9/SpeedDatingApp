@@ -37,7 +37,10 @@ import MatchScreen from './MatchScreen';
 import JoinScreen from './JoinScreen';
 import ManagePermissionScreen from './ManagePermissionScreen';
 import SettingsScreen from './SettingsScreen';
-import GenderModal from './GenderModal';
+
+import GenderModal from './modal/GenderModal';
+import WorkModal from './modal/WorkModal';
+import UniversityModal from './modal/UniversityModal';
 
 const MovieStack = StackNavigator({
   Login: { screen: Login },
@@ -49,7 +52,11 @@ const MovieStack = StackNavigator({
   Mymatches: { screen: MymatchesScreen },
   Join: { screen: JoinScreen }, 
   Settings: { screen: SettingsScreen },
+  //modal
   Gender: { screen: GenderModal },
+  Work: { screen: WorkModal },
+  University: { screen: UniversityModal },
+  
   // organizer screen
   VotePush: { screen: VotePushScreen },
   VotingStatus: { screen: VotingStatusScreen },

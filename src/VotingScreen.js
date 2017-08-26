@@ -58,7 +58,7 @@ export default class VotingScreen extends Component {
       participant, 
       person 
     } = this.props.navigation.state.params;
-    const { avatar, name } = participant;
+    const { avatar, name, table } = participant;
     return (
       // add table number here
       <View style={styles.container}>
@@ -67,6 +67,8 @@ export default class VotingScreen extends Component {
             <Image source={{ uri: avatar }} style={styles.avatarImage} />
           </View>
           <Text style={styles.text}>{name}</Text>
+
+          <Text style={styles.text}>person { table }</Text>
         </View>
         <TouchableHighlight
           underlayColor="#9575CD"

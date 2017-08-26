@@ -108,12 +108,14 @@ export default class ManageScreen extends Component {
   }
 
   start = () => {
+    const { event } = this.props.navigation.state.params;
     if (this.state.selected.length > 0) {
       let json = JSON.stringify({
         command: "start",
         timeout: 2,
         talk_time: parseInt(this.state.talk_time),
-        selected: JSON.stringify(this.state.selected) 
+        selected: JSON.stringify(this.state.selected),
+        event: JSON.stringify(event)
       });
       this.ws.send(json);
     } else {

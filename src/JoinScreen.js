@@ -36,7 +36,7 @@ export default class JoinScreen extends Component {
     });
     this.ws.send(connected);
   }
-  
+
   onMessageRecieved = (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
@@ -111,7 +111,7 @@ export default class JoinScreen extends Component {
   }
 
   render() {
-    const { person, table } =  this.props.navigation.state.params;     
+    const { person } =  this.props.navigation.state.params;     
     return (
       <View style={styles.container}>
 
@@ -121,7 +121,7 @@ export default class JoinScreen extends Component {
         />
         
         <Text > Join screen </Text>
-        <Text > Table {table} </Text>
+        <Text > Table {person.table} </Text>
 
       </View>
     );

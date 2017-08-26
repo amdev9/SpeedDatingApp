@@ -13,8 +13,6 @@ import _ from 'lodash';
 import {
   facebookLogin,
   facebookMiddleware,
-  googleLogin,
-  googleMiddleware,
   vkontakteLogin,
   vkontakteMiddleware,
   oauthCallback,
@@ -46,11 +44,11 @@ app.use(passport.session());
 
 // Set up auth routes
 app.get('/auth/facebook', facebookLogin);
-app.get('/auth/google', googleLogin);
+
 app.get('/auth/vkontakte', vkontakteLogin);
 
 app.get('/auth/facebook/callback', facebookMiddleware, oauthCallback);
-app.get('/auth/google/callback', googleMiddleware, oauthCallback);
+
 app.get('/auth/vkontakte/callback', vkontakteMiddleware, oauthCallback);
 
 app.get('/logout', function(req, res) {
@@ -100,6 +98,7 @@ app.get('/images', function(req, res) {
     });
 });
 
+// uncomment and fix error
 app.get('/images/:id', function(req, res) {
     router.getImageById(req.params.id, function(err, genres) {
         if (err) { throw err; }
@@ -121,10 +120,9 @@ function mainLogic(ws, obj) {
         data: obj.selected
     });
     next = () => { 
-        // table_max --> ?
         var parsed = JSON.parse(obj.selected);
         parsed.map((participant, index) => {
-            if (participant.table == table_max) {
+            if (participant.table == obj.event.table_max) {
                 participant.table = 1;
             } else {
                 participant.table++;

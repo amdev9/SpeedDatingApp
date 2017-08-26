@@ -1,6 +1,5 @@
 import passport from 'passport';
 import FacebookStrategy from 'passport-facebook';
-// import GoogleStrategy from 'passport-google-oauth20';
 import VkontakteStrategyObj from 'passport-vkontakte';
 const VKontakteStrategy = VkontakteStrategyObj.Strategy;
 
@@ -16,7 +15,7 @@ import request from 'request-promise';
 
 // Transform Facebook profile because Facebook and Google profile objects look different
 // and we want to transform them into user objects that have the same set of attributes
-const transformFacebookProfile = (profile) => {
+const transformFacebookProfile = (profile, work, university) => {
   // console.log(profile);
   
   return ({
@@ -24,11 +23,13 @@ const transformFacebookProfile = (profile) => {
     name: profile.first_name,  
     avatar: profile.picture.data.url,
     gender: (profile.gender == 'female') ? 1 : 2,
+    work: [ work ],
+    university: [ university ] 
   });
 }
 
 // Transform Vkontakte profile into user object 
-const transformVKontakteProfile = (profile) => {
+const transformVKontakteProfile = (profile, work, university) => {
   
   // console.log(profile)
   return ({
@@ -36,16 +37,11 @@ const transformVKontakteProfile = (profile) => {
     name: profile.first_name,
     avatar: profile.photo,
     gender: profile.sex,  
+    work: [ work ],
+    university: [ university ] 
   });
 }
-
-// // Transform Google profile into user object
-// const transformGoogleProfile = (profile) => ({
-//   oauth_id: profile.id,
-//   name: profile.displayName,
-//   avatar: profile.image.url,
-// });
-
+ 
 
 // Register Facebook Passport strategy
 passport.use(new FacebookStrategy(facebook,
@@ -53,44 +49,43 @@ passport.use(new FacebookStrategy(facebook,
   async (accessToken, refreshToken, profile, done)
     // Return done callback and pass transformed user object
     => {
-      console.log(accessToken)
+      // console.log(accessToken)
 
       // app.get('/facebook-search/:id', (req, res) => {
     
-          // you need permission for most of these fields
-          const userFieldSet = 'id, work, education';//name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture, photos, feed';
-          const options = {
-            method: 'GET',
-            uri: `https://graph.facebook.com/v2.10/1359694324147112`, //${req.params.id} //'https://graph.facebook.com/me', //
-            qs: {
-              access_token: accessToken, //user_access_token,
-              fields: userFieldSet
-            }
-          };
-          request(options)
-            .then(fbRes => {
-              // console.log(fbRes)
-              var w = JSON.parse(fbRes);
-              // console.log( w.work[0].employer.name, w.work[0].position.name);
-              // console.log( w.education[0].school.name, w.education[0].type);
-               
-            })
-        // })
+      // you need permission for most of these fields
+      const userFieldSet = 'id, work, education';//name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture, photos, feed';
+      const options = {
+        method: 'GET',
+        uri: `https://graph.facebook.com/v2.10/1359694324147112`, //${req.params.id} //'https://graph.facebook.com/me', //
+        qs: {
+          access_token: accessToken, //user_access_token,
+          fields: userFieldSet
+        }
+      };
+      var fbRes = await request(options);
+      var w = JSON.parse(fbRes);
+      var employer_name = w.work[0].employer.name;
+      var position_name = w.work[0].position.name;
+      var school_name = w.education[0].school.name;
+      var education_type = w.education[0].type;
+            
+      var work = {
+        "employer_name": employer_name,
+        "position_name": position_name
+      };
+      var university = {
+        "school_name": school_name,
+        "education_type": education_type
+      };  
 
-
-
-      done(null, await createOrGetUserFromDatabase(transformFacebookProfile(profile._json)))
+      // console.log(employer_name, position_name, school_name, education_type);
+      
+      done(null, await createOrGetUserFromDatabase(transformFacebookProfile(profile._json, work, university)))
     }
 ));
 
-// // Register Google Passport strategy
-// passport.use(new GoogleStrategy(google,
-//   async (accessToken, refreshToken, profile, done)
-//     => {
-//       done(null, await createOrGetUserFromDatabase(transformGoogleProfile(profile._json)))
-//     }
-// ));
-
+ 
 // Register vk Passport strategy
 passport.use(new VKontakteStrategy(vkontakte,
   // {
@@ -100,8 +95,8 @@ passport.use(new VKontakteStrategy(vkontakte,
   // },
   async (accessToken, refreshToken, params, profile, done)
     => {
-      console.log(accessToken)
-      console.log(params)  // email is undefined if phone is used
+      // console.log(accessToken)
+      // console.log(params)  // email is undefined if phone is used
 
       const userFieldSet = 'bdate, career, education';//name, about, email, accounts, link, is_verified, significant_other, relationship_status, website, picture, photos, feed';
       const options = {
@@ -113,20 +108,31 @@ passport.use(new VKontakteStrategy(vkontakte,
           v: '5.68'
         }
       };
-      request(options)
-        .then(fbRes => {
-          // console.log(fbRes)
-          var w = JSON.parse(fbRes);
-          // console.log( w.response[0].career[0].company )//.career[0].company, w.company[0].position);
-          // console.log( w.response[0].university_name, w.response[0].faculty_name); //  
-        })
-        
-      done(null, await createOrGetUserFromDatabase(transformVKontakteProfile(profile._json)))
+      var fbRes = await request(options);
+      var w = JSON.parse(fbRes);
+      console.log(fbRes);
+      var employer_name = w.response[0].career[0].company;
+      var position_name = w.response[0].career[0].position; 
+      var school_name = w.response[0].university_name;
+      var education_type = w.response[0].faculty_name; 
+      // console.log(career_company, company_position, university_name, faculty_name); // 
+      
+      var work = {
+        "employer_name": employer_name,
+        "position_name": position_name
+      };
+      var university = {
+        "school_name": school_name,
+        "education_type": education_type
+      };  
+
+      
+      done(null, await createOrGetUserFromDatabase(transformVKontakteProfile(profile._json, work, university)))
     }      
 ));
   
 const createOrGetUserFromDatabase = async (userProfile) => {
-  
+
   let user = await Person.findOne({ 'oauth_id': userProfile.oauth_id }).exec();
   if (!user) {
     user = new Person({
@@ -149,12 +155,8 @@ passport.deserializeUser((user, done) => done(null, user));
 // Facebook
 export const facebookLogin = passport.authenticate('facebook', {scope: ['public_profile', 'user_friends', 'user_education_history', 'email', 'user_about_me', 'user_work_history'], authType: 'rerequest'});
 export const facebookMiddleware = passport.authenticate('facebook', { failureRedirect: '/auth/facebook' });
-
-// Google
-export const googleLogin = passport.authenticate('google', { scope: ['profile'] });
-export const googleMiddleware = passport.authenticate('google', { failureRedirect: '/auth/google' });
-
-// Google
+ 
+// vk
 export const vkontakteLogin = passport.authenticate('vkontakte',  { scope: ['status', 'email', 'friends', 'notify'] } );
 export const vkontakteMiddleware = passport.authenticate('vkontakte', { failureRedirect: '/auth/vkontakte' });
 

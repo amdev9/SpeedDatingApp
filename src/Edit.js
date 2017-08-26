@@ -44,7 +44,8 @@ class Edit extends React.Component {
       uploadWritten: 0,
       
       avatar: user.avatar ? user.avatar  : '',
-      current_work: user.current_work ? user.current_work  : '',
+      work: user.work ? user.work  : '',
+      university: user.university ? user.university  : '',
       about: user.about ? user.about  : '',
       age: user.age ? user.age  : '',
       gender: user.gender ? user.gender  : 0
@@ -54,7 +55,8 @@ class Edit extends React.Component {
   saveProfile = async () => {
      
     const { user } = this.props.navigation.state.params;
-    user.current_work = this.state.current_work;
+    user.work = this.state.work;
+    user.university = this.state.university;
     user.about = this.state.about;
     user.age = this.state.age;
     user.avatar = this.state.avatar;
@@ -211,20 +213,35 @@ class Edit extends React.Component {
       </View>
 
         <ScrollView
-              contentContainerStyle={styles.scrollContent}>
-              <Text style={styles.sectionHeader}><Text>О пользователе {user.name} </Text></Text>
-              <TextInput style={styles.item} onChangeText={(about) => this.setState({ about })}
-                value={this.state.about}/>
-              <Text style={styles.sectionHeader}>Я</Text>
-              
-              <TouchableOpacity onPress={() => navigate('Gender', { user: user })}>
+          contentContainerStyle={styles.scrollContent}>
+          <Text style={styles.sectionHeader}><Text>О пользователе {user.name} </Text></Text>
+          <TextInput style={styles.item} onChangeText={(about) => this.setState({ about })}
+            value={this.state.about}/>
 
-              <View style={styles.navBarTest}>
-                <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Мужчина' : 'Женщина'}</Text>
-                <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
-              </View>
-              </TouchableOpacity>
-              <Text style={styles.sectionHeader}><Text> </Text></Text>
+          <Text style={styles.sectionHeader}>Я</Text>
+            <TouchableOpacity onPress={() => navigate('Gender', { user: user })}>
+            <View style={styles.navBarTest}>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Мужчина' : 'Женщина'}</Text>
+              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+            </View>
+          </TouchableOpacity>
+          
+          <Text style={styles.sectionHeader}>Текущая работа</Text>
+          <TouchableOpacity onPress={() => navigate('Work', { user: user })}>
+            <View style={styles.navBarTest}>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Добавить работу' : 'Женщина'}</Text>
+              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+            </View>
+          </TouchableOpacity>
+          
+          <Text style={styles.sectionHeader}>Университет</Text>
+          <TouchableOpacity onPress={() => navigate('University', { user: user })}>
+            <View style={styles.navBarTest}>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Добавить университет' : 'Женщина'}</Text>
+              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+            </View>
+          </TouchableOpacity>
+          <Text style={styles.sectionHeader}><Text> </Text></Text>
 
         </ScrollView>
 

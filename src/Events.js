@@ -10,7 +10,6 @@ import {
   Text
 } from 'react-native';
 
-
 import _ from 'lodash';
 import EventPoster from './EventPoster';
 import EventPopup from './EventPopup';
@@ -18,8 +17,6 @@ import EventPopup from './EventPopup';
 import { defaultStyles } from './styles';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-
 
 @connect(
   state => ({
@@ -70,7 +67,7 @@ export default class Events extends Component {
       // alert('U Selecte table ' + this.state.chosenTable);
       this.closeEvent();
       const { navigate } = this.props.navigation;
-      this.props.navigation.state.params.person.table = this.state.chosenTable;
+      this.props.navigation.state.params.person.table = this.state.chosenTable + 1; // index + 1 = realvalue
       navigate('Join', {
         // table: this.state.chosenTable,
         event: this.state.event,
@@ -190,8 +187,6 @@ export default class Events extends Component {
               size="large"
             />
         }
-
-        
 
         <EventPopup
           event={this.state.event}
