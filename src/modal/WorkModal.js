@@ -20,13 +20,13 @@ export default class WorkModal extends Component {
     super(props);
     const { user } = this.props.navigation.state.params;
     this.state = {
-      gender: user.gender
+      work: user.work
     }
   }
     
   saveUser = async () => {
     const { user } = this.props.navigation.state.params;
-    user.gender = this.state.gender;
+    user.work = this.state.work;
     try {
       const response = await put('user', {
         user: user
@@ -42,6 +42,7 @@ export default class WorkModal extends Component {
   render() {
     const { goBack } = this.props.navigation;
     const {user} = this.props.navigation.state.params;
+    console.log(user.work);
     return (
       
 
@@ -62,29 +63,36 @@ export default class WorkModal extends Component {
           
 
           <View style={styles.back}>
-          <TouchableOpacity onPress={() =>  {
-            this.setState({ 
-              gender: 2
-            })
-          }}>
-
-          {/* for each from user.work */}
-          <View style={styles.navBarTest}>
-            <Text style={styles.item}>Мужчина</Text>
-            <Icon style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-          </View>
-          </TouchableOpacity>
           
-          <TouchableOpacity onPress={() =>  {
-            this.setState({ 
-              gender: 1
-            })
-          }}>
-          <View style={styles.navBarTest}>
-            <Text style={styles.item}>Женщина</Text>
-            <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-          </View>
-          </TouchableOpacity>
+
+        
+            <TouchableOpacity onPress={() =>  {
+              this.setState({ 
+                gender: 1
+              })
+            }}>
+            <View style={styles.navBarTest}>
+              <Text style={styles.item}> {user.work.position_name } at {user.work.employer_name} </Text>
+              <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() =>  {
+              this.setState({ 
+                gender: 2
+              })
+            }}>
+            <View style={styles.navBarTest}>
+              <Text style={styles.item}>Нет</Text>
+              <Icon  style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+            </View>
+            </TouchableOpacity>
+
+
+          
+
+  
+          
+        
           </View>
         </ScrollView>
 
@@ -93,6 +101,34 @@ export default class WorkModal extends Component {
   }
 }
     
+
+// <TouchableOpacity onPress={() =>  {
+//   this.setState({ 
+//     gender: 2
+//   })
+// }}>
+
+// <View style={styles.navBarTest}>
+//   <Text style={styles.item}>Мужчина</Text>
+//   <Icon style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+// </View>
+// </TouchableOpacity>
+
+
+{/* <TouchableOpacity onPress={() =>  {
+  this.setState({ 
+    gender: 1
+  })
+}}>
+<View style={styles.navBarTest}>
+  <Text style={styles.item}>Женщина</Text>
+  <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+</View>
+
+
+</TouchableOpacity> */}
+ 
+
 const styles = StyleSheet.create({
   back: {
     marginTop: 30,

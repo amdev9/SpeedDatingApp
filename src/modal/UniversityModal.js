@@ -43,6 +43,7 @@ export default class UniversityModal extends Component {
   render() {
     const { goBack } = this.props.navigation;
     const {user} = this.props.navigation.state.params;
+    console.log(user.university)
     return (
       // add two buttons with transparent checkbox icons
       // on press make checkbox with color and set value to clicked
@@ -71,7 +72,7 @@ export default class UniversityModal extends Component {
 
           {/* for each from user.university */}
           <View style={styles.navBarTest}>
-            <Text style={styles.item}>Мужчина</Text>
+            <Text style={styles.item}>{user.university.education_type } at {user.university.school_name} </Text>
             <Icon style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
           </View>
           </TouchableOpacity>
@@ -82,7 +83,7 @@ export default class UniversityModal extends Component {
             })
           }}>
           <View style={styles.navBarTest}>
-            <Text style={styles.item}>Женщина</Text>
+            <Text style={styles.item}>Нет</Text>
             <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
           </View>
           </TouchableOpacity>

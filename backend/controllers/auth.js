@@ -23,8 +23,8 @@ const transformFacebookProfile = (profile, work, university) => {
     name: profile.first_name,  
     avatar: profile.picture.data.url,
     gender: (profile.gender == 'female') ? 1 : 2,
-    work: [ work ],
-    university: [ university ] 
+    work: work,
+    university: university
   });
 }
 
@@ -37,8 +37,8 @@ const transformVKontakteProfile = (profile, work, university) => {
     name: profile.first_name,
     avatar: profile.photo,
     gender: profile.sex,  
-    work: [ work ],
-    university: [ university ] 
+    work: work,
+    university: university
   });
 }
  
@@ -139,7 +139,9 @@ const createOrGetUserFromDatabase = async (userProfile) => {
       oauth_id: userProfile.oauth_id,
       name: userProfile.name,
       avatar: userProfile.avatar,
-      gender: userProfile.gender
+      gender: userProfile.gender,
+      work: userProfile.work,
+      university: userProfile.university
     });
     await user.save();
   }

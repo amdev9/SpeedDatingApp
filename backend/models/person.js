@@ -10,8 +10,8 @@ var personSchema = Schema({
   avatar   : String,
   age      : String,
   about : String,
-  work: Array,
-  university: Array,
+  work: Object,
+  university: Object,
   gender   : Number,  //  1 - женский, 2 - мужской, 0 - без указания пола. 
   events : [{ type: Schema.Types.ObjectId, ref: 'DateEvent' }],
   likes: Object,
