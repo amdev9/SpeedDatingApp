@@ -14,6 +14,7 @@ import {
   RefreshControl
 } from 'react-native';
 import { defaultStyles } from './styles';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Participant from './Participant';
 
@@ -25,7 +26,9 @@ export default class ManageScreen extends Component {
     selected: [],
     participants: [], // init on open - get queue from server
     index: 0,
-    talk_time: '4'
+    talk_time_min: 4,
+    talk_time_sec: 4,
+
   };
  
   onOpenConnection = () => {
@@ -138,10 +141,26 @@ export default class ManageScreen extends Component {
     const { event } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <Button
-          onPress={() => this.props.navigation.goBack() }
-          title="Go Back"
-        />
+        
+        
+        <View style={styles.navBar}>
+
+            <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
+            <Text style={ [styles.navBarButton,{
+              fontWeight: 'bold'
+            }]} onPress={() => this.props.navigation.goBack() }>Назад к мероприятиям</Text>
+            <Text style={styles.navBarHeader}></Text>
+            
+            
+            {/* <Text style={styles.navBarButton}
+              onPress={() => this.props.navigation.navigate('Events', {
+                person: user
+              })}>
+               Events
+            </Text> */}
+
+            <Text style={styles.navBarButton}>  </Text> 
+          </View>
 
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
@@ -155,19 +174,46 @@ export default class ManageScreen extends Component {
           {this.state.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
         </ScrollView>
 
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-          keyboardType= {'numeric'}
-          onChangeText={(text) => this.setState({ text })}
-          value={this.state.talk_time}
-        />
+
+        <View style={ { 
+          flexDirection: 'row',
+          //justifyContent: 'space-between',
+          justifyContent: 'center',
+          marginBottom: 5,
+        }}>
+          <Text style={{ width: 100, textAlign: 'center', color: '#3f88fb', fontWeight: 'bold'}}>Минуты</Text>
+          <Text style={{ width: 100, textAlign: 'center', color: '#3f88fb', fontWeight: 'bold'}}>Секунды</Text>
+        </View>
+        <View style={ { 
+          flexDirection: 'row',
+          //justifyContent: 'space-between',
+          justifyContent: 'center',
+          marginBottom: 20
+          
+        }}>
+       
+        
+          <TextInput
+            style={{ marginLeft: 20, marginRight: 20, height: 30, width: 60, borderColor: 'gray', borderWidth: 1, fontSize: 20, fontWeight: 'bold' }}
+            keyboardType= {'numeric'}
+            onChangeText={(text) => this.setState({ text })}
+            value={this.state.talk_time_min}
+          />
+          <Text style={{ fontWeight: 'bold', fontSize: 20}}>:</Text>
+          <TextInput
+            style={{ marginLeft: 20, marginRight: 20, height: 30, width: 60, borderColor: 'gray', borderWidth: 1, fontSize: 20, fontWeight: 'bold' }}
+            keyboardType= {'numeric'}
+            onChangeText={(text) => this.setState({ text })}
+            value={this.state.talk_time_sec}
+          /> 
+        </View>
         
         <TouchableHighlight
             underlayColor="#9575CD"
             style={styles.buttonContainer}
             onPress={this.start}
             >
-            <Text style={styles.button}>Start</Text>
+            <Text style={styles.button}>Начать мероприятие</Text>
         </TouchableHighlight> 
       </View>
     );
@@ -177,9 +223,41 @@ export default class ManageScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    backgroundColor: "#FFF"
   },
+  //////
+  navBar: {
+    flexDirection: 'row',
+    paddingTop: 30,
+    height: 64,
+    backgroundColor: '#FFFFFF' // '#1EAAF1'
+  },
+  navBarButton: {
+    color: '#262626',
+    textAlign:'center',
+    width: 200,
+    color: '#3f88fb'
+  },
+  navBarButtonIcon: {
+    marginTop: -4,
+    color: '#262626',
+    textAlign:'center',
+    marginLeft: 10,
+    // width: 200,
+    color: '#3f88fb'
+  },
+  navBarHeader: {
+    flex: 1,
+    color: '#262626',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    ...defaultStyles.text,
+    fontSize: 15,
+    // marginTop: 7
+  },
+  //////
   header: {
     ...defaultStyles.text,
     color: '#333',
