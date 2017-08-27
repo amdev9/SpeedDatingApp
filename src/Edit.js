@@ -44,23 +44,31 @@ class Edit extends React.Component {
       uploadWritten: 0,
       
       avatar: user.avatar ? user.avatar  : '',
-      work: user.work ? user.work  : '',
-      university: user.university ? user.university  : '',
       about: user.about ? user.about  : '',
       age: user.age ? user.age  : '',
-      gender: user.gender ? user.gender  : 0
+      gender: user.gender ? user.gender  : 0,
+
+      work: user.work ? user.work  : '',
+      university: user.university ? user.university  : '',
+      current_work: user.current_work ? user.current_work  : '',
+      current_university: user.current_university ? user.current_university  : '',
+      
+
     }
   }
 
   saveProfile = async () => {
      
     const { user } = this.props.navigation.state.params;
-    user.work = this.state.work;
-    user.university = this.state.university;
     user.about = this.state.about;
     user.age = this.state.age;
     user.avatar = this.state.avatar;
     user.gender = this.state.gender;
+    user.work = this.state.work;
+    user.university = this.state.university;
+    user.current_work = this.state.current_work;
+    user.current_university = this.state.current_university;
+    
 
     try {
       const response = await put('user', {
@@ -76,22 +84,6 @@ class Edit extends React.Component {
       alert(error);
     }
   };
-
-
-  
-
-  // componentDidMount() {
-  //   DeviceEventEmitter.addListener('RNUploaderProgress', (data) => {
-  //     let bytesWritten = data.totalBytesWritten;
-  //     let bytesTotal   = data.totalBytesExpectedToWrite;
-  //     let progress     = data.progress;
-  //     this.setState({
-  //       uploadProgress: progress, 
-  //       uploadTotal: bytesTotal, 
-  //       uploadWritten: bytesWritten
-  //     });
-  //   });
-  // }
 
 
   setIndex = (index) => {
@@ -165,41 +157,22 @@ class Edit extends React.Component {
     const {user} = this.props.navigation.state.params;
     const { navigate } = this.props.navigation;
     
-    console.log('state :', this.state)
+    // console.log('state :', this.state)
     return (
-      
       <View  style={styles.container}>
-
-      {/* <Button
-        title={'Save' }
-        onPress={() => this.saveProfile()}
-      /> 
-          <Picker selectedValue = {this.state.user_sex} onValueChange = {this.updateUser}>
-               <Picker.Item label = "Steve" value = "steve" />
-               <Picker.Item label = "Ellen" value = "ellen" />
-               <Picker.Item label = "Maria" value = "maria" />
-            </Picker>
-          <Text style = {styles.text_sex}>{this.state.user_sex}</Text>
-        <Text style={styles.header}>
-        </Text> */}
-
-          <View style={styles.navBar}>
-            <Text style={styles.navBarButton}></Text>
-            <Text style={styles.navBarHeader}>Изменить</Text>
-            <TouchableOpacity onPress={() =>  {
-                  this.saveProfile();
-                  this.props.navigation.navigate('Profile', { user: user });
-            }}>
-              <Text style={styles.navBarButton}>Готово</Text>
-            </TouchableOpacity>
-          </View>
-        
-        
+        <View style={styles.navBar}>
+          <Text style={styles.navBarButton}></Text>
+          <Text style={styles.navBarHeader}>Изменить</Text>
+          <TouchableOpacity onPress={() =>  {
+                this.saveProfile();
+                this.props.navigation.navigate('Profile', { user: user });
+          }}>
+            <Text style={styles.navBarButton}>Готово</Text>
+          </TouchableOpacity>
+        </View>
         
         <View style={styles.content}>
-        {/* <Text> {user.name} </Text> */}
         <View style={styles.avatar}>
-          
         <TouchableOpacity onPress={() => { this.toggleModal(); this.getPhotos() }}>
             <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
             <View style={styles.circle}>
@@ -207,7 +180,6 @@ class Edit extends React.Component {
               {/* c4c9d1 */}
               </View>
           </TouchableOpacity>
-  
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
         </View>
       </View>
@@ -227,9 +199,16 @@ class Edit extends React.Component {
           </TouchableOpacity>
           
           <Text style={styles.sectionHeader}>Текущая работа</Text>
-          <TouchableOpacity onPress={() => navigate('Work', { user: user })}>
+          <TouchableOpacity onPress={() => {
+
+            
+              return navigate('Work', { user: user })
+            
+            }
+            
+            }>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Добавить работу' : 'Женщина'}</Text>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.current_work == '') ? 'Добавить работу' : user.work.position_name }</Text>
               <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
@@ -237,7 +216,7 @@ class Edit extends React.Component {
           <Text style={styles.sectionHeader}>Университет</Text>
           <TouchableOpacity onPress={() => navigate('University', { user: user })}>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Добавить университет' : 'Женщина'}</Text>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.current_university == '' ) ? 'Добавить университет' : user.university.school_name }</Text>
               <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
@@ -246,36 +225,7 @@ class Edit extends React.Component {
         </ScrollView>
 
 
-        {/* <Button
-        title='View Photos'
-        onPress={() => { this.toggleModal(); this.getPhotos() }}
-        />  
-
-        current work   
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(current_work) => this.setState({ current_work })}
-          value={this.state.current_work}
-        />
-         about user info   
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(about) => this.setState({about})}
-          value={this.state.about}
-        />
-        
-          age  
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(age) => this.setState({age})}
-          value={this.state.age}
-        />
-
-       <Button
-        title='Browse Images'
-        onPress={this.navigate}
-        /> */}
-
+     
         <Modal
         animationType={"slide"}
         transparent={false}

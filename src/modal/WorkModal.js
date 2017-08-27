@@ -20,17 +20,18 @@ export default class WorkModal extends Component {
     super(props);
     const { user } = this.props.navigation.state.params;
     this.state = {
+      current_work: user.current_work ? user.current_work : '',
       work: user.work
     }
   }
     
   saveUser = async () => {
     const { user } = this.props.navigation.state.params;
-    user.work = this.state.work;
+    user.current_work = this.state.current_work;
     try {
       const response = await put('user', {
         user: user
-      }); 
+      });
       const json = await response.json(); 
       console.log( JSON.stringify(json) );
     }
@@ -42,10 +43,8 @@ export default class WorkModal extends Component {
   render() {
     const { goBack } = this.props.navigation;
     const {user} = this.props.navigation.state.params;
-    console.log(user.work);
+    
     return (
-      
-
       <View style={styles.container}>
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}></Text>
@@ -60,75 +59,38 @@ export default class WorkModal extends Component {
        
         <ScrollView
           contentContainerStyle={styles.scrollContent}>
-          
-
           <View style={styles.back}>
-          
-
-        
             <TouchableOpacity onPress={() =>  {
               this.setState({ 
-                gender: 1
-              })
+                current_work: user.work.position_name
+              });
+              {/* console.log(this.state.current_work) */}
+              console.log(this.state.current_work, this.state.work.position_name)
             }}>
             <View style={styles.navBarTest}>
-              <Text style={styles.item}> {user.work.position_name } at {user.work.employer_name} </Text>
-              <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+              <Text style={styles.item}>{user.work.position_name } at {user.work.employer_name} </Text>
+              <Icon  style={ this.state.current_work != '' ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
             </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() =>  {
+              {/* console.log(this.state.current_work) */}
               this.setState({ 
-                gender: 2
+                current_work: ''
               })
+              console.log(this.state.current_work, this.state.work.position_name)
             }}>
             <View style={styles.navBarTest}>
               <Text style={styles.item}>Нет</Text>
-              <Icon  style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+              <Icon style={ this.state.current_work == '' ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
             </View>
             </TouchableOpacity>
-
-
-          
-
-  
-          
-        
           </View>
         </ScrollView>
-
       </View>
     );
   }
 }
-    
-
-// <TouchableOpacity onPress={() =>  {
-//   this.setState({ 
-//     gender: 2
-//   })
-// }}>
-
-// <View style={styles.navBarTest}>
-//   <Text style={styles.item}>Мужчина</Text>
-//   <Icon style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-// </View>
-// </TouchableOpacity>
-
-
-{/* <TouchableOpacity onPress={() =>  {
-  this.setState({ 
-    gender: 1
-  })
-}}>
-<View style={styles.navBarTest}>
-  <Text style={styles.item}>Женщина</Text>
-  <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-</View>
-
-
-</TouchableOpacity> */}
- 
-
+     
 const styles = StyleSheet.create({
   back: {
     marginTop: 30,

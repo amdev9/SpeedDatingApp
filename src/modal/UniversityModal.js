@@ -12,22 +12,21 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import { defaultStyles } from '../styles';
 import { put, get } from '../../components/api';
-const { width,height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 export default class UniversityModal extends Component {
-  
-  
   constructor(props) {
     super(props);
     const { user } = this.props.navigation.state.params;
     this.state = {
-      gender: user.gender
+      current_university: user.current_university ? user.current_university : '',
+      university: user.university
     }
   }
     
   saveUser = async () => {
     const { user } = this.props.navigation.state.params;
-    user.gender = this.state.gender;
+    user.current_university = this.state.current_university;
     try {
       const response = await put('user', {
         user: user
@@ -43,10 +42,9 @@ export default class UniversityModal extends Component {
   render() {
     const { goBack } = this.props.navigation;
     const {user} = this.props.navigation.state.params;
-    console.log(user.university)
+    
     return (
-      // add two buttons with transparent checkbox icons
-      // on press make checkbox with color and set value to clicked
+      
       <View style={styles.container}>
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}></Text>
@@ -66,25 +64,25 @@ export default class UniversityModal extends Component {
           <View style={styles.back}>
           <TouchableOpacity onPress={() =>  {
             this.setState({ 
-              gender: 2
+              current_university: user.university
             })
           }}>
 
           {/* for each from user.university */}
           <View style={styles.navBarTest}>
             <Text style={styles.item}>{user.university.education_type } at {user.university.school_name} </Text>
-            <Icon style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+            <Icon style={ this.state.current_university != '' ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
           </View>
           </TouchableOpacity>
           
           <TouchableOpacity onPress={() =>  {
             this.setState({ 
-              gender: 1
+              current_university: ''
             })
           }}>
           <View style={styles.navBarTest}>
             <Text style={styles.item}>Нет</Text>
-            <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
+            <Icon  style={ this.state.current_university == '' ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
           </View>
           </TouchableOpacity>
           </View>
@@ -102,9 +100,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    // backgroundColor: '#FFF',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
   transparent: {
     color: 'transparent'
