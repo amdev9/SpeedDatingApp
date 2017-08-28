@@ -111,12 +111,12 @@ passport.use(new VKontakteStrategy(vkontakte,
       var fbRes = await request(options);
       var w = JSON.parse(fbRes);
       console.log(fbRes);
-      var employer_name = w.response[0].career[0].company;
-      var position_name = w.response[0].career[0].position; 
+      var employer_name = w.response[0].career[0] ? w.response[0].career[0].company : '';
+      var position_name = w.response[0].career[0] ? w.response[0].career[0].position : ''; 
       var school_name = w.response[0].university_name;
       var education_type = w.response[0].faculty_name; 
-      // console.log(career_company, company_position, university_name, faculty_name); // 
-      
+      // console.log(career_company, company_position, university_name, faculty_name); //       
+      // {"response":[{"id":442341583,"first_name":"Alexander","last_name":"Matveev","bdate":"30.10.1992","career":[],"university":0,"university_name":"","faculty":0,"faculty_name":"","graduation":0}]}
       var work = {
         "employer_name": employer_name,
         "position_name": position_name

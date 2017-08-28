@@ -241,7 +241,10 @@ export default class IntervalPopup extends Component {
           {/* .bind(this, this.state.interval) */}
           <View style={styles.content}>
             <TouchableOpacity onPress={onChoose.bind(this, this.state.interval)}> 
-                <Text>Выбрать</Text>
+                <Text style={{
+                  fontWeight: 'bold',
+                  color: '#3f88fb'
+                }}>Выбрать</Text>
             </TouchableOpacity>
             <Picker
                 selectedValue={this.state.interval}

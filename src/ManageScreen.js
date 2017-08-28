@@ -175,13 +175,23 @@ export default class ManageScreen extends Component {
         </View>
          
         <View style={{
-           
            flexDirection: 'row',
+           margin: 20,
+           justifyContent: 'center',
         }}>
-          <TouchableOpacity onPress={this.openInterval}>
-            <Text > Click to choose interval: </Text>
-          </TouchableOpacity>
-          <Text> {this.state.test.toString()} </Text>
+          <TouchableHighlight 
+            underlayColor="#9575CD"
+            style={styles.buttonSContainer}
+            onPress={this.openInterval}
+          >
+            <Text style={{ 
+              color: "white",
+              fontWeight: 'bold'
+              }} >Выбрать промежуток </Text>
+          </TouchableHighlight>
+          <View style={styles.textContainer}>
+            <Text style={{ color: "white"}}> {this.state.test.toString()} </Text>
+          </View>
         </View>
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
@@ -257,14 +267,38 @@ const styles = StyleSheet.create({
     color: '#333',
     fontSize: 36,
   },
-  buttonContainer: {
+  buttonSContainer: {
     alignItems: 'center',
     backgroundColor: '#3f88fb', //673AB7
-    borderRadius: 100,
-    margin: 20,
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100,
+    // margin: 20,
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingLeft: 20,
+    paddingRight: 10,
+    
+    // paddingHorizontal: 30,
   },
+  buttonContainer: {
+    backgroundColor: '#3f88fb',//'#673AB7',
+    borderRadius: 100,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignItems: 'center',
+    margin: 20,
+  },
+  textContainer: {
+    alignItems: 'center',
+    backgroundColor: '#673AB7', //673AB7
+    borderTopRightRadius: 100,
+    borderBottomRightRadius: 100,
+    // margin: 20,
+    paddingVertical: 10,
+    paddingRight: 20,
+    paddingLeft: 10,
+    // paddingHorizontal: 30,
+  },
+
   button: {
     ...defaultStyles.text,
     color: '#FFFFFF',
