@@ -215,7 +215,7 @@ export default class IntervalPopup extends Component {
 
   render() {
     const {
-        onChoose,
+        onClose,
     } = this.props;
 
     if (!this.state.visible) {
@@ -237,7 +237,7 @@ export default class IntervalPopup extends Component {
         >
 
           <View style={styles.content}>
-            <TouchableOpacity onPress={onChoose}> 
+            <TouchableOpacity onPress={onClose}> 
                 <Text>Выбрать</Text>
             </TouchableOpacity>
             <Picker

@@ -188,7 +188,8 @@ export default class ManageScreen extends Component {
 
         <IntervalPopup 
           isOpen={this.state.popupIsOpen} 
-          onChoose={this.closeInterval}
+           
+          onClose={this.closeInterval}
         />
       </View>
     );
