@@ -214,8 +214,10 @@ export default class IntervalPopup extends Component {
   }
 
   render() {
+
     const {
-        onClose,
+      onClose,
+      onChoose
     } = this.props;
 
     if (!this.state.visible) {
@@ -236,14 +238,14 @@ export default class IntervalPopup extends Component {
           }]}
         >
 
+          {/* .bind(this, this.state.interval) */}
           <View style={styles.content}>
-            <TouchableOpacity onPress={onClose}> 
+            <TouchableOpacity onPress={onChoose.bind(this, this.state.interval)}> 
                 <Text>Выбрать</Text>
             </TouchableOpacity>
             <Picker
                 selectedValue={this.state.interval}
                 onValueChange={(itemValue, itemIndex) => {
-                        console.log(this.state.interval)
                         return this.setState({interval: itemValue})
                     }
                 }>

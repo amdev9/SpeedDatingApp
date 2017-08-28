@@ -30,6 +30,7 @@ export default class ManageScreen extends Component {
     participants: [], // init on open - get queue from server
     index: 0,
     popupIsOpen: false,
+    test: ''
   };
  
   openInterval = () => {
@@ -43,6 +44,15 @@ export default class ManageScreen extends Component {
       popupIsOpen: false,
     });
   }
+
+  closeChoose = (test) => {
+    this.setState({
+      test: test
+    }) 
+  }
+  
+     
+    
 
   onOpenConnection = () => {
     console.log(' - onopen - ');
@@ -166,8 +176,9 @@ export default class ManageScreen extends Component {
         </View>
          
         <TouchableOpacity onPress={this.openInterval}>
-          <Text> Click to choose interval 01:00</Text>
+          <Text> Click to choose interval: </Text>
         </TouchableOpacity>
+        <Text> {this.state.test} </Text>
         
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
@@ -188,6 +199,7 @@ export default class ManageScreen extends Component {
         <IntervalPopup 
           isOpen={this.state.popupIsOpen} 
           onClose={this.closeInterval}
+          onChoose={this.closeChoose}
         />
       </View>
     );
