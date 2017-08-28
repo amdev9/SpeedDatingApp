@@ -17,7 +17,7 @@ import { defaultStyles } from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Participant from './Participant';
 
-import IntervalPopup from './IntervalPopup';
+import IntervalPopup from './popups/IntervalPopup';
 
 
 export default class ManageScreen extends Component {
@@ -30,7 +30,7 @@ export default class ManageScreen extends Component {
     participants: [], // init on open - get queue from server
     index: 0,
     popupIsOpen: false,
-    test: ''
+    test: 10 // change to default value
   };
  
   openInterval = () => {
@@ -48,7 +48,7 @@ export default class ManageScreen extends Component {
   closeChoose = (test) => {
     this.closeInterval();
     this.setState({
-      test: test
+      test: parseInt(test, 10)  // from string to int
     }) 
   }
   
@@ -140,7 +140,7 @@ export default class ManageScreen extends Component {
       let json = JSON.stringify({
         command: "start",
         timeout: 2,
-        talk_time: parseInt(this.state.talk_time),
+        talk_time: this.state.test,
         selected: JSON.stringify(this.state.selected),
         event: JSON.stringify(event)
       });
@@ -165,8 +165,6 @@ export default class ManageScreen extends Component {
     const { event } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        
-        
         <View style={styles.navBar}>
           <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
           <Text style={ [styles.navBarButton,{
@@ -176,11 +174,15 @@ export default class ManageScreen extends Component {
           <Text style={styles.navBarButton}>  </Text> 
         </View>
          
-        <TouchableOpacity onPress={this.openInterval}>
-          <Text> Click to choose interval: </Text>
-        </TouchableOpacity>
-        <Text> {this.state.test} </Text>
-        
+        <View style={{
+           
+           flexDirection: 'row',
+        }}>
+          <TouchableOpacity onPress={this.openInterval}>
+            <Text > Click to choose interval: </Text>
+          </TouchableOpacity>
+          <Text> {this.state.test.toString()} </Text>
+        </View>
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
@@ -193,7 +195,7 @@ export default class ManageScreen extends Component {
             underlayColor="#9575CD"
             style={styles.buttonContainer}
             onPress={this.start}
-            >
+        >
             <Text style={styles.button}>Начать мероприятие</Text>
         </TouchableHighlight> 
 
@@ -257,7 +259,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    backgroundColor: '#673AB7',
+    backgroundColor: '#3f88fb', //673AB7
     borderRadius: 100,
     margin: 20,
     paddingVertical: 10,

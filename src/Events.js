@@ -12,7 +12,7 @@ import {
 
 import _ from 'lodash';
 import EventPoster from './EventPoster';
-import EventPopup from './EventPopup';
+import EventPopup from './popups/EventPopup';
 
 import { defaultStyles } from './styles';
 import { connect } from 'react-redux';

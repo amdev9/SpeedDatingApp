@@ -13,9 +13,9 @@ import {
   View
 } from 'react-native';
 
-import { defaultStyles } from './styles';
-import Options from './Options';
-import EventButton from './EventButton';
+import { defaultStyles } from '../styles';
+import Options from '../Options';
+import EventButton from '../EventButton';
 
 
 

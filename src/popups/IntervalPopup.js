@@ -14,7 +14,7 @@ import {
   Picker
 } from 'react-native';
 
-import { defaultStyles } from './styles';
+import { defaultStyles } from '../styles';
  
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
@@ -249,8 +249,13 @@ export default class IntervalPopup extends Component {
                         return this.setState({interval: itemValue})
                     }
                 }>
-                <Picker.Item label="Java" value="java" />
-                <Picker.Item label="JavaScript" value="js" />
+                <Picker.Item label="0:20" value="20" />
+                <Picker.Item label="01:00" value="60" />
+                <Picker.Item label="02:00" value="120" />
+                <Picker.Item label="03:00" value="180" />
+                <Picker.Item label="04:00" value="240" />
+                <Picker.Item label="05:00" value="300" />
+                <Picker.Item label="06:00" value="360" />
             </Picker>
           </View>
         
