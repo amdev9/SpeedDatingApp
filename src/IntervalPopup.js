@@ -241,8 +241,12 @@ export default class IntervalPopup extends Component {
                 <Text>Выбрать</Text>
             </TouchableOpacity>
             <Picker
-                selectedValue={this.state.language}
-                onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                selectedValue={this.state.interval}
+                onValueChange={(itemValue, itemIndex) => {
+                        console.log(this.state.interval)
+                        return this.setState({interval: itemValue})
+                    }
+                }>
                 <Picker.Item label="Java" value="java" />
                 <Picker.Item label="JavaScript" value="js" />
             </Picker>

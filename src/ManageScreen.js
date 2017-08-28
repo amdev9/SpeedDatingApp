@@ -32,10 +32,9 @@ export default class ManageScreen extends Component {
     popupIsOpen: false,
   };
  
-  openInterval = (interval) => {
+  openInterval = () => {
     this.setState({
       popupIsOpen: true,
-      interval,	
     });
   }
   
@@ -188,7 +187,6 @@ export default class ManageScreen extends Component {
 
         <IntervalPopup 
           isOpen={this.state.popupIsOpen} 
-           
           onClose={this.closeInterval}
         />
       </View>
