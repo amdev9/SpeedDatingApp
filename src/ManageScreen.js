@@ -46,6 +46,7 @@ export default class ManageScreen extends Component {
   }
 
   closeChoose = (test) => {
+    this.closeInterval();
     this.setState({
       test: test
     }) 
