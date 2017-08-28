@@ -11,7 +11,8 @@ import {
   ScrollView,
   TextInput,
   Button,
-  RefreshControl
+  RefreshControl,
+  Picker
 } from 'react-native';
 import { defaultStyles } from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -144,38 +145,14 @@ export default class ManageScreen extends Component {
         
         
         <View style={styles.navBar}>
-
-            <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
-            <Text style={ [styles.navBarButton,{
-              fontWeight: 'bold'
-            }]} onPress={() => this.props.navigation.goBack() }>Назад к мероприятиям</Text>
-            <Text style={styles.navBarHeader}></Text>
-            
-            
-            {/* <Text style={styles.navBarButton}
-              onPress={() => this.props.navigation.navigate('Events', {
-                person: user
-              })}>
-               Events
-            </Text> */}
-
-            <Text style={styles.navBarButton}>  </Text> 
-          </View>
-
-        <ScrollView
-          ref={(scrollView) => { this._scrollView = scrollView; }}  
-        >
-        {/* fix event.participants to participant_ids 
-          1. change to state.participants listen on websocket
-          2. when exit from room send ws message -> delete from state.participants
-        
-        event
-        */}
-          {this.state.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
-        </ScrollView>
-
-
-        <View style={ { 
+          <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
+          <Text style={ [styles.navBarButton,{
+            fontWeight: 'bold'
+          }]} onPress={() => this.props.navigation.goBack() }>Назад к мероприятиям</Text>
+          <Text style={styles.navBarHeader}></Text>
+          <Text style={styles.navBarButton}>  </Text> 
+        </View>
+        {/* <View style={ { 
           flexDirection: 'row',
           //justifyContent: 'space-between',
           justifyContent: 'center',
@@ -206,7 +183,30 @@ export default class ManageScreen extends Component {
             onChangeText={(text) => this.setState({ text })}
             value={this.state.talk_time_sec}
           /> 
-        </View>
+        </View> */}
+        <TouchableOpacity>
+        <Text> Click to choose interval 01:00</Text>
+        </TouchableOpacity>
+        <Picker
+          selectedValue={this.state.language}
+          onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+          <Picker.Item label="Java" value="java" />
+          <Picker.Item label="JavaScript" value="js" />
+        </Picker>
+
+        <ScrollView
+          ref={(scrollView) => { this._scrollView = scrollView; }}  
+        >
+        {/* fix event.participants to participant_ids 
+          1. change to state.participants listen on websocket
+          2. when exit from room send ws message -> delete from state.participants
+        
+        event
+        */}
+          {this.state.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
+        </ScrollView>
+
+
         
         <TouchableHighlight
             underlayColor="#9575CD"

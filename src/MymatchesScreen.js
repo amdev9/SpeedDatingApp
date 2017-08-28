@@ -95,7 +95,7 @@ export default class MymatchesScreen extends Component {
     const { person } = this.props.navigation.state.params;
     
     if(obj && typeof(obj.data) !== 'undefined') {
-      var founded = JSON.parse(obj.data);
+      var founded = JSON.parse(obj.data); // unexpected eof
       for (var key in founded ) {
         if (person._id == key) {
           founded[key].shift();  
