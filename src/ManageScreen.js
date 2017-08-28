@@ -11,27 +11,40 @@ import {
   ScrollView,
   TextInput,
   Button,
-  RefreshControl,
-  Picker
+  RefreshControl
 } from 'react-native';
 import { defaultStyles } from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import Participant from './Participant';
+
+import IntervalPopup from './IntervalPopup';
+
 
 export default class ManageScreen extends Component {
   //   --main ws--
   // [ ManageScreen -> 'start' -> VotingStatusScreen ] -> 'done' ->  MatchScreen
 
+ 
   state = {
     selected: [],
     participants: [], // init on open - get queue from server
     index: 0,
-    talk_time_min: 4,
-    talk_time_sec: 4,
-
+    popupIsOpen: false,
   };
  
+  openInterval = (interval) => {
+    this.setState({
+      popupIsOpen: true,
+      interval,	
+    });
+  }
+  
+  closeInterval = () => {
+    this.setState({
+      popupIsOpen: false,
+    });
+  }
+
   onOpenConnection = () => {
     console.log(' - onopen - ');
     // get participants from server queue and clean it
@@ -152,57 +165,14 @@ export default class ManageScreen extends Component {
           <Text style={styles.navBarHeader}></Text>
           <Text style={styles.navBarButton}>  </Text> 
         </View>
-        {/* <View style={ { 
-          flexDirection: 'row',
-          //justifyContent: 'space-between',
-          justifyContent: 'center',
-          marginBottom: 5,
-        }}>
-          <Text style={{ width: 100, textAlign: 'center', color: '#3f88fb', fontWeight: 'bold'}}>Минуты</Text>
-          <Text style={{ width: 100, textAlign: 'center', color: '#3f88fb', fontWeight: 'bold'}}>Секунды</Text>
-        </View>
-        <View style={ { 
-          flexDirection: 'row',
-          //justifyContent: 'space-between',
-          justifyContent: 'center',
-          marginBottom: 20
-          
-        }}>
-       
-        
-          <TextInput
-            style={{ marginLeft: 20, marginRight: 20, height: 30, width: 60, borderColor: 'gray', borderWidth: 1, fontSize: 20, fontWeight: 'bold' }}
-            keyboardType= {'numeric'}
-            onChangeText={(text) => this.setState({ text })}
-            value={this.state.talk_time_min}
-          />
-          <Text style={{ fontWeight: 'bold', fontSize: 20}}>:</Text>
-          <TextInput
-            style={{ marginLeft: 20, marginRight: 20, height: 30, width: 60, borderColor: 'gray', borderWidth: 1, fontSize: 20, fontWeight: 'bold' }}
-            keyboardType= {'numeric'}
-            onChangeText={(text) => this.setState({ text })}
-            value={this.state.talk_time_sec}
-          /> 
-        </View> */}
-        <TouchableOpacity>
-        <Text> Click to choose interval 01:00</Text>
+         
+        <TouchableOpacity onPress={this.openInterval}>
+          <Text> Click to choose interval 01:00</Text>
         </TouchableOpacity>
-        <Picker
-          selectedValue={this.state.language}
-          onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-          <Picker.Item label="Java" value="java" />
-          <Picker.Item label="JavaScript" value="js" />
-        </Picker>
-
+        
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
-        {/* fix event.participants to participant_ids 
-          1. change to state.participants listen on websocket
-          2. when exit from room send ws message -> delete from state.participants
-        
-        event
-        */}
           {this.state.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
         </ScrollView>
 
@@ -215,6 +185,11 @@ export default class ManageScreen extends Component {
             >
             <Text style={styles.button}>Начать мероприятие</Text>
         </TouchableHighlight> 
+
+        <IntervalPopup 
+          isOpen={this.state.popupIsOpen} 
+          onChoose={this.closeInterval}
+        />
       </View>
     );
   }
