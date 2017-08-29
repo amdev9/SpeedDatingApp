@@ -163,7 +163,7 @@ export default class VotingStatusScreen extends Component {
       <View style={styles.container}>
   
   {/* 
-   change to custom matchParticipant
+   change to custom votingParticipant
     */}
           {this.state.participants.map((participant, index) => {
             return <View style={styles.containerPart} >
