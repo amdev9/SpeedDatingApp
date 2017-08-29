@@ -50,20 +50,58 @@ export default class VotingStatusScreen extends Component {
       const { navigate } = this.props.navigation;
       var founded = JSON.parse(obj.data);
 
-      console.log(founded)
-      // 59a2c6995a4ffa2284514cff
-      // {_id: "59a2c6995a4ffa2284514cff", name: "Александра", avatar: "http://localhost:3000/images/59a2c6b25a4ffa2284514d00"}
-      // {_id: "59a498b4be2f9f52448a9432", name: "Alexander", avatar: "https://vk.com/images/camera_50.png"}
-      // 59a498b4be2f9f52448a9432
-      // {_id: "59a498b4be2f9f52448a9432", name: "Alexander", avatar: "https://vk.com/images/camera_50.png"}
-      // {_id: "59a2c6995a4ffa2284514cff", name: "Александра", avatar: "http://localhost:3000/images/59a2c6b25a4ffa2284514d00"}
-       
+      // console.log(founded)
+            
+
+      Array.prototype.indexOfForArrays = function(search)
+      {
+        var searchJson = JSON.stringify(search); // "[3,566,23,79]"
+        var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
+        return arrJson.indexOf(searchJson);
+      };
+
+
+      for (var key in founded ) { 
+          founded[key].shift();  
+      }
+
       var passed = [];
+      var final = [];
+      var final_ob = [];
       for (var key in founded ) {
-        passed.push(founded[key]);
-      }    
+          founded[key].forEach( (item) => {  
+              founded[item._id].forEach( (found) => {
+                  if (found._id == key) {
+                      var s = [key, item._id].sort();
+                      if ( passed.indexOfForArrays(s) < 0 ) { 
+                          passed.push(s);
+                      } else {
+                          final = s;
+                      }
+                  }
+              })
+          })
+      }
+
+      for (var key in founded ) { 
+          founded[key].forEach ( (it) => {
+              if ( final.indexOf(it._id) > -1 ) {
+                  var ind = final.indexOf(it._id);
+                  final.slice(ind , 1);
+                  final_ob.push(it);
+              }
+          })
+      }
+
+      console.log(final_ob);
+
+      // var passed = [];
+      // for (var key in founded ) {
+      //   passed.push(founded[key]);
+      // }    
+
       navigate('Match', {
-        matches: passed
+        matches: final_ob
       });  
     } else if ( obj.type == 'likes_post' ) {
 
