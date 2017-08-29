@@ -164,7 +164,7 @@ export default class MymatchesScreen extends Component {
               <TextInput
                 style={styles.search} 
                 
-                placeholder="text"
+                placeholder="Поиск"
                 placeholderTextColor="#888888"
                 selectionColor="#3f88fb"
                 onChangeText={this.setSearchText.bind(this)}
