@@ -21,19 +21,13 @@ export default class MatchScreen extends Component {
     const { matches } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-         <Text> { JSON.stringify(matches) }</Text> 
-
-                  {/*   
-
-         {matches.map(function(object, i){ 
-            return object.map((participant, index) => {
-              return <View><Text> { participant._id } </Text></View>
-            })
-          }) 
-          } 
+         {/* <Text> { JSON.stringify(matches) }</Text> */}
+         
+         { matches.map((participant, index) => {
+              return  <Participant participant={participant} key={index} />  
+           })
+        } 
  
-          <Participant participant={participant} key={index} /> 
-          */}
       </View>
     );
   }
@@ -41,9 +35,9 @@ export default class MatchScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   header: {
     ...defaultStyles.text,
