@@ -235,7 +235,7 @@ function mainLogic(ws, obj) {
         // console.log(event.likes);    
         let matches = {};
         event.likes.forEach( (object) => {
-            console.log('--trace----> ', object)
+            // console.log('--trace----> ', object)
             // person_likes contains wrong!
             object.person_likes.forEach( (id) => {
                 event.likes.forEach( (next) => {
@@ -246,15 +246,15 @@ function mainLogic(ws, obj) {
                                 matches[object.person_id] = [];
                             }
                             matches[object.person_id].push(id);
-                            console.log('matches --> ',object.person_id, id);
+                            // console.log('matches --> ',object.person_id, id);
                         }
                     }
                 })
             })
         })
 
-        console.log(event.participants);
-        console.log(matches);
+        // console.log(event.participants);
+        // console.log(matches);
         // from array of ids to array of objects obj.selected
         for (var key in matches) {
             var key_index = _.findIndex(event.participants, function(o) { return o._id == key; });

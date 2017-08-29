@@ -68,7 +68,7 @@ export default class VotingScreen extends Component {
           </View>
           <Text style={styles.text}>{name}</Text>
 
-          <Text style={styles.text}>person { table }</Text>
+          <Text style={styles.text}>table { table }</Text>
         </View>
         <TouchableHighlight
           underlayColor="#9575CD"

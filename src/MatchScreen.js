@@ -21,14 +21,19 @@ export default class MatchScreen extends Component {
     const { matches } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        <Text> Admin matches </Text>
-                  
+         <Text> { JSON.stringify(matches) }</Text> 
+
+                  {/*   
+
          {matches.map(function(object, i){ 
             return object.map((participant, index) => {
-              return <Participant participant={participant} key={index} /> 
+              return <View><Text> { participant._id } </Text></View>
             })
           }) 
-          }
+          } 
+ 
+          <Participant participant={participant} key={index} /> 
+          */}
       </View>
     );
   }

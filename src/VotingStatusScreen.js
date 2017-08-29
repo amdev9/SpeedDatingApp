@@ -44,34 +44,29 @@ export default class VotingStatusScreen extends Component {
 
   onMessageRecieved = (e) => {
     // when recieved broadcast 'push event' -> rerender VotingStatusScreen
-    console.log(e.data);
+    // console.log(e.data);
     var obj = JSON.parse(e.data); 
     if (obj.type == 'calculate') {
       const { navigate } = this.props.navigation;
       var founded = JSON.parse(obj.data);
+
+      console.log(founded)
+      // 59a2c6995a4ffa2284514cff
+      // {_id: "59a2c6995a4ffa2284514cff", name: "Александра", avatar: "http://localhost:3000/images/59a2c6b25a4ffa2284514d00"}
+      // {_id: "59a498b4be2f9f52448a9432", name: "Alexander", avatar: "https://vk.com/images/camera_50.png"}
+      // 59a498b4be2f9f52448a9432
+      // {_id: "59a498b4be2f9f52448a9432", name: "Alexander", avatar: "https://vk.com/images/camera_50.png"}
+      // {_id: "59a2c6995a4ffa2284514cff", name: "Александра", avatar: "http://localhost:3000/images/59a2c6b25a4ffa2284514d00"}
+       
       var passed = [];
       for (var key in founded ) {
         passed.push(founded[key]);
-      }
-      // var copy = [];
-      // passed.forEach( (arr ) => {
-      //   copy.push(_.map(arr, '_id').sort());
-      // })
-      // var uniq_copy = _.uniq(copy, function(item) { 
-      //   return JSON.stringify(item); 
-      // });
-      
-      
-      // passed remove duplicate arrays
-      // to array of ids => sort ids => remove duplicates
-      
+      }    
       navigate('Match', {
         matches: passed
       });  
     } else if ( obj.type == 'likes_post' ) {
 
-      // console.log('particip', this.state.participants);
-      // console.log('likes_post', obj.data);
       var lik = JSON.parse(obj.data);
       this.state.participants.map( (participant) => {
 
@@ -89,17 +84,6 @@ export default class VotingStatusScreen extends Component {
         participants: this.state.participants
       });
 
-      // this.state.participants.forEach( (participant) => {
-      //   if (participant._id == obj.data.person_id) {
-      //     participant.likes = obj.data;
-      //   }
-      // });
-      
-
-      // this.state.liked.push(obj.data)
-      // this.setState({
-      //   liked: this.state.liked
-      // });
     }
   };
 
@@ -129,17 +113,12 @@ export default class VotingStatusScreen extends Component {
   }
 
   render() {
-    // list with all participants - pushed results status in front of each
     
     return (
       <View style={styles.container}>
-        <Text> Voting status screen - Manager screen</Text>
-
-          {/* <Text> { JSON.stringify(this.state.participants) } </Text>  */}
-
-          {this.state.participants.map((participant, index) => 
-           
-            <View style={styles.containerPart} >
+  
+          {this.state.participants.map((participant, index) => {
+            return <View style={styles.containerPart} >
               <TouchableOpacity>
                 <View style={styles.avatarContainer}>
                   {participant.avatar && <Image
@@ -152,14 +131,24 @@ export default class VotingStatusScreen extends Component {
                   <Text style={[styles.text, styles.name]}> {participant.name} </Text>
                 </View>
                 <View >
-                  <Text style={[styles.text, styles.name]}> { JSON.stringify(participant.likes) } </Text>
+                  <Text style={[styles.text, styles.name]}> { typeof participant.likes === 'object' ? participant.likes.person_likes.join(',') : '' } </Text>
+                  {/* raturn array of avatars */}
                 </View>
               </TouchableOpacity>
             </View>
+          }
+          
           )}
-        <TouchableOpacity onPress={this._calculate}>
-          <Text> Calculate results </Text>
-        </TouchableOpacity>
+     
+
+        <TouchableHighlight
+            underlayColor="#9575CD"
+            style={styles.buttonContainer}
+            onPress={this._calculate}
+            >
+            <Text style={styles.button}>Подсчитать совпадения</Text>
+        </TouchableHighlight> 
+
       </View>
     );
   }
