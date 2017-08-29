@@ -52,9 +52,6 @@ export default class MatchScreen extends Component {
                     <View >
                       <Text style={[styles.text, styles.name]}> {participant.name} </Text>
                     </View>
-                    <View >
-                      <Text style={[styles.text, styles.name]}> { typeof participant.likes === 'object' ? participant.likes.person_likes.join(',') : '' } </Text>  
-                    </View>
                   </TouchableOpacity>
                 </View>
               );
