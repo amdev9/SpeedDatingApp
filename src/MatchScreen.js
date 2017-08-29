@@ -21,12 +21,23 @@ export default class MatchScreen extends Component {
     const { matches } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-         {/* <Text> { JSON.stringify(matches) }</Text> */}
-         
+          <Text> { JSON.stringify(matches) }</Text> 
+         {/*
+         change to custom matchParticipant
+
+        
+
+         <ScrollView
+          ref={(scrollView) => { this._scrollView = scrollView; }}  
+        >
          { matches.map((participant, index) => {
-              return  <Participant participant={participant} key={index} />  
+              return  (
+                <Participant participant={participant} key={index} />  
+              );
            })
-        } 
+         } 
+        </ScrollView>
+         */}
  
       </View>
     );

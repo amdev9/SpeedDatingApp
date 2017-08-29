@@ -67,7 +67,7 @@ export default class VotingStatusScreen extends Component {
 
       var passed = [];
       var final = [];
-      var final_ob = [];
+      
       for (var key in founded ) {
           founded[key].forEach( (item) => {  
               founded[item._id].forEach( (found) => {
@@ -76,24 +76,31 @@ export default class VotingStatusScreen extends Component {
                       if ( passed.indexOfForArrays(s) < 0 ) { 
                           passed.push(s);
                       } else {
-                          final = s;
+                          final.push(s); // [ s, .. ]
                       }
                   }
               })
           })
       }
 
-      for (var key in founded ) { 
-          founded[key].forEach ( (it) => {
-              if ( final.indexOf(it._id) > -1 ) {
-                  var ind = final.indexOf(it._id);
-                  final.slice(ind , 1);
-                  final_ob.push(it);
-              }
-          })
-      }
+      var final_ob_done = []; // array of pairs = 2 item arrays
+      final.forEach( (fin) => {
+        var final_ob = [];
+        for (var key in founded ) { 
+            founded[key].forEach ( (it) => {
 
-      console.log(final_ob);
+                if ( fin.indexOf(it._id) > -1 ) {
+                  var ind = fin.indexOf(it._id);
+                  fin.slice(ind , 1);
+                  final_ob.push(it);
+                }
+
+            })
+        }
+        final_ob_done.push(final_ob);
+      })
+
+      console.log(final_ob_done);
 
       // var passed = [];
       // for (var key in founded ) {
@@ -101,7 +108,7 @@ export default class VotingStatusScreen extends Component {
       // }    
 
       navigate('Match', {
-        matches: final_ob
+        matches: final_ob_done
       });  
     } else if ( obj.type == 'likes_post' ) {
 
@@ -155,6 +162,9 @@ export default class VotingStatusScreen extends Component {
     return (
       <View style={styles.container}>
   
+  {/* 
+   change to custom matchParticipant
+    */}
           {this.state.participants.map((participant, index) => {
             return <View style={styles.containerPart} >
               <TouchableOpacity>
@@ -170,7 +180,7 @@ export default class VotingStatusScreen extends Component {
                 </View>
                 <View >
                   <Text style={[styles.text, styles.name]}> { typeof participant.likes === 'object' ? participant.likes.person_likes.join(',') : '' } </Text>
-                  {/* raturn array of avatars */}
+                  
                 </View>
               </TouchableOpacity>
             </View>
