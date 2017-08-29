@@ -38,35 +38,30 @@ export default class MatchScreen extends Component {
          
 
         { matches.map((object, index) => {
-
-
             return object.map((participant, index) => {
               return  (
                 <View style={styles.containerPart} >
-                <TouchableOpacity>
-                  <View style={styles.avatarContainer}>
-                    {participant.avatar && <Image
-                      resizeMode='contain'
-                      style={styles.avatar}
-                      source={{ uri: participant.avatar }}
-                    />}
-                  </View>
-                  <View >
-                    <Text style={[styles.text, styles.name]}> {participant.name} </Text>
-                  </View>
-                  <View >
-                    <Text style={[styles.text, styles.name]}> { typeof participant.likes === 'object' ? participant.likes.person_likes.join(',') : '' } </Text>  
-                  </View>
-                </TouchableOpacity>
-              </View>
+                  <TouchableOpacity>
+                    <View style={styles.avatarContainer}>
+                      {participant.avatar && <Image
+                        resizeMode='contain'
+                        style={styles.avatar}
+                        source={{ uri: participant.avatar }}
+                      />}
+                    </View>
+                    <View >
+                      <Text style={[styles.text, styles.name]}> {participant.name} </Text>
+                    </View>
+                    <View >
+                      <Text style={[styles.text, styles.name]}> { typeof participant.likes === 'object' ? participant.likes.person_likes.join(',') : '' } </Text>  
+                    </View>
+                  </TouchableOpacity>
+                </View>
               );
             })
 
           })
         } 
-
-         
-          
       </View>
     );
   }

@@ -179,7 +179,16 @@ export default class VotingStatusScreen extends Component {
                   <Text style={[styles.text, styles.name]}> {participant.name} </Text>
                 </View>
                 <View >
-                  <Text style={[styles.text, styles.name]}> { typeof participant.likes === 'object' ? participant.likes.person_likes.join(',') : '' } </Text>
+                   {/* <Text style={[styles.text, styles.name]}>  </Text>
+                  render avatars */}
+                  { typeof participant.likes === 'object' ? participant.likes.person_likes.map( (id)=> {
+                    var ob = _.find(this.state.participants, function(obj) { return obj._id == id });
+                    return <Image
+                      resizeMode='contain'
+                      style={styles.avatar}
+                      source={{ uri: ob.avatar  }}
+                    />
+                  }) : <View ></View> }
                   
                 </View>
               </TouchableOpacity>
