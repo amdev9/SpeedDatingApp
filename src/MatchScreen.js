@@ -9,7 +9,8 @@ import {
   View, 
   ListView, 
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  Image
 } from 'react-native';
 import { defaultStyles } from './styles';
 
@@ -21,28 +22,91 @@ export default class MatchScreen extends Component {
     const { matches } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-          <Text> { JSON.stringify(matches) }</Text> 
-         {/*
+         {/*  <Text> { JSON.stringify(matches) }</Text> 
             change to custom matchParticipant
-
-            <ScrollView
-              ref={(scrollView) => { this._scrollView = scrollView; }}  
-            >
-            { matches.map((participant, index) => {
-                  return  (
-                    <Participant participant={participant} key={index} />  
-                  );
-              })
-            } 
-            </ScrollView>
+          <ScrollView
+            ref={(scrollView) => { this._scrollView = scrollView; }}  
+          >
+          { matches.map((participant, index) => {
+                return  (
+                  <Participant participant={participant} key={index} />  
+                );
+            })
+          } 
+          </ScrollView>
          */}
- 
+         
+
+        { matches.map((object, index) => {
+
+
+            return object.map((participant, index) => {
+              return  (
+                <View style={styles.containerPart} >
+                <TouchableOpacity>
+                  <View style={styles.avatarContainer}>
+                    {participant.avatar && <Image
+                      resizeMode='contain'
+                      style={styles.avatar}
+                      source={{ uri: participant.avatar }}
+                    />}
+                  </View>
+                  <View >
+                    <Text style={[styles.text, styles.name]}> {participant.name} </Text>
+                  </View>
+                  <View >
+                    <Text style={[styles.text, styles.name]}> { typeof participant.likes === 'object' ? participant.likes.person_likes.join(',') : '' } </Text>  
+                  </View>
+                </TouchableOpacity>
+              </View>
+              );
+            })
+
+          })
+        } 
+
+         
+          
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  containerPart: {
+    flexDirection: 'row',
+  },
+  avatarContainer: {
+    alignItems: 'center',
+    marginLeft: 5,
+    paddingTop: 10,
+    width: 40,
+  },
+  contentContainer: {
+    flex: 1,
+    borderBottomWidth: 1,
+    borderColor: '#EEE',
+    padding: 5,
+  },
+  avatar: {
+    borderWidth: 1,
+    borderColor: '#EEE',
+    borderRadius: 13,
+    width: 26,
+    height: 26,
+  },
+  text: {
+    color: '#000',
+    fontFamily: 'Avenir',
+    fontSize: 15,
+  },
+  name: {
+    fontWeight: 'bold',
+  },
+  created: {
+    color: '#BBB',
+  },
+/////
   container: {
     // flex: 1,
     // justifyContent: 'center',
