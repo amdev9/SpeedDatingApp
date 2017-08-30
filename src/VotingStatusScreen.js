@@ -231,7 +231,8 @@ const styles = StyleSheet.create({
   textContainer: {
     width: 120,
     height: 60,
-    marginLeft: 15
+    marginLeft: 15,
+    
   },
   avatarListContainer: {
     // alignItems: 'center',

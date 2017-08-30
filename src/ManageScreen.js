@@ -190,7 +190,7 @@ export default class ManageScreen extends Component {
               }} >Выбрать промежуток </Text>
           </TouchableHighlight>
           <View style={styles.textContainer}>
-            <Text style={{ color: "white"}}> {this.state.test.toString()} </Text>
+            <Text style={{ color: "#3f88fb", fontWeight: 'bold'}}> {this.state.test.toString()} </Text>
           </View>
         </View>
         <ScrollView
@@ -289,7 +289,12 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     alignItems: 'center',
-    backgroundColor: '#673AB7', //673AB7
+    // backgroundColor: '#673AB7', //673AB7
+    
+    borderRightWidth: 1,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: '#3f88fb',
     borderTopRightRadius: 100,
     borderBottomRightRadius: 100,
     // margin: 20,

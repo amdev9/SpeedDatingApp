@@ -227,57 +227,54 @@ class Edit extends React.Component {
 
      
         <Modal
-        animationType={"slide"}
-        transparent={false}
-        visible={this.state.modalVisible}
-        onRequestClose={() => console.log('closed')}
+          animationType={"slide"}
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => console.log('closed')}
         >
-        <View style={styles.modalContainer}>
-        <TouchableOpacity onPress={this.toggleModal}>
-          <Text style={styles.closeButton}>Закрыть</Text>
-        </TouchableOpacity>
-        {/* <Button
-            title='Close'
-            onPress={this.toggleModal}
-          />   */}
-          <ScrollView
-            contentContainerStyle={styles.scrollView}>
+          <View style={styles.modalContainer}>
+          <TouchableOpacity onPress={this.toggleModal}>
+            <Text style={styles.closeButton}>Закрыть</Text>
+          </TouchableOpacity>
+           
+            <ScrollView
+              contentContainerStyle={styles.scrollView}>
+              {
+                this.state.photos.map((p, i) => {
+                  return (
+                    <TouchableHighlight
+                      underlayColor="#9575CD"
+                      style={{opacity: i === this.state.index ? 0.5 : 1}}
+                      key={i}
+                      underlayColor='transparent'
+                      onPress={() => this.setIndex(i)}
+                    >
+                      <Image
+                        style={{
+                          width: width/3,
+                          height: width/3
+                        }}
+                        source={{uri: p.node.image.uri}}
+                      />
+                    </TouchableHighlight>
+                  )
+                })
+              }
+            </ScrollView>
             {
-              this.state.photos.map((p, i) => {
-                return (
-                  <TouchableHighlight
-                    underlayColor="#9575CD"
-                    style={{opacity: i === this.state.index ? 0.5 : 1}}
-                    key={i}
-                    underlayColor='transparent'
-                    onPress={() => this.setIndex(i)}
-                  >
-                    <Image
-                      style={{
-                        width: width/3,
-                        height: width/3
-                      }}
-                      source={{uri: p.node.image.uri}}
-                    />
-                  </TouchableHighlight>
-                )
-              })
+              this.state.index !== null  && (
+                <View style={styles.shareButton}>
+                <TouchableOpacity onPress={this.upload}>
+                  <Text style={styles.uploadButton}>Загрузить</Text>
+                  </TouchableOpacity>
+                  {/* <Button
+                      title='Upload'
+                      onPress={this.upload}
+                    /> */}
+                </View>
+              )
             }
-          </ScrollView>
-          {
-            this.state.index !== null  && (
-              <View style={styles.shareButton}>
-              <TouchableOpacity onPress={this.upload}>
-                <Text style={styles.uploadButton}>Загрузить</Text>
-                </TouchableOpacity>
-                {/* <Button
-                    title='Upload'
-                    onPress={this.upload}
-                  /> */}
-              </View>
-            )
-          }
-        </View>
+          </View>
         </Modal>
       </View>
 
