@@ -170,8 +170,8 @@ export default class VotingStatusScreen extends Component {
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
           {this.state.participants.map((participant, index) => {
-            return <View style={styles.containerPart} >
-              <TouchableOpacity>
+            return <TouchableOpacity style={styles.containerPart} >
+              
                 <View style={styles.avatarContainer}>
                   {participant.avatar && <Image
                     resizeMode='contain'
@@ -179,10 +179,10 @@ export default class VotingStatusScreen extends Component {
                     source={{ uri: participant.avatar }}
                   />}
                 </View>
-                <View >
+                <View style={styles.textContainer}>
                   <Text style={[styles.text, styles.name]}> {participant.name} </Text>
                 </View>
-                <View >
+                <View style={styles.avatarListContainer}>
                    {/* <Text style={[styles.text, styles.name]}>  </Text>
                   render avatars */}
                   { typeof participant.likes === 'object' ? participant.likes.person_likes.map( (id)=> {
@@ -195,8 +195,8 @@ export default class VotingStatusScreen extends Component {
                   }) : <View ></View> }
                   
                 </View>
-              </TouchableOpacity>
-            </View>
+              
+            </TouchableOpacity>
           }
           
           )}
@@ -224,6 +224,17 @@ const styles = StyleSheet.create({
   },
   avatarContainer: {
     alignItems: 'center',
+    marginLeft: 5,
+    paddingTop: 10,
+    // width: 40,
+  },
+  textContainer: {
+    width: 120,
+    height: 60,
+    marginLeft: 15
+  },
+  avatarListContainer: {
+    // alignItems: 'center',
     marginLeft: 5,
     paddingTop: 10,
     // width: 40,

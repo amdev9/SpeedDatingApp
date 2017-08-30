@@ -36,15 +36,15 @@ export default class MatchScreen extends Component {
         
 
       <ScrollView
-          ref={(scrollView) => { this._scrollView = scrollView; }}  
+          style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
 
         { matches.map((object, index) => {
 
             return object.map((participant, index) => {
               return  (
-                <View style={styles.containerPart} >
-                  <TouchableOpacity>
+                <TouchableOpacity style={styles.containerPart} >
+                  
                     <View style={styles.avatarContainer}>
                       {participant.avatar && <Image
                         resizeMode='contain'
@@ -52,11 +52,11 @@ export default class MatchScreen extends Component {
                         source={{ uri: participant.avatar }}
                       />}
                     </View>
-                    <View >
+                    <View style={ styles.textContainer }>
                       <Text style={[styles.text, styles.name]}> {participant.name} </Text>
                     </View>
-                  </TouchableOpacity>
-                </View>
+                   
+                </TouchableOpacity>
               );
             })
 
@@ -109,19 +109,28 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     paddingTop: 10,
     width: 40,
+    
+  },
+
+  textContainer: {
+    // width: 120,
+    // height: 60,
+    // marginLeft: 15
   },
   contentContainer: {
     flex: 1,
     borderBottomWidth: 1,
     borderColor: '#EEE',
     padding: 5,
+    
   },
   avatar: {
-    borderWidth: 1,
-    borderColor: '#EEE',
-    borderRadius: 13,
-    width: 26,
-    height: 26,
+    // borderWidth: 1,
+    // borderColor: '#EEE',
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+
   },
   text: {
     color: '#000',
