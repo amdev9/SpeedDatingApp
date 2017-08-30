@@ -22,17 +22,23 @@ export default class MatchScreen extends Component {
     const { matches } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
+        {/* 
         <View style={styles.navBar}>
           <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
           <Text style={ [styles.navBarButton,{
             fontWeight: 'bold'
           }]} onPress={() => this.props.navigation.goBack() }>Назад к мероприятиям</Text>
-          {/* return to events where to find data ? */}
+          
           <Text style={styles.navBarHeader}></Text>
           <Text style={styles.navBarButton}>  </Text> 
         </View>
-         
+          */}
         
+
+      <ScrollView
+          ref={(scrollView) => { this._scrollView = scrollView; }}  
+        >
+
         { matches.map((object, index) => {
 
             return object.map((participant, index) => {
@@ -56,6 +62,8 @@ export default class MatchScreen extends Component {
 
           })
         } 
+      </ScrollView>
+
       </View>
     );
   }
@@ -94,6 +102,7 @@ const styles = StyleSheet.create({
   /////////
   containerPart: {
     flexDirection: 'row',
+    
   },
   avatarContainer: {
     alignItems: 'center',
@@ -127,7 +136,8 @@ const styles = StyleSheet.create({
   },
 /////
   container: {
-    // flex: 1,
+    flex: 1,
+    backgroundColor: '#FFF'
     // justifyContent: 'center',
     // alignItems: 'center',
   },

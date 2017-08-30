@@ -165,6 +165,10 @@ export default class VotingStatusScreen extends Component {
   {/* 
    change to custom votingParticipant
     */}
+
+    <ScrollView style={{ marginTop: 20 }}
+          ref={(scrollView) => { this._scrollView = scrollView; }}  
+        >
           {this.state.participants.map((participant, index) => {
             return <View style={styles.containerPart} >
               <TouchableOpacity>
@@ -185,7 +189,7 @@ export default class VotingStatusScreen extends Component {
                     var ob = _.find(this.state.participants, function(obj) { return obj._id == id });
                     return <Image
                       resizeMode='contain'
-                      style={styles.avatar}
+                      style={styles.avatarList}
                       source={{ uri: ob.avatar  }}
                     />
                   }) : <View ></View> }
@@ -196,7 +200,8 @@ export default class VotingStatusScreen extends Component {
           }
           
           )}
-     
+          </ScrollView>
+
 
         <TouchableHighlight
             underlayColor="#9575CD"
@@ -213,23 +218,32 @@ export default class VotingStatusScreen extends Component {
 
 const styles = StyleSheet.create({
   containerPart: {
+    flex: 1,
     flexDirection: 'row',
+    
   },
   avatarContainer: {
     alignItems: 'center',
     marginLeft: 5,
     paddingTop: 10,
-    width: 40,
+    // width: 40,
   },
-  contentContainer: {
-    flex: 1,
-    borderBottomWidth: 1,
-    borderColor: '#EEE',
-    padding: 5,
-  },
+  // contentContainer: {
+  //   flex: 1,
+  //   borderBottomWidth: 1,
+  //   borderColor: '#EEE',
+  //   padding: 5,
+  // },
   avatar: {
-    borderWidth: 1,
-    borderColor: '#EEE',
+    // borderWidth: 1,
+    // borderColor: '#EEE',
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+  },
+  avatarList: {
+    // borderWidth: 1,
+    // borderColor: '#EEE',
     borderRadius: 13,
     width: 26,
     height: 26,
@@ -248,8 +262,11 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // marginTop: 20,
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    backgroundColor: '#FFF'
   },
   header: {
     ...defaultStyles.text,
@@ -263,7 +280,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    backgroundColor: '#673AB7',
+    backgroundColor: '#3f88fb',//673AB7
     borderRadius: 100,
     margin: 20,
     paddingVertical: 10,
