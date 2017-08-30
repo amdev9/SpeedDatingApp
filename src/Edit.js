@@ -1,5 +1,4 @@
 import React from 'react'
-
 import {
   View,
   Text,
@@ -18,18 +17,12 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-
-
 import Icon from 'react-native-vector-icons/Ionicons';
 import { defaultStyles } from './styles';
 import { put, get } from '../components/api';
 var RNUploader = NativeModules.RNUploader;
 import RNFetchBlob from 'react-native-fetch-blob';
-
 import ImagePicker from 'react-native-image-crop-picker';
-
-
-
 
 let styles
 const { width,height } = Dimensions.get('window')
@@ -58,7 +51,6 @@ class Edit extends React.Component {
       current_work: user.current_work ? user.current_work  : '',
       current_university: user.current_university ? user.current_university  : '',
       
-
     }
   }
 

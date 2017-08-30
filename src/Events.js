@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 
 import _ from 'lodash';
+import Icon from 'react-native-vector-icons/Ionicons';
 import EventPoster from './EventPoster';
 import EventPopup from './popups/EventPopup';
-
 import { defaultStyles } from './styles';
+
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 @connect(
   state => ({
@@ -108,34 +108,15 @@ export default class Events extends Component {
       <View style={styles.container}>
       
         <View style={styles.navBar}>
-          {/* <Text style={styles.navBarButton}
-            onPress={() =>  this.props.navigation.navigate('Profile', {
-              user: person
-            })}>
-             Profile
-          </Text> */}
-
           <Icon style={styles.navBarButton}
             onPress={() =>  this.props.navigation.navigate('Profile', {
               user: person
             })} name="ios-person-outline" size={30} color="#900" />
-          {/* 
-          this.props.navigation.goBack()} 
-             */}
           <Text style={styles.navBarHeader}>Мероприятия</Text>
-
-          {/* <Icon style={styles.navBarHeader} name="ios-calendar" size={30} color="#900" /> */}
-         
           <Icon style={styles.navBarButton}
             onPress={() => this.props.navigation.navigate('Mymatches', {
               person: person
             })} name="ios-chatboxes-outline" size={30} color="#900" /> 
-          {/* <Text style={styles.navBarButton}
-            onPress={() => this.props.navigation.navigate('Mymatches', {
-              person: person
-            })}>
-             Matches
-          </Text> */}
         </View>
   
         <SegmentedControlIOS tintColor="#3f88fb" style={styles.bottomContent} 

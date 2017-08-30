@@ -16,9 +16,22 @@ import { defaultStyles } from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Participant from './Participant';
 
+
+import { connect } from 'react-redux';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    refresh: () => dispatch({type: 'GET_EVENT_DATA'}),
+  }),
+)
 export default class MatchScreen extends Component {
 
   render() {
+    const { events } = this.props;
     const { matches } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
@@ -34,6 +47,7 @@ export default class MatchScreen extends Component {
         </View>
           */}
         
+        <Text> { JSON.stringify(events) } </Text>
 
       <ScrollView
           style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  

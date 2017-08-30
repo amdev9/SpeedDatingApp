@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   View,
   NativeModules,
-  WebView
+  WebView,
+  Image
 } from 'react-native';
 import { defaultStyles } from './styles';
 import { put, get } from '../components/api';
@@ -83,7 +84,14 @@ export default class Confirmation extends Component {
       : 
 
       <View style={styles.container}>
-        <Text> All info about payment </Text>
+        <Text style={styles.title}> {event.title} </Text>
+        <Text> {event.date} </Text>
+        <View style={styles.imageContainer}>
+          <Image source={{ uri: event.photo }} style={styles.image} />
+        </View>
+        <Text> { JSON.stringify(event.manage_ids) } </Text>
+        <Text> {event.description} </Text>
+        <Text> { JSON.stringify(event.participants) } </Text>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() =>  this._finalBookEvent() }//this._pressFunc()} // change to yandex pay func
@@ -121,10 +129,16 @@ export default class Confirmation extends Component {
 
 
 const styles = StyleSheet.create({
+  title: {
+    fontWeight: 'bold',
+    marginTop: 20
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#FFF'
+    
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   header: {
     ...defaultStyles.text,

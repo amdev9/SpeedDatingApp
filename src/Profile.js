@@ -27,24 +27,13 @@ export default class Profile extends Component {
           <View style={styles.navBar}>
             <Text style={styles.navBarButton}></Text>
             <Text style={styles.navBarHeader}>Профиль</Text>
-            {/* <Icon style={styles.navBarHeader} name="ios-person" size={30} color="#900" /> */}
-            
-            {/* <Text style={styles.navBarButton}
-              onPress={() => this.props.navigation.navigate('Events', {
-                person: user
-              })}>
-               Events
-            </Text> */}
-
             <Icon style={styles.navBarButton}
               onPress={() => this.props.navigation.navigate('Events', {
                 person: user
               })} name="ios-calendar-outline" size={30} />
           </View>
           
-          {/* <Text style={styles.header}>
-            Welcome {user.name}!
-          </Text> */}
+          
           <View style={styles.avatar}>
             <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}

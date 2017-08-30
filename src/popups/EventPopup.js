@@ -270,7 +270,7 @@ export default class EventPopup extends Component {
           { ( !event.manage_ids.includes(person._id) && ( event.participant_ids.includes(person._id)) ) 
             ? 
               <View style={styles.sectionTables}>
-                <Text style={styles.sectionHeader}>Choose table</Text>
+                <Text style={styles.sectionHeader}>Выберите номер стол</Text>
                 <Options
                   values={_.range(1, table_max + 1)}
                   chosen={chosenTable}

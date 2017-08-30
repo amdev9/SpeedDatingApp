@@ -150,6 +150,7 @@ export default class MymatchesScreen extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.content}>
+
             <View style={styles.navBar}>
               <Icon style={styles.navBarButton}
                 onPress={() => this.props.navigation.navigate('Events', {
@@ -158,12 +159,10 @@ export default class MymatchesScreen extends Component {
                 <Text style={styles.navBarHeader}>Мои совпадения</Text>
               <Text style={styles.navBarButton}></Text>
             </View>
-            {/* search by name of matchers --- clearTextOnFocus={true} */}
+            
             <View>
-              
               <TextInput
                 style={styles.search} 
-                
                 placeholder="Поиск"
                 placeholderTextColor="#888888"
                 selectionColor="#3f88fb"
@@ -199,7 +198,8 @@ export default class MymatchesScreen extends Component {
                 <Text style={styles.navBarHeader}>Мои совпадения</Text>
               <Text style={styles.navBarButton}></Text>
             </View>
-            <Text style={{textAlign: 'center'}}>No matches yet</Text>
+            <Text style={{textAlign: 'center'}}>Начните поиск пар. Когда вы найдете себе несколько пар, они отобразятся здесь и вы сможете отправить им сообщения</Text>
+            {/* No matches yet */}
           </View>
         </View>
       );

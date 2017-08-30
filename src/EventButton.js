@@ -32,7 +32,8 @@ export default class EventButton extends Component {
           style={styles.buttonContainer}
           onPress={onManage}
         >
-          <Text style={styles.button}>Manage this event</Text>
+          <Text style={styles.button}>Управлять мероприятием</Text> 
+          
         </TouchableHighlight> 
             
       } else if  ( !event.manage_queue_ids.includes(person._id) && !event.manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id)) ) {
@@ -44,7 +45,8 @@ export default class EventButton extends Component {
                 style={styles.buttonContainer}
                 onPress={onBook}
               >
-              <Text style={styles.button}>Book My Tickets</Text> 
+              <Text style={styles.button}>Подробнее</Text> 
+              {/* Book My Tickets */}
               </TouchableHighlight>
 
               <TouchableHighlight
@@ -52,7 +54,7 @@ export default class EventButton extends Component {
                 style={styles.buttonContainer}
                 onPress={onManageRequest}
               >
-              <Text style={styles.button}>Became a manager of event</Text> 
+              <Text style={styles.button}>Стать организатором</Text> 
               </TouchableHighlight>
             </View>
           : 
@@ -98,7 +100,7 @@ export default class EventButton extends Component {
               style={styles.buttonContainer}
               onPress={onJoin}
               >
-              <Text style={styles.button}>Join event room</Text>
+              <Text style={styles.button}>Начать мероприятие</Text>
               </TouchableHighlight> 
 
             </View>
