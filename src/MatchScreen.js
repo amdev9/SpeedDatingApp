@@ -41,7 +41,7 @@ export default class MatchScreen extends Component {
 
         { matches.map((object, index) => {
 
-            return object.map((participant, index) => {
+            return <View style={ styles.containerFull }>{ object.map((participant, index) => {
               return  (
                 <TouchableOpacity style={styles.containerPart} >
                   
@@ -59,6 +59,8 @@ export default class MatchScreen extends Component {
                 </TouchableOpacity>
               );
             })
+
+        }</View>  //////////////
 
           })
         } 
@@ -101,8 +103,14 @@ const styles = StyleSheet.create({
   },
   /////////
   containerPart: {
-    flexDirection: 'row',
-    
+    flexDirection: 'column',
+    width: 100,
+    alignItems: 'center',
+    flex: 1
+  },
+  containerFull: {  
+    flexDirection: 'row', 
+    alignItems:'center'
   },
   avatarContainer: {
     alignItems: 'center',
