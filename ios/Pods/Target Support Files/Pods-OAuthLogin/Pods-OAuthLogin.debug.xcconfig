@@ -1,8 +1,8 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/YandexMoneySDKObjc"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/QBImagePickerController" "$PODS_CONFIGURATION_BUILD_DIR/RSKImageCropper" "$PODS_CONFIGURATION_BUILD_DIR/YandexMoneySDKObjc"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/YandexMoneySDKObjc/YandexMoneySDKObjc.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "YandexMoneySDKObjc"
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/QBImagePickerController/QBImagePickerController.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/RSKImageCropper/RSKImageCropper.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/YandexMoneySDKObjc/YandexMoneySDKObjc.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "QBImagePickerController" -framework "RSKImageCropper" -framework "YandexMoneySDKObjc"
 PODS_BUILD_DIR = $BUILD_DIR
 PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.

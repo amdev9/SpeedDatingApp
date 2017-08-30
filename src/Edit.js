@@ -24,7 +24,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { defaultStyles } from './styles';
 import { put, get } from '../components/api';
 var RNUploader = NativeModules.RNUploader;
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'react-native-fetch-blob';
+
+import ImagePicker from 'react-native-image-crop-picker';
+
+
+
 
 let styles
 const { width,height } = Dimensions.get('window')
@@ -126,7 +131,7 @@ class Edit extends React.Component {
       files: [{
         name: 'file',
         filename: _generateUUID() + '.png',
-        filepath: image, //file.uri,
+        filepath: image, //file.uri, // change to image.path
         filetype: 'image/png',
       }],//files,
       params: {name: 'test-app'}
@@ -153,6 +158,52 @@ class Edit extends React.Component {
   }
   
 
+  _picker = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true
+    }).then(image => {
+      console.log(image);
+      // this.upload
+
+    
+      let opts = {
+        url: 'http://localhost:3000/v1/',
+        files: [{
+          name: image.filename,//'file',
+          filename: _generateUUID() + '.png',
+          filepath: image.path, //file.uri, // change to image.path
+          filetype: 'image/png', // image.mime
+        }],//files,
+        params: {name: 'test-app'}
+      };
+  
+    
+      RNUploader.upload(opts, (err, res) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        console.log(res);
+        let status = res.status;
+        let responseString = res.data;
+        console.log('Upload complete with status ' + status);
+        console.log(responseString);
+        this.setState({ 
+          avatar: 'http://localhost:3000/images/'  + JSON.parse(responseString).images 
+        });
+        // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
+        this.setState({modalVisible: false});
+  
+      });
+
+    });
+  
+  }
+
+
+
   render() {
     const {user} = this.props.navigation.state.params;
     const { navigate } = this.props.navigation;
@@ -173,7 +224,11 @@ class Edit extends React.Component {
         
         <View style={styles.content}>
         <View style={styles.avatar}>
-        <TouchableOpacity onPress={() => { this.toggleModal(); this.getPhotos() }}>
+        <TouchableOpacity onPress={() => { 
+          this._picker();
+
+          {/* this.toggleModal(); this.getPhotos()  */}
+          }}>
             <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
             <View style={styles.circle}>
               <Icon style={styles.setting} name="md-create" size={20} color="#FFFF" /> 
