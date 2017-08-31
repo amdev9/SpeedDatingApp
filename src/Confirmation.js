@@ -30,18 +30,23 @@ const YandexPay = NativeModules.YandexPay;
 )
 export default class Confirmation extends Component {
   state = {
-    request: undefined
+    request: {}
   };
 
   _pressFunc = () => {
-    console.log('_pressFunc');
+    // console.log('_pressFunc');
     YandexPay.doTestPayment((error, req) => {
       if (error) {
         console.error(error);
       } else {
+        console.log('req.status', req.status);
+        if (req.status == 'success') {
+          this._finalBookEvent();
+        }
         this.setState({
           request: req
         });
+        // if success callback returned => _finalBookEvent -> view ('Оплата проведена успешно', кнопка 'Вернуться к мероприятиям')
       }
     }); 
   }
@@ -66,7 +71,7 @@ export default class Confirmation extends Component {
       console.log(json);
 
       // events = json; // get events
-      this.props.navigation.goBack();
+      // this.props.navigation.goBack();
        
     }
     catch (error) {
@@ -78,18 +83,29 @@ export default class Confirmation extends Component {
     const { event, participant } = this.props.navigation.state.params;
     const { goBack } = this.props.navigation;
     const { request } = this.state;
-    return request
-      
-      ? <WebView
+     
+    if (request.status == 'process') {
+      return <WebView
         source={request}
         style={{
           marginTop: 20,
         }}
       />
+    } else if (request.status == 'success') {
+      return (
+        <View style={styles.container}>
+          <Text>Оплата проведена успешно</Text>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={() => goBack()}  
+          >
+            <Text style={styles.button}>Вернуться к мероприятиям</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
 
-      : 
-
-      <View style={styles.container}>
+      return  <View style={styles.container}>
         <View style={styles.navBar}>
           <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
             <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
@@ -139,13 +155,12 @@ export default class Confirmation extends Component {
           marginLeft: 20, 
           marginBottom: 10
         }}> {event.description} </Text>
-       
+      
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() =>  {
-            return  this._finalBookEvent()
-           
-          } }//this._pressFunc()} // change to yandex pay func
+            return  this._pressFunc() //this._finalBookEvent()
+          } }//} // change to yandex pay func
         >
           <Text style={styles.button}>Записаться</Text>
         </TouchableOpacity>
@@ -175,22 +190,9 @@ export default class Confirmation extends Component {
           </View>   
         </View>    
       </View>
-    ;
-             
-    // } else {
-    //   return (
-    //     <View style={styles.container}>
-    //       <Text> Already attended to event </Text>
-    //       <TouchableOpacity
-    //         style={styles.buttonContainer}
-    //         onPress={() => goBack()}  
-    //       >
-    //         <Text style={styles.button}>Done</Text>
-    //       </TouchableOpacity>
-    //     </View>
-    //   )
+    }
 
-    // }
+    
   }
 
     // else manage event

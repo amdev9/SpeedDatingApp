@@ -50,9 +50,9 @@ RCT_EXPORT_METHOD(doTestPayment:(RCTResponseSenderBlock) callback) {
   
   NSDictionary *paymentParams = @{
                                   @"to" : @"410015438403969",
-                                  @"amount" : @10,
-                                  @"comment" : @"Оплата за услуги проведения мероприятия",
-                                  @"message": @"Оплата за услуги проведения мероприятия"
+                                  @"amount" : @1.02,
+                                  @"comment" : @"Тестовая оплата за услуги проведения мероприятия",
+                                  @"message": @"Тестовая оплата за услуги проведения мероприятия"
                                   };
   
   // Register your application using clientId and obtaining instanceId (if needed).
@@ -210,6 +210,7 @@ RCT_EXPORT_METHOD(doTestPayment:(RCTResponseSenderBlock) callback) {
                               @"Content-Length": [NSString stringWithFormat:@"%lu", (unsigned long) postData.length]
                               };
     NSDictionary *req = @{
+                          @"status": @"process",
                           @"uri" : asc.url.absoluteString,
                           @"method" : @"POST",
                           @"body": post,
@@ -233,7 +234,14 @@ RCT_EXPORT_METHOD(doTestPayment:(RCTResponseSenderBlock) callback) {
     
     // Success payment
     RCTLogInfo(@"Success payment");
+    NSDictionary *req = @{
+                          @"status": @"success"
+    };
+    callback(@[[NSNull null], req]);
     
+    // make success callback 
+
+
     //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success!" message:@"" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil];
     //    [alert show];
   }
