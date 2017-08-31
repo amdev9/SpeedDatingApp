@@ -2,12 +2,11 @@ import Event from '../models/event';
 import _ from 'lodash';
 import { wss } from '../server';
 
-// User relation for .populate()
-// const creatorRelation = {
-//   path: '_creator', // ['participants', 
-//   select: ['name', 'avatar', 'likes'],
-//   model: 'Person',
-// };
+const managerRelation = {
+  path: 'manage_ids',  
+  select: ['name', 'avatar'],
+  model: 'Person',
+};
 
 const participantsRelation = {
   path: 'participants', 
@@ -15,14 +14,13 @@ const participantsRelation = {
   model: 'Person',
 };
 
-
- 
 export const list = async (req, res, next) => {
   // Get all comments and populate User models
   const events = await Event.find()
     // .sort({ 'created': -1 })
     // .populate(creatorRelation)
     .populate(participantsRelation)
+    .populate(managerRelation)
     .exec();
 
   res.json({

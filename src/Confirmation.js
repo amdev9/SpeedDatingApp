@@ -120,18 +120,23 @@ export default class Confirmation extends Component {
           <Image source={{ uri: event.photo }} style={styles.image} />
         </View> 
 
+        <View style={[styles.avatarContainer, {
+          marginLeft: 20, 
+          marginTop: 15,
+          flexDirection: 'row'
+        }]}>
+          <Image source={{ uri: event.manage_ids[1].avatar }} style={styles.avatarOrg} />
+          <Text style={{ 
+            width: 120, 
+            marginLeft: 10, 
+            fontWeight: 'bold', 
+            fontSize: 14 
+          }}> {event.manage_ids[1].name} </Text>
+        </View>
+        
+        
         <Text style={{ 
           marginLeft: 20, 
-          marginTop: 20,
-          marginBottom: 10
-        }}> { JSON.stringify(event.manage_ids) } </Text>
-        {/* 
-          change to object
-         */}
-
-        <Text style={{ 
-          marginLeft: 20, 
-          marginTop: 20,
           marginBottom: 10
         }}> {event.description} </Text>
        
@@ -165,6 +170,7 @@ export default class Confirmation extends Component {
                   <Image source={{ uri: participant.avatar }} style={styles.avatar} />
                 </View>
               }
+              
             )}
           </View>   
         </View>    
@@ -202,6 +208,11 @@ const styles = StyleSheet.create({
   image: {
     // borderRadius: 10,                   // rounded corners
     ...StyleSheet.absoluteFillObject,   // fill up all space in a container
+  },
+  avatarOrg: {
+    borderRadius: 25,
+    width: 50,
+    height: 50,
   },
   avatar: {
     borderRadius: 30,
