@@ -102,6 +102,9 @@ export default class Confirmation extends Component {
         </View>
 
 
+        {/* <Text> { JSON.stringify(event) } </Text>  */}
+        {/* add creator info */}
+
         <Text style={styles.title}> {event.title}</Text>
         <View style={{ 
           flexDirection: 'row', 
@@ -115,7 +118,7 @@ export default class Confirmation extends Component {
 
         <View style={styles.imageContainer}>
           <Image source={{ uri: event.photo }} style={styles.image} />
-        </View>
+        </View> 
 
         <Text style={{ 
           marginLeft: 20, 
@@ -144,18 +147,27 @@ export default class Confirmation extends Component {
 
         <View style={{ 
           alignItems: 'center',
-          marginBottom: 10
+          marginBottom: 10,
+          
         }}>
           <Text>Ты можешь встетить их</Text>
-          </View>
+        </View>
+        <View style={{ 
+          alignItems: 'center',
+          backgroundColor: '#e6e6e6',
+        }}>
           <View style={{ 
-            backgroundColor: '#e6e6e6' 
-          }}>
-            <Text>  { JSON.stringify(event.participants) } </Text>
-          </View>
-          {/*  change to objects  */}
-       
-        
+            
+            flexDirection: 'row',
+          }}> 
+            { event.participants.map((participant, index) => {
+                return <View style={styles.avatarContainer}>
+                  <Image source={{ uri: participant.avatar }} style={styles.avatar} />
+                </View>
+              }
+            )}
+          </View>   
+        </View>    
       </View>
     ;
              
@@ -191,6 +203,23 @@ const styles = StyleSheet.create({
     // borderRadius: 10,                   // rounded corners
     ...StyleSheet.absoluteFillObject,   // fill up all space in a container
   },
+  avatar: {
+    borderRadius: 30,
+    width: 60,
+    height: 60,
+    // borderColor: '#FFF',
+    // borderWidth: 4
+  },
+  avatarContainer: {        
+    alignItems: 'center',
+    marginTop: 15,
+    marginBottom: 15,
+    margin: 5, //?
+    // paddingTop: 10,
+    width: 60,
+    height: 60
+  },
+
 
   navBar: {
     flexDirection: 'row',

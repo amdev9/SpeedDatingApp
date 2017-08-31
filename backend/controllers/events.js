@@ -16,7 +16,7 @@ const participantsRelation = {
 };
 
 
-// List existing comments
+ 
 export const list = async (req, res, next) => {
   // Get all comments and populate User models
   const events = await Event.find()
