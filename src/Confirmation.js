@@ -82,17 +82,21 @@ export default class Confirmation extends Component {
       
       ? <WebView
         source={request}
-        style={{marginTop: 20}}
+        style={{
+          marginTop: 20,
+        }}
       />
 
       : 
 
       <View style={styles.container}>
         <View style={styles.navBar}>
-          <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
-          <Text style={ [styles.navBarButton,{
-            fontWeight: 'bold'
-          }]} onPress={() => this.props.navigation.goBack() }>Назад к мероприятиям</Text>          
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
+            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
+            <Text style={ [styles.navBarButton,{
+              fontWeight: 'bold'
+            }]}>Назад к мероприятиям</Text>       
+          </TouchableOpacity>   
           <Text style={styles.navBarHeader}></Text>
           <Text style={styles.navBarButton}></Text> 
         </View>
@@ -130,7 +134,10 @@ export default class Confirmation extends Component {
        
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() =>  this._finalBookEvent() }//this._pressFunc()} // change to yandex pay func
+          onPress={() =>  {
+            return  this._finalBookEvent()
+           
+          } }//this._pressFunc()} // change to yandex pay func
         >
           <Text style={styles.button}>Записаться</Text>
         </TouchableOpacity>
