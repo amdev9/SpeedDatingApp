@@ -7,11 +7,15 @@ import {
   View,
   NativeModules,
   WebView,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 import { defaultStyles } from './styles';
 import { put, get } from '../components/api';
 import { connect } from 'react-redux';
+
+import Icon from 'react-native-vector-icons/Ionicons';
+const { width, height } = Dimensions.get('window');
 
 const YandexPay = NativeModules.YandexPay;
 
@@ -84,26 +88,54 @@ export default class Confirmation extends Component {
       : 
 
       <View style={styles.container}>
-        <Text style={styles.title}> {event.title} </Text>
-        <Text> {event.date} </Text>
+        <View style={styles.navBar}>
+          <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
+          <Text style={ [styles.navBarButton,{
+            fontWeight: 'bold'
+          }]} onPress={() => this.props.navigation.goBack() }>Назад к мероприятиям</Text>          
+          <Text style={styles.navBarHeader}></Text>
+          <Text style={styles.navBarButton}></Text> 
+        </View>
+
+
+        <Text style={styles.title}> {event.title}</Text>
+        <View style={{ 
+          flexDirection: 'row', 
+          marginLeft: 20, 
+          marginTop: 10,
+          marginBottom: 10
+        }}>
+          <Icon name="ios-calendar-outline" size={25} color="#900"  />
+          <Text style={{marginLeft: 10}}> {event.date} </Text>
+        </View>
+
         <View style={styles.imageContainer}>
           <Image source={{ uri: event.photo }} style={styles.image} />
         </View>
-        <Text> { JSON.stringify(event.manage_ids) } </Text>
-        <Text> {event.description} </Text>
-        <Text> { JSON.stringify(event.participants) } </Text>
+
+        <Text style={{ 
+          marginLeft: 20, 
+          marginTop: 20,
+          marginBottom: 10
+        }}> { JSON.stringify(event.manage_ids) } </Text>
+        <Text style={{ 
+          marginLeft: 20, 
+          marginTop: 20,
+          marginBottom: 10
+        }}> {event.description} </Text>
+       
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() =>  this._finalBookEvent() }//this._pressFunc()} // change to yandex pay func
         >
           <Text style={styles.button}>Final Book Event</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => goBack()}  
-            >
-          <Text style={styles.button}>Done</Text>
-        </TouchableOpacity>
+
+        <View>
+          <Text>Ты можешь встетить их</Text>
+          <Text> { JSON.stringify(event.participants) } </Text>
+        </View>
+        
       </View>
     ;
              
@@ -129,9 +161,53 @@ export default class Confirmation extends Component {
 
 
 const styles = StyleSheet.create({
+
+  imageContainer: {
+    // flex: 1,
+    height: height / 3
+    // width: width / 2,         // half of screen widtj
+  },
+  image: {
+    // borderRadius: 10,                   // rounded corners
+    ...StyleSheet.absoluteFillObject,   // fill up all space in a container
+  },
+
+  navBar: {
+    flexDirection: 'row',
+    paddingTop: 30,
+    // height: 64,
+    backgroundColor: '#FFFFFF' // '#1EAAF1'
+  },
+  navBarButton: {
+    color: '#262626',
+    textAlign:'center',
+    width: 200,
+    color: '#3f88fb'
+  },
+  navBarButtonIcon: {
+    marginTop: -4,
+    color: '#262626',
+    textAlign:'center',
+    marginLeft: 10,
+    // width: 200,
+    color: '#3f88fb'
+  },
+  navBarHeader: {
+    flex: 1,
+    color: '#262626',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    ...defaultStyles.text,
+    fontSize: 15,
+    // marginTop: 7
+  },
+  /////////
   title: {
     fontWeight: 'bold',
-    marginTop: 20
+    fontSize: 20,
+    ...defaultStyles.text,
+    marginLeft: 20,
+    marginTop: 5
   },
   container: {
     flex: 1,
