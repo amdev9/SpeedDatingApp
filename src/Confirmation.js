@@ -118,6 +118,10 @@ export default class Confirmation extends Component {
           marginTop: 20,
           marginBottom: 10
         }}> { JSON.stringify(event.manage_ids) } </Text>
+        {/* 
+          change to object
+         */}
+
         <Text style={{ 
           marginLeft: 20, 
           marginTop: 20,
@@ -128,13 +132,22 @@ export default class Confirmation extends Component {
           style={styles.buttonContainer}
           onPress={() =>  this._finalBookEvent() }//this._pressFunc()} // change to yandex pay func
         >
-          <Text style={styles.button}>Final Book Event</Text>
+          <Text style={styles.button}>Записаться</Text>
         </TouchableOpacity>
 
-        <View>
+        <View style={{ 
+          alignItems: 'center',
+          marginBottom: 10
+        }}>
           <Text>Ты можешь встетить их</Text>
-          <Text> { JSON.stringify(event.participants) } </Text>
-        </View>
+          </View>
+          <View style={{ 
+            backgroundColor: '#e6e6e6' 
+          }}>
+            <Text>  { JSON.stringify(event.participants) } </Text>
+          </View>
+          {/*  change to objects  */}
+       
         
       </View>
     ;
