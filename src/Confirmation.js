@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+
 import {
   StyleSheet,
   Text,
@@ -16,6 +17,9 @@ import { connect } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 const { width, height } = Dimensions.get('window');
+
+import { URL } from 'url'; // new
+
 
 const YandexPay = NativeModules.YandexPay;
 const kSuccessUrl = "yandexmoneyapp://oauth/authorize/success";
@@ -84,12 +88,10 @@ export default class Confirmation extends Component {
   };
   
   strippedURL = (url) => {
-
     /* 
       JS url object
       https://developer.mozilla.org/en-US/docs/Web/API/URL  
     */
-
     var  obURL = new URL(url);
     var scheme = obURL.protocol.toLowerCase();
     var path = obURL.pathname;
@@ -105,22 +107,6 @@ export default class Confirmation extends Component {
     var strippedURL = `${scheme}//${host}:${port}${path}`.toLowerCase();
     console.log(strippedURL);
     return strippedURL;
-
-    // IOS scheme://host:port/path?query
-    // NSString *scheme = [url.scheme lowercaseString];
-    // NSString *path   = [url.path stringByTrimmingCharactersInSet:[NSCharacterSet punctuationCharacterSet]];
-    // NSString *host   = url.host;
-    // NSInteger port   = [url.port integerValue];
-    // if (port == 0) {
-    //     if ([scheme isEqualToString:kHttpsScheme]) {
-    //         port = 443;
-    //     }
-    //     else {
-    //         port = 80;
-    //     }
-    // }
-    // NSString *strippedURL = [[NSString stringWithFormat:@"%@://%@:%ld/%@", scheme, host, port ,  path] lowercaseString];
-    // return strippedURL;
   }
 
   shouldStart = () => {
@@ -198,10 +184,6 @@ export default class Confirmation extends Component {
           <Text style={styles.navBarButton}></Text> 
         </View>
 
-
-        {/* <Text> { JSON.stringify(event) } </Text>  */}
-        {/* add creator info */}
-
         <Text style={styles.title}> {event.title}</Text>
         <View style={{ 
           flexDirection: 'row', 
@@ -230,7 +212,6 @@ export default class Confirmation extends Component {
             fontSize: 14 
           }}> {event.manage_ids[1].name} </Text>
         </View>
-        
         
         <Text style={{ 
           marginLeft: 20, 
@@ -271,13 +252,8 @@ export default class Confirmation extends Component {
           </View>   
         </View>    
       </View>
-    }
-
-    
-  }
-
-    // else manage event
-         
+    } 
+  }      
 }
 
 
