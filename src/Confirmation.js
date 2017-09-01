@@ -48,10 +48,7 @@ export default class Confirmation extends Component {
       if (error) {
         console.error(error);
       } else {
-        console.log('req.status', req.status);
-        if (req.status == 'success') {
-          this._finalBookEvent();
-        }
+         
         this.setState({
           request: req,
           current_URL: req.uri
@@ -153,14 +150,17 @@ export default class Confirmation extends Component {
         // console.log('success');
         var req = {};
         req.status = "success";
+        this._finalBookEvent();
         this.setState({
           request: req
-        }) 
+        });
+        
     }
     if (strippedURL == strippedFailURL) {
         // console.log('fail');
         var req = {};
         req.status = "fail";
+        // this._finalBookEvent(); // for test
         this.setState({
           request: req
         }) 
@@ -240,7 +240,7 @@ export default class Confirmation extends Component {
           <Image source={{ uri: event.photo }} style={styles.image} />
         </View> 
 
-        <View style={[styles.avatarContainer, {
+        {/* <View style={[styles.avatarContainer, {
           marginLeft: 20, 
           marginTop: 15,
           flexDirection: 'row'
@@ -252,7 +252,7 @@ export default class Confirmation extends Component {
             fontWeight: 'bold', 
             fontSize: 14 
           }}> {event.manage_ids[1].name} </Text>
-        </View>
+        </View> */}
         
         <Text style={{ 
           marginLeft: 20, 
