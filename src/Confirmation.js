@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 const { width, height } = Dimensions.get('window');
 
-import { URL } from 'url'; // new
+
 
 
 const YandexPay = NativeModules.YandexPay;
@@ -156,6 +156,11 @@ export default class Confirmation extends Component {
           marginTop: 20,
         }}
         onShouldStartLoadWithRequest={ this.shouldStart }
+        
+
+        // onNavigationStateChange == Function that is invoked when the WebView loading starts or ends.
+        // https://stackoverflow.com/questions/39099444/react-native-webview-get-url
+
         // onShouldStartLoadWithRequest  -> if successUrl -> 
       />
     } else if (request.status == 'success') {
