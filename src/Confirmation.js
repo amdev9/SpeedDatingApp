@@ -109,51 +109,61 @@ export default class Confirmation extends Component {
     return strippedURL;
   }
 
-  _onShouldStartLoadWithRequest = () => {
+  // _onShouldStartLoadWithRequest = () => {
 
-    // onShouldStartLoadWithRequest -- https://facebook.github.io/react-native/docs/webview.html
-    if (this.state.current_URL == null) {
-      return false;
-    }
-    var strippedURL =  this.strippedURL(this.state.current_URL);
-    var strippedSuccessURL = this.strippedURL(kSuccessUrl);
-    var strippedFailURL = this.strippedURL(kFailUrl);
+  //   // onShouldStartLoadWithRequest -- https://facebook.github.io/react-native/docs/webview.html
+  //   if (this.state.current_URL == null) {
+  //     return false;
+  //   }
+  //   var strippedURL =  this.strippedURL(this.state.current_URL);
+  //   var strippedSuccessURL = this.strippedURL(kSuccessUrl);
+  //   var strippedFailURL = this.strippedURL(kFailUrl);
     
-    if (strippedURL == strippedSuccessURL) {
-        // dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 2*NSEC_PER_SEC); // delay execution of finishpayment for 2 sec
-        // dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        //     //
-        //     // NSLog(@"\n||||||||||--------------> second finishPayment \n\n");
-        //     //
-        //     // [self finishPayment]; // change to render() { return (); }
-        // });
+  //   if (strippedURL == strippedSuccessURL) {
+  //       // dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 2*NSEC_PER_SEC); // delay execution of finishpayment for 2 sec
+  //       // dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+  //       //     //
+  //       //     // NSLog(@"\n||||||||||--------------> second finishPayment \n\n");
+  //       //     //
+  //       //     // [self finishPayment]; // change to render() { return (); }
+  //       // });
         
-        console.log('success');
+  //       console.log('success');
         
-        return false;
-    }
+  //       return false;
+  //   }
     
-    if (strippedURL == strippedFailURL) {
+  //   if (strippedURL == strippedFailURL) {
         
-        console.log('fail');
-        // NSLog(@"------ strippedFailURL----- \n\n");
-        // [self showError:nil];
-        // [webView removeFromSuperview];
-        return false;
-    }
+  //       console.log('fail');
+  //       // NSLog(@"------ strippedFailURL----- \n\n");
+  //       // [self showError:nil];
+  //       // [webView removeFromSuperview];
+  //       return false;
+  //   }
 
-    return true;
-  }
+  //   return true;
+  // }
 
   _onNavigationStateChange(webViewState) {
     let strippedURL =  this.strippedURL(webViewState.url);
     let strippedSuccessURL = this.strippedURL(kSuccessUrl);
     let strippedFailURL = this.strippedURL(kFailUrl);
     if (strippedURL == strippedSuccessURL) {
-        console.log('success');
+        // console.log('success');
+        var req = {};
+        req.status = "success";
+        this.setState({
+          request: req
+        }) 
     }
     if (strippedURL == strippedFailURL) {
-        console.log('fail');
+        // console.log('fail');
+        var req = {};
+        req.status = "fail";
+        this.setState({
+          request: req
+        }) 
     }
   }
 
@@ -181,6 +191,18 @@ export default class Confirmation extends Component {
       return (
         <View style={styles.container}>
           <Text>Оплата проведена успешно</Text>
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={() => goBack()}  
+          >
+            <Text style={styles.button}>Вернуться к мероприятиям</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else if (request.status == 'fail') {
+      return (
+        <View style={styles.container}>
+          <Text>Ошибка при оплате</Text>
           <TouchableOpacity
             style={styles.buttonContainer}
             onPress={() => goBack()}  
