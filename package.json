@@ -16,6 +16,7 @@
     "react-native-image-crop-picker": "^0.16.0",
     "react-native-linear-gradient": "^2.2.0",
     "react-native-safari-view": "^2.0.0",
+    "react-native-segmented-control-tab": "^3.2.1",
     "react-native-uploader": "0.0.10",
     "react-native-vector-icons": "^4.3.0",
     "react-navigation": "^1.0.0-beta.11",

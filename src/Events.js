@@ -18,6 +18,9 @@ import { defaultStyles } from './styles';
 
 import { connect } from 'react-redux';
 
+import SegmentedControlTab from 'react-native-segmented-control-tab'
+
+
 @connect(
   state => ({
     events: state.events,
@@ -119,14 +122,28 @@ export default class Events extends Component {
             })} name="ios-chatboxes-outline" size={30} color="#900" /> 
         </View>
   
-        <SegmentedControlIOS tintColor="#3f88fb" style={styles.bottomContent} 
+        {/* <SegmentedControlIOS tintColor="#3f88fb" style={styles.bottomContent} 
           values={['Мои', 'Найти']}
           selectedIndex={this.state.selectedIndex}
           onChange={(event) => {
             this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
           }}
-        />
-       
+        /> */}
+        
+        <View style={styles.bottomContent}>
+          <SegmentedControlTab 
+            tabStyle={styles.tabStyle}
+            tabTextStyle={styles.tabTextStyle}
+            activeTabStyle={styles.activeTabStyle}
+            
+            values={['Мои', 'Найти']}
+            selectedIndex={this.state.selectedIndex}
+            onTabPress={(index) => {
+              this.setState({selectedIndex: index});
+            }}
+          />
+        </View>
+
         {events // and movies participants contains data && this.state.selectedIndex == 1
           ? <ScrollView
               contentContainerStyle={styles.scrollContent}
@@ -189,6 +206,23 @@ export default class Events extends Component {
 }
 
 const styles = StyleSheet.create({
+
+  tabStyle: {
+    // paddingVertical: 5,
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    borderColor: '#3f88fb',
+    // borderWidth: 1,
+    // backgroundColor: 'white',
+  },
+  activeTabStyle: {
+      backgroundColor: '#3f88fb'
+  },
+  tabTextStyle: {
+      color: '#3f88fb'
+  },
+
   // header styles
   gradient: {
     width: 400,
