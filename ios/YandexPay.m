@@ -9,6 +9,7 @@
 #import "YandexPay.h"
 #import "React/RCTLog.h"
 
+
 #import "YMAExternalPaymentInfoModel.h"
 #import "YMAExternalPaymentSession.h"
 #import "YMAExternalPaymentRequest.h"
@@ -34,6 +35,8 @@ static NSString *const kClientId = @"B28C202D8C46BBA015EA17CED2D08A02E103F4A4DD6
 @property(nonatomic, strong, readonly) NSDictionary *instanceIdQuery;
 @property(nonatomic, copy) NSString *instanceId;
 @property(nonatomic, strong, readonly) YMAExternalPaymentSession *session;
+
+
 
 @end
 

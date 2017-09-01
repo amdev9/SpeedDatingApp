@@ -18,6 +18,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const { width, height } = Dimensions.get('window');
 
 const YandexPay = NativeModules.YandexPay;
+const kSuccessUrl = "yandexmoneyapp://oauth/authorize/success";
+const kFailUrl = "yandexmoneyapp://oauth/authorize/fail";
+const kHttpsScheme = "https:";
+
 
 @connect(
   state => ({
@@ -79,6 +83,81 @@ export default class Confirmation extends Component {
     }
   };
   
+  strippedURL = (url) => {
+
+    /* 
+      JS url object
+      https://developer.mozilla.org/en-US/docs/Web/API/URL  
+    */
+
+    var  obURL = new URL(url);
+    var scheme = obURL.protocol.toLowerCase();
+    var path = obURL.pathname;
+    var host = obURL.host;
+    var port = obURL.port;
+    if (port == 0) {
+      if (scheme == kHttpsScheme) {
+        port = 443;
+      } else {
+        port = 80;
+      }
+    }
+    var strippedURL = `${scheme}//${host}:${port}${path}`.toLowerCase();
+    console.log(strippedURL);
+    return strippedURL;
+
+    // IOS scheme://host:port/path?query
+    // NSString *scheme = [url.scheme lowercaseString];
+    // NSString *path   = [url.path stringByTrimmingCharactersInSet:[NSCharacterSet punctuationCharacterSet]];
+    // NSString *host   = url.host;
+    // NSInteger port   = [url.port integerValue];
+    // if (port == 0) {
+    //     if ([scheme isEqualToString:kHttpsScheme]) {
+    //         port = 443;
+    //     }
+    //     else {
+    //         port = 80;
+    //     }
+    // }
+    // NSString *strippedURL = [[NSString stringWithFormat:@"%@://%@:%ld/%@", scheme, host, port ,  path] lowercaseString];
+    // return strippedURL;
+  }
+
+  shouldStart = () => {
+    // onShouldStartLoadWithRequest -- https://facebook.github.io/react-native/docs/webview.html
+    if (this.state.request.uri == null) {
+      return false;
+    }
+    var strippedURL =  this.strippedURL(this.state.request.uri);
+    var strippedSuccessURL = this.strippedURL(kSuccessUrl);
+    var strippedFailURL = this.strippedURL(kFailUrl);
+    
+    if (strippedURL == strippedSuccessURL) {
+        // dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 2*NSEC_PER_SEC); // delay execution of finishpayment for 2 sec
+        // dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+        //     //
+        //     // NSLog(@"\n||||||||||--------------> second finishPayment \n\n");
+        //     //
+        //     // [self finishPayment]; // change to render() { return (); }
+        // });
+        
+        console.log('success');
+        
+        return false;
+    }
+    
+    if (strippedURL == strippedFailURL) {
+        
+        console.log('fail');
+        // NSLog(@"------ strippedFailURL----- \n\n");
+        // [self showError:nil];
+        // [webView removeFromSuperview];
+        return false;
+    }
+
+    return true;
+  }
+
   render() {
     const { event, participant } = this.props.navigation.state.params;
     const { goBack } = this.props.navigation;
@@ -90,6 +169,8 @@ export default class Confirmation extends Component {
         style={{
           marginTop: 20,
         }}
+        onShouldStartLoadWithRequest={ this.shouldStart }
+        // onShouldStartLoadWithRequest  -> if successUrl -> 
       />
     } else if (request.status == 'success') {
       return (
