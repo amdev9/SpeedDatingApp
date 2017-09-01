@@ -1,14 +1,17 @@
 const { URL } = require('url');
 
 var url = "yandexmoneyapp://oauth/authorize/success";
+
+
 const kSuccessUrl = "yandexmoneyapp://oauth/authorize/success";
 const kFailUrl = "yandexmoneyapp://oauth/authorize/fail";
 const kHttpsScheme = "https:";
 
-var  obURL = new URL(url);
+var obURL = new URL(url);
 var scheme = obURL.protocol.toLowerCase();
-var path = obURL.pathname;
-var host = obURL.host;
+// var path = obURL.pathname;
+// var host = obURL.host;
+
 var port = obURL.port;
 if (port == 0) {
   if (scheme == kHttpsScheme) {
@@ -17,6 +20,15 @@ if (port == 0) {
     port = 80;
   }
 }
+var part = obURL.href.substring(scheme.length + 2, obURL.href.length );
+var host = part.split('/')[0];
+var path_split = part.split('?')[0];
+var path = path_split.substring(host.length, path_split.length);
+
+console.log('scheme: ', scheme);
+console.log('host: ', host);
+console.log('path: ', path)
+
 var strippedURL = `${scheme}//${host}:${port}${path}`.toLowerCase();
 
 console.log(strippedURL)

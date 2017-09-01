@@ -38,7 +38,8 @@ const kHttpsScheme = "https:";
 )
 export default class Confirmation extends Component {
   state = {
-    request: {}
+    request: {},
+    current_URL: ''
   };
 
   _pressFunc = () => {
@@ -52,7 +53,8 @@ export default class Confirmation extends Component {
           this._finalBookEvent();
         }
         this.setState({
-          request: req
+          request: req,
+          current_URL: req.uri
         });
         // if success callback returned => _finalBookEvent -> view ('Оплата проведена успешно', кнопка 'Вернуться к мероприятиям')
       }
@@ -88,14 +90,8 @@ export default class Confirmation extends Component {
   };
   
   strippedURL = (url) => {
-    /* 
-      JS url object
-      https://developer.mozilla.org/en-US/docs/Web/API/URL  
-    */
-    var  obURL = new URL(url);
+    var obURL = new URL(url);
     var scheme = obURL.protocol.toLowerCase();
-    var path = obURL.pathname;
-    var host = obURL.host;
     var port = obURL.port;
     if (port == 0) {
       if (scheme == kHttpsScheme) {
@@ -104,17 +100,22 @@ export default class Confirmation extends Component {
         port = 80;
       }
     }
+    var part = obURL.href.substring( scheme.length + 2, obURL.href.length );
+    var host = part.split('/')[0];
+    var path_split = part.split('?')[0];
+    var path = path_split.substring(host.length, path_split.length);
     var strippedURL = `${scheme}//${host}:${port}${path}`.toLowerCase();
-    console.log(strippedURL);
+    console.log('strippedURL: ', strippedURL);
     return strippedURL;
   }
 
-  shouldStart = () => {
+  _onShouldStartLoadWithRequest = () => {
+
     // onShouldStartLoadWithRequest -- https://facebook.github.io/react-native/docs/webview.html
-    if (this.state.request.uri == null) {
+    if (this.state.current_URL == null) {
       return false;
     }
-    var strippedURL =  this.strippedURL(this.state.request.uri);
+    var strippedURL =  this.strippedURL(this.state.current_URL);
     var strippedSuccessURL = this.strippedURL(kSuccessUrl);
     var strippedFailURL = this.strippedURL(kFailUrl);
     
@@ -144,6 +145,18 @@ export default class Confirmation extends Component {
     return true;
   }
 
+  _onNavigationStateChange(webViewState) {
+    let strippedURL =  this.strippedURL(webViewState.url);
+    let strippedSuccessURL = this.strippedURL(kSuccessUrl);
+    let strippedFailURL = this.strippedURL(kFailUrl);
+    if (strippedURL == strippedSuccessURL) {
+        console.log('success');
+    }
+    if (strippedURL == strippedFailURL) {
+        console.log('fail');
+    }
+  }
+
   render() {
     const { event, participant } = this.props.navigation.state.params;
     const { goBack } = this.props.navigation;
@@ -155,7 +168,8 @@ export default class Confirmation extends Component {
         style={{
           marginTop: 20,
         }}
-        onShouldStartLoadWithRequest={ this.shouldStart }
+        onNavigationStateChange={this._onNavigationStateChange.bind(this)}
+        //onShouldStartLoadWithRequest={ this._onShouldStartLoadWithRequest.bind(this) }
         
 
         // onNavigationStateChange == Function that is invoked when the WebView loading starts or ends.
