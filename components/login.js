@@ -14,8 +14,17 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 
 const { width, height } = Dimensions.get('window');
+
+
 // const URL = 'http://192.168.1.34:3000';
-const URL = 'http://localhost:3000';
+// const URL = 'http://localhost:3000';
+
+
+const URL = Platform.OS === 'android'
+? 'http://192.168.1.33:3000' // works for Genymotion
+: 'http://192.168.1.33:3000';
+
+
 
 export default class Login extends Component { 
   // static propTypes = {
