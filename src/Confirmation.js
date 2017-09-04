@@ -261,7 +261,8 @@ export default class Confirmation extends Component {
       
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() =>  {
+          onPress={() =>  { // add condition android || ios
+          
             return  this._pressFunc() //this._finalBookEvent()
           } }//} // change to yandex pay func
         >
