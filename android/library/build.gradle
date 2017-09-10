@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'bintray-release'
+
+ext {
+    // version* variables must not be longer than two digits
+    versionMajor = 4
+    versionMinor = 1
+    versionPatch = 0
+    versionAlpha = 0
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    resourcePrefix 'ym_'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode getAppVersionCode()
+        versionName getAppVersionName()
+        consumerProguardFiles 'proguard-cfg.txt'
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/LICENSE.txt'
+    }
+}
+
+def getAppVersionName() {
+    return "${versionMajor}.${versionMinor}.${versionPatch}"
+}
+
+int getAppVersionCode() {
+    return versionMajor * 1000000 + versionMinor * 10000 + versionPatch * 100 + versionAlpha
+}
+
+dependencies {
+    compile 'com.yandex.money.api:yandex-money-sdk-java:7.1.0'
+    compile 'com.android.support:support-annotations:25.3.1'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.5.4'
+}
+
+publish {
+    userOrg = 'yandex-money'
+    groupId = 'com.yandex.money.api'
+    artifactId = 'yandex-money-sdk-android'
+    version = getAppVersionName()
+    website = 'https://github.com/yandex-money/yandex-money-sdk-android'
+    issueTracker = "${website}/issues"
+    repository = "${website}.git"
+}

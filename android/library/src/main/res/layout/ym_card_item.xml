@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ym_card_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ym_card_item_height"
+        android:orientation="horizontal"
+        android:descendantFocusability="blocksDescendants"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/ym_text_view.Card"
+            android:id="@+id/ym_pan_fragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ym_default_card"
+            android:drawablePadding="@dimen/ym_card_item_drawable_padding"
+            android:gravity="center_vertical"
+            tools:ignore="RtlHardcoded" />
+
+        <ImageButton
+            android:id="@+id/ym_actions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ym_button_overflow"
+            tools:ignore="ContentDescription"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:listDivider"/>
+
+</LinearLayout>

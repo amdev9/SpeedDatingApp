@@ -9,7 +9,8 @@ import {
   NativeModules,
   WebView,
   Image,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';
 import { defaultStyles } from './styles';
 import { put, get } from '../components/api';
@@ -19,9 +20,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const { width, height } = Dimensions.get('window');
 
 
-
-
-const YandexPay = NativeModules.YandexPay;
+// const YandexPay = NativeModules.YandexPay;
 const kSuccessUrl = "yandexmoneyapp://oauth/authorize/success";
 const kFailUrl = "yandexmoneyapp://oauth/authorize/fail";
 const kHttpsScheme = "https:";
@@ -42,9 +41,16 @@ export default class Confirmation extends Component {
     current_URL: ''
   };
 
-  _pressFunc = () => {
-    // console.log('_pressFunc');
-    YandexPay.doTestPayment((error, req) => {
+  _pressFuncANDROID = () => {
+    NativeModules.ImagePicker.pay( 
+      //{}, // no config yet 
+      (uri) => { console.log(uri) }, 
+      (error) => { console.log(error) }
+    );
+  }
+
+  _pressFuncIOS = () => {
+    NativeModules.YandexPay.doTestPayment((error, req) => {
       if (error) {
         console.error(error);
       } else {
@@ -262,9 +268,14 @@ export default class Confirmation extends Component {
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() =>  { // add condition android || ios
-          
-            return  this._pressFunc() //this._finalBookEvent()
-          } }//} // change to yandex pay func
+            
+            if (Platform.OS === 'android') {
+              return  this._pressFuncANDROID();
+            } else {
+              return  this._pressFuncIOS(); //this._finalBookEvent()
+            }
+            
+          } } 
         >
           <Text style={styles.button}>Записаться</Text>
         </TouchableOpacity>

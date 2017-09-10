@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="@dimen/ym_screen_border_margin">
+
+        <TextView
+            style="@style/ym_text_view.Title"
+            android:id="@+id/ym_error_title"
+            android:gravity="center"
+            android:text="@string/ym_error_illegal_param_client_id_title"/>
+
+        <TextView
+            style="@style/ym_text_view.Large"
+            android:id="@+id/ym_error_message"
+            android:layout_marginTop="@dimen/ym_screen_border_margin"
+            android:layout_marginBottom="@dimen/ym_screen_border_margin"
+            android:gravity="center"
+            android:text="@string/ym_error_illegal_param_client_id"/>
+
+        <Button
+            style="@style/ym_button.Primary.Large"
+            android:id="@+id/ym_error_action"
+            android:text="@string/ym_error_action_try_again"/>
+
+    </LinearLayout>
+
+</ScrollView>

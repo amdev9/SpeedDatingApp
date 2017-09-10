@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ym_background">#fff2efed</color>
+    <color name="ym_text_color_light">#99000000</color>
+    <color name="ym_text_color_dark">#dd000000</color>
+    <color name="ym_text_color_title">#ff000000</color>
+    <color name="ym_text_color_placeholder">#44000000</color>
+    <color name="ym_text_color_pan_fragment">#ffffffff</color>
+</resources>

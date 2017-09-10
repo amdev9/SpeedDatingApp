@@ -15,6 +15,9 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+
+import com.oauthlogin.imagepicker.*; // import the package
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -28,9 +31,10 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new PickerPackage(),
-            new LinearGradientPackage(),
-            new RNFetchBlobPackage(),
-            new VectorIconsPackage()
+              new LinearGradientPackage(),
+                new RNFetchBlobPackage(),
+                  new VectorIconsPackage(),
+                    new ImagePickerPackage()
       );
     }
   };

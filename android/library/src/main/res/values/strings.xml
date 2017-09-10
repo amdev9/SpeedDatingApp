@@ -1,0 +1,47 @@
+<resources>
+
+    <string name="ym_activity_label">Card Payment</string>
+
+    <!-- Errors -->
+    <string name="ym_error_oops_title">Oops!</string>
+    <string name="ym_error_something_wrong_title">Something wrong</string>
+    <string name="ym_error_illegal_param_client_id_title">Can\'t do it</string>
+    <string name="ym_error_illegal_param_client_id">This app is refused to do any payments.</string>
+    <string name="ym_error_illegal_param_csc">You\'ve specified wrong %1$s code.</string>
+    <string name="ym_error_authorization_reject">Your bank refused to withdraw money.</string>
+    <string name="ym_error_payee_not_found">Payee not found.</string>
+    <string name="ym_error_payment_refused">The shop you are trying to pay to couldn\'t accept your payment.</string>
+    <string name="ym_error_unknown">Payment failed: please try again in a few minutes.</string>
+    <string name="ym_error_csc_invalid">Security code is invalid.</string>
+
+    <!-- Error Actions -->
+    <string name="ym_error_action_try_again">Try again</string>
+    <string name="ym_error_action_try_another_card">Try another card</string>
+
+    <!-- Success Fragment -->
+    <string name="ym_success_thank_you">Thank you!</string>
+    <string name="ym_success_comment">You had been charged for %1$.2f rub.</string>
+    <string name="ym_success_save_card">Save card</string>
+    <string name="ym_success_save_card_description">Next time you won\'t be needed to input them again.</string>
+    <string name="ym_success_saving_card">Saving card&#8230;</string>
+    <string name="ym_success_saving_card_description">Please wait a moment.</string>
+    <string name="ym_success_card_saved_description">All done! Next time you need to specify %1$s code only.</string>
+
+    <!-- Cards Fragment -->
+    <string name="ym_cards_payment_name">Payment Name</string>
+    <string name="ym_cards_payment_sum">Total</string>
+    <string name="ym_cards_payment_sum_value">%1$.2f rub.</string>
+    <string name="ym_cards_payment_options_available">Available Payment Options</string>
+    <string name="ym_cards_delete_card">Delete</string>
+    <string name="ym_cards_pay_another_card">Pay with Another Card</string>
+
+    <!-- CSC Fragment -->
+    <string name="ym_csc_code">%1$s code</string>
+    <string name="ym_csc_three">3-digits</string>
+    <string name="ym_csc_four">4-digits</string>
+    <string name="ym_csc_back">back</string>
+    <string name="ym_csc_front">front</string>
+    <string name="ym_csc_hint">%1$s code on the %2$s of your card.</string>
+    <string name="ym_csc_pay">Pay</string>
+
+</resources>

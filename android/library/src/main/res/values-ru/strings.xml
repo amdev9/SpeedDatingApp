@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ym_activity_label">Оплата с Карты</string>
+
+    <!-- Errors -->
+    <string name="ym_error_oops_title">Ой!</string>
+    <string name="ym_error_something_wrong_title">Что-то не так</string>
+    <string name="ym_error_illegal_param_client_id_title">Ничего не получится</string>
+    <string name="ym_error_illegal_param_client_id">Возможность платить с банковской карты в этом приложении заблокирована.</string>
+    <string name="ym_error_illegal_param_csc">Похоже вы указали неверный код %1$s.</string>
+    <string name="ym_error_authorization_reject">Банк не разрешил снять деньги с вашей карты.</string>
+    <string name="ym_error_payee_not_found">Получатель не найден.</string>
+    <string name="ym_error_payment_refused">Магазин не смог принять ваш платеж.</string>
+    <string name="ym_error_unknown">Платеж не прошел: повторите попытку через пару минут.</string>
+    <string name="ym_error_csc_invalid">Код введен неправильно</string>
+
+    <!-- Error Actions -->
+    <string name="ym_error_action_try_again">Попробовать еще раз</string>
+    <string name="ym_error_action_try_another_card">Заплатить с другой карты</string>
+
+    <!-- Success Fragment -->
+    <string name="ym_success_thank_you">Спасибо!</string>
+    <string name="ym_success_comment">С вашей карты списано %1$.2f руб.</string>
+    <string name="ym_success_save_card">Сохранить данные карты</string>
+    <string name="ym_success_save_card_description">В следующий раз вам не придется указывать их заново.</string>
+    <string name="ym_success_saving_card">Сохраняем данные&#8230;</string>
+    <string name="ym_success_saving_card_description">Нужно немного подождать.</string>
+    <string name="ym_success_card_saved_description">Все получилось! При следующем платеже нужно указать только %1$s.</string>
+
+    <!-- Cards Fragment -->
+    <string name="ym_cards_payment_name">Название платежа</string>
+    <string name="ym_cards_payment_sum">Сумма</string>
+    <string name="ym_cards_payment_sum_value">%1$.2f руб.</string>
+    <string name="ym_cards_payment_options_available">Доступные способы оплаты</string>
+    <string name="ym_cards_delete_card">Удалить</string>
+    <string name="ym_cards_pay_another_card">Оплатить с другой карты</string>
+
+    <!-- CSC Fragment -->
+    <string name="ym_csc_code">Код %1$s</string>
+    <string name="ym_csc_three">Трехзначный</string>
+    <string name="ym_csc_four">Четырехзначный</string>
+    <string name="ym_csc_back">оборотной</string>
+    <string name="ym_csc_front">лицевой</string>
+    <string name="ym_csc_hint">%1$s код на %2$s стороне вашей банковской карты.</string>
+    <string name="ym_csc_pay">Заплатить</string>
+
+</resources>
