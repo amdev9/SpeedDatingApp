@@ -110,65 +110,15 @@ class Edit extends React.Component {
   toggleModal = () => {
     this.setState({ modalVisible: !this.state.modalVisible });
   }
-
-  // upload = () => {
-  //   const image = this.state.photos[this.state.index].node.image.uri;
-  //   // let photos = this.state.photos;
-  //   // photos.push(image);
-  //   // this.setState({photos: photos});
-  //   console.log('Uploading ..', image)
-
-  //   // let files = this.state.photos.map( (file) => {
-  //   //   return {
-  //   //     name: 'file',
-  //   //     filename: _generateUUID() + '.png',
-  //   //     filepath: file.uri,
-  //   //     filetype: 'image/png',
-  //   //   }
-  //   // });
-
-  //   let opts = {
-  //     url: `${AVATAR_URL}/v1/`,
-  //     files: [{
-  //       name: 'file',
-  //       filename: _generateUUID() + '.png',
-  //       filepath: image, //file.uri, // change to image.path
-  //       filetype: 'image/png',
-  //     }],//files,
-  //     params: {name: 'test-app'}
-  //   };
-
-  
-  //   RNUploader.upload(opts, (err, res) => {
-  //     if (err) {
-  //       console.log(err);
-  //       return;
-  //     }
-  //     console.log(res);
-  //     let status = res.status;
-  //     let responseString = res.data;
-  //     console.log('Upload complete with status ' + status);
-  //     console.log(responseString);
-  //     this.setState({ 
-  //       avatar: `${AVATAR_URL}/images/${JSON.parse(responseString).images}` 
-  //     });
-  //     // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
-  //     this.setState({modalVisible: false});
-
-  //   });
-  // }
-  
-
+ 
   _picker = () => {
     ImagePicker.openPicker({
       width: 300,
       height: 300,
       cropping: true
     }).then(image => {
-      console.log(image);
-      // this.upload
-
-    
+      // console.log(image);
+      
       let opts = {
         url: `${AVATAR_URL}/v1/`,
         files: [{
@@ -180,7 +130,6 @@ class Edit extends React.Component {
         params: {name: 'test-app'}
       };
   
-    
       RNUploader.upload(opts, (err, res) => {
         if (err) {
           console.log(err);
@@ -196,14 +145,9 @@ class Edit extends React.Component {
         });
         // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
         this.setState({modalVisible: false});
-  
       });
-
-    });
-  
+    });  
   }
-
-
 
   render() {
     const {user} = this.props.navigation.state.params;
