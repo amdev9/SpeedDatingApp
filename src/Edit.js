@@ -14,7 +14,8 @@ import {
   NativeModules,
   TextInput,
   Picker,
-  TouchableOpacity
+  TouchableOpacity,
+  Platform
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -26,6 +27,14 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 let styles
 const { width,height } = Dimensions.get('window')
+
+
+const AVATAR_URL = 'http://192.168.1.33:3000';
+
+const URL = Platform.OS === 'android'
+? 'http://10.0.3.2:3000' // works for Genymotion
+: 'http://localhost:3000';
+
 
 class Edit extends React.Component {
  
@@ -102,52 +111,52 @@ class Edit extends React.Component {
     this.setState({ modalVisible: !this.state.modalVisible });
   }
 
-  upload = () => {
-    const image = this.state.photos[this.state.index].node.image.uri;
-    // let photos = this.state.photos;
-    // photos.push(image);
-    // this.setState({photos: photos});
-    console.log('Uploading ..', image)
+  // upload = () => {
+  //   const image = this.state.photos[this.state.index].node.image.uri;
+  //   // let photos = this.state.photos;
+  //   // photos.push(image);
+  //   // this.setState({photos: photos});
+  //   console.log('Uploading ..', image)
 
-    // let files = this.state.photos.map( (file) => {
-    //   return {
-    //     name: 'file',
-    //     filename: _generateUUID() + '.png',
-    //     filepath: file.uri,
-    //     filetype: 'image/png',
-    //   }
-    // });
+  //   // let files = this.state.photos.map( (file) => {
+  //   //   return {
+  //   //     name: 'file',
+  //   //     filename: _generateUUID() + '.png',
+  //   //     filepath: file.uri,
+  //   //     filetype: 'image/png',
+  //   //   }
+  //   // });
 
-    let opts = {
-      url: 'http://localhost:3000/v1/',
-      files: [{
-        name: 'file',
-        filename: _generateUUID() + '.png',
-        filepath: image, //file.uri, // change to image.path
-        filetype: 'image/png',
-      }],//files,
-      params: {name: 'test-app'}
-    };
+  //   let opts = {
+  //     url: `${AVATAR_URL}/v1/`,
+  //     files: [{
+  //       name: 'file',
+  //       filename: _generateUUID() + '.png',
+  //       filepath: image, //file.uri, // change to image.path
+  //       filetype: 'image/png',
+  //     }],//files,
+  //     params: {name: 'test-app'}
+  //   };
 
   
-    RNUploader.upload(opts, (err, res) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(res);
-      let status = res.status;
-      let responseString = res.data;
-      console.log('Upload complete with status ' + status);
-      console.log(responseString);
-      this.setState({ 
-        avatar: 'http://localhost:3000/images/'  + JSON.parse(responseString).images 
-      });
-      // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
-      this.setState({modalVisible: false});
+  //   RNUploader.upload(opts, (err, res) => {
+  //     if (err) {
+  //       console.log(err);
+  //       return;
+  //     }
+  //     console.log(res);
+  //     let status = res.status;
+  //     let responseString = res.data;
+  //     console.log('Upload complete with status ' + status);
+  //     console.log(responseString);
+  //     this.setState({ 
+  //       avatar: `${AVATAR_URL}/images/${JSON.parse(responseString).images}` 
+  //     });
+  //     // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
+  //     this.setState({modalVisible: false});
 
-    });
-  }
+  //   });
+  // }
   
 
   _picker = () => {
@@ -161,7 +170,7 @@ class Edit extends React.Component {
 
     
       let opts = {
-        url: 'http://localhost:3000/v1/',
+        url: `${AVATAR_URL}/v1/`,
         files: [{
           name: image.filename,//'file',
           filename: _generateUUID() + '.png',
@@ -183,7 +192,7 @@ class Edit extends React.Component {
         console.log('Upload complete with status ' + status);
         console.log(responseString);
         this.setState({ 
-          avatar: 'http://localhost:3000/images/'  + JSON.parse(responseString).images 
+          avatar: `${AVATAR_URL}/images/${JSON.parse(responseString).images}` 
         });
         // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
         this.setState({modalVisible: false});

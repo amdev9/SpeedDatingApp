@@ -10,7 +10,8 @@ import {
   Button,
   Image,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
