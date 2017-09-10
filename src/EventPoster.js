@@ -20,6 +20,9 @@ const { width, height } = Dimensions.get('window');
 // How many posters we want to have in each row and column
 const cols = 3, rows = 4;
 
+const placesHeight = (height - 20 - 20) / rows - 10;
+
+
 export default class EventPoster extends Component {
   // Component prop types
   static propTypes = {
@@ -52,7 +55,7 @@ export default class EventPoster extends Component {
                 colors={[ 'rgba(63, 136, 251, 0.8)', 'rgba(85, 149, 252, 0.8)', 'rgba(79, 69, 100, 0.8)']}
                   style={styles.overlay} /> */}
 
-          <View style={styles.downPoster}>
+          <View style={styles.upPoster}>
             <Text style={styles.title} numberOfLines={1}>{title}</Text>
             <Sticker value={show_manage} />
           </View>
@@ -71,15 +74,20 @@ export default class EventPoster extends Component {
 }
 
 const styles = StyleSheet.create({
+  upPoster: {
+    justifyContent: 'space-between',
+    flexDirection: 'row'
+  },
   downPoster: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    // marginBottom: 0
+    marginTop: placesHeight - (10 + placesHeight / 2 + 10 + 33),
+    
   },
   container: {
     marginLeft: 10,
     marginBottom: 10,
-    height: (height - 20 - 20) / rows - 10,
+    height: placesHeight,
     width: (width - 20) /// cols - 10,
   },
   // WIDGETS
@@ -87,7 +95,7 @@ const styles = StyleSheet.create({
     ...defaultStyles.text,
     fontSize: 17,
     fontWeight: '500',
-    marginTop: 10,//(height - 20 - 20) / rows - 10 - 25,
+    marginTop: 10,
     marginLeft: 15,
     color: '#FFFFFF',
     backgroundColor: 'rgba(0,0,0,0)',

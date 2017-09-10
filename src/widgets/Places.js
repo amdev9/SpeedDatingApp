@@ -61,7 +61,7 @@ export default class Places extends Component {
 const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
-        marginTop: 8,
+        // marginTop: 8,
     },
     black: {
         // ...defaultStyles.text,

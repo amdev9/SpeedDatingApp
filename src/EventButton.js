@@ -173,12 +173,8 @@ const styles = StyleSheet.create({
   doubleButtonContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: 100
-    // backgroundColor: '#3f88fb',//'#673AB7',
-    // borderRadius: 100,
-    // paddingVertical: 10,
-    // paddingHorizontal: 15,
-    // alignItems: 'center',
+    height: 100 //  130  fix for android
+   
   },
   button: {
     ...defaultStyles.text,

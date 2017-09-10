@@ -11,7 +11,7 @@ import { defaultStyles } from '../styles';
 
 const { width, height } = Dimensions.get('window');
 const cols = 3, rows = 4;
-const placesHeight = (height - 20 - 20) / rows - 100;
+const placesHeight = (height - 20 - 20) / rows - 10;
 
 export default class Date extends Component {
   render() {
@@ -41,10 +41,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0)',
   },
   buttonContainer: {
-    marginTop: placesHeight, //30,   //////// fix
+    marginTop: placesHeight / 4, //30,   //////// fix
     marginLeft: 15,
     // height: 30,
-    width: 75,
+    width: 90,
     alignItems: 'center',
     // flexDirection: 'row',
     backgroundColor: '#FFF', // 3f88fb
