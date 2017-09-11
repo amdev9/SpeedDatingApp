@@ -25,7 +25,10 @@ const defaultHeight = height * 0.67;
 export default class EventButton extends Component {
     render() {
       const { event, person, onBook, onManage, onJoin, onManageRequest } = this.props;
-      if ( event.manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id)) ) 
+      
+      var manage_ids = event.manage_ids.map(event => event._id); // fixed manage_ids
+      
+      if ( manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id))  ) 
       {
         return <TouchableHighlight
           underlayColor="#9575CD"
@@ -36,7 +39,7 @@ export default class EventButton extends Component {
           
         </TouchableHighlight> 
             
-      } else if  ( !event.manage_queue_ids.includes(person._id) && !event.manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id)) ) {
+      } else if  ( !event.manage_queue_ids.includes(person._id) && !manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id)) ) {
         return  event.show_manage 
           ? 
             <View style={styles.doubleButtonContainer}>
@@ -67,7 +70,7 @@ export default class EventButton extends Component {
               <Text style={styles.button}>Book My Tickets</Text> 
               </TouchableHighlight>
             </View>
-        } else if  ( !event.manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id))
+        } else if  ( !manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id))
            && event.manage_queue_ids.includes(person._id) ) {
           return  event.show_manage 
             ? 
@@ -91,9 +94,9 @@ export default class EventButton extends Component {
                 <Text style={styles.button}>Book My Tickets</Text> 
                 </TouchableHighlight>
               </View>
-        } else if  ( !event.manage_ids.includes(person._id) && ( event.participant_ids.includes(person._id)) ) {
+        } else if  ( !manage_ids.includes(person._id) && ( event.participant_ids.includes(person._id)) ) {
           return <View>
-              {/* <Text style={styles.footer}> Already attend </ Text> */}
+              <Text style={styles.footer}> Already attend </ Text>
 
               <TouchableHighlight
               underlayColor="#9575CD"
