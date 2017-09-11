@@ -353,8 +353,8 @@ styles = StyleSheet.create({
   navBarButton: {
     color: '#3f88fb',
     textAlign:'center',
-    width: 64,
-    fontSize: 15,
+    width: 80,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   navBarHeader: {
@@ -363,7 +363,7 @@ styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     ...defaultStyles.text,
-    fontSize: 15,
+    fontSize: 18,
     // marginTop: 5
   },
   // text_sex: {

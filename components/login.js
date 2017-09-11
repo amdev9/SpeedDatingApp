@@ -15,16 +15,9 @@ import SafariView from 'react-native-safari-view';
 
 const { width, height } = Dimensions.get('window');
 
-
-// const URL = 'http://192.168.1.34:3000';
-// const URL = 'http://localhost:3000';
-
-
 const URL = Platform.OS === 'android'
 ? 'http://192.168.1.33:3000' // works for Genymotion
 : 'http://192.168.1.33:3000';
-
-
 
 export default class Login extends Component { 
   // static propTypes = {
@@ -118,7 +111,8 @@ export default class Login extends Component {
             onPress={this.loginWithFacebook}
             {...iconStyles}
           >
-            Login with Facebook
+           
+            <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ FACEBOOK</Text> 
           </Icon.Button>
            
           <Icon.Button
@@ -127,7 +121,7 @@ export default class Login extends Component {
             onPress={this.loginWithVk}
             {...iconStyles}
           >
-            Login with VK
+          <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ VK</Text> 
           </Icon.Button>
           </View>
 
@@ -145,7 +139,8 @@ export default class Login extends Component {
 
 const iconStyles = {
   borderRadius: 30,
-  iconStyle: { paddingVertical: 5 },
+  iconStyle: { paddingVertical: 10 },
+  
   // marginLeft: 40
   // alignItems: 'center',
 };
@@ -154,6 +149,12 @@ const iconStyles = {
 
 
 const styles = StyleSheet.create({
+  buttonText: {
+    fontFamily: 'System', 
+    fontWeight: 'bold', 
+    fontSize: 15, 
+    color: 'white'
+  },
   container: {
     flex: 1,
     backgroundColor: '#FFF',
@@ -182,14 +183,17 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   contentNew: {
-    height: 190,
+    height: 210,
     width: width
   },
   buttons: {
     justifyContent: 'space-between',
     flexDirection: 'column',
     flex: 1,
-    margin: 40
+    marginTop: 40,
+    marginBottom: 40,
+    marginLeft: 30,
+    marginRight: 30,
   },
    
 });

@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     ...defaultStyles.text,
-    fontSize: 15,
+    fontSize: 18,
     // marginTop: 7
   },
   container: {

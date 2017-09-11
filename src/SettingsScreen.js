@@ -28,7 +28,7 @@ import { defaultStyles } from './styles';
 
 const URL = Platform.OS === 'android'
 ? 'http://10.0.3.2:3000' // works for Genymotion
-: 'http://localhost:3000';
+: 'http://192.168.1.33:3000';
 
 
 class Settings extends Component {
@@ -130,8 +130,8 @@ styles = StyleSheet.create({
   navBarButton: {
     color: '#3f88fb',
     textAlign:'center',
-    width: 64,
-    fontSize: 15,
+    width: 80,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   navBarHeader: {
@@ -140,7 +140,7 @@ styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     ...defaultStyles.text,
-    fontSize: 15,
+    fontSize: 18,
     // marginTop: 5
   },
 
