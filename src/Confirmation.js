@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
+import urllib from 'url';
+
+
 import {
   StyleSheet,
   Text,
@@ -92,8 +95,9 @@ export default class Confirmation extends Component {
     }
   };
   
-  strippedURL = (url) => {
-    var obURL = new URL(url);
+  strippedURL = (uri) => {
+    // console.log(url);
+    var obURL = urllib.parse(uri); // new URL(url);
     var scheme = obURL.protocol.toLowerCase();
     var port = obURL.port;
     if (port == 0) {
@@ -108,46 +112,10 @@ export default class Confirmation extends Component {
     var path_split = part.split('?')[0];
     var path = path_split.substring(host.length, path_split.length);
     var strippedURL = `${scheme}//${host}:${port}${path}`.toLowerCase();
-    console.log('strippedURL: ', strippedURL);
+    // console.log('strippedURL: ', strippedURL);
     return strippedURL;
   }
-
-  // _onShouldStartLoadWithRequest = () => {
-
-  //   // onShouldStartLoadWithRequest -- https://facebook.github.io/react-native/docs/webview.html
-  //   if (this.state.current_URL == null) {
-  //     return false;
-  //   }
-  //   var strippedURL =  this.strippedURL(this.state.current_URL);
-  //   var strippedSuccessURL = this.strippedURL(kSuccessUrl);
-  //   var strippedFailURL = this.strippedURL(kFailUrl);
-    
-  //   if (strippedURL == strippedSuccessURL) {
-  //       // dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 2*NSEC_PER_SEC); // delay execution of finishpayment for 2 sec
-  //       // dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-  //       //     //
-  //       //     // NSLog(@"\n||||||||||--------------> second finishPayment \n\n");
-  //       //     //
-  //       //     // [self finishPayment]; // change to render() { return (); }
-  //       // });
-        
-  //       console.log('success');
-        
-  //       return false;
-  //   }
-    
-  //   if (strippedURL == strippedFailURL) {
-        
-  //       console.log('fail');
-  //       // NSLog(@"------ strippedFailURL----- \n\n");
-  //       // [self showError:nil];
-  //       // [webView removeFromSuperview];
-  //       return false;
-  //   }
-
-  //   return true;
-  // }
-
+ 
   _onNavigationStateChange(webViewState) {
     let strippedURL =  this.strippedURL(webViewState.url);
     let strippedSuccessURL = this.strippedURL(kSuccessUrl);

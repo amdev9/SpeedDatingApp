@@ -33,7 +33,8 @@ const AVATAR_URL = 'http://192.168.1.33:3000';
 
 const URL = Platform.OS === 'android'
 ? 'http://10.0.3.2:3000' // works for Genymotion
-: 'http://localhost:3000';
+: 'http://192.168.1.33:3000';
+// : 'http://localhost:3000';
 
 
 class Edit extends React.Component {
