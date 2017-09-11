@@ -115,7 +115,7 @@ styles = StyleSheet.create({
   },
   item: {
     padding: 10,
-    fontSize: 15,
+    fontSize: 18,
     height: 44,
     fontFamily: 'System',
     textAlign:'center',

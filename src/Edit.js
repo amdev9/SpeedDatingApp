@@ -303,13 +303,13 @@ styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 5,
-    fontSize: 14,
+    fontSize: 17,
     fontWeight: 'bold',
     backgroundColor: 'rgba(247,247,247,1.0)',
   },
   item: {
     padding: 10,
-    fontSize: 15,
+    fontSize: 18,
     height: 44,
     fontFamily: 'System',
     textAlign: 'left',
@@ -321,7 +321,7 @@ styles = StyleSheet.create({
   },
   itemTextChoose: {
     padding: 12,
-    fontSize: 15,
+    fontSize: 18,
     fontFamily: 'System',
     fontWeight: 'bold',
     color: '#a5a9af',
@@ -396,7 +396,7 @@ styles = StyleSheet.create({
     color: '#3f88fb',
     textAlign:'center',
     // width: 64,
-    fontSize: 15,
+    fontSize: 18,
     marginBottom: 20,
     fontWeight: 'bold'
   },  
@@ -404,7 +404,7 @@ styles = StyleSheet.create({
     color: '#3f88fb',
     textAlign:'center',
     // width: 64,
-    fontSize: 15,
+    fontSize: 18,
     marginTop: 10,
     marginBottom: 10,
     fontWeight: 'bold'
