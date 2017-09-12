@@ -168,7 +168,9 @@ export default class ManageScreen extends Component {
         <View style={styles.navBar}>
           <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
           <Text style={ [styles.navBarButton,{
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            fontSize: 16,
+            marginLeft: 5
           }]} onPress={() => this.props.navigation.goBack() }>Назад к мероприятиям</Text>
           <Text style={styles.navBarHeader}></Text>
           <Text style={styles.navBarButton}>  </Text> 
@@ -186,7 +188,8 @@ export default class ManageScreen extends Component {
           >
             <Text style={{ 
               color: "white",
-              fontWeight: 'bold'
+              fontWeight: 'bold', 
+              //fontSize: 16
               }} >Выбрать промежуток </Text>
           </TouchableHighlight>
           <View style={styles.textContainer}>
