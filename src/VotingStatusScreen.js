@@ -141,7 +141,7 @@ export default class VotingStatusScreen extends Component {
   };
 
   componentWillMount() {
-    this.ws = new WebSocket('ws://localhost:3000');
+    this.ws = new WebSocket('ws://192.168.1.33:3000'); // localhost
     this.ws.onopen = this.onOpenConnection;
     this.ws.onmessage = this.onMessageRecieved;
     this.ws.onerror = this.onError;

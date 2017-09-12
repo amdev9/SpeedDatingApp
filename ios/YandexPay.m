@@ -219,6 +219,9 @@ RCT_EXPORT_METHOD(doTestPayment:(RCTResponseSenderBlock) callback) {
                           @"body": post,
                           @"headers": headers
                           };
+    
+//    RCTLogInfo(@"CAllback called");
+
     callback(@[[NSNull null], req]);
     
     

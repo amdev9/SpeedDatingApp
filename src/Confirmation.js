@@ -23,7 +23,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 const { width, height } = Dimensions.get('window');
 
 
-// const YandexPay = NativeModules.YandexPay;
+
 const kSuccessUrl = "yandexmoneyapp://oauth/authorize/success";
 const kFailUrl = "yandexmoneyapp://oauth/authorize/fail";
 const kHttpsScheme = "https:";
@@ -53,6 +53,7 @@ export default class Confirmation extends Component {
   }
 
   _pressFuncIOS = () => {
+    console.log('_pressFuncIOS');
     NativeModules.YandexPay.doTestPayment((error, req) => {
       if (error) {
         console.error(error);
@@ -87,7 +88,7 @@ export default class Confirmation extends Component {
       console.log(json);
 
       // events = json; // get events
-      // this.props.navigation.goBack();
+      this.props.navigation.goBack(); // test only
        
     }
     catch (error) {
@@ -237,11 +238,12 @@ export default class Confirmation extends Component {
           style={styles.buttonContainer}
           onPress={() =>  { // add condition android || ios
             
-            if (Platform.OS === 'android') {
-              return  this._pressFuncANDROID();
-            } else {
-              return  this._pressFuncIOS(); //this._finalBookEvent()
-            }
+            console.log("pay pressed\n");
+            this._finalBookEvent(); // test
+            
+            // return (Platform.OS === 'android') ? this._pressFuncANDROID() : this._pressFuncIOS(); 
+              
+            
             
           } } 
         >
