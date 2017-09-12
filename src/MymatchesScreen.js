@@ -172,12 +172,42 @@ export default class MymatchesScreen extends Component {
               <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
             </View>
    
-            <Text style={styles.horizontalText}>Last event matches</Text>
+            <View style={{
+              flexDirection: 'row',
+            }}>
+              <Text style={styles.horizontalText}>Последнее мероприятие</Text>
+              <View style={styles.circle}>
+                <Text style={{
+                  marginTop: 2,
+                  marginLeft: 5.5,
+                  color: "white",
+                  fontSize: 13,
+                  fontWeight: 'bold',
+                  backgroundColor: 'transparent'
+                }}>3</Text>
+              </View>
+            </View>
             <ScrollView style={styles.horizontal} ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
               {/* this.state.persons */}
               {this.state.persons.map((participant, index) => <Participant vision={'mymatch_horizontal'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
             </ScrollView> 
-            <Text style={styles.verticalText}>All matches</Text>
+            
+            <View style={{
+              flexDirection: 'row',
+            }}>
+              <Text style={styles.verticalText}>Все совпадения</Text>
+              <View style={styles.circle}>
+                <Text style={{
+                  marginTop: 2,
+                  marginLeft: 5.5,
+                  color: "white",
+                  fontSize: 13,
+                  fontWeight: 'bold',
+                  backgroundColor: 'transparent'
+                }}>5</Text>
+              </View>
+            </View>
+
             <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
               {/* this.state.persons + async storage */}
               {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
@@ -210,7 +240,14 @@ export default class MymatchesScreen extends Component {
 
 const styles = StyleSheet.create({
  
-
+  circle: {
+    marginTop: 9,
+    marginLeft: 7,
+    width: 20,
+    height: 20,
+    borderRadius: 20/2,
+    backgroundColor: '#3f88fb'
+  },
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
@@ -267,15 +304,18 @@ const styles = StyleSheet.create({
     color: '#3f88fb'
   },
   verticalText: {
+    marginTop: 10,
     marginLeft: 10,
     fontWeight: 'bold',
     color: '#3f88fb'
   },
   horizontal: {
+    marginTop: 5,
     marginLeft: 10,
     height: 90
   },
   vertical: {
+    
     marginLeft: 10,
     marginRight: 10,
     // flex: 1

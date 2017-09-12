@@ -16,6 +16,7 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { defaultStyles } from './styles';
+// import FastImage from 'react-native-fast-image';
  
 const { width, height } = Dimensions.get('window');
 
@@ -36,7 +37,12 @@ export default class Profile extends Component {
           
           
           <View style={styles.avatar}>
-            <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
+           <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
+            
+               
+              
+            
+
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
           </View>
           <Text style={styles.text}>
