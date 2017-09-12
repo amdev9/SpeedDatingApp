@@ -189,12 +189,13 @@ export default class ManageScreen extends Component {
             <Text style={{ 
               color: "white",
               fontWeight: 'bold', 
-              //fontSize: 16
+              fontSize: 15
               }} >Выбрать промежуток </Text>
-          </TouchableHighlight>
+              </TouchableHighlight>
           <View style={styles.textContainer}>
-            <Text style={{ color: "#3f88fb", fontWeight: 'bold'}}> {this.state.test.toString()} </Text>
+            <Text style={{ color: "#3f88fb", fontWeight: 'bold', }}> {this.state.test.toString()} </Text>
           </View>
+          
         </View>
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
@@ -203,7 +204,6 @@ export default class ManageScreen extends Component {
         </ScrollView>
 
 
-        
         <TouchableHighlight
             underlayColor="#9575CD"
             style={styles.buttonContainer}

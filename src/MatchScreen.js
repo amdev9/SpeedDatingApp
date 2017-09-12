@@ -47,7 +47,7 @@ export default class MatchScreen extends Component {
         </View>
           */}
         
-        <Text> { JSON.stringify(events) } </Text>
+        {/* <Text> { JSON.stringify(events) } </Text> */}
 
       <ScrollView
           style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  
