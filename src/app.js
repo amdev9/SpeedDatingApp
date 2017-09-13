@@ -42,8 +42,11 @@ import GenderModal from './modal/GenderModal';
 import WorkModal from './modal/WorkModal';
 import UniversityModal from './modal/UniversityModal';
 
+import ScrollTab from './ScrollTab';
+
 const MovieStack = StackNavigator({
   Login: { screen: Login },
+  ScrollTab: { screen: ScrollTab },
   Profile: { screen: Profile },
   Events: { screen: Events }, //events
   Confirmation: { screen: Confirmation },

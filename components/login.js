@@ -52,7 +52,7 @@ export default class Login extends Component {
      
 
     const { navigate } = this.props.navigation;
-    navigate('Profile', { user: user }); // change to ScrollableTabView
+    navigate('ScrollableTab'); //'Profile', { user: user }); // change to ScrollableTabView
     
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
