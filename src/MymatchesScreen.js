@@ -177,14 +177,7 @@ export default class MymatchesScreen extends Component {
             }}>
               <Text style={styles.horizontalText}>Последнее мероприятие</Text>
               <View style={styles.circle}>
-                <Text style={{
-                  marginTop: 2,
-                  marginLeft: 5.5,
-                  color: "white",
-                  fontSize: 13,
-                  fontWeight: 'bold',
-                  backgroundColor: 'transparent'
-                }}>3</Text>
+                <Text style={styles.digitText}>3</Text>
               </View>
             </View>
             <ScrollView style={styles.horizontal} ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
@@ -197,14 +190,7 @@ export default class MymatchesScreen extends Component {
             }}>
               <Text style={styles.verticalText}>Все совпадения</Text>
               <View style={styles.circle}>
-                <Text style={{
-                  marginTop: 2,
-                  marginLeft: 5.5,
-                  color: "white",
-                  fontSize: 13,
-                  fontWeight: 'bold',
-                  backgroundColor: 'transparent'
-                }}>5</Text>
+                <Text style={styles.digitText}>5</Text>
               </View>
             </View>
 
@@ -239,15 +225,25 @@ export default class MymatchesScreen extends Component {
 }
 
 const styles = StyleSheet.create({
- 
   circle: {
-    marginTop: 9,
+    marginTop: 10,
     marginLeft: 7,
-    width: 20,
-    height: 20,
-    borderRadius: 20/2,
+    width: 24,
+    height: 24,
+    borderRadius: 24/2,
     backgroundColor: '#3f88fb'
   },
+  digitText: {
+    marginTop: 2.5,
+    marginLeft: 7.5,
+    color: "white",
+    fontSize: 16,
+    //fontWeight: 'bold',
+    fontFamily: 'ProximaNova-Semibold',
+    backgroundColor: 'transparent'
+  },
+
+  
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
@@ -298,25 +294,28 @@ const styles = StyleSheet.create({
 
   ///
   horizontalText: {
-    marginTop: 10,
+    marginTop: 11.5,
     marginLeft: 10,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontFamily: 'ProximaNova-Semibold',
     color: '#3f88fb'
   },
   verticalText: {
-    marginTop: 10,
+    marginTop: 11.5,
     marginLeft: 10,
-    fontWeight: 'bold',
+    fontSize: 16,
+    // fontWeight: 'bold',
+    fontFamily: 'ProximaNova-Semibold',
     color: '#3f88fb'
   },
   horizontal: {
     marginTop: 5,
     marginLeft: 10,
-    height: 90
+    height: 120
   },
   vertical: {
     
-    marginLeft: 10,
+    // marginLeft: 10,
     marginRight: 10,
     // flex: 1
   },

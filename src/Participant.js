@@ -62,7 +62,7 @@ export default class Participant extends PureComponent {
             />}
           </View>
           <View style={styles.textContainer_hor}>
-            <Text style={styles.text_hor}> {name} </Text>
+            <Text style={styles.text_hor}>{name}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -84,7 +84,7 @@ export default class Participant extends PureComponent {
             />}
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.text}> {name} </Text>
+            <Text style={styles.text}>{name}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -137,7 +137,7 @@ export default class Participant extends PureComponent {
                 />}
               </View>
               <View style={styles.textContainer}>
-                <Text style={styles.text}> {name} </Text>
+                <Text style={styles.text}>{name}</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -157,13 +157,15 @@ const styles = StyleSheet.create({
     // marginLeft: 8,
     marginTop: 5,
    
-    height: 60
+    height: 78
   },
   text_hor: {
-    color: '#000',
-    fontFamily: 'System',
-    fontSize: 14,
-    fontWeight: 'bold',
+    color: '#474747',
+    
+    // fontFamily: 'System',
+    fontFamily: 'ProximaNova-Semibold', //'System',
+    fontSize: 17,
+    // fontWeight: 'bold',
     marginTop: 5
   },
   textContainer_hor: {
@@ -187,23 +189,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#3f88fb',
   },
   avatar: {
-    borderRadius: 30,
-    width: 60,
-    height: 60,
+    borderRadius: 78/2,
+    width: 78,
+    height: 78,
   },
   avatarContainer: {        
     alignItems: 'center',
     
     // paddingTop: 10,
-    width: 60,
-    height: 60
+    width: 78,
+    height: 78
   },
   text: {
-    color: '#4b4d5c',
-    fontFamily: 'System',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 20
+    color: '#474747',
+    // color: '#4b4d5c',
+    fontFamily: 'ProximaNova-Semibold', //'System',
+    fontSize: 21,
+    // fontWeight: 'bold',
+    marginTop: 25
   },
   textLiked: {
     color: 'white',
@@ -214,8 +217,10 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     width: 120,
-    height: 60,
-    marginLeft: 15
+    height: 78,
+    // marginLeft: 0,
+    alignItems: 'center',
+
   },
   iconic: { 
     marginTop: 15, 

@@ -54,6 +54,7 @@
 		E971C0A438C04B918E75CEDB /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85CDDDBAC2B4C87BAE92CF9 /* Entypo.ttf */; };
 		FA8838301F3EBC5300E899F1 /* YandexPay.m in Sources */ = {isa = PBXBuildFile; fileRef = FA88382F1F3EBC5300E899F1 /* YandexPay.m */; };
 		FA92AE781F3000D900B1B1DA /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA92AE771F30007800B1B1DA /* libRCTCameraRoll.a */; };
+		FAA638C11F68C1E10095D339 /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAA638C01F68C1E10095D339 /* ProximaNova-Semibold.ttf */; };
 		FF8E11BB735D40BBB88CA845 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF6D61D67C48F780B346A0 /* libRNFetchBlob.a */; };
 /* End PBXBuildFile section */
 
@@ -365,6 +366,7 @@
 		FA88382E1F3EBC5300E899F1 /* YandexPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YandexPay.h; sourceTree = "<group>"; };
 		FA88382F1F3EBC5300E899F1 /* YandexPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YandexPay.m; sourceTree = "<group>"; };
 		FA92AE721F30007800B1B1DA /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		FAA638C01F68C1E10095D339 /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
 		FE13A27E01694416A02C3C6C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -617,6 +619,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FAA6389B1F68B05B0095D339 /* fonts */,
 				13B07FAE1A68108700A75B9A /* OAuthLogin */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* OAuthLoginTests */,
@@ -712,6 +715,14 @@
 				FA92AE771F30007800B1B1DA /* libRCTCameraRoll.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FAA6389B1F68B05B0095D339 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FAA638C01F68C1E10095D339 /* ProximaNova-Semibold.ttf */,
+			);
+			name = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1174,6 +1185,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				E971C0A438C04B918E75CEDB /* Entypo.ttf in Resources */,
+				FAA638C11F68C1E10095D339 /* ProximaNova-Semibold.ttf in Resources */,
 				A103DC0DA8D946A1B6CC69EB /* EvilIcons.ttf in Resources */,
 				E9577C24AF91495EBD21215E /* FontAwesome.ttf in Resources */,
 				43FDE48C365D43CF8E4457A7 /* Foundation.ttf in Resources */,
