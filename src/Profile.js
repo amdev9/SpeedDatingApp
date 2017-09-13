@@ -34,24 +34,13 @@ export default class Profile extends Component {
                 person: user
               })} name="ios-calendar-outline" size={30} />
           </View>
-          
-          
           <View style={styles.avatar}>
            <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
-            
-               
-              
-            
-
-            {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
           </View>
           <Text style={styles.text}>
              {user.name} 
-             {/* {'\n'} */}
-             {/* {JSON.stringify(this.props)} */}
-             
           </Text>
-
+          
           <View style={styles.barContainer}>
             <View style={styles.rightSide}>
               <TouchableOpacity style={styles.circle}

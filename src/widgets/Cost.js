@@ -12,21 +12,29 @@ import { defaultStyles } from '../styles';
 
 export default class Cost extends Component {
     render() {
-      const { cost, part } = this.props;
+      const { cost, part, manage } = this.props;
       
-      if (!part) {
-        return  <View
-            underlayColor="#9575CD"
-            style={styles.buttonContainer}
-        >
-          <Text style={styles.places}>{cost}</Text>
-          <Icon style={styles.iconic} name="ruble" size={15} color="#FFF" />
-        </View> 
+      if(!manage) {
+        if (!part) {
+          return  <View
+              underlayColor="#9575CD"
+              style={styles.buttonContainer}
+          >
+            <Text style={styles.places}>{cost}</Text>
+            <Icon style={styles.iconic} name="ruble" size={15} color="#FFF" />
+          </View> 
+        } else {
+          return  <View style={styles.buttonGo}>
+            <Iconic style={styles.iconicGo} name="ios-checkmark" size={30} />
+            <Text style={styles.go}>Уже иду</Text>
+           
+          </View> 
+        }
+        
       } else {
         return  <View style={styles.buttonGo}>
-          <Iconic style={styles.iconicGo} name="ios-checkmark" size={30} />
-          <Text style={styles.go}>Уже иду</Text>
-         
+        {/* <Iconic style={styles.iconicGo} name="ios-checkmark" size={30} /> */}
+          <Text style={styles.go}>Организатор</Text>
         </View> 
       }
       

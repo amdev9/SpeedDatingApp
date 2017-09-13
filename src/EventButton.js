@@ -65,7 +65,7 @@ export default class EventButton extends Component {
                 style={styles.buttonContainer}
                 onPress={onBook}
               >
-              <Text style={styles.button}>Book My Tickets</Text> 
+              <Text style={styles.button}>Подробнее</Text> 
               </TouchableHighlight>
             </View>
         } else if  ( !manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id))

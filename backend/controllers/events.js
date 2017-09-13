@@ -145,6 +145,7 @@ export const approve = async (req, res, next) => {
       let position = event.manage_queue_ids.indexOf(req.params.manageQueueId);
       if ( ~position ) event.manage_queue_ids.splice(position, 1);
       event.manage_ids.push(req.params.manageQueueId);
+      event.show_manage = false;
     } else if (req.params.decision == 'decline') {  
       let position = event.manage_queue_ids.indexOf(req.params.manageQueueId);
       if ( ~position ) event.manage_queue_ids.splice(position, 1);

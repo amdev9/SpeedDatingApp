@@ -45,6 +45,15 @@ export default class EventPoster extends Component {
     } else {
       var part = false;
     }
+
+    var manage_ids = event.manage_ids.map(event => event._id); // fixed manage_ids
+    if ( manage_ids.includes(person._id) ) {
+      var manage_approve = true;
+      
+    } else {
+      var manage_approve = false;
+    }
+
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(event)}>
         <View style={styles.imageContainer}>
@@ -64,7 +73,7 @@ export default class EventPoster extends Component {
           
           <View style={styles.downPoster}>
             <Places now={left_places} max={places_max} />
-            <Cost cost={cost} part={part} />  
+            <Cost cost={cost} part={part} manage={manage_approve} />  
           </View>
         </View>
        

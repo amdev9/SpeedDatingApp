@@ -52,5 +52,30 @@ organizer.save(function (err) {
     if (err) return handleError(err);
     // thats it!
   });
+//////////
+  var event2 = new Event({
+    title: "Nence upon a timex.",
+    _creator: organizer._id,    // assign the _id from the person
+    photo : 'https://i.imgur.com/po7UezG.jpg',
+    description: 'Some description', 
+    places_max: 30,
+    cost_men: 2000,
+    cost_women: 600,
+    date : Date.now(),
+    show_manage: false,
+    manage_ids: manage_ids,
+    participant_ids: [],
+    participants: [],
+    likes: [],
+    matches: {},
+    table_max: 15
+  });
+
+  event2.save(function (err) {
+    if (err) return handleError(err);
+    // thats it!
+  });
+
+
 });
  

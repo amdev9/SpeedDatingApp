@@ -20,7 +20,7 @@ import Participant from './Participant';
 import Icon from 'react-native-vector-icons/Ionicons';
 import _ from 'lodash';
 
-// AsyncStorage.clear();
+AsyncStorage.clear();
 var pech = [];
  
 
