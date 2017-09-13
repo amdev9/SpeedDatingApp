@@ -150,14 +150,15 @@ export default class Participant extends PureComponent {
 const styles = StyleSheet.create({
   col_hor: {
     flexDirection: 'column',
-    width: 80,
+    // width: 90,
+    flex: 1
   },
   avatarContainer_hor: {        
-    alignItems: 'center',
+    alignItems: 'flex-start',
     // marginLeft: 8,
     marginTop: 5,
-   
-    height: 78
+    
+    // height: 78
   },
   text_hor: {
     color: '#474747',
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   textContainer_hor: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     // width: 80,
     // height: 60,
     // marginLeft: 15
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
   col: {
     flex: 1,
     flexDirection: 'row',
-    margin: 10
+    margin: 10,
   },
   container: {
     // flexDirection: 'row',
@@ -194,10 +195,10 @@ const styles = StyleSheet.create({
     height: 78,
   },
   avatarContainer: {        
-    alignItems: 'center',
+    // alignItems: 'center',
     
     // paddingTop: 10,
-    width: 78,
+    width: 90, //78,
     height: 78
   },
   text: {
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   textContainer: {
-    width: 120,
+    // width: 120,
     height: 78,
     // marginLeft: 0,
     alignItems: 'center',
