@@ -105,7 +105,7 @@ export default class Events extends Component {
 
   render() {
     const { events, loading, refresh } = this.props;
-    const { person } =  this.props.navigation.state.params;
+    const { user } =  this.props //.navigation.state.params;
 
     return (
       <View style={styles.container}>
@@ -113,12 +113,12 @@ export default class Events extends Component {
         <View style={styles.navBar}>
           <Icon style={styles.navBarButton}
             onPress={() =>  this.props.navigation.navigate('Profile', {
-              user: person
+              user: user
             })} name="ios-person-outline" size={30} color="#900" />
           <Text style={styles.navBarHeader}>Мероприятия</Text>
           <Icon style={styles.navBarButton}
             onPress={() => this.props.navigation.navigate('Mymatches', {
-              person: person // change to user: user
+              person: user // change to user: user
             })} name="ios-chatboxes-outline" size={30} color="#900" /> 
         </View>
   
@@ -159,10 +159,10 @@ export default class Events extends Component {
             >
               {events.map((event, index) => {
                 if (this.state.selectedIndex == 0) {
-                  if (event.participant_ids.includes(person._id) || event.manage_ids.includes(person._id)) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
+                  if (event.participant_ids.includes(user._id) || event.manage_ids.includes(user._id)) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
                     return <EventPoster
                       event={event}
-                      person={person}
+                      person={user}
                       onOpen={this.openEvent}
                       key={index}
                     /> 
@@ -170,7 +170,7 @@ export default class Events extends Component {
                 } else {
                   return <EventPoster
                     event={event}
-                    person={person}
+                    person={user}
                     onOpen={this.openEvent}
                     key={index}
                   /> 
@@ -188,7 +188,7 @@ export default class Events extends Component {
 
         <EventPopup
           event={this.state.event}
-          person={person}
+          person={user}
           isOpen={this.state.popupIsOpen}
           onClose={this.closeEvent}
           onBook={this.bookEvent}

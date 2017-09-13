@@ -44,42 +44,62 @@ import UniversityModal from './modal/UniversityModal';
 
 import ScrollTab from './ScrollTab';
 
-const MovieStack = StackNavigator({
-  Login: { screen: Login },
-  ScrollTab: { screen: ScrollTab },
-  Profile: { screen: Profile },
-  Events: { screen: Events }, //events
-  Confirmation: { screen: Confirmation },
-  Edit: { screen: Edit },
-  Voting: { screen: VotingScreen },
-  Mymatches: { screen: MymatchesScreen },
-  Join: { screen: JoinScreen }, 
-  Settings: { screen: SettingsScreen },
-  //modal
-  Gender: { screen: GenderModal },
-  Work: { screen: WorkModal },
-  University: { screen: UniversityModal },
+// const MovieStack = StackNavigator({
+//   Login: { screen: Login },
+//   ScrollTab: { screen: ScrollTab },
+//   Profile: { screen: Profile },
+//   Events: { screen: Events }, //events
+//   Confirmation: { screen: Confirmation },
+//   Edit: { screen: Edit },
+//   Voting: { screen: VotingScreen },
+//   Mymatches: { screen: MymatchesScreen },
+//   Join: { screen: JoinScreen }, 
+//   Settings: { screen: SettingsScreen },
+//   //modal
+//   Gender: { screen: GenderModal },
+//   Work: { screen: WorkModal },
+//   University: { screen: UniversityModal },
   
-  // organizer screen
-  VotePush: { screen: VotePushScreen },
-  VotingStatus: { screen: VotingStatusScreen },
-  Manage: { screen: ManageScreen },
-  Match: { screen: MatchScreen },
-  ManagePermission: { screen: ManagePermissionScreen }
-}, {
-  // In modal mode screen slides up from the bottom
-  // mode: 'modal',
-  // No headers for modals. Otherwise we'd have two headers on the screen, one for stack, one for modal.
-  headerMode: 'none',
-});
+//   // organizer screen
+//   VotePush: { screen: VotePushScreen },
+//   VotingStatus: { screen: VotingStatusScreen },
+//   Manage: { screen: ManageScreen },
+//   Match: { screen: MatchScreen },
+//   ManagePermission: { screen: ManagePermissionScreen }
+// }, {
+//   // In modal mode screen slides up from the bottom
+//   // mode: 'modal',
+//   // No headers for modals. Otherwise we'd have two headers on the screen, one for stack, one for modal.
+//   headerMode: 'none',
+// });
+
+
 
 export default class App extends Component {
+
+  state = {
+    user: undefined, // not logged in yet
+  };
+
+  onLoggedIn = (user) => {
+    this.setState({ user });
+  };
+
   render() {     
-    return (
-      <Provider store={store}> 
-        <MovieStack /> 
-      </Provider>
-    )
+    
+    const { user } = this.state;
+    return user
+      // Show comments if user is logged in
+      ? <ScrollTab user={user} />
+      // Show login screen otherwise
+      : <Login onLoggedIn={this.onLoggedIn} />;
+
+    //     return (
+    //   <Provider store={store}> 
+    //     <MovieStack /> 
+    //   </Provider>
+    // )
+    
   }
 }
 

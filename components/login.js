@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Linking,
   StyleSheet,
@@ -20,10 +20,11 @@ const URL = Platform.OS === 'android'
 : 'http://192.168.1.33:3000';
 
 export default class Login extends Component { 
-  // static propTypes = {
-  //   onLoggedIn: PropTypes.func.isRequired
-  // };
+  static propTypes = {
+    onLoggedIn: PropTypes.func.isRequired
+  };
 
+  
   // Set up Linking
   componentDidMount() {
     // Add event listener to handle OAuthLogin:// URLs
@@ -48,12 +49,16 @@ export default class Login extends Component {
     // Decode the user string and parse it into JSON
     const user = JSON.parse(decodeURI(user_string));
     // Call onLoggedIn function of parent component and pass user object
-    // this.props.onLoggedIn(user);
-     
+    // !
+    this.props.onLoggedIn(user); 
+    // const { navigate } = this.props.navigation;
+    // navigate('ScrollTab'); //'Profile', { user: user }); // change to ScrollableTabView 
+    // change to state ? login : ScrollTab 
+    // like here: http://rationalappdev.com/implementing-comments-with-react-native-and-nodejs/
 
-    const { navigate } = this.props.navigation;
-    navigate('ScrollableTab'); //'Profile', { user: user }); // change to ScrollableTabView
-    
+
+
+
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
     }
@@ -124,10 +129,6 @@ export default class Login extends Component {
           <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ VK</Text> 
           </Icon.Button>
           </View>
-
-         
-          
-
 
         </View>
 

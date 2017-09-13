@@ -20,7 +20,7 @@ import Participant from './Participant';
 import Icon from 'react-native-vector-icons/Ionicons';
 import _ from 'lodash';
 
-AsyncStorage.clear();
+// AsyncStorage.clear();
 var pech = [];
  
 
@@ -100,7 +100,7 @@ export default class MymatchesScreen extends Component {
   onMessageRecieved = (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
-    const { person } = this.props.navigation.state.params;
+    const { person } = this.props //.navigation.state.params;
     
     if (obj.type == 'calculate') {
       // if(obj && typeof(obj.data) !== 'undefined') {
@@ -160,7 +160,7 @@ export default class MymatchesScreen extends Component {
 
   render() {
     console.log(this.state);
-    const { person } = this.props.navigation.state.params;
+    const { person } = this.props //.navigation.state.params;
     if (this.state.persons.length + pech.length > 0 && this.state.text.length == 0 ) { // && this.state.searchFlag == false 
       return (
         <View style={styles.container}>
