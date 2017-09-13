@@ -25,16 +25,18 @@ export default class Profile extends Component {
   render() {
     const { user } = this.props //.navigation.state.params;
     return (     
+      
       <View style={styles.container}>
         <View style={styles.content}>
-          <View style={styles.navBar}>
+        
+           {/* <View style={styles.navBar}>
             <Text style={styles.navBarButton}></Text>
             <Text style={styles.navBarHeader}>Профиль</Text>
             <Icon style={styles.navBarButton}
               onPress={() => this.props.navigation.navigate('Events', {
                 person: user // change to user: user
               })} name="ios-calendar-outline" size={30} />
-          </View>
+          </View> */}
           <View style={styles.avatar}>
            <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
           </View>
@@ -59,7 +61,7 @@ export default class Profile extends Component {
             </View>
           </View>
 
-          
+           
         </View>
       </View>
     );
@@ -128,11 +130,10 @@ const styles = StyleSheet.create({
     // marginTop: 7
   },
   container: {
-    flex: 1,
+    // flex: 1, // fixed 
     backgroundColor: '#FFF',
   },
   content: {
-    // flex: 1, removed
     justifyContent: 'center',
     alignItems: 'center',
   },

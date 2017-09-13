@@ -166,14 +166,14 @@ export default class MymatchesScreen extends Component {
         <View style={styles.container}>
           <View style={styles.content}>
 
-            <View style={styles.navBar}>
+            {/* <View style={styles.navBar}>
               <Icon style={styles.navBarButton}
                 onPress={() => this.props.navigation.navigate('Events', {
                   person: person
                 }) } name="ios-calendar-outline" size={30} color="#900" /> 
                 <Text style={styles.navBarHeader}>Мои совпадения</Text>
               <Text style={styles.navBarButton}></Text>
-            </View>
+            </View> */}
             
             <View>
               <TextInput
@@ -280,14 +280,14 @@ export default class MymatchesScreen extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.content}>
-            <View style={styles.navBar}>
+            {/* <View style={styles.navBar}>
               <Icon style={styles.navBarButton}
                 onPress={() => this.props.navigation.navigate('Events', {
                   person: person
                 }) } name="ios-calendar-outline" size={30} color="#900" /> 
                 <Text style={styles.navBarHeader}>Мои совпадения</Text>
               <Text style={styles.navBarButton}></Text>
-            </View>
+            </View> */}
             <Text style={{textAlign: 'center'}}>Начните поиск пар. Когда вы найдете себе несколько пар, они отобразятся здесь и вы сможете отправить им сообщения</Text>
             {/* No matches yet */}
           </View>
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
     // marginTop: 5
   },
   container: {
-    flex: 1,
+    // flex: 1, // fixed
     backgroundColor: '#FFF',
   },
 

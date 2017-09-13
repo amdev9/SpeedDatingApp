@@ -110,7 +110,7 @@ export default class Events extends Component {
     return (
       <View style={styles.container}>
       
-        <View style={styles.navBar}>
+        {/* <View style={styles.navBar}>
           <Icon style={styles.navBarButton}
             onPress={() =>  this.props.navigation.navigate('Profile', {
               user: user
@@ -120,7 +120,7 @@ export default class Events extends Component {
             onPress={() => this.props.navigation.navigate('Mymatches', {
               person: user // change to user: user
             })} name="ios-chatboxes-outline" size={30} color="#900" /> 
-        </View>
+        </View> */}
   
         {/* <SegmentedControlIOS tintColor="#3f88fb" style={styles.bottomContent} 
           values={['Мои', 'Найти']}
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     // marginTop: 5
   },
   container: {
-    flex: 1,                // take up all screen
+    // flex: 1,               // fixed
     //paddingTop: 20,         // start below status bar
     backgroundColor: '#FFFFFF'
   },
