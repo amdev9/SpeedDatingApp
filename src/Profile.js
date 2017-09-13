@@ -16,7 +16,8 @@ import {
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { defaultStyles } from './styles';
-// import FastImage from 'react-native-fast-image';
+
+// ScrollableTabView
  
 const { width, height } = Dimensions.get('window');
 
@@ -31,7 +32,7 @@ export default class Profile extends Component {
             <Text style={styles.navBarHeader}>Профиль</Text>
             <Icon style={styles.navBarButton}
               onPress={() => this.props.navigation.navigate('Events', {
-                person: user
+                person: user // change to user: user
               })} name="ios-calendar-outline" size={30} />
           </View>
           <View style={styles.avatar}>
@@ -40,7 +41,7 @@ export default class Profile extends Component {
           <Text style={styles.text}>
              {user.name} 
           </Text>
-          
+
           <View style={styles.barContainer}>
             <View style={styles.rightSide}>
               <TouchableOpacity style={styles.circle}

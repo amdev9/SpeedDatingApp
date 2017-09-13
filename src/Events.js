@@ -118,7 +118,7 @@ export default class Events extends Component {
           <Text style={styles.navBarHeader}>Мероприятия</Text>
           <Icon style={styles.navBarButton}
             onPress={() => this.props.navigation.navigate('Mymatches', {
-              person: person
+              person: person // change to user: user
             })} name="ios-chatboxes-outline" size={30} color="#900" /> 
         </View>
   
