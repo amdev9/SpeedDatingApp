@@ -10,7 +10,7 @@ import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-ta
 import Profile from './Profile';
 import Events from './Events';
 import Mymatches from './MymatchesScreen';
-
+import ModalStack from './navi/ModalStack';
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -41,7 +41,8 @@ export default class ScrollTab extends Component {
             renderTabBar={() => <ScrollableTabBar />}
           >
             <View tabLabel='Profile'>
-                <Profile user={user}/>
+                <ModalStack user={user} />
+                {/* <Profile user={user}/> */}
             </View>
             <View tabLabel='Events'>
                 <Events user={user}/>

@@ -21,6 +21,8 @@ import { defaultStyles } from './styles';
  
 const { width, height } = Dimensions.get('window');
 
+
+
 export default class Profile extends Component {
   render() {
     const { user } = this.props //.navigation.state.params;
