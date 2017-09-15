@@ -23,13 +23,18 @@ const { width, height } = Dimensions.get('window');
 
 
 
+
+
 export default class Profile extends Component {
   render() {
-    const { user } = this.props //.navigation.state.params;
+
+    // const { user } = this.props;
+    const user  = this.props.screenProps;
+    
     return (     
       
       <View style={styles.container}>
-        <View style={styles.content}>
+        <View style={styles.content}>  
         
            {/* <View style={styles.navBar}>
             <Text style={styles.navBarButton}></Text>
@@ -39,6 +44,7 @@ export default class Profile extends Component {
                 person: user // change to user: user
               })} name="ios-calendar-outline" size={30} />
           </View> */}
+          
           <View style={styles.avatar}>
            <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
           </View>
@@ -64,8 +70,8 @@ export default class Profile extends Component {
           </View>
 
            
-        </View>
-      </View>
+       </View>  
+       </View> 
     );
   }
 }
@@ -136,6 +142,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
   },
   content: {
+    
     justifyContent: 'center',
     alignItems: 'center',
   },

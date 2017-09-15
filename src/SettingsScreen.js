@@ -38,7 +38,7 @@ class Settings extends Component {
     try {
       let response =  await fetch(`${URL}/logout`);
       let responseJson = await response.json();
-      // alert(responseJson);
+      alert(responseJson);
       if (responseJson == 'ok') {
         
         navigate('Login');
@@ -59,8 +59,8 @@ class Settings extends Component {
       <Text style={styles.navBarButton}></Text>
       <Text style={styles.navBarHeader}>Настройки</Text>
       <TouchableOpacity onPress={() =>  {
-            {/* this.saveProfile(); */}
-            this.props.navigation.navigate('Profile', { user: user });
+            this.props.navigation.goBack();
+            //this.props.navigation.navigate('Profile', { user: user });
       }}>
         <Text style={styles.navBarButton}>Готово</Text>
       </TouchableOpacity>

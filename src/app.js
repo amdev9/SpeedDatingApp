@@ -94,7 +94,7 @@ export default class App extends Component {
       // Show login screen otherwise
       : <Login onLoggedIn={this.onLoggedIn} />;
 
-    //     return (
+    // return (
     //   <Provider store={store}> 
     //     <MovieStack /> 
     //   </Provider>

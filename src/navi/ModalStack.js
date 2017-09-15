@@ -9,7 +9,9 @@ import Edit from '../Edit';
 export default ModalStack = StackNavigator({
   Profile: {
     screen: Profile,
-    // add params through navigationOptions:  { user }
+    navigationOptions: (props) => ({
+      user: props.screenProps  
+    }),
   },
   Settings: {
     screen: SettingsScreen

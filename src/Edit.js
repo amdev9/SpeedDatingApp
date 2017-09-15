@@ -154,6 +154,8 @@ class Edit extends React.Component {
     const {user} = this.props.navigation.state.params;
     const { navigate } = this.props.navigation;
     
+    console.log('user: ', user);
+    
     // console.log('state :', this.state)
     return (
       <View  style={styles.container}>
@@ -162,7 +164,7 @@ class Edit extends React.Component {
           <Text style={styles.navBarHeader}>Изменить</Text>
           <TouchableOpacity onPress={() =>  {
                 this.saveProfile();
-                this.props.navigation.navigate('Profile', { user: user });
+                this.props.navigation.navigate('Profile', { user: user }); // goBack() 
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
