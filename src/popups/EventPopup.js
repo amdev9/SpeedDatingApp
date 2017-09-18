@@ -22,7 +22,7 @@ import EventButton from '../EventButton';
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
 // Set default popup height to 67% of screen height
-const defaultHeight = height * 0.67;
+const defaultHeight = height * 0.67; // 67
 
 export default class EventPopup extends Component {
 

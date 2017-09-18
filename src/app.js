@@ -82,24 +82,105 @@ import ScrollTab from './ScrollTab';
 //       Events
 //       Mymatches
 //     Settings
-//     ModalStack:
+//     EditStack:
 //       Edit (main)
 //       Gender
 //       Work
 //       University
 //     Confirmation
 //     ManagePermission
-//     StackNavigator:  
+//     UserNavigator (StackNavigator):  
 //       ->Join
 //       -->Voting
 //       --->VotePush
-//     StackNavigator:  
+//     ManagerNavigator (StackNavigator):  
 //       ->Manage
 //       -->VotingStatus
 //       --->Match
        
-    
 
+const EditStack = StackNavigator({
+  Edit: {
+    screen: Edit,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  Gender: {
+    screen: GenderModal,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  University: {
+    screen: UniversityModal,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  Work: {
+    screen: WorkModal,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+}, {
+  mode: 'modal',
+  headerMode: 'none',
+});
+
+const UserNavigator = StackNavigator({
+  Join: { screen: JoinScreen },
+  Voting: { screen: VotingScreen },
+  VotePush: { screen: VotePushScreen },   
+}, {
+  headerMode: 'none',
+});
+
+const ManagerNavigator = StackNavigator({
+  Manage: { screen: ManageScreen },
+  VotingStatus: { screen: VotingStatusScreen },
+  Match: { screen: MatchScreen },   
+}, {
+  headerMode: 'none',
+});
+
+const ModalStack = StackNavigator({
+  ScrollTab: { 
+    screen: ScrollTab,
+    navigationOptions: (props) => ({
+      user: props.screenProps,
+      gesturesEnabled: false
+    }), 
+  },
+  Settings: { screen: SettingsScreen },
+  Edit: { screen: EditStack },
+  Confirmation: { screen: Confirmation },
+  ManagePermission: { screen: ManagePermissionScreen },
+  UserNavigator: { screen: UserNavigator },
+  ManagerNavigator: { screen: ManagerNavigator },
+
+  // Profile: { // change to scrolltab
+  //   screen: Profile,
+  //   navigationOptions: (props) => ({
+  //     user: props.screenProps,
+  //     gesturesEnabled: false
+  //   }), 
+  // },
+  // Edit: {
+  //   screen: EditStack,
+  //   navigationOptions: {
+  //     gesturesEnabled: false
+  //   }
+  // },
+}, {
+  // In modal mode screen slides up from the bottom
+  mode: 'modal',
+  // No headers for modals. Otherwise we'd have two headers on the screen, one for stack, one for modal.
+  headerMode: 'none',
+});
+
+    
 export default class App extends Component {
 
   state = {
@@ -115,7 +196,9 @@ export default class App extends Component {
     const { user } = this.state;
     return user
       // Show comments if user is logged in
-      ? <ScrollTab user={user} />
+      ? <ModalStack screenProps={
+        user
+       } />  //<ScrollTab user={user} />
       // Show login screen otherwise
       : <Login onLoggedIn={this.onLoggedIn} />;
 

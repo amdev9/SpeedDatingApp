@@ -28,13 +28,13 @@ const { width, height } = Dimensions.get('window');
 export default class Profile extends Component {
   render() {
 
-    // const { user } = this.props; // ScrollableTabView
-    const user  = this.props.screenProps; // modalstack
+    const { user } = this.props; // ScrollableTabView
+    // const user  = this.props.screenProps; // modalstack
     console.log(user);
     return (     
       
       <View style={styles.container}>
-        {/* <View style={styles.content}>   */}
+        <View style={styles.content}>  
         
            {/* <View style={styles.navBar}>
             <Text style={styles.navBarButton}></Text>
@@ -70,7 +70,7 @@ export default class Profile extends Component {
           </View>
 
            
-       {/* </View> */ }  
+        </View> 
        </View> 
     );
   }

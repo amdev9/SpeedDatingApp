@@ -158,13 +158,13 @@ class Edit extends React.Component {
     
     // console.log('state :', this.state)
     return (
-      <View  style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}></Text>
           <Text style={styles.navBarHeader}>Изменить</Text>
           <TouchableOpacity onPress={() =>  {
-                this.saveProfile();
-                this.props.navigation.navigate('Profile', { user: user }); // goBack() 
+              this.saveProfile();
+              navigate('ScrollTab', { user: user }); // Profile  goBack() // this.props.navigation.
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
