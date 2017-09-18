@@ -25,11 +25,13 @@ import {
 import { defaultStyles } from './styles';
 
 // const URL = 'http://localhost:3000';
-
 const URL = Platform.OS === 'android'
 ? 'http://10.0.3.2:3000' // works for Genymotion
 : 'http://192.168.1.33:3000';
 
+
+import { onSignOut } from "../components/auth";
+import { ResetToSignedOut } from "../components/router";
 
 class Settings extends Component {
   
@@ -41,7 +43,8 @@ class Settings extends Component {
       alert(responseJson);
       if (responseJson == 'ok') {
         
-        navigate('Login');
+        onSignOut().then(() => navigation.dispatch(ResetToSignedOut))
+        // navigate('Login');
       }
       
     } catch(error) {

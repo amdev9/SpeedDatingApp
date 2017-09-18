@@ -19,10 +19,15 @@ const URL = Platform.OS === 'android'
 ? 'http://192.168.1.33:3000' // works for Genymotion
 : 'http://192.168.1.33:3000';
 
+
+
+import { onSignIn } from "./auth";
+import { ResetToSignedIn } from "./router";
+
 export default class Login extends Component { 
-  static propTypes = {
-    onLoggedIn: PropTypes.func.isRequired
-  };
+  // static propTypes = {
+  //   onLoggedIn: PropTypes.func.isRequired
+  // };
 
   
   // Set up Linking
@@ -50,7 +55,10 @@ export default class Login extends Component {
     const user = JSON.parse(decodeURI(user_string));
     // Call onLoggedIn function of parent component and pass user object
     // !
-    this.props.onLoggedIn(user); 
+
+    onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) // this.props.onLoggedIn(user); 
+    
+    
     // const { navigate } = this.props.navigation;
     // navigate('ScrollTab'); //'Profile', { user: user }); // change to ScrollableTabView 
     // change to state ? login : ScrollTab 

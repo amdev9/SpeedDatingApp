@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {
   Text,
   View,
+  AsyncStorage
 } from 'react-native';
 
 
@@ -37,40 +38,47 @@ import WorkModal from './modal/WorkModal';
 import UniversityModal from './modal/UniversityModal';
 
 
+const USER_KEY = "auth-demo-key";
+
 export default class ScrollTab extends Component {
   // static propTypes = {
   //   user: PropTypes.object.isRequired
   // };
 
+  // getUser = async () => {
+  //   var res = await AsyncStorage.getItem(USER_KEY);
+  //   return JSON.parse(res);
+  // }
+
   render() {
     // const { user } = this.props;
-    const user  = this.props.screenProps
+    // const user  = this.props.screenProps
+    
+    // !!!!!!!! fetch user: https://stackoverflow.com/questions/33553112/react-native-asyncstorage-fetches-data-after-rendering
+    
     return (
-        <Provider store={store}> 
-            
-           {/* <ModalStack screenProps={
-                   user
-                  } /> */}
+      <View><Text>Cool</Text></View> 
+        
 
-           <ScrollableTabView
-            style={{
-                marginTop: 20
-            }}
-            initialPage={0} // param choose 'Profile' || Events || Mymatches
-            renderTabBar={() => <ScrollableTabBar />}
-          >
-            <View  tabLabel='Profile'>
-              <Profile user={user}  navigation={this.props.navigation}/> 
-            </View>
-            <View tabLabel='Events'>
-                <Events user={user}/>
-            </View>
-            <View tabLabel='Mymatches'>
-                <Mymatches person={user}/>
-
-            </View>
-          </ScrollableTabView> 
-        </Provider>
+        // <Provider store={store}> 
+        //   <ScrollableTabView
+        //     style={{
+        //         marginTop: 20
+        //     }}
+        //     initialPage={0} // param choose 'Profile' || Events || Mymatches
+        //     renderTabBar={() => <ScrollableTabBar />}
+        //   >
+        //     <View  tabLabel='Profile'>
+        //       <Profile user={user} navigation={this.props.navigation}/> 
+        //     </View>
+        //     <View tabLabel='Events'>
+        //         <Events user={user} navigation={this.props.navigation}/>
+        //     </View>
+        //     <View tabLabel='Mymatches'>
+        //         <Mymatches person={user} navigation={this.props.navigation}/>
+        //     </View>
+        //   </ScrollableTabView> 
+        // </Provider>
     );
   };
 

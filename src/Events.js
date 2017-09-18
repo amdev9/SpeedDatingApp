@@ -59,7 +59,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Confirmation', {
       event: this.state.event,
-      participant: this.props.navigation.state.params.person
+      participant: this.props.navigation.state.params.person 
     }); 
   }
 
@@ -93,7 +93,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('ManagePermission', {
       event: this.state.event,
-      person: this.props.navigation.state.params.person
+      person: this.props.navigation.state.params.user // person 
     }); 
   }
 
