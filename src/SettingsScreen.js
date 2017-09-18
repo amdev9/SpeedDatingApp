@@ -51,7 +51,7 @@ class Settings extends Component {
 
   render() {
     const {user} = this.props.navigation.state.params;
-
+    console.log('settings', user);
     return (
 
       <View style={styles.container}>

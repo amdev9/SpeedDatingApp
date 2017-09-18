@@ -70,8 +70,10 @@ const EditStack = StackNavigator({
 });
 
 
+
+
 const ModalStack = StackNavigator({
-  Profile: {
+  Profile: { // change to scrolltab
     screen: Profile,
     navigationOptions: (props) => ({
       user: props.screenProps,
@@ -108,13 +110,13 @@ export default class ScrollTab extends Component {
     return (
         <Provider store={store}> 
             
-           <ModalStack screenProps={
+           {/* <ModalStack screenProps={
                    user
-                  } />  
+                  } />    */}
 
-                  {/* <Profile user={user}/> */}
+     
 
-          {/* <ScrollableTabView
+           <ScrollableTabView
             style={{
                 marginTop: 20
             }}
@@ -122,7 +124,10 @@ export default class ScrollTab extends Component {
             renderTabBar={() => <ScrollableTabBar />}
           >
             <View  tabLabel='Profile'>
-               
+            <ModalStack screenProps={
+                   user
+                  } /> 
+              {/* <Profile user={user}/>  */}
             </View>
             <View tabLabel='Events'>
                 <Events user={user}/>
@@ -131,7 +136,7 @@ export default class ScrollTab extends Component {
                 <Mymatches person={user}/>
 
             </View>
-          </ScrollableTabView> */}
+          </ScrollableTabView> 
         </Provider>
     );
   };

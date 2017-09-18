@@ -74,6 +74,31 @@ import ScrollTab from './ScrollTab';
 // });
 
 
+// NAVIGATION SCHEME
+//   Login
+//   ModalStack: 
+//     ScrollTab (main): // navigate ScrollTab(tabname = ['Profile', 'Events', 'Mymatches'])
+//       Profile
+//       Events
+//       Mymatches
+//     Settings
+//     ModalStack:
+//       Edit (main)
+//       Gender
+//       Work
+//       University
+//     Confirmation
+//     ManagePermission
+//     StackNavigator:  
+//       ->Join
+//       -->Voting
+//       --->VotePush
+//     StackNavigator:  
+//       ->Manage
+//       -->VotingStatus
+//       --->Match
+       
+    
 
 export default class App extends Component {
 

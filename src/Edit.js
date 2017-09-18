@@ -154,7 +154,7 @@ class Edit extends React.Component {
     const {user} = this.props.navigation.state.params;
     const { navigate } = this.props.navigation;
     
-    console.log('user: ', user);
+    console.log('edit ', user);
     
     // console.log('state :', this.state)
     return (
