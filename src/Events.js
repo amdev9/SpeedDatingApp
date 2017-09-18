@@ -59,7 +59,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Confirmation', {
       event: this.state.event,
-      participant: this.props.navigation.state.params.person 
+      participant: this.props.user //.navigation.state.params.person 
     }); 
   }
 
@@ -70,11 +70,11 @@ export default class Events extends Component {
       // alert('U Selecte table ' + this.state.chosenTable);
       this.closeEvent();
       const { navigate } = this.props.navigation;
-      this.props.navigation.state.params.person.table = this.state.chosenTable + 1; // index + 1 = realvalue
+      this.props.user.table = this.state.chosenTable + 1; // navigation.state.params.person
       navigate('Join', {
         // table: this.state.chosenTable,
         event: this.state.event,
-        person: this.props.navigation.state.params.person
+        person: this.props.user //navigation.state.params.person
       }); 
     }
   }
@@ -84,7 +84,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Manage', {
       event: this.state.event,
-      person: this.props.navigation.state.params.person
+      person: this.props.user //navigation.state.params.person
     }); 
   }
 
@@ -93,7 +93,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('ManagePermission', {
       event: this.state.event,
-      person: this.props.navigation.state.params.user // person 
+      person: this.props.user //navigation.state.params.user // person 
     }); 
   }
 
@@ -106,7 +106,7 @@ export default class Events extends Component {
   render() {
     const { events, loading, refresh } = this.props;
     const { user } =  this.props //.navigation.state.params;
-
+    // console.log(user);
     return (
       <View style={styles.container}>
       

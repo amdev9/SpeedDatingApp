@@ -15,7 +15,8 @@ import {
   TextInput,
   Picker,
   TouchableOpacity,
-  Platform
+  Platform,
+  AsyncStorage
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -30,6 +31,7 @@ const { width,height } = Dimensions.get('window')
 
 
 const AVATAR_URL = 'http://192.168.1.33:3000';
+const USER_KEY = "auth-demo-key";
 
 const URL = Platform.OS === 'android'
 ? 'http://10.0.3.2:3000' // works for Genymotion
@@ -84,6 +86,7 @@ class Edit extends React.Component {
       const json = await response.json(); 
       console.log( JSON.stringify(json) );
       
+      AsyncStorage.setItem(USER_KEY, JSON.stringify(user)); // fix
       // events = json; // get events
       // this.props.navigation.goBack();
     }
@@ -164,7 +167,7 @@ class Edit extends React.Component {
           <Text style={styles.navBarHeader}>Изменить</Text>
           <TouchableOpacity onPress={() =>  {
               this.saveProfile();
-              navigate('ScrollTab', { user: user }); // Profile  goBack() // this.props.navigation.
+              navigate('ScrollTab'); // , { user: user } change to AsyncStorage user saving //  goBack() // this.props.navigation.
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>

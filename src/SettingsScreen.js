@@ -36,14 +36,14 @@ import { ResetToSignedOut } from "../components/router";
 class Settings extends Component {
   
   logout = async () => {
-    const { navigate } = this.props.navigation;
+    // const { navigate } = this.props.navigation;
     try {
       let response =  await fetch(`${URL}/logout`);
       let responseJson = await response.json();
-      alert(responseJson);
+      // alert(responseJson);
       if (responseJson == 'ok') {
         
-        onSignOut().then(() => navigation.dispatch(ResetToSignedOut))
+        onSignOut().then(() => this.props.navigation.dispatch(ResetToSignedOut))
         // navigate('Login');
       }
       
