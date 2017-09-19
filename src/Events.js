@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
     // marginTop: 5
   },
   container: {
-    height: 600, // change ti flex????
+    height: 500, // change ti flex????
     // flex: 1,               // fixed
     //paddingTop: 20,         // start below status bar
     backgroundColor: '#FFFFFF'

@@ -50,7 +50,7 @@ export default class VotingStatusScreen extends Component {
       const { navigate } = this.props.navigation;
       var founded = JSON.parse(obj.data);
 
-      // console.log(founded)
+      console.log(founded)
             
 
       Array.prototype.indexOfForArrays = function(search)
@@ -69,7 +69,7 @@ export default class VotingStatusScreen extends Component {
       var final = [];
       
       for (var key in founded ) {
-          founded[key].forEach( (item) => {  
+          founded[key].forEach( (item) => {  // null
               founded[item._id].forEach( (found) => {
                   if (found._id == key) {
                       var s = [key, item._id].sort();

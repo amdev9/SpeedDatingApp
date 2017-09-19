@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import {
   Text,
   View,
-  AsyncStorage
+  AsyncStorage,
+  ActivityIndicator,
+  StyleSheet
 } from 'react-native';
 
 
@@ -44,7 +46,6 @@ export default class ScrollTab extends Component {
   //   return JSON.parse(res);
   // }
 
- 
   constructor(props) {
     super(props);
     this.state = {
@@ -52,9 +53,8 @@ export default class ScrollTab extends Component {
     };
   }
 
-  componentWillMount() {
+  componentWillMount() { 
     AsyncStorage.getItem(USER_KEY).then((user) => {
-    
       this.setState({
         isLoading: false,
         user: JSON.parse(user)
@@ -62,54 +62,54 @@ export default class ScrollTab extends Component {
     });
   };
 
+  render() { // make rerender 
 
-
-  render() {
-    
-    // const { user } = this.props;
+//    const { user } = this.props;
     // const user  = this.props.screenProps
-    
     // fetch user: https://stackoverflow.com/questions/33553112/react-native-asyncstorage-fetches-data-after-rendering
     
     if (this.state.isLoading) {
-      return <View><Text>Loading...</Text></View>;
+      return <ActivityIndicator
+        animating={true} // loading
+        style={styles.loader}
+        size="large"
+      />
     }
     // this is the content you want to show after the promise has resolved
 
     return (
-      
-        
-        
-        <Provider store={store}> 
-          
-          <ScrollableTabView
-            style={{
-            
-              marginTop: 20,
-              backgroundColor: 'white',
-              
-            }}
-            initialPage={0} // param choose 'Profile' || Events || Mymatches
-            tabBarBackgroundColor='white'
-            renderTabBar={() => <ScrollableTabBar />}
-          >
-            <View  tabLabel='Profile'>
-              <Profile user={this.state.user} navigation={this.props.navigation}/> 
-            </View>
-            <View tabLabel='Events'>
-              {/* store from aboveis not defined here  */}
-                <Events user={this.state.user} navigation={this.props.navigation}/>
-            </View>
-            <View tabLabel='Mymatches'>
-                <Mymatches person={this.state.user} navigation={this.props.navigation}/>
-            </View>
-          </ScrollableTabView> 
-          
-        </Provider>
-        
-        
+      <Provider store={store}> 
+        <ScrollableTabView
+          style={{
+            marginTop: 20,
+            backgroundColor: 'white',
+          }}
+          initialPage={0} // param choose 'Profile' || Events || Mymatches
+          tabBarBackgroundColor='white'
+          renderTabBar={() => <ScrollableTabBar />}
+        >
+          <View  tabLabel='Profile'>
+            <Profile user={this.state.user} navigation={this.props.navigation}/> 
+          </View>
+          <View tabLabel='Events'>
+            {/* store from aboveis not defined here  */}
+              <Events user={this.state.user} navigation={this.props.navigation}/>
+          </View>
+          <View tabLabel='Mymatches'>
+              <Mymatches person={this.state.user} navigation={this.props.navigation}/>
+          </View>
+        </ScrollableTabView> 
+      </Provider>  
     );
   };
 
 }
 
+const styles = StyleSheet.create({
+  loader: {
+    flex: 1,
+    alignItems: 'center',     // center horizontally
+    justifyContent: 'center', // center vertically
+    backgroundColor: 'white'
+  }
+});

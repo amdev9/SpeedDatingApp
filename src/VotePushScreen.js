@@ -48,9 +48,12 @@ export default class VotingPushScreen extends Component {
       const json = await response.json();
       console.log(json);
       const { navigate } = this.props.navigation;
-      navigate('Mymatches', {
-        person: person
-      });
+      
+      navigate('ScrollTab');
+
+      // 'Mymatches', {
+      //   person: person
+      // });
     }
     catch (error) {
       alert(error);
@@ -68,14 +71,13 @@ export default class VotingPushScreen extends Component {
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
           {participants.map((participant, index) => <Participant vision={'votepush'} participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked}/>)}
-        
         </ScrollView>
         <TouchableHighlight
-            underlayColor="#9575CD"
-            style={styles.buttonContainer}
-            onPress={this.onConfirm}
-            >
-            <Text style={styles.button}>Отправить</Text>
+          underlayColor="#9575CD"
+          style={styles.buttonContainer}
+          onPress={this.onConfirm}
+        >
+          <Text style={styles.button}>Отправить</Text>
         </TouchableHighlight> 
       </View>
     );

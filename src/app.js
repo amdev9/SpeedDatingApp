@@ -49,7 +49,7 @@ export default class App extends Component {
       })
       .catch(err => alert("An error occurred: " + JSON.stringify(err)));
   }
-
+  
   render() {
     const { checkedSignIn, signedIn } = this.state;
 
@@ -58,7 +58,6 @@ export default class App extends Component {
       return null;
     }
 
-    console.log('createRootNavigator');
     const Layout = createRootNavigator(signedIn); 
     return <Layout />;
   }

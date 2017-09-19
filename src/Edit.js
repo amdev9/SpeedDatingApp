@@ -84,7 +84,7 @@ class Edit extends React.Component {
         user: user
       }); 
       const json = await response.json(); 
-      console.log( JSON.stringify(json) );
+      // console.log( JSON.stringify(json) );
       
       AsyncStorage.setItem(USER_KEY, JSON.stringify(user)); // fix
       // events = json; // get events
@@ -94,7 +94,6 @@ class Edit extends React.Component {
       alert(error);
     }
   };
-
 
   setIndex = (index) => {
     if (index === this.state.index) {
