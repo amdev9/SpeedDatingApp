@@ -65,6 +65,7 @@ export default class ScrollTab extends Component {
 
 
   render() {
+    console.log(store);
     // const { user } = this.props;
     // const user  = this.props.screenProps
     
@@ -91,6 +92,7 @@ export default class ScrollTab extends Component {
               <Profile user={this.state.user} navigation={this.props.navigation}/> 
             </View>
             <View tabLabel='Events'>
+              {/* store from aboveis not defined here  */}
                 <Events user={this.state.user} navigation={this.props.navigation}/>
             </View>
             <View tabLabel='Mymatches'>

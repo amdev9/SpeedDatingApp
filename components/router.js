@@ -126,8 +126,15 @@ export const ModalStack = StackNavigator({
   Edit: { screen: EditStack },
   Confirmation: { screen: Confirmation },
   ManagePermission: { screen: ManagePermissionScreen },
-  UserNavigator: { screen: UserNavigator },
-  ManagerNavigator: { screen: ManagerNavigator }
+  // UserNavigator: { screen: UserNavigator }, 
+  Join: { screen: JoinScreen }, // fix??
+  Voting: { screen: VotingScreen },
+  VotePush: { screen: VotePushScreen },   
+  // ManagerNavigator: { screen: ManagerNavigator }
+  Manage: { screen: ManageScreen }, // fix??
+  VotingStatus: { screen: VotingStatusScreen },
+  Match: { screen: MatchScreen },   
+
 }, {
   mode: 'modal',
   headerMode: 'none',

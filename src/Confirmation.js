@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import { defaultStyles } from './styles';
 import { put, get } from '../components/api';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 const { width, height } = Dimensions.get('window');
@@ -29,15 +29,15 @@ const kFailUrl = "yandexmoneyapp://oauth/authorize/fail";
 const kHttpsScheme = "https:";
 
 
-@connect(
-  state => ({
-    events: state.events,
-    loading: state.loading,
-  }),
-  dispatch => ({
-    refresh: () => dispatch({type: 'GET_EVENT_DATA'}),
-  }),
-)
+// @connect(
+//   state => ({
+//     events: state.events,
+//     loading: state.loading,
+//   }),
+//   dispatch => ({
+//     refresh: () => dispatch({type: 'GET_EVENT_DATA'}),
+//   }),
+// )
 export default class Confirmation extends Component {
   state = {
     request: {},
@@ -73,8 +73,8 @@ export default class Confirmation extends Component {
     
     // integrate pay screen
 
-    const { events, loading, refresh } = this.props;
-    console.log(events, loading, refresh);
+    // const { events, loading, refresh } = this.props;
+    // console.log(events, loading, refresh);
     const { event, participant } = this.props.navigation.state.params;
     // this._scrollView.scrollTo({ y: 0 });
     try {
