@@ -65,11 +65,11 @@ export default class ScrollTab extends Component {
 
 
   render() {
-    console.log(store);
+    
     // const { user } = this.props;
     // const user  = this.props.screenProps
     
-    // !!!!!!!! fetch user: https://stackoverflow.com/questions/33553112/react-native-asyncstorage-fetches-data-after-rendering
+    // fetch user: https://stackoverflow.com/questions/33553112/react-native-asyncstorage-fetches-data-after-rendering
     
     if (this.state.isLoading) {
       return <View><Text>Loading...</Text></View>;
@@ -77,15 +77,20 @@ export default class ScrollTab extends Component {
     // this is the content you want to show after the promise has resolved
 
     return (
-      // <View><Text>{this.state.user}</Text></View> 
+      
         
-
+        
         <Provider store={store}> 
+          
           <ScrollableTabView
             style={{
-                marginTop: 20
+            
+              marginTop: 20,
+              backgroundColor: 'white',
+              
             }}
             initialPage={0} // param choose 'Profile' || Events || Mymatches
+            tabBarBackgroundColor='white'
             renderTabBar={() => <ScrollableTabBar />}
           >
             <View  tabLabel='Profile'>
@@ -99,7 +104,10 @@ export default class ScrollTab extends Component {
                 <Mymatches person={this.state.user} navigation={this.props.navigation}/>
             </View>
           </ScrollableTabView> 
+          
         </Provider>
+        
+        
     );
   };
 
