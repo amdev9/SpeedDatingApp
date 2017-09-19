@@ -97,6 +97,7 @@ export default class MymatchesScreen extends Component {
     console.log(' - onopen - ');
   }
   
+  
   onMessageRecieved = (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
