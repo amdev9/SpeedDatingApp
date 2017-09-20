@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
-import { createRootNavigator } from "../components/router";
-import { isSignedIn } from "../components/auth";
+import { createRootNavigator } from "../helpers/router";
+import { isSignedIn } from "../helpers/auth";
 
 AsyncStorage.clear(); 
 
