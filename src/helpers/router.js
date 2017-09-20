@@ -15,8 +15,7 @@ import VotePushScreen from '../UserStack/VotePushScreen';
 import Profile from '../RootScroll/Profile';
 import MymatchesScreen from '../RootScroll/MymatchesScreen';
 import ScrollTab from '../RootScroll/ScrollTab';
-
-import Events from '../Events/Events';
+import Events from '../RootScroll/Events/Events';
 
 import Edit from '../EditStack/Edit';
 import GenderModal from '../EditStack/GenderModal';

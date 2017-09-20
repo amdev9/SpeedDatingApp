@@ -14,7 +14,7 @@ import Places from './widgets/Places';
 import Sticker from './widgets/Sticker';
 import Cost from './widgets/Cost';
 import Date from './widgets/Date';
-import { defaultStyles } from '../styles';
+import { defaultStyles } from '../../styles';
 
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');

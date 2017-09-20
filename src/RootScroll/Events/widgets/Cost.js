@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Iconic from 'react-native-vector-icons/Ionicons';
 
 
-import { defaultStyles } from '../../styles';
+import { defaultStyles } from '../../../styles';
 
 export default class Cost extends Component {
     render() {

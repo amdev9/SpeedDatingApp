@@ -17,7 +17,7 @@ import _ from 'lodash';
 
 import EventPoster from './EventPoster';
 import EventPopup from './EventPopup';
-import { defaultStyles } from '../styles';
+import { defaultStyles } from '../../styles';
 
 
 @connect(

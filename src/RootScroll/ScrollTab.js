@@ -15,7 +15,7 @@ import { apiMiddleware, reducer } from '../helpers/redux';
 import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 
 import Profile from './Profile';
-import Events from '../Events/Events';
+import Events from './Events/Events';
 import Mymatches from './MymatchesScreen';
 
 const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
