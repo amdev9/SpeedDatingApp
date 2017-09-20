@@ -9,7 +9,8 @@ import {
   View, 
   ListView, 
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  AsyncStorage
 } from 'react-native';
 
 
@@ -50,8 +51,10 @@ export default class VotingPushScreen extends Component {
       console.log(json);
       const { navigate } = this.props.navigation;
       
-      console.log('::::::::::::::::: VotePush: ', person);
-      navigate('ScrollTab'); // save person to async storage
+      
+      navigate('ScrollTab', {
+        paramm: 2
+      }); // Mymatches tab
 
       // 'Mymatches', {
       //   person: person

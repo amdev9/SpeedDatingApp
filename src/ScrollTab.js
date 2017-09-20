@@ -50,8 +50,11 @@ export default class ScrollTab extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true
+      isLoading: true,
+      initialPage: 0
     };
+
+    
   }
 
   componentWillMount() { 
@@ -61,10 +64,18 @@ export default class ScrollTab extends Component {
         user: JSON.parse(user)
       });
     });
+
+    if (this.props.navigation.state.params && typeof this.props.navigation.state.params.paramm !== 'undefined') {
+       this.setState({
+         initialPage: this.props.navigation.state.params.paramm
+       })
+     } 
   };
 
   render() { // make rerender 
 
+    // const { paramm } = this.props;
+  
 //    const { user } = this.props;
     // const user  = this.props.screenProps
     // fetch user: https://stackoverflow.com/questions/33553112/react-native-asyncstorage-fetches-data-after-rendering
@@ -85,7 +96,7 @@ export default class ScrollTab extends Component {
             marginTop: 20,
             backgroundColor: 'white',
           }}
-          initialPage={0} // param choose 'Profile' || Events || Mymatches
+          initialPage={this.state.initialPage} // 0 param choose 'Profile' || Events || Mymatches
           tabBarBackgroundColor='white'
           renderTabBar={() => <ScrollableTabBar />}
         >

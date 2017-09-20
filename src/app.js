@@ -28,7 +28,7 @@ import { createRootNavigator } from "../components/router";
 import { isSignedIn } from "../components/auth";
 
 
-AsyncStorage.clear();
+// AsyncStorage.clear(); 
 
 export default class App extends Component {
 

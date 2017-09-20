@@ -161,7 +161,8 @@ export const createRootNavigator = (signedIn = false) => {
     {
       headerMode: "none",
       mode: "modal",
-      initialRouteName: signedIn ? "ModalStack" : "Login"
+      initialRouteName: signedIn ? "ModalStack" : "Login",
+      //initialRouteParams: { paramm: 'Bonjour' }
     }
   );
 };

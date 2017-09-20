@@ -98,10 +98,11 @@ export default class MymatchesScreen extends Component {
   }
   
   
-  onMessageRecieved = (e) => {
+  onMessageRecieved = async (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     const { person } = this.props 
+ 
     
     if (obj.type == 'calculate') {
       // if(obj && typeof(obj.data) !== 'undefined') {
