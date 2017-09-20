@@ -66,8 +66,8 @@ class Edit extends React.Component {
     }
   }
 
-  saveProfile = async () => {
-     
+  saveProfile = async (navigate) => {
+    
     const { user } = this.props.navigation.state.params;
     user.about = this.state.about;
     user.age = this.state.age;
@@ -78,7 +78,6 @@ class Edit extends React.Component {
     user.current_work = this.state.current_work;
     user.current_university = this.state.current_university;
     
-
     try {
       const response = await put('user', {
         user: user
@@ -86,7 +85,10 @@ class Edit extends React.Component {
       const json = await response.json(); 
       // console.log( JSON.stringify(json) );
       
-      AsyncStorage.setItem(USER_KEY, JSON.stringify(user)); // fix
+      AsyncStorage.setItem(USER_KEY, JSON.stringify(user), () => {
+        navigate('ScrollTab');
+      }); 
+      
       // events = json; // get events
       // this.props.navigation.goBack();
     }
@@ -120,7 +122,7 @@ class Edit extends React.Component {
       height: 300,
       cropping: true
     }).then(image => {
-      // console.log(image);
+      console.log('----------- _picker');
       
       let opts = {
         url: `${AVATAR_URL}/v1/`,
@@ -138,15 +140,17 @@ class Edit extends React.Component {
           console.log(err);
           return;
         }
-        console.log(res);
+         
         let status = res.status;
         let responseString = res.data;
-        console.log('Upload complete with status ' + status);
-        console.log(responseString);
+        //console.log('Upload complete with status ' + status);
+        //console.log(responseString);
         this.setState({ 
           avatar: `${AVATAR_URL}/images/${JSON.parse(responseString).images}` 
         });
         // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
+        
+        
         this.setState({modalVisible: false});
       });
     });  
@@ -164,9 +168,9 @@ class Edit extends React.Component {
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}></Text>
           <Text style={styles.navBarHeader}>Изменить</Text>
-          <TouchableOpacity onPress={() =>  {
-              this.saveProfile();
-              navigate('ScrollTab'); // , { user: user } change to AsyncStorage user saving //  goBack() // this.props.navigation.
+          <TouchableOpacity onPress={() => {
+              this.saveProfile(navigate);
+            //setTimeout(() => { //}, 3000) // , { user: user } change to AsyncStorage user saving //  goBack() // this.props.navigation.
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
@@ -176,14 +180,11 @@ class Edit extends React.Component {
         <View style={styles.avatar}>
         <TouchableOpacity onPress={() => { 
           this._picker();
-
-          {/* this.toggleModal(); this.getPhotos()  */}
-          }}>
+        }}>
             <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
             <View style={styles.circle}>
               <Icon style={styles.setting} name="md-create" size={20} color="#FFFF" /> 
-              {/* c4c9d1 */}
-              </View>
+            </View>
           </TouchableOpacity>
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
         </View>

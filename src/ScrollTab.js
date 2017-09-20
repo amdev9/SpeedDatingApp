@@ -38,14 +38,6 @@ const USER_KEY = "auth-demo-key";
 
 
 export default class ScrollTab extends Component {
-  // static propTypes = {
-  //   user: PropTypes.object.isRequired
-  // };
-
-  // getUser = async () => {
-  //   var res = await AsyncStorage.getItem(USER_KEY);
-  //   return JSON.parse(res);
-  // }
 
   constructor(props) {
     super(props);
@@ -53,8 +45,6 @@ export default class ScrollTab extends Component {
       isLoading: true,
       initialPage: 0
     };
-
-    
   }
 
   componentWillMount() { 
