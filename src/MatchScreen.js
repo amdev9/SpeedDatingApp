@@ -17,37 +17,39 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Participant from './Participant';
 
 
-import { connect } from 'react-redux';
 
-@connect(
-  state => ({
-    events: state.events,
-    loading: state.loading,
-  }),
-  dispatch => ({
-    refresh: () => dispatch({type: 'GET_EVENT_DATA'}),
-  }),
-)
+// import { connect } from 'react-redux';
+
+// @connect(
+//   state => ({
+//     events: state.events,
+//     loading: state.loading,
+//   }),
+//   dispatch => ({
+//     refresh: () => dispatch({type: 'GET_EVENT_DATA'}),
+//   }),
+// )
 export default class MatchScreen extends Component {
 
   render() {
-    const { events } = this.props;
+    // const { events } = this.props;
     const { matches } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
-        {/* 
-        <View style={styles.navBar}>
-          <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
-          <Text style={ [styles.navBarButton,{
-            fontWeight: 'bold'
-          }]} onPress={() => this.props.navigation.goBack() }>Назад к мероприятиям</Text>
-          
-          <Text style={styles.navBarHeader}></Text>
-          <Text style={styles.navBarButton}>  </Text> 
-        </View>
-          */}
         
-        {/* <Text> { JSON.stringify(events) } </Text> */}
+        <View style={styles.navBar}>
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.navigate('ScrollTab') }>
+            {/*   this.props.navigation.goBack() */}
+            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
+            <Text style={ [styles.navBarButton,{
+              fontWeight: 'bold'
+            }]}>Назад к мероприятиям</Text>       
+          </TouchableOpacity>   
+          <Text style={styles.navBarHeader}></Text>
+          <Text style={styles.navBarButton}></Text> 
+        </View>
+         
+     
 
       <ScrollView
           style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
-    height: 64,
+    // height: 64,
     backgroundColor: '#FFFFFF' // '#1EAAF1'
   },
   navBarButton: {

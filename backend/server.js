@@ -232,7 +232,7 @@ function mainLogic(ws, obj) {
         if (err) {
         console.log(err);
         }
-        // console.log(event.likes);    
+        console.log('--likes----> ', event.likes);    
         let matches = {};
         event.likes.forEach( (object) => {
             // console.log('--trace----> ', object)
@@ -268,6 +268,7 @@ function mainLogic(ws, obj) {
             type: "calculate",
             data: JSON.stringify(matches)
         });
+        // console.log(calculate)
         wss.broadcast(calculate);
     });
   }
