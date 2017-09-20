@@ -17,6 +17,8 @@ import {
 } from 'react-native';
 import { defaultStyles } from '../styles';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+
 import Participant from '../Participant';
 
 const { width, height } = Dimensions.get('window');

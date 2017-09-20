@@ -15,7 +15,7 @@ import {
 
 import { defaultStyles } from '../styles';
 import Participant from '../Participant';
-import { put, get } from '../../helpers/api';
+import { put, get } from '../helpers/api';
 
 export default class VotingPushScreen extends Component {
   // votingpushscreen  -> 'confirm' -> empty mymatches (waiting for admin 'done')

@@ -12,8 +12,10 @@ import {
   RefreshControl,
   Image
 } from 'react-native';
-import { defaultStyles } from '../styles';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+
+import { defaultStyles } from '../styles';
 
 export default class VotingScreen extends Component {
   

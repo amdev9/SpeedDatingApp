@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 
 
-import { apiMiddleware, reducer } from '../../helpers/redux';
+import { apiMiddleware, reducer } from '../helpers/redux';
 import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 
 import Profile from './Profile';

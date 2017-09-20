@@ -23,8 +23,8 @@ import {
 } from 'react-native'
 
 import { defaultStyles } from '../styles';
-import { onSignOut } from "../../helpers/auth";
-import { ResetToSignedOut } from "../../helpers/router";
+import { onSignOut } from "../helpers/auth";
+import { ResetToSignedOut } from "../helpers/router";
 
 
 // const URL = 'http://localhost:3000';

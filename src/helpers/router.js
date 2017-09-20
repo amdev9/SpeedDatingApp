@@ -5,30 +5,30 @@ import { FontAwesome } from "react-native-vector-icons";
 
 
 
-import Login from '../src/Login/Login';
+import Login from '../Login/Login';
 
-import Confirmation from '../src/UserStack/Confirmation';
-import JoinScreen from '../src/UserStack/JoinScreen';
-import VotingScreen from '../src/UserStack/VotingScreen';
-import VotePushScreen from '../src/UserStack/VotePushScreen';
+import Confirmation from '../UserStack/Confirmation';
+import JoinScreen from '../UserStack/JoinScreen';
+import VotingScreen from '../UserStack/VotingScreen';
+import VotePushScreen from '../UserStack/VotePushScreen';
 
-import Profile from '../src/RootScroll/Profile';
-import MymatchesScreen from '../src/RootScroll/MymatchesScreen';
-import ScrollTab from '../src/RootScroll/ScrollTab';
+import Profile from '../RootScroll/Profile';
+import MymatchesScreen from '../RootScroll/MymatchesScreen';
+import ScrollTab from '../RootScroll/ScrollTab';
 
-import Events from '../src/Events/Events';
+import Events from '../Events/Events';
 
-import Edit from '../src/EditStack/Edit';
-import GenderModal from '../src/EditStack/GenderModal';
-import WorkModal from '../src/EditStack/WorkModal';
-import UniversityModal from '../src/EditStack/UniversityModal';
+import Edit from '../EditStack/Edit';
+import GenderModal from '../EditStack/GenderModal';
+import WorkModal from '../EditStack/WorkModal';
+import UniversityModal from '../EditStack/UniversityModal';
 
-import SettingsScreen from '../src/SettingsStack/SettingsScreen';
+import SettingsScreen from '../SettingsStack/SettingsScreen';
 
-import ManagePermissionScreen from '../src/ManagerStack/ManagePermissionScreen';
-import ManageScreen from '../src/ManagerStack/ManageScreen';
-import VotingStatusScreen from '../src/ManagerStack/VotingStatusScreen';
-import MatchScreen from '../src/ManagerStack/MatchScreen';
+import ManagePermissionScreen from '../ManagerStack/ManagePermissionScreen';
+import ManageScreen from '../ManagerStack/ManageScreen';
+import VotingStatusScreen from '../ManagerStack/VotingStatusScreen';
+import MatchScreen from '../ManagerStack/MatchScreen';
 
 
 

@@ -26,7 +26,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 
 import { defaultStyles } from '../styles';
-import { put, get } from '../../helpers/api';
+import { put, get } from '../helpers/api';
 
 var RNUploader = NativeModules.RNUploader;
 let styles

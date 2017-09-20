@@ -12,8 +12,8 @@ import SafariView from 'react-native-safari-view';
 
 
 import Screens from './Screens';
-import { onSignIn } from "../../helpers/auth";
-import { ResetToSignedIn } from "../../helpers/router";
+import { onSignIn } from "../helpers/auth";
+import { ResetToSignedIn } from "../helpers/router";
 
 
 const { width, height } = Dimensions.get('window');

@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import { defaultStyles } from '../styles';
-import { put, get } from '../../helpers/api';
+import { put, get } from '../helpers/api';
 
 export default class ManagePermissionScreen extends Component {
     
