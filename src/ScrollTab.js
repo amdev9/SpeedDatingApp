@@ -58,6 +58,7 @@ export default class ScrollTab extends Component {
   }
 
   componentWillMount() { 
+    console.log('componentWillMount ScrollTab')
     AsyncStorage.getItem(USER_KEY).then((user) => {
       this.setState({
         isLoading: false,

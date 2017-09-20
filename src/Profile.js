@@ -22,29 +22,16 @@ import { defaultStyles } from './styles';
 const { width, height } = Dimensions.get('window');
 
 
-
-
-
 export default class Profile extends Component {
   render() {
 
-    const { user } = this.props; // ScrollableTabView
-    // const user  = this.props.screenProps; // modalstack
+    const { user } = this.props; // const user  = this.props.screenProps; // modalstack
     console.log(user);
     return (     
       
       <View style={styles.container}>
         <View style={styles.content}>  
         
-           {/* <View style={styles.navBar}>
-            <Text style={styles.navBarButton}></Text>
-            <Text style={styles.navBarHeader}>Профиль</Text>
-            <Icon style={styles.navBarButton}
-              onPress={() => this.props.navigation.navigate('Events', {
-                person: user // change to user: user
-              })} name="ios-calendar-outline" size={30} />
-          </View> */}
-          
           <View style={styles.avatar}>
            <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
           </View>
@@ -68,8 +55,7 @@ export default class Profile extends Component {
               <Text style={styles.barText}>ИЗМЕНИТЬ</Text>
             </View>
           </View>
-
-           
+          
         </View> 
        </View> 
     );
@@ -88,7 +74,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12,
     marginTop: 10,
-  
   },
   barContainer: {
     width: width,
