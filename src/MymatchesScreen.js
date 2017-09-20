@@ -81,7 +81,7 @@ export default class MymatchesScreen extends Component {
         
       }
     } catch (error) {
-      alert('error get from asyncstorage');
+      alert('error get from asyncstorage: ' + JSON.stringify(error));
     }
   }
 

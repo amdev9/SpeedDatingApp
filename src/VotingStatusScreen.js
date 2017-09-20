@@ -53,63 +53,63 @@ export default class VotingStatusScreen extends Component {
       console.log(founded)
             
 
-      Array.prototype.indexOfForArrays = function(search)
-      {
-        var searchJson = JSON.stringify(search); // "[3,566,23,79]"
-        var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
-        return arrJson.indexOf(searchJson);
-      };
+      // Array.prototype.indexOfForArrays = function(search)
+      // {
+      //   var searchJson = JSON.stringify(search); // "[3,566,23,79]"
+      //   var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
+      //   return arrJson.indexOf(searchJson);
+      // };
 
 
-      for (var key in founded ) { 
-          founded[key].shift();  
-      }
-
-      var passed = [];
-      var final = [];
-      
-      for (var key in founded ) {
-          founded[key].forEach( (item) => {  // null
-              founded[item._id].forEach( (found) => {
-                  if (found._id == key) {
-                      var s = [key, item._id].sort();
-                      if ( passed.indexOfForArrays(s) < 0 ) { 
-                          passed.push(s);
-                      } else {
-                          final.push(s); // [ s, .. ]
-                      }
-                  }
-              })
-          })
-      }
-
-      var final_ob_done = []; // array of pairs = 2 item arrays
-      final.forEach( (fin) => {
-        var final_ob = [];
-        for (var key in founded ) { 
-            founded[key].forEach ( (it) => {
-
-                if ( fin.indexOf(it._id) > -1 ) {
-                  var ind = fin.indexOf(it._id);
-                  fin.slice(ind , 1);
-                  final_ob.push(it);
-                }
-
-            })
-        }
-        final_ob_done.push(final_ob);
-      })
-
-      console.log(final_ob_done);
+      // for (var key in founded ) { 
+      //     founded[key].shift();  
+      // }
 
       // var passed = [];
+      // var final = [];
+      
       // for (var key in founded ) {
-      //   passed.push(founded[key]);
-      // }    
+      //     founded[key].forEach( (item) => {  // null
+      //         founded[item._id].forEach( (found) => {
+      //             if (found._id == key) {
+      //                 var s = [key, item._id].sort();
+      //                 if ( passed.indexOfForArrays(s) < 0 ) { 
+      //                     passed.push(s);
+      //                 } else {
+      //                     final.push(s); // [ s, .. ]
+      //                 }
+      //             }
+      //         })
+      //     })
+      // }
 
-      navigate('Match', {
-        matches: final_ob_done
-      });  
+      // var final_ob_done = []; // array of pairs = 2 item arrays
+      // final.forEach( (fin) => {
+      //   var final_ob = [];
+      //   for (var key in founded ) { 
+      //       founded[key].forEach ( (it) => {
+
+      //           if ( fin.indexOf(it._id) > -1 ) {
+      //             var ind = fin.indexOf(it._id);
+      //             fin.slice(ind , 1);
+      //             final_ob.push(it);
+      //           }
+
+      //       })
+      //   }
+      //   final_ob_done.push(final_ob);
+      // })
+
+      // console.log(final_ob_done);
+
+      // // var passed = [];
+      // // for (var key in founded ) {
+      // //   passed.push(founded[key]);
+      // // }    
+
+      // navigate('Match', {
+      //   matches: final_ob_done
+      // });  
     } else if ( obj.type == 'likes_post' ) {
 
       var lik = JSON.parse(obj.data);

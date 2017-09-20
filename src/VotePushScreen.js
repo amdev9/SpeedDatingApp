@@ -49,7 +49,8 @@ export default class VotingPushScreen extends Component {
       console.log(json);
       const { navigate } = this.props.navigation;
       
-      navigate('ScrollTab');
+      console.log('::::::::::::::::: VotePush: ', person);
+      navigate('ScrollTab'); // save person to async storage
 
       // 'Mymatches', {
       //   person: person
