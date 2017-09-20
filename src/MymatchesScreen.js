@@ -20,33 +20,26 @@ import Participant from './Participant';
 import Icon from 'react-native-vector-icons/Ionicons';
 import _ from 'lodash';
 
-// AsyncStorage.clear();
+
 var pech = [];
- 
 
 const { width,height } = Dimensions.get('window')
-
-
 export default class MymatchesScreen extends Component {
   
   constructor(props) {
     super(props);
     this.state = {
       persons: [],
-      text: '',
-      // searchFlag: false,
+      // text: '',
     }; 
   }
 
   setSearchText(text) {
     this.setState({text})
-     // pech
     let filteredData = this.filterNotes(text, pech);
     this.setState({
-      // searchFlag: true,
       persons: filteredData
     })
-    // hide 
   }
 
   filterNotes(searchText, notes) {
@@ -65,7 +58,6 @@ export default class MymatchesScreen extends Component {
   }
 
   async fetchData() {
-     // on init get from async storage
     try {
       const myArray = await AsyncStorage.getItem('@MySuperStore:persons');
       if (myArray !== null) {
@@ -89,7 +81,7 @@ export default class MymatchesScreen extends Component {
     try {
       await AsyncStorage.setItem('@MySuperStore:persons', JSON.stringify(myArray));
     } catch (error) {
-      // Error saving data
+
     }
   }
 
@@ -102,8 +94,7 @@ export default class MymatchesScreen extends Component {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     const { person } = this.props 
- 
-    
+
     if (obj.type == 'calculate') {
       // if(obj && typeof(obj.data) !== 'undefined') {
         var founded = JSON.parse(obj.data); // unexpected eof
@@ -122,7 +113,7 @@ export default class MymatchesScreen extends Component {
     
             this.saveData(this.state.persons).done()
     
-            // set new and merge old (overwrite) with current results 
+            
             this.setState({
               persons: this.state.persons
             })
@@ -162,22 +153,14 @@ export default class MymatchesScreen extends Component {
 
   render() {
     console.log(this.state);
-    const { person } = this.props //.navigation.state.params;
-    if (this.state.persons.length + pech.length > 0 && this.state.text.length == 0 ) { // && this.state.searchFlag == false 
+    const { person } = this.props  
+    if (this.state.persons.length + pech.length > 0 ) {  //  && this.state.text.length == 0
       return (
         <View style={styles.container}>
           <View style={styles.content}>
 
-            {/* <View style={styles.navBar}>
-              <Icon style={styles.navBarButton}
-                onPress={() => this.props.navigation.navigate('Events', {
-                  person: person
-                }) } name="ios-calendar-outline" size={30} color="#900" /> 
-                <Text style={styles.navBarHeader}>Мои совпадения</Text>
-              <Text style={styles.navBarButton}></Text>
-            </View> */}
             
-            <View>
+            {/* <View>
               <TextInput
                 style={styles.search} 
                 placeholder="Поиск"
@@ -189,8 +172,8 @@ export default class MymatchesScreen extends Component {
                 value={this.state.text}
               />
               <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
-            </View>
-   
+            </View> */}
+{/*    
             <View style={{
               flexDirection: 'row',
             }}>
@@ -200,16 +183,16 @@ export default class MymatchesScreen extends Component {
               </View>
             </View>
             <ScrollView style={styles.horizontal} ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
-              {/* this.state.persons */}
+               
               {this.state.persons.map((participant, index) => <Participant vision={'mymatch_horizontal'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
             </ScrollView> 
-            
+             */}
             <View style={{
               flexDirection: 'row',
             }}>
               <Text style={styles.verticalText}>Все совпадения</Text>
               <View style={styles.circle}>
-                <Text style={styles.digitText}>5</Text>
+                <Text style={styles.digitText}>{this.state.persons.length}</Text>
               </View>
             </View>
 
@@ -221,77 +204,70 @@ export default class MymatchesScreen extends Component {
           </View>
         </View>
       );
-    } else if(this.state.persons.length + pech.length > 0  && this.state.text.length > 0) { // && this.state.searchFlag == true
-      return (
-        <View style={styles.container}>
-          <View style={styles.content}>
+    // } else if(this.state.persons.length + pech.length > 0  && this.state.text.length > 0) { // && this.state.searchFlag == true
+    //   return (
+    //     <View style={styles.container}>
+    //       <View style={styles.content}>
 
  
             
-            <View style={{ 
-              marginTop: 20, 
-              flexDirection: 'row',
-            }}>
-              <View style={{ width: width - 110}}>
-                <TextInput
-                  style={styles.searchActive} 
-                  placeholder="Поиск"
-                  placeholderTextColor="#888888"
-                  selectionColor="#3f88fb"
-                  onChangeText={this.setSearchText.bind(this)}
-                  value={this.state.text}
-                />
-                <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
-              </View>
-              <TouchableOpacity 
-                onPress={this._searchCancel}
-                style={
-                {
-                  width: 110,
-                  marginTop: 14
-                }
-              }>
-                <Text style={{
-                  color: '#3f88fb',
-                  textAlign:'center',
-                  fontSize: 17,
-                  //fontWeight: 'bold'
-                }}>Отменить</Text>
-              </TouchableOpacity>
-            </View>
+    //         <View style={{ 
+    //           marginTop: 20, 
+    //           flexDirection: 'row',
+    //         }}>
+    //           <View style={{ width: width - 110}}>
+    //             <TextInput
+    //               style={styles.searchActive} 
+    //               placeholder="Поиск"
+    //               placeholderTextColor="#888888"
+    //               selectionColor="#3f88fb"
+    //               onChangeText={this.setSearchText.bind(this)}
+    //               value={this.state.text}
+    //             />
+    //             <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
+    //           </View>
+    //           <TouchableOpacity 
+    //             onPress={this._searchCancel}
+    //             style={
+    //             {
+    //               width: 110,
+    //               marginTop: 14
+    //             }
+    //           }>
+    //             <Text style={{
+    //               color: '#3f88fb',
+    //               textAlign:'center',
+    //               fontSize: 17,
+    //               //fontWeight: 'bold'
+    //             }}>Отменить</Text>
+    //           </TouchableOpacity>
+    //         </View>
             
   
-            <View style={{
-              flexDirection: 'row'
-            }}>
-              <Text style={styles.verticalText}>Найдено</Text>
-              <View style={styles.circle}>
-                <Text style={styles.digitText}>{this.state.persons.length}</Text>
-              </View>
-            </View>
+    //         <View style={{
+    //           flexDirection: 'row'
+    //         }}>
+    //           <Text style={styles.verticalText}>Найдено</Text>
+    //           <View style={styles.circle}>
+    //             <Text style={styles.digitText}>{this.state.persons.length}</Text>
+    //           </View>
+    //         </View>
 
-            <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
-              {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
-            </ScrollView>   
+    //         <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
+    //           {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
+    //         </ScrollView>   
   
-          </View>
-        </View>
-      );
+    //       </View>
+    //     </View>
+    //   );
 
     } else if( this.state.persons.length + pech.length == 0 ) {
       return (
         <View style={styles.container}>
           <View style={styles.content}>
-            {/* <View style={styles.navBar}>
-              <Icon style={styles.navBarButton}
-                onPress={() => this.props.navigation.navigate('Events', {
-                  person: person
-                }) } name="ios-calendar-outline" size={30} color="#900" /> 
-                <Text style={styles.navBarHeader}>Мои совпадения</Text>
-              <Text style={styles.navBarButton}></Text>
-            </View> */}
-            <Text style={{textAlign: 'center'}}>Начните поиск пар. Когда вы найдете себе несколько пар, они отобразятся здесь и вы сможете отправить им сообщения</Text>
-            {/* No matches yet */}
+            <Text style={{textAlign: 'center'}}>{
+              'Начните поиск пар. Когда вы найдете себе несколько пар, они отобразятся здесь и вы сможете отправить им сообщения'
+            }</Text>
           </View>
         </View>
       );
@@ -337,8 +313,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     ...defaultStyles.text,
-    fontSize: 18,
-    // marginTop: 5
+    fontSize: 18
   },
   container: {
     // flex: 1, // fixed
