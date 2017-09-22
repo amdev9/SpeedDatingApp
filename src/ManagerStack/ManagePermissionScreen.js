@@ -26,8 +26,10 @@ export default class ManagePermissionScreen extends Component {
       }); 
       const json = await response.json();
       console.log(json);
-      this.props.navigation.goBack();
-      // go back with response - we will contact with you
+      this.props.navigation.goBack(); 
+      // refresh(); // add reload here <- refresh func
+
+      
     }
     catch (error) {
       alert(error);

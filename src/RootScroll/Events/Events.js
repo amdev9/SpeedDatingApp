@@ -36,6 +36,34 @@ export default class Events extends Component {
     selectedIndex: 1,
     chosenTable: null,       // choose first day by default
   }
+  ///// websocket server event handle
+  onOpenConnection = () => {
+    console.log(' - onopen - ');
+  }
+  onMessageRecieved = async (e) => {
+    console.log(e.data);
+    var obj = JSON.parse(e.data); 
+    // const { person } = this.props 
+    // if (obj.type == 'calculate') {}
+  };
+  
+  onError = (e) => {
+    console.log(e.message);
+  };
+  
+  onClose = (e) => {
+    console.log(e.code, e.reason);
+  };
+
+  componentWillMount() {
+    this.ws = new WebSocket('ws://192.168.1.33:3000'); // localhost
+    this.ws.onopen = this.onOpenConnection;
+    this.ws.onmessage = this.onMessageRecieved;
+    this.ws.onerror = this.onError;
+    this.ws.onclose = this.onClose;
+  }
+
+  ///////////////////
 
   openEvent = (event) => {
     this.setState({
@@ -58,7 +86,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Confirmation', {
       event: this.state.event,
-      participant: this.props.user //.navigation.state.params.person 
+      participant: this.props.user 
     }); 
   }
 
@@ -73,7 +101,7 @@ export default class Events extends Component {
       navigate('Join', {
         // table: this.state.chosenTable,
         event: this.state.event,
-        person: this.props.user //navigation.state.params.person
+        person: this.props.user 
       }); 
     }
   }
@@ -83,7 +111,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Manage', {
       event: this.state.event,
-      person: this.props.user //navigation.state.params.person
+      person: this.props.user 
     }); 
   }
 
@@ -92,7 +120,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('ManagePermission', {
       event: this.state.event,
-      person: this.props.user //navigation.state.params.user // person 
+      person: this.props.user,
     }); 
   }
 
@@ -104,31 +132,11 @@ export default class Events extends Component {
 
   render() {
     const { events, loading, refresh } = this.props;
-    const { user } =  this.props //.navigation.state.params;
+    const { user } =  this.props;
     // console.log(user);
     return (
       <View style={styles.container}>
       
-        {/* <View style={styles.navBar}>
-          <Icon style={styles.navBarButton}
-            onPress={() =>  this.props.navigation.navigate('Profile', {
-              user: user
-            })} name="ios-person-outline" size={30} color="#900" />
-          <Text style={styles.navBarHeader}>Мероприятия</Text>
-          <Icon style={styles.navBarButton}
-            onPress={() => this.props.navigation.navigate('Mymatches', {
-              person: user // change to user: user
-            })} name="ios-chatboxes-outline" size={30} color="#900" /> 
-        </View> */}
-  
-        {/* <SegmentedControlIOS tintColor="#3f88fb" style={styles.bottomContent} 
-          values={['Мои', 'Найти']}
-          selectedIndex={this.state.selectedIndex}
-          onChange={(event) => {
-            this.setState({selectedIndex: event.nativeEvent.selectedSegmentIndex});
-          }}
-        /> */}
-        
         <View style={styles.bottomContent}>
           <SegmentedControlTab 
             tabStyle={styles.tabStyle}

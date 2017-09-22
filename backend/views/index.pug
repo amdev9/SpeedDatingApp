@@ -28,7 +28,7 @@ block content
 
   script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
   script.
-    var approve = function(eventId) {
+    var approve = function(eventId) { // change to websocket
       var e = document.getElementById("manage_queue_ids");
       var manageQueueId = e.options[e.selectedIndex].value;
       console.log(manageQueueId)
@@ -38,6 +38,8 @@ block content
           url: '/v1/events/'+ eventId + '/approve/' + manageQueueId,
           //- dataType: "text",
           success: function(msg) {
+              // callback(msg)
+              
               alert(msg);
           }
       });

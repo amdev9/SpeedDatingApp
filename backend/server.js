@@ -69,25 +69,18 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.get('/admin', async (req, res) => {
-    
-    // auth with login and password
-
+    // add auth with login and password
     var events = await Event.find().exec();
     var persons = await Person.find().exec();
-    // send events , persons to pug template
-    // console.log(events)
-    // console.log(persons);
+    // console.log("\n----------- wss: ", wss);
     res.render('index', { 
       title: 'Express',
       events: JSON.parse(JSON.stringify(events)),
       persons: JSON.parse(JSON.stringify(persons))
-    });
+    }); // callback for renders
+    // wss.broadcast( JSON.stringify(msg) );  // msg - updated event
     
 });
- // return return events,
-// [ list of events          ] 
-// [ id | selector(manage_queue_ids) |  manage_ids .. ] [Button - Approve]
-
 
 app.get('/images', function(req, res) {
     router.getImages(function(err, genres) {
