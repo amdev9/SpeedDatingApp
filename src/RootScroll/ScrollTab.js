@@ -19,6 +19,11 @@ import Events from './Events/Events';
 import Mymatches from './MymatchesScreen';
 
 const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
+
+// import thunk from 'redux-thunk'
+// applyMiddleware(thunk, socketMiddleware)
+
+
 store.dispatch({type: 'GET_EVENT_DATA'});
 const USER_KEY = "auth-demo-key";
 export default class ScrollTab extends Component {
