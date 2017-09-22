@@ -103,9 +103,8 @@ app.get('/images/:id', function(req, res) {
 const server = http.createServer(app);
 export const wss = new WebSocket.Server({ server });
 
-function mainLogic(ws, obj) {
 
-  if (obj.command == 'start') {
+function start(ws, obj) {
     CLIENTS_QUEUE = [];
     var counter = 0;
     var selected = JSON.stringify({
@@ -177,9 +176,9 @@ function mainLogic(ws, obj) {
             wss.broadcast(next()); // change to function next() --> table auto increment
         }
     }, (obj.timeout + obj.talk_time) * 1000 );
-    
-  } else if (obj.command == 'connected') {
-    
+}
+
+function connected(ws, obj) {
     var connected = JSON.stringify({
         type: "connected", 
         data: obj.data
@@ -191,9 +190,9 @@ function mainLogic(ws, obj) {
     // if (!_.some(CLIENTS_QUEUE, obj.data)) {
       CLIENTS_QUEUE.push(obj.data);
     // }
-    
-  } else if (obj.command == 'closed') {
+}
 
+function closed(ws, obj) {
     var closed = JSON.stringify({
         type: "closed", 
         data: obj.data
@@ -203,9 +202,9 @@ function mainLogic(ws, obj) {
     // if (_.some(CLIENTS_QUEUE, obj.data)) {
         _.remove(CLIENTS_QUEUE, obj.data);
     // }
+}
 
-  } else if (obj.command == 'clients_queue') {
-
+function clients_queue(ws, obj) {
     var response_queue = JSON.stringify({
         type: "response_queue", 
         data: CLIENTS_QUEUE
@@ -213,8 +212,9 @@ function mainLogic(ws, obj) {
 
     console.log('----- before broadcast response_queue ---')
     wss.broadcast(response_queue);
+}
 
-  } else if (obj.command == 'calculate') {
+function calculate(ws, obj) {
     // search event by id and get likes
     const participantsRelation = {
         path: 'participants', 
@@ -264,6 +264,18 @@ function mainLogic(ws, obj) {
         // console.log(calculate)
         wss.broadcast(calculate);
     });
+}
+
+function mainLogic(ws, obj) { 
+  switch(obj.command) {
+      case 'start': start(ws, obj); break;
+      case 'connected': connected(ws, obj); break;
+      case 'closed': closed(ws, obj); break;
+      case 'clients_queue': clients_queue(ws, obj); break;
+      case 'calculate': calculate(ws, obj); break;
+      default: 
+        console.log('command not found');
+         
   }
 }
 

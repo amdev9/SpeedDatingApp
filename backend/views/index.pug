@@ -28,19 +28,46 @@ block content
 
   script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
   script.
+    websocket = new WebSocket("ws://192.168.1.33:3000/");
+
+    //- websocket = new WebSocket("ws://localhost:8080/");
+    //- $('form').submit(function() {
+    //-   name = $('#name').val() ? $('#name').val() : 'Anonymous';
+    //-   $('#name-div').hide();
+    //-   $('#welcome').text('Hello ' + name);
+    //-   websocket.send(JSON.stringify({
+    //-     name: name,
+    //-     message: $('#message').val()
+    //-   }));
+    //-   $('#message').focus();
+    //-   $('#message').val('');
+    //-   return false;
+    //- });
+    //- websocket.onmessage = function(evt) {
+    //-   $('#messages').append($('<li>').html(evt.data));
+    //- };
+    //- websocket.onerror = function(evt) {
+    //-   $('#messages').append($('<li>').text('<span style="color: red;">ERROR:</span> ' + evt.data));
+    //- };
+
     var approve = function(eventId) { // change to websocket
       var e = document.getElementById("manage_queue_ids");
       var manageQueueId = e.options[e.selectedIndex].value;
       console.log(manageQueueId)
 
-      $.ajax({
+      $.ajax({ // on server side check for ws object. if approve -> make changes in db (event)
           type: "POST",
           url: '/v1/events/'+ eventId + '/approve/' + manageQueueId,
           //- dataType: "text",
           success: function(msg) {
-              // callback(msg)
+              
               
               alert(msg);
+
+              
+              websocket.send(JSON.stringify({
+                test: '-----------------test'
+              }));
           }
       });
     }
