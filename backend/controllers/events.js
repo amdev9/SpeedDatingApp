@@ -132,43 +132,40 @@ export const manage = async (req, res, next) => {
 };
 
 
-export const approve = async (req, res, next) => { 
-  // const {  person_id } = req.body; 
-  // form details
+// export const approve = async (req, res, next) => { 
+//   // const {  person_id } = req.body; 
+//   // form details
 
-  Event.findById(req.params.eventId, function (err, event) {
-    if (err) {
-      console.log(err);
-    }
+//   Event.findById(req.params.eventId, function (err, event) {
+//     if (err) {
+//       console.log(err);
+//     }
 
-    if (req.params.decision == 'approve') {
-      let position = event.manage_queue_ids.indexOf(req.params.manageQueueId);
-      if ( ~position ) event.manage_queue_ids.splice(position, 1);
-      event.manage_ids.push(req.params.manageQueueId);
-      event.show_manage = false;
-    } else if (req.params.decision == 'decline') {  
-      let position = event.manage_queue_ids.indexOf(req.params.manageQueueId);
-      if ( ~position ) event.manage_queue_ids.splice(position, 1);
-      event.manage_decline_ids.push(req.params.manageQueueId);
-    }
+//     if (req.params.decision == 'approve') {
+//       let position = event.manage_queue_ids.indexOf(req.params.manageQueueId);
+//       if ( ~position ) event.manage_queue_ids.splice(position, 1);
+//       event.manage_ids.push(req.params.manageQueueId);
+//       event.show_manage = false;
+//     } else if (req.params.decision == 'decline') {  
+//       let position = event.manage_queue_ids.indexOf(req.params.manageQueueId);
+//       if ( ~position ) event.manage_queue_ids.splice(position, 1);
+//       event.manage_decline_ids.push(req.params.manageQueueId);
+//     }
 
-    event.save(function (err, updatedEvent) {
-      if (err) {
-        console.log(err);
-      }
+//     event.save(function (err, updatedEvent) {
+//       if (err) {
+//         console.log(err);
+//       }
 
        
-      // make broadcast request // figure out
-      // var likes_post = JSON.stringify({
-      //   type: "likes_post",
-      //   data: JSON.stringify(obj)
-      // });
-      // wss.broadcast(likes_post);
+//       // make broadcast request // figure out
+//       // var likes_post = JSON.stringify({
+//       //   type: "likes_post",
+//       //   data: JSON.stringify(obj)
+//       // });
+//       // wss.broadcast(likes_post);
       
-      res.send(JSON.stringify(updatedEvent));
-    });
-  });
-};
-
-// in admin panel (web interface) 
-// delete from manage_queue_ids -> add to accepted - manage_ids or add to manage_trash_ids
+//       res.send(JSON.stringify(updatedEvent));
+//     });
+//   });
+// };

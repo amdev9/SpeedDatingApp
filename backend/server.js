@@ -266,6 +266,40 @@ function calculate(ws, obj) {
     });
 }
 
+
+function events(ws, obj) {
+
+    const eventId = obj.eventId;
+    const decision = obj.decision;
+    const manageQueueId = obj.manageQueueId;
+    Event.findById(eventId, function (err, event) {
+        if (err) {
+            console.log(err);
+        }
+        if (decision == 'approve') {
+            let position = event.manage_queue_ids.indexOf(manageQueueId);
+            if ( ~position ) event.manage_queue_ids.splice(position, 1);
+            event.manage_ids.push(manageQueueId);
+            event.show_manage = false;
+        } else if (decision == 'decline') {  
+            let position = event.manage_queue_ids.indexOf(manageQueueId);
+            if ( ~position ) event.manage_queue_ids.splice(position, 1);
+            event.manage_decline_ids.push(manageQueueId);
+        }
+        event.save(function (err, updatedEvent) {
+            if (err) {
+                console.log(err);
+            }
+            // + push notification 
+            var event_decision = JSON.stringify({
+                type: "event_" + decision,
+                data: JSON.stringify(updatedEvent)
+            });
+            wss.broadcast(event_decision);
+        });
+    });
+}
+
 function mainLogic(ws, obj) { 
   switch(obj.command) {
       case 'start': start(ws, obj); break;
@@ -273,6 +307,7 @@ function mainLogic(ws, obj) {
       case 'closed': closed(ws, obj); break;
       case 'clients_queue': clients_queue(ws, obj); break;
       case 'calculate': calculate(ws, obj); break;
+      case 'events': events(ws, obj); break;
       default: 
         console.log('command not found');
   }

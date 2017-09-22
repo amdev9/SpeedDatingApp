@@ -4,20 +4,22 @@ import { Platform } from 'react-native';
 import { put, get } from './api';
 
 const API = Platform.OS === 'android'
-  ? 'http://10.0.3.2:3000/v1' // works for Genymotion
-  : 'http://192.168.1.33:3000/v1';
-  // : 'http://localhost:3000/v1';
+  ? 'http://10.0.3.2:3000/v1'
+  : 'http://192.168.1.33:3000/v1';  
 
+
+
+// Mymatches, Events websockets
 export const apiMiddleware = store => next => action => {
-  // Pass all actions through by default
+  /* Pass all actions through by default */
   next(action);
   switch (action.type) {
-    // In case we receive an action to send an API request
+    /* In case we receive an action to send an API request */
     case 'GET_EVENT_DATA':
-      // Dispatch GET_MOVIE_DATA_LOADING to update loading state
+      /* Dispatch GET_MOVIE_DATA_LOADING to update loading state */
       store.dispatch({type: 'GET_EVENT_DATA_LOADING'});
-      // Make API call and dispatch appropriate actions when done
-      fetch(`${API}/events`)
+      /* Make API call and dispatch appropriate actions when done */
+      fetch(`${API}/events`) // change to websocket
         .then(response => response.json())
         .then(data => next({
           type: 'GET_EVENT_DATA_RECEIVED',

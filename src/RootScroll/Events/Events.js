@@ -34,37 +34,10 @@ export default class Events extends Component {
   state = {
     popupIsOpen: false,
     selectedIndex: 1,
-    chosenTable: null,       // choose first day by default
+    chosenTable: null,      
   }
-  ///// websocket server event handle
-  onOpenConnection = () => {
-    console.log(' - onopen - ');
-  }
-  onMessageRecieved = async (e) => {
-    console.log(e.data);
-    var obj = JSON.parse(e.data); 
-    // const { person } = this.props 
-    // if (obj.type == 'calculate') {}
-  };
+
   
-  onError = (e) => {
-    console.log(e.message);
-  };
-  
-  onClose = (e) => {
-    console.log(e.code, e.reason);
-  };
-
-  componentWillMount() {
-    this.ws = new WebSocket('ws://192.168.1.33:3000'); // localhost
-    this.ws.onopen = this.onOpenConnection;
-    this.ws.onmessage = this.onMessageRecieved;
-    this.ws.onerror = this.onError;
-    this.ws.onclose = this.onClose;
-  }
-
-  ///////////////////
-
   openEvent = (event) => {
     this.setState({
       popupIsOpen: true,

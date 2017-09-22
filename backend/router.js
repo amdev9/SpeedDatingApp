@@ -57,12 +57,10 @@ router.route('/events')
 router.route('/events/:eventId/manage')
   .put(manage);
 
-router.route('/events/:eventId/:decision/:manageQueueId')
-  .post(approve);
+// router.route('/events/:eventId/:decision/:manageQueueId')
+//   .post(approve);
 
 
-
-// add route to post likes
 router.route('/likes')
   .put(post);
 

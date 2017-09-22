@@ -71,7 +71,7 @@ export default class ScrollTab extends Component {
             marginTop: 20,
             backgroundColor: 'white',
           }}
-          initialPage={this.state.initialPage} // 0 param choose 'Profile' || Events || Mymatches
+          initialPage={this.state.initialPage} 
           tabBarBackgroundColor='white'
           renderTabBar={() => <ScrollableTabBar />}
         >
@@ -79,11 +79,10 @@ export default class ScrollTab extends Component {
             <Profile user={this.state.user} navigation={this.props.navigation}/> 
           </View>
           <View tabLabel='Events'>
-            {/* store from aboveis not defined here  */}
-              <Events user={this.state.user} navigation={this.props.navigation}/>
+            <Events user={this.state.user} navigation={this.props.navigation}/>
           </View>
           <View tabLabel='Mymatches'>
-              <Mymatches person={this.state.user} navigation={this.props.navigation}/>
+            <Mymatches person={this.state.user} navigation={this.props.navigation}/>
           </View>
         </ScrollableTabView> 
       </Provider>  

@@ -134,8 +134,8 @@ export default class MymatchesScreen extends Component {
     console.log(e.code, e.reason);
   };
 
-  componentWillMount() {
-    this.ws = new WebSocket('ws://192.168.1.33:3000'); // localhost
+  componentWillMount() { // move to redux
+    this.ws = new WebSocket('ws://192.168.1.33:3000'); 
     this.ws.onopen = this.onOpenConnection;
     this.ws.onmessage = this.onMessageRecieved;
     this.ws.onerror = this.onError;
