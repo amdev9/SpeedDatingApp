@@ -38,7 +38,6 @@ export default class MatchScreen extends Component {
         </View>
          
      
-
       <ScrollView
           style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  
         >

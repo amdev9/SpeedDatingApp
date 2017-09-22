@@ -166,7 +166,6 @@ export default class ManageScreen extends Component {
     return (
       <View style={styles.container}>
 
-        
         <View style={styles.navBar}>
           <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
             {/*   this.props.navigation.goBack() */}
