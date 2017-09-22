@@ -275,7 +275,6 @@ function mainLogic(ws, obj) {
       case 'calculate': calculate(ws, obj); break;
       default: 
         console.log('command not found');
-         
   }
 }
 

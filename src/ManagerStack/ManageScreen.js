@@ -165,15 +165,18 @@ export default class ManageScreen extends Component {
     const { event } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
+
+        
         <View style={styles.navBar}>
-          <Icon style={styles.navBarButtonIcon} onPress={() => this.props.navigation.goBack() } name="ios-arrow-back" size={25} color="#900"  />
-          <Text style={ [styles.navBarButton,{
-            fontWeight: 'bold',
-            fontSize: 16,
-            marginLeft: 5
-          }]} onPress={() => this.props.navigation.goBack() }>Назад к мероприятиям</Text>
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
+            {/*   this.props.navigation.goBack() */}
+            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
+            <Text style={ [styles.navBarButton,{
+              fontWeight: 'bold'
+            }]}>Назад к мероприятиям</Text>       
+          </TouchableOpacity>   
           <Text style={styles.navBarHeader}></Text>
-          <Text style={styles.navBarButton}>  </Text> 
+          <Text style={styles.navBarButton}></Text> 
         </View>
          
         <View style={{
