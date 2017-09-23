@@ -117,16 +117,19 @@ export default class Events extends Component {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
-    if (obj.command == "event_decision") { // NOT WORKING
+    if (obj.type == "event_decision") {
       let updatedEvent = JSON.parse(obj.data)
-      
       let updatedEvents =  _.remove(this.state.events, { '_id': updatedEvent._id }); 
       updatedEvents.push(updatedEvent);
+
+      console.log('---------------->>>>>>> SETSTATE <<<<<<<<<<< ') // correct it
+
+
       this.setState({
         events: updatedEvents
       });
     }
-    
+
   };
   
   onError = (e) => {
