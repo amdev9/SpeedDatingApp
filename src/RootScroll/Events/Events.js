@@ -103,6 +103,39 @@ export default class Events extends Component {
     });
   }
 
+
+  //////////////////// move to scrolltab , then redux
+  
+  onOpenConnection = () => {
+    console.log(' - onopen - ');
+  }
+
+  onMessageRecieved = async (e) => {
+    console.log(e.data);
+    var obj = JSON.parse(e.data); 
+
+    // update and rerender events list 
+  };
+  
+  onError = (e) => {
+    console.log(e.message);
+  };
+  
+  onClose = (e) => {
+    console.log(e.code, e.reason);
+  };
+
+  componentWillMount() { 
+    this.ws = new WebSocket('ws://192.168.1.33:3000'); 
+    this.ws.onopen = this.onOpenConnection;
+    this.ws.onmessage = this.onMessageRecieved;
+    this.ws.onerror = this.onError;
+    this.ws.onclose = this.onClose;
+  }
+
+  ///////////////////
+
+
   render() {
     const { events, loading, refresh } = this.props;
     const { user } =  this.props;

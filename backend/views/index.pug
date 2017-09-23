@@ -12,6 +12,7 @@ block content
             th= key  
       tr
         each val, key in object
+           
           if (object.hasOwnProperty(key))
             if (key == 'manage_queue_ids')
               td 
@@ -63,7 +64,7 @@ block content
         eventId: eventId,
         decision: 'approve',
         manageQueueId: manageQueueId
-      });
+      }) );
 
       //- $.ajax({ 
       //-     type: "POST",
@@ -73,10 +74,12 @@ block content
     }
     
     websocket.onmessage = function(evt) {
-      $('#messages').append($('<li>').html(evt.data));
+      console.log('onmessage', evt)
+      //- $('#messages').append($('<li>').html(evt.data));
     };
     websocket.onerror = function(evt) {
-      $('#messages').append($('<li>').text('<span style="color: red;">ERROR:</span> ' + evt.data));
+      console.log('onerror', evt)
+      //- $('#messages').append($('<li>').text('<span style="color: red;">ERROR:</span> ' + evt.data));
     };
 
 
