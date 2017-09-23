@@ -119,14 +119,14 @@ export default class Events extends Component {
     
     if (obj.type == "event_decision") {
       let updatedEvent = JSON.parse(obj.data)
-      let updatedEvents =  _.remove(this.state.events, { '_id': updatedEvent._id }); 
-      updatedEvents.push(updatedEvent);
+      let eventsFromState = this.state.events;
+      _.remove(eventsFromState, { '_id': updatedEvent._id }); 
+      eventsFromState.push(updatedEvent);
 
-      console.log('---------------->>>>>>> SETSTATE <<<<<<<<<<< ') // correct it
-
+      console.log('---------------->>>>>>> SETSTATE <<<<<<<<<<< ', eventsFromState) 
 
       this.setState({
-        events: updatedEvents
+        events: eventsFromState
       });
     }
 
