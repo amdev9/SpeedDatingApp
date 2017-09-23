@@ -20,8 +20,17 @@ import Mymatches from './MymatchesScreen';
 
 const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
 
+ 
+// import { createStore, applyMiddleware } from 'redux'
 // import thunk from 'redux-thunk'
-// applyMiddleware(thunk, socketMiddleware)
+// import reducer from './reducer'
+// import { socketMiddleware } from './socketMiddleware'
+
+// export default function configureStore(initialState) {
+//   return createStore(reducer, initialState,
+//       applyMiddleware(thunk, socketMiddleware)
+//   )
+// }
 
 
 store.dispatch({type: 'GET_EVENT_DATA'});

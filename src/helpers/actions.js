@@ -11,7 +11,16 @@ export default actions = {
             status: 'disconnected'
         }
     },
-    messageReceived:
-    connecting:
-        
+    connecting: function() {
+        return {
+            type: 'CONNECTION',
+            status: 'connecting'
+        }
+    },
+    messageReceived: function(msg) {
+        return {
+            type: 'MESSAGE_RECEIVED',
+            data: msg
+        }
+    }
 }
