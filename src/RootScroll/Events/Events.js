@@ -31,10 +31,14 @@ import { defaultStyles } from '../../styles';
 )
 export default class Events extends Component {
   
-  state = {
-    popupIsOpen: false,
-    selectedIndex: 1,
-    chosenTable: null,      
+  constructor(props) {
+    super(props);
+    this.state = {
+      popupIsOpen: false,
+      selectedIndex: 1,
+      chosenTable: null,     
+      events: props.events // added
+    };
   }
 
   
@@ -103,7 +107,6 @@ export default class Events extends Component {
     });
   }
 
-
   //////////////////// move to scrolltab , then redux
   
   onOpenConnection = () => {
@@ -113,8 +116,15 @@ export default class Events extends Component {
   onMessageRecieved = async (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
-
-    // update and rerender events list 
+    
+    if (obj.command == "event_decision") { // test it
+      let updatedEvent = JSON.parse(obj.data)
+      let updatedEvents =  _.remove(this.state.events, { '_id': updatedEvent._id }); 
+      updatedEvents.push(updatedEvent);
+      this.setState({
+        events: updatedEvents
+      });
+    }
   };
   
   onError = (e) => {
@@ -133,13 +143,10 @@ export default class Events extends Component {
     this.ws.onclose = this.onClose;
   }
 
-  ///////////////////
-
 
   render() {
-    const { events, loading, refresh } = this.props;
+    const { loading, refresh } = this.props; // events, 
     const { user } =  this.props;
-    // console.log(user);
     return (
       <View style={styles.container}>
       
@@ -157,7 +164,7 @@ export default class Events extends Component {
           />
         </View>
 
-        {events // and movies participants contains data && this.state.selectedIndex == 1
+        {this.state.events // and movies participants contains data && this.state.selectedIndex == 1
           ? <ScrollView
               contentContainerStyle={styles.scrollContent}
               // Hide all scroll indicators
@@ -170,7 +177,7 @@ export default class Events extends Component {
                 />
               }
             >
-              {events.map((event, index) => {
+              {this.state.events.map((event, index) => {
                 if (this.state.selectedIndex == 0) {
                   if (event.participant_ids.includes(user._id) || event.manage_ids.includes(user._id)) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
                     return <EventPoster

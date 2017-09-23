@@ -292,7 +292,8 @@ function events(ws, obj) {
             }
             // + push notification 
             var event_decision = JSON.stringify({
-                type: "event_" + decision,
+                type: "event_decision",
+                decision: decision,
                 data: JSON.stringify(updatedEvent)
             });
             wss.broadcast(event_decision);

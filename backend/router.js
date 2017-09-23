@@ -67,7 +67,5 @@ router.route('/likes')
 router.route('/user')
   .put(update_user);
 
-
-
 export default router;
 
