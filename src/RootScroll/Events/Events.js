@@ -123,7 +123,7 @@ export default class Events extends Component {
       _.remove(eventsFromState, { '_id': updatedEvent._id }); 
       eventsFromState.push(updatedEvent);
 
-      console.log('---------------->>>>>>> SETSTATE <<<<<<<<<<< ', eventsFromState) 
+      console.log('1) eventsFromState: ', eventsFromState) 
 
       this.setState({
         events: eventsFromState
@@ -150,7 +150,10 @@ export default class Events extends Component {
 
 
   render() {
-    const { loading, refresh } = this.props; // events, 
+    const { events, loading, refresh } = this.props;  
+
+    console.log('2) list events : ',  events);
+    
     const { user } =  this.props;
     return (
       <View style={styles.container}>
@@ -184,7 +187,7 @@ export default class Events extends Component {
             >
               {this.state.events.map((event, index) => {
                 if (this.state.selectedIndex == 0) {
-                  if (event.participant_ids.includes(user._id) || event.manage_ids.includes(user._id)) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
+                  if (event.participant_ids.includes(user._id)  ) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
                     return <EventPoster
                       event={event}
                       person={user}

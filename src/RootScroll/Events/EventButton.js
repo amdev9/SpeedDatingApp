@@ -23,7 +23,14 @@ const defaultHeight = height * 0.67;
 export default class EventButton extends Component {
     render() {
       const { event, person, onBook, onManage, onJoin, onManageRequest } = this.props;
-      var manage_ids = event.manage_ids.map(event => event._id); // fixed manage_ids
+
+      //transform manage_ids
+      if (event.manage_ids.length > 0 && typeof(event.manage_ids[0]) == 'object' ) {
+        var manage_ids = event.manage_ids.map(event => event._id); 
+      } else {
+        var manage_ids = event.manage_ids;
+      }
+    
       if ( manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id))  ) 
       {
         return <TouchableHighlight
