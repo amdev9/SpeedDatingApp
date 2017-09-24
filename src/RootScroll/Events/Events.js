@@ -26,7 +26,7 @@ import { defaultStyles } from '../../styles';
     loading: state.loading,
   }),
   dispatch => ({
-    refresh: () => dispatch({type: 'GET_EVENT_DATA'}),
+    refresh: () => dispatch({type: 'GET_EVENT_DATA'}), 
   }),
 )
 export default class Events extends Component {
@@ -121,7 +121,7 @@ export default class Events extends Component {
       let updatedEvent = JSON.parse(obj.data)
       let eventsFromState = this.state.events;
       _.remove(eventsFromState, { '_id': updatedEvent._id }); 
-      eventsFromState.push(updatedEvent);
+      eventsFromState.push(updatedEvent); // add order
 
       console.log('1) eventsFromState: ', eventsFromState) 
 

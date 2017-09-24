@@ -8,7 +8,6 @@ const API = Platform.OS === 'android'
   : 'http://192.168.1.33:3000/v1';  
 
 
-
 // Mymatches, Events websockets
 export const apiMiddleware = store => next => action => {
   /* Pass all actions through by default */
