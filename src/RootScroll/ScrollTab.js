@@ -6,34 +6,34 @@ import {
   ActivityIndicator,
   StyleSheet
 } from 'react-native';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+
 import { StackNavigator } from 'react-navigation';
-
-
-import { apiMiddleware, reducer } from '../helpers/redux';
 import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 
 import Profile from './Profile';
 import Events from './Events/Events';
 import Mymatches from './MymatchesScreen';
 
-const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
 
- 
-// import { createStore, applyMiddleware } from 'redux'
-// import thunk from 'redux-thunk'
-// import reducer from './reducer'
-// import { socketMiddleware } from './socketMiddleware'
+// import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+// import { apiMiddleware, reducer } from '../helpers/redux';
+// const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
+// store.dispatch({type: 'GET_EVENT_DATA'});
 
-// export default function configureStore(initialState) {
-//   return createStore(reducer, initialState,
-//       applyMiddleware(thunk, socketMiddleware)
-//   )
-// }
+import { fetchEvents } from '../helpers/actions';
+import configureStore from '../helpers/store';
+const store = configureStore({})
+
+const action = () => {
+  return {
+    type: 'WEBSOCKET:CONNECT',
+    url: 'ws://192.168.1.33:3000'
+  }
+}
+store.dispatch(action());
 
 
-store.dispatch({type: 'GET_EVENT_DATA'});
 const USER_KEY = "auth-demo-key";
 export default class ScrollTab extends Component {
 
@@ -46,6 +46,8 @@ export default class ScrollTab extends Component {
   }
 
   componentWillMount() { 
+
+
     console.log('componentWillMount ScrollTab')
     AsyncStorage.getItem(USER_KEY).then((user) => {
       this.setState({

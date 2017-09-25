@@ -14,19 +14,19 @@ const participantsRelation = {
   model: 'Person',
 };
 
-export const list = async (req, res, next) => {
-  // Get all comments and populate User models
-  const events = await Event.find()
-    // .sort({ 'created': -1 })
-    // .populate(creatorRelation)
-    .populate(participantsRelation)
-    .populate(managerRelation)
-    .exec();
+// export const list = async (req, res, next) => {
+//   // Get all comments and populate User models
+//   const events = await Event.find()
+//     // .sort({ 'created': -1 })
+//     // .populate(creatorRelation)
+//     .populate(participantsRelation)
+//     .populate(managerRelation)
+//     .exec();
 
-  res.json({
-    events
-  });
-};
+//   res.json({
+//     events
+//   });
+// };
 
 export const create = async (req, res, next) => {
   const { event_id, participant_id } = req.body;

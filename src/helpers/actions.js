@@ -1,26 +1,88 @@
+import { WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPEN, WEBSOCKET_CLOSED, WEBSOCKET_MESSAGE } from './constants';
+
+
 export default actions = {
-    connected: function() {
-        return {
-            type: 'CONNECTION',
-            status: 'connected'
+    connecting: () => ({  // event, websocket
+        type: WEBSOCKET_CONNECTING,
+        payload: {
+          timestamp: new Date(),
+          // event,
+          // websocket
         }
-    },
-    disconnected: function() {
-        return {
-            type: 'CONNECTION',
-            status: 'disconnected'
+    }),
+    connected: () => ({  // event
+        type: WEBSOCKET_OPEN,
+        payload: {
+          timestamp: new Date(),
+          // event
         }
-    },
-    connecting: function() {
-        return {
-            type: 'CONNECTION',
-            status: 'connecting'
+    }),
+    disconnected: () => ({  // event
+        type: WEBSOCKET_CLOSED,
+        payload: {
+          timestamp: new Date(),
+          // event
         }
-    },
-    messageReceived: function(msg) {
+    }),
+    messageReceived: (msg) => ({  // event
+        type: WEBSOCKET_MESSAGE,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+          // event
+        }
+    }),
+    eventsList: (msg) => ({  
+        type: WEBSOCKET_EVENTS_LIST,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    eventDecision: (msg) => ({  
+        type: WEBSOCKET_EVENT_DECISION,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    sending: () => ({  
+        type: WEBSOCKET_SENDING,
+        payload: {
+          timestamp: new Date(),
+        }
+    })
+    
+};
+
+
+
+
+// data_loading - before send ws message
+// data_received - onmessage received message with data
+// data_error - onerror 
+
+export function fetchEvents() { // fetchEvents
+    const action = () => {
         return {
-            type: 'MESSAGE_RECEIVED',
-            data: msg
+          type: 'WEBSOCKET:SEND',
+          command: 'events_list',
+          data: 'ws://localhost:3000'
         }
     }
-}
+
+    return (dispatch) => {
+        dispatch(action())
+    }
+
+    // return (dispatch) => {
+    //   dispatch(getData())
+    //   getPeople()
+    //     .then((data) => {
+    //       dispatch(getDataSuccess(data))
+    //     })
+    //     .catch((err) => console.log('err:', err))
+    // }
+  }
+  
+// add function for userSave , postLike, ..

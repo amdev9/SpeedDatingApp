@@ -267,7 +267,8 @@ function calculate(ws, obj) {
 }
 
 
-function events(ws, obj) {
+
+function events_decision(ws, obj) {
 
     const eventId = obj.eventId;
     const decision = obj.decision;
@@ -292,12 +293,32 @@ function events(ws, obj) {
             }
             // + push notification 
             var event_decision = JSON.stringify({
-                type: "event_decision",
+                type: "EVENT_DECISION",
                 decision: decision,
-                data: JSON.stringify(updatedEvent)
+                event: JSON.stringify(updatedEvent)
             });
             wss.broadcast(event_decision);
         });
+    });
+}
+
+function events_list(ws, obj) {
+    const managerRelation = {
+        path: 'manage_ids',  
+        select: ['name', 'avatar'],
+        model: 'Person',
+    };
+    const participantsRelation = {
+        path: 'participants', 
+        select: ['name', 'avatar', 'likes'],
+        model: 'Person',
+    };
+    Event.find().populate(participantsRelation).populate(managerRelation).exec(function(err, events ) {
+
+        ws.send(JSON.stringify({  // change to send
+            type: "EVENTS_LIST", 
+            events: JSON.stringify(events)
+        }));
     });
 }
 
@@ -308,7 +329,8 @@ function mainLogic(ws, obj) {
       case 'closed': closed(ws, obj); break;
       case 'clients_queue': clients_queue(ws, obj); break;
       case 'calculate': calculate(ws, obj); break;
-      case 'events': events(ws, obj); break;
+      case 'events_decision': events_decision(ws, obj); break;
+      case 'events_list': events_list(ws, obj); break;
       default: 
         console.log('command not found');
   }

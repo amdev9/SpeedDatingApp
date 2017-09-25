@@ -167,11 +167,9 @@ export const oauthCallback = async (req, res) => {
   res.redirect('OAuthLogin://login?user=' + JSON.stringify(req.user));
 };
 
-// update user info
+
 export const update_user = async (req, res) => {
-  // 1. find user by id  
-  // 2. update user info
-  // 3. user.save();
+ 
 
   const { user } = req.body;
   Person.findById(user._id, function (err, person) {

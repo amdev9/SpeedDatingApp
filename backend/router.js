@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 
 import { 
-    list, 
+   // list, 
     create, 
     post, 
     manage,
@@ -50,12 +50,11 @@ router.post('/', upload.any(), function(req, res, next) {
 });
 
 
-router.route('/events')
-  .get(list)
-  .put(create);
+router.route('/events').put(create); // создать мероприятие populate.js
+//   .get(list)  // 
 
 router.route('/events/:eventId/manage')
-  .put(manage);
+  .put(manage); // стать организатором
 
 // router.route('/events/:eventId/:decision/:manageQueueId')
 //   .post(approve);
@@ -64,7 +63,7 @@ router.route('/events/:eventId/manage')
 router.route('/likes')
   .put(post);
 
-router.route('/user')
+router.route('/user') // edit screen - update user info
   .put(update_user);
 
 export default router;

@@ -20,16 +20,19 @@ import EventPopup from './EventPopup';
 import { defaultStyles } from '../../styles';
 
 
+import { fetchEvents } from '../../helpers/actions';
+
 @connect(
   state => ({
     events: state.events,
     loading: state.loading,
   }),
   dispatch => ({
-    refresh: () => dispatch({type: 'GET_EVENT_DATA'}), 
+    refresh: () => dispatch(fetchEvents()),  // {type: 'GET_EVENT_DATA'}
   }),
 )
 export default class Events extends Component {
+  
   
   constructor(props) {
     super(props);
@@ -109,50 +112,55 @@ export default class Events extends Component {
 
   //////////////////// move to scrolltab , then redux
   
-  onOpenConnection = () => {
-    console.log(' - onopen - ');
-  }
+  // onOpenConnection = () => {
+  //   console.log(' - onopen - ');
+  // }
 
-  onMessageRecieved = async (e) => {
-    console.log(e.data);
-    var obj = JSON.parse(e.data); 
+  // onMessageRecieved = async (e) => {
+  //   console.log(e.data);
+    // var obj = JSON.parse(e.data); 
     
-    if (obj.type == "event_decision") {
-      let updatedEvent = JSON.parse(obj.data)
-      let eventsFromState = this.state.events;
-      _.remove(eventsFromState, { '_id': updatedEvent._id }); 
-      eventsFromState.push(updatedEvent); // add order
+    // if (obj.type == "event_decision") {
+    //   let updatedEvent = JSON.parse(obj.data)
+    //   let eventsFromState = this.state.events;
+    //   _.remove(eventsFromState, { '_id': updatedEvent._id }); 
+    //   eventsFromState.push(updatedEvent); // add order
 
-      console.log('1) eventsFromState: ', eventsFromState) 
+    //   console.log('1) eventsFromState: ', eventsFromState) 
 
-      this.setState({
-        events: eventsFromState
-      });
-    }
+    //   this.setState({
+    //     events: eventsFromState
+    //   });
+    // }
 
-  };
+  // };
   
-  onError = (e) => {
-    console.log(e.message);
-  };
+  // onError = (e) => {
+  //   console.log(e.message);
+  // };
   
-  onClose = (e) => {
-    console.log(e.code, e.reason);
-  };
+  // onClose = (e) => {
+  //   console.log(e.code, e.reason);
+  // };
 
   componentWillMount() { 
-    this.ws = new WebSocket('ws://192.168.1.33:3000'); 
-    this.ws.onopen = this.onOpenConnection;
-    this.ws.onmessage = this.onMessageRecieved;
-    this.ws.onerror = this.onError;
-    this.ws.onclose = this.onClose;
+    this.props.refresh();
+  //   this.ws = new WebSocket('ws://192.168.1.33:3000'); 
+  //   this.ws.onopen = this.onOpenConnection;
+  //   this.ws.onmessage = this.onMessageRecieved;
+  //   this.ws.onerror = this.onError;
+  //   this.ws.onclose = this.onClose;
   }
 
 
   render() {
+
+    console.log(this.props)
+    console.log(this.state)
+
     const { events, loading, refresh } = this.props;  
 
-    console.log('2) list events : ',  events);
+    // this.state.
     
     const { user } =  this.props;
     return (
@@ -172,7 +180,7 @@ export default class Events extends Component {
           />
         </View>
 
-        {this.state.events // and movies participants contains data && this.state.selectedIndex == 1
+        {events 
           ? <ScrollView
               contentContainerStyle={styles.scrollContent}
               // Hide all scroll indicators
@@ -185,7 +193,7 @@ export default class Events extends Component {
                 />
               }
             >
-              {this.state.events.map((event, index) => {
+              {events.map((event, index) => {
                 if (this.state.selectedIndex == 0) {
                   if (event.participant_ids.includes(user._id)  ) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
                     return <EventPoster

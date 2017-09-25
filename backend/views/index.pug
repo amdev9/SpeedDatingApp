@@ -35,7 +35,7 @@ block content
       var manageQueueId = e.options[e.selectedIndex].value;
       //console.log(manageQueueId)
       websocket.send(JSON.stringify({
-        command: 'events',
+        command: 'events_decision',
         eventId: eventId,
         decision: 'approve',
         manageQueueId: manageQueueId
