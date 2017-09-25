@@ -40,7 +40,7 @@ export default class Events extends Component {
       popupIsOpen: false,
       selectedIndex: 1,
       chosenTable: null,     
-      events: props.events // added
+      // events: props.events // added
     };
   }
 
@@ -144,7 +144,10 @@ export default class Events extends Component {
   // };
 
   componentWillMount() { 
+    console.log('>>>>>>>>>>>>>>>> componentWillMount >>>>>>>>>>>>>>>>>>>')
     this.props.refresh();
+   
+
   //   this.ws = new WebSocket('ws://192.168.1.33:3000'); 
   //   this.ws.onopen = this.onOpenConnection;
   //   this.ws.onmessage = this.onMessageRecieved;
@@ -155,11 +158,12 @@ export default class Events extends Component {
 
   render() {
 
-    console.log(this.props)
-    console.log(this.state)
+    // console.log(this.props)
+    // console.log(this.state)
 
     const { events, loading, refresh } = this.props;  
 
+    
     // this.state.
     
     const { user } =  this.props;
@@ -194,20 +198,23 @@ export default class Events extends Component {
               }
             >
               {events.map((event, index) => {
+                console.log(index)
                 if (this.state.selectedIndex == 0) {
                   if (event.participant_ids.includes(user._id)  ) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
                     return <EventPoster
-                      event={event}
+                      event={event} // comment it & pass events - connect
                       person={user}
                       onOpen={this.openEvent}
+                      //index={index}
                       key={index}
                     /> 
                   }  
                 } else {
                   return <EventPoster
-                    event={event}
+                    event={event} // comment it & pass events - connect
                     person={user}
                     onOpen={this.openEvent}
+                   // index={index}
                     key={index}
                   /> 
                 }

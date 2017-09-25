@@ -14,6 +14,8 @@ export default class Cost extends Component {
     render() {
       const { cost, part, manage } = this.props;
       
+      console.log(this.props)
+
       if(!manage) {
         if (!part) {
           return  <View

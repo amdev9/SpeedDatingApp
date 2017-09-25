@@ -16,6 +16,8 @@ import Cost from './widgets/Cost';
 import Date from './widgets/Date';
 import { defaultStyles } from '../../styles';
 
+import { connect } from 'react-redux';
+
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
 // How many posters we want to have in each row and column
@@ -23,25 +25,27 @@ const cols = 3, rows = 4;
 
 const placesHeight = (height - 20 - 20) / rows - 10;
 
-
+// connect 1 param - events
+ 
 export default class EventPoster extends Component {
   // Component prop types
   static propTypes = {
     // Movie object with title, genre, and poster
-    event: PropTypes.object.isRequired,
+    event: PropTypes.object.isRequired, // comment it
     person: PropTypes.object.isRequired,
     // Called when user taps on a poster
     onOpen: PropTypes.func.isRequired,
   }
   render() {
-    const { person, event, person: { gender }, event: { title, date, places_max, cost_men, cost_women, show_manage, photo, participant_ids }, onOpen } = this.props;
+    var { person, event, person: { gender }, onOpen , event} = this.props;
+    
     if (gender == 1) {
-      var cost = cost_women;
+      var cost = event.cost_women;
     } else if (gender == 2) {
-      var cost = cost_men;
+      var cost = event.cost_men;
     }
-    var left_places = places_max - participant_ids.length;
-    if (participant_ids.includes(person._id) ) {
+    var left_places = event.places_max - event.participant_ids.length;
+    if (event.participant_ids.includes(person._id) ) {
       var part = true;
     } else {
       var part = false;
@@ -63,7 +67,7 @@ export default class EventPoster extends Component {
     return (
       <TouchableOpacity style={styles.container} onPress={() => onOpen(event)}>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: photo }} style={styles.image} />
+          <Image source={{ uri: event.photo }} style={styles.image} />
             <View style={styles.overlay} />
             {/* <LinearGradient  start={{x: 0.0, y: 0.1}} end={{x: 1.0, y: 0.6}}
               locations={[0,0.3,0.7]}
@@ -71,14 +75,14 @@ export default class EventPoster extends Component {
                   style={styles.overlay} /> */}
 
           <View style={styles.upPoster}>
-            <Text style={styles.title} numberOfLines={1}>{title}</Text>
-            <Sticker value={show_manage} />
+            <Text style={styles.title} numberOfLines={1}>{event.title}</Text>
+            <Sticker value={event.show_manage} />
           </View>
           <Date style={styles.date} value={'11.09.2017'} /> 
           {/* {date}   18-00*/}
           
           <View style={styles.downPoster}>
-            <Places now={left_places} max={places_max} />
+            <Places now={left_places} max={event.places_max} />
             <Cost cost={cost} part={part} manage={manage_approve} />  
           </View>
         </View>

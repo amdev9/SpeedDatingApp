@@ -6,18 +6,20 @@ export default  reducer = (state = { events: [], loading: true }, action) => {
       case 'WEBSOCKET:MESSAGE':
         // Assuming that your data is a DOMString in JSON format
         const data_message = (action.payload.data); // JSON.parse
-        console.log('WEBSOCKET:MESSAGE: ', data_message);
+        // console.log('WEBSOCKET:MESSAGE: ', data_message);
         return { ...state, ...data_message}
 
       case 'WEBSOCKET:EVENT_DECISION':
         const updatedEvent = JSON.parse(action.payload.data.event); 
         let eventsFromState = state.events;
+      
+        // console.log('-- state.events before: ', eventsFromState)
         _.remove(eventsFromState, { '_id': updatedEvent._id }); 
-        eventsFromState.push(updatedEvent); // add order
-        console.log('-- reducer WEBSOCKET:EVENT_DECISION')
+        eventsFromState.push(updatedEvent); 
+        // console.log('-- after reducer: ', eventsFromState)
         return { 
           loading: false, 
-          events: eventsFromState  // update this.state
+          events: eventsFromState, //eventsFromState  // rerender child component
         }
 
       case 'WEBSOCKET:EVENTS_LIST':
@@ -28,7 +30,7 @@ export default  reducer = (state = { events: [], loading: true }, action) => {
         }
 
       case 'WEBSOCKET:SENDING': 
-        console.log('WEBSOCKET:SENDING');
+        // console.log('WEBSOCKET:SENDING');
         return { 
           ...state, 
           loading: true
