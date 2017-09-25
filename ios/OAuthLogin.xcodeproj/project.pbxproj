@@ -642,6 +642,7 @@
 				32C008A284A24DD49E079DBF /* Resources */,
 				A4AA8845A08CB239BC5EE21E /* Pods */,
 				7FF92239E970173D1EE7B293 /* Frameworks */,
+				FA93775C1F79774200958FEA /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -730,6 +731,20 @@
 				FA92AE771F30007800B1B1DA /* libRCTCameraRoll.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FA93775C1F79774200958FEA /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				8AE2AE62477C4E2590BA2295 /* libSafariViewManager.a */,
+				39EE6D0F1EE94085A989864A /* libRNVectorIcons.a */,
+				76FF6D61D67C48F780B346A0 /* libRNFetchBlob.a */,
+				456E4B10066F484B89061574 /* libRNUploader.a */,
+				1B34A19B8E7943A3A7DC2DD8 /* libBVLinearGradient.a */,
+				D146FE6CF2C54F7A913535D6 /* libimageCropPicker.a */,
+				D28BAC77A5AE46F3BD47854C /* libFastImage.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		FAA6389B1F68B05B0095D339 /* fonts */ = {
@@ -1501,7 +1516,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.OAuthLogin123;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speeddate.TestDeploy;
 				PRODUCT_NAME = OAuthLogin;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1530,7 +1545,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.OAuthLogin123;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speeddate.TestDeploy;
 				PRODUCT_NAME = OAuthLogin;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
