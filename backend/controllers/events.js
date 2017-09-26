@@ -28,43 +28,43 @@ const participantsRelation = {
 //   });
 // };
 
-export const create = async (req, res, next) => {
-  const { event_id, participant_id } = req.body;
+// export const create = async (req, res, next) => {
+//   const { event_id, participant_id } = req.body;
  
-  var events = await Event.find()
-    // .sort({ 'created': -1 })
-    // .populate(creatorRelation)
-    .populate(participantsRelation)
-    .exec();
+//   var events = await Event.find()
+//     // .sort({ 'created': -1 })
+//     // .populate(creatorRelation)
+//     .populate(participantsRelation)
+//     .exec();
 
-  Event.findById(event_id, function (err, event) {
-    if (err) {
-      console.log(err);
-    }
+//   Event.findById(event_id, function (err, event) {
+//     if (err) {
+//       console.log(err);
+//     }
     
-    if (event.participant_ids.includes(participant_id)) {
-      res.send(event);
-    } else {
-      event.participant_ids.push(participant_id);
+//     if (event.participant_ids.includes(participant_id)) {
+//       res.send(event);
+//     } else {
+//       event.participant_ids.push(participant_id);
       
-      event.participants.push(participant_id); // works
+//       event.participants.push(participant_id); // works
 
-      event.save(function (err, updatedEvent) {
-        if (err) {
-          console.log(err);
-        }
-        _.remove(events, { '_id': event_id});
+//       event.save(function (err, updatedEvent) {
+//         if (err) {
+//           console.log(err);
+//         }
+//         _.remove(events, { '_id': event_id});
         
-        // find by event_id remove event place updatedEvent 
-        res.json([
-            ...events,
-            updatedEvent
-          ]);
-        // res.send(updatedEvent);
-      });
-    }
-  });
-};
+//         // find by event_id remove event place updatedEvent 
+//         res.json([
+//             ...events,
+//             updatedEvent
+//           ]);
+//         // res.send(updatedEvent);
+//       });
+//     }
+//   });
+// };
 
   
 export const post = async (req, res, next) => {

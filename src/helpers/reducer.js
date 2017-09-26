@@ -1,5 +1,6 @@
 export default  reducer = (state = { events: [], loading: true }, action) => {
     switch (action.type) {
+
       case 'WEBSOCKET:EVENT_DECISION':
         const updatedEvent = JSON.parse(action.payload.data.event);  
         return { 

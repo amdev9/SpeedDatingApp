@@ -50,7 +50,7 @@ router.post('/', upload.any(), function(req, res, next) {
 });
 
 
-router.route('/events').put(create); // создать мероприятие populate.js
+// router.route('/events').put(create);
 //   .get(list)  // 
 
 router.route('/events/:eventId/manage')

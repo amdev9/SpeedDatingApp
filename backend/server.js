@@ -268,11 +268,14 @@ function calculate(ws, obj) {
 
 
 
+
 function events_decision(ws, obj) {
 
     const eventId = obj.eventId;
     const decision = obj.decision;
     const manageQueueId = obj.manageQueueId;
+
+    
     Event.findById(eventId, function (err, event) {
         if (err) {
             console.log(err);
@@ -322,6 +325,50 @@ function events_list(ws, obj) {
     });
 }
 
+function update_event(ws, obj) { // fix errors
+
+    const event_id = obj.event_id;
+    const participant_id = obj.participant_id;
+    const participantsRelation = {
+        path: 'participants', 
+        select: ['name', 'avatar', 'likes'],
+        model: 'Person',
+    };
+
+    Event.find().populate(participantsRelation).exec( function(err, events) {  
+        if (err) {
+            console.log(err);
+        }
+
+        let event = _.find(events, function(obj) { return obj._id == event_id })
+
+        if (event.participant_ids.includes(participant_id)) {
+            console.log('if: ', event)
+            // res.send(event); 
+        } else {
+            event.participant_ids.push(participant_id);
+            event.participants.push(participant_id);
+            event.save(function (err, updatedEvent) {
+
+                // console.log('save: ', updatedEvent)
+                // if (err) {
+                //     console.log(err);
+                // }
+                // _.remove(events, { '_id': event_id});
+                ws.send(JSON.stringify({ 
+                    type: "EVENTS_LIST", 
+                    events: JSON.stringify(events)
+                }));
+                    // [
+                        // ...events,
+                        // updatedEvent
+                    // ]
+               
+            });
+        }
+    });
+}
+
 function mainLogic(ws, obj) { 
   switch(obj.command) {
       case 'start': start(ws, obj); break;
@@ -331,6 +378,7 @@ function mainLogic(ws, obj) {
       case 'calculate': calculate(ws, obj); break;
       case 'events_decision': events_decision(ws, obj); break;
       case 'events_list': events_list(ws, obj); break;
+      case 'update_event': update_event(ws, obj); break;
       default: 
         console.log('command not found');
   }

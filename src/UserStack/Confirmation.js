@@ -25,6 +25,18 @@ const kSuccessUrl = "yandexmoneyapp://oauth/authorize/success";
 const kFailUrl = "yandexmoneyapp://oauth/authorize/fail";
 const kHttpsScheme = "https:";
 
+import { connect } from 'react-redux';
+import { updateEvent } from '../helpers/actions'; 
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    update: (event_id, participant_id) => dispatch(updateEvent(event_id, participant_id)), 
+  }),
+)
 export default class Confirmation extends Component {
   state = {
     request: {},
@@ -65,14 +77,16 @@ export default class Confirmation extends Component {
     const { event, participant } = this.props.navigation.state.params;
     // this._scrollView.scrollTo({ y: 0 });
     try {
-      // Make API call
-      const response = await put('events', {
-        event_id: event._id,
-        participant_id: participant._id,
-      }); 
 
-      const json = await response.json();
-      console.log(json);
+      this.props.update(event._id, participant._id);
+
+      // const response = await put('events', {
+      //   event_id: event._id,
+      //   participant_id: participant._id,
+      // }); 
+
+      // const json = await response.json();
+      // console.log(json);
 
       // events = json; // get events
       this.props.navigation.goBack(); // test only

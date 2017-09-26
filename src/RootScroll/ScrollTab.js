@@ -15,21 +15,8 @@ import Events from './Events/Events';
 import Mymatches from './MymatchesScreen';
 
  
-import { Provider } from 'react-redux';
-import { fetchEvents } from '../helpers/actions';
-import configureStore from '../helpers/store';
-const store = configureStore({})
 
-const action = () => {
-  return {
-    type: 'WEBSOCKET:CONNECT',
-    url: 'ws://192.168.1.33:3000'
-  }
-}
 
-store.dispatch(action());
-
-// store.dispatch(fetchEvents());
 
 
 const USER_KEY = "auth-demo-key";
@@ -67,8 +54,8 @@ export default class ScrollTab extends Component {
       />
     }
     
-    return (
-      <Provider store={store}> 
+    return ( // move provider to app.js? 
+      
         <ScrollableTabView
           style={{
             marginTop: 20,
@@ -88,7 +75,7 @@ export default class ScrollTab extends Component {
             <Mymatches person={this.state.user} navigation={this.props.navigation}/>
           </View>
         </ScrollableTabView> 
-      </Provider>  
+      
     );
   };
 

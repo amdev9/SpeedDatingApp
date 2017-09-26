@@ -66,8 +66,7 @@ export function fetchEvents() { // fetchEvents
     const action = () => {
         return {
           type: 'WEBSOCKET:SEND',
-          command: 'events_list',
-          data: 'ws://localhost:3000'
+          command: 'events_list'
         }
     }
 
@@ -83,6 +82,23 @@ export function fetchEvents() { // fetchEvents
     //     })
     //     .catch((err) => console.log('err:', err))
     // }
-  }
-  
+}
+
+export function updateEvent(event_id, participant_id) { 
+    const action = () => {
+        return {
+          type: 'WEBSOCKET:SEND',
+          command: 'update_event',
+          event_id: event_id,
+          participant_id: participant_id
+        }
+    }
+
+    return (dispatch) => {
+        dispatch(action())
+    }
+}
+
+
+
 // add function for userSave , postLike, ..
