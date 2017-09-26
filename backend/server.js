@@ -325,8 +325,7 @@ function events_list(ws, obj) {
     });
 }
 
-function update_event(ws, obj) { // fix errors
-
+function update_event(ws, obj) { 
     const event_id = obj.event_id;
     const participant_id = obj.participant_id;
     const participantsRelation = {
@@ -334,38 +333,19 @@ function update_event(ws, obj) { // fix errors
         select: ['name', 'avatar', 'likes'],
         model: 'Person',
     };
-
     Event.find().populate(participantsRelation).exec( function(err, events) {  
         if (err) {
             console.log(err);
         }
-
         let event = _.find(events, function(obj) { return obj._id == event_id })
-
-        if (event.participant_ids.includes(participant_id)) {
-            console.log('if: ', event)
-            // res.send(event); 
-        } else {
-            event.participant_ids.push(participant_id);
-            event.participants.push(participant_id);
-            event.save(function (err, updatedEvent) {
-
-                // console.log('save: ', updatedEvent)
-                // if (err) {
-                //     console.log(err);
-                // }
-                // _.remove(events, { '_id': event_id});
-                ws.send(JSON.stringify({ 
-                    type: "EVENTS_LIST", 
-                    events: JSON.stringify(events)
-                }));
-                    // [
-                        // ...events,
-                        // updatedEvent
-                    // ]
-               
-            });
-        }
+        event.participant_ids.push(participant_id);
+        event.participants.push(participant_id);
+        event.save(function (err, updatedEvent) {
+            ws.send(JSON.stringify({ 
+                type: "EVENTS_LIST", 
+                events: JSON.stringify(events)
+            })); 
+        });
     });
 }
 
