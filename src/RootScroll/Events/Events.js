@@ -39,8 +39,7 @@ export default class Events extends Component {
     this.state = {
       popupIsOpen: false,
       selectedIndex: 1,
-      chosenTable: null,     
-      // events: props.events // added
+      chosenTable: null
     };
   }
 
@@ -110,62 +109,16 @@ export default class Events extends Component {
     });
   }
 
-  //////////////////// move to scrolltab , then redux
-  
-  // onOpenConnection = () => {
-  //   console.log(' - onopen - ');
-  // }
-
-  // onMessageRecieved = async (e) => {
-  //   console.log(e.data);
-    // var obj = JSON.parse(e.data); 
-    
-    // if (obj.type == "event_decision") {
-    //   let updatedEvent = JSON.parse(obj.data)
-    //   let eventsFromState = this.state.events;
-    //   _.remove(eventsFromState, { '_id': updatedEvent._id }); 
-    //   eventsFromState.push(updatedEvent); // add order
-
-    //   console.log('1) eventsFromState: ', eventsFromState) 
-
-    //   this.setState({
-    //     events: eventsFromState
-    //   });
-    // }
-
-  // };
-  
-  // onError = (e) => {
-  //   console.log(e.message);
-  // };
-  
-  // onClose = (e) => {
-  //   console.log(e.code, e.reason);
-  // };
-
   componentWillMount() { 
-    console.log('>>>>>>>>>>>>>>>> componentWillMount >>>>>>>>>>>>>>>>>>>')
     this.props.refresh();
-   
-
-  //   this.ws = new WebSocket('ws://192.168.1.33:3000'); 
-  //   this.ws.onopen = this.onOpenConnection;
-  //   this.ws.onmessage = this.onMessageRecieved;
-  //   this.ws.onerror = this.onError;
-  //   this.ws.onclose = this.onClose;
   }
 
 
+  
+
   render() {
 
-    // console.log(this.props)
-    // console.log(this.state)
-
     const { events, loading, refresh } = this.props;  
-
-    
-    // this.state.
-    
     const { user } =  this.props;
     return (
       <View style={styles.container}>
@@ -249,15 +202,9 @@ export default class Events extends Component {
 }
 
 const styles = StyleSheet.create({
-
   tabStyle: {
-    // paddingVertical: 5,
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     borderColor: '#3f88fb',
-    // borderWidth: 1,
-    // backgroundColor: 'white',
+    
   },
   activeTabStyle: {
       backgroundColor: '#3f88fb'
@@ -265,8 +212,6 @@ const styles = StyleSheet.create({
   tabTextStyle: {
       color: '#3f88fb'
   },
-
-  // header styles
   gradient: {
     width: 400,
     height: 200,

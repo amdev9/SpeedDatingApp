@@ -14,13 +14,8 @@ import Profile from './Profile';
 import Events from './Events/Events';
 import Mymatches from './MymatchesScreen';
 
-
-// import { createStore, applyMiddleware } from 'redux';
+ 
 import { Provider } from 'react-redux';
-// import { apiMiddleware, reducer } from '../helpers/redux';
-// const store = createStore(reducer, {}, applyMiddleware(apiMiddleware));
-// store.dispatch({type: 'GET_EVENT_DATA'});
-
 import { fetchEvents } from '../helpers/actions';
 import configureStore from '../helpers/store';
 const store = configureStore({})
@@ -31,7 +26,10 @@ const action = () => {
     url: 'ws://192.168.1.33:3000'
   }
 }
+
 store.dispatch(action());
+
+// store.dispatch(fetchEvents());
 
 
 const USER_KEY = "auth-demo-key";
@@ -46,9 +44,6 @@ export default class ScrollTab extends Component {
   }
 
   componentWillMount() { 
-
-
-    console.log('componentWillMount ScrollTab')
     AsyncStorage.getItem(USER_KEY).then((user) => {
       this.setState({
         isLoading: false,
@@ -63,14 +58,7 @@ export default class ScrollTab extends Component {
      } 
   };
 
-  render() { // make rerender 
-
-    // const { paramm } = this.props;
-  
-//    const { user } = this.props;
-    // const user  = this.props.screenProps
-    // fetch user: https://stackoverflow.com/questions/33553112/react-native-asyncstorage-fetches-data-after-rendering
-    
+  render() {  
     if (this.state.isLoading) {
       return <ActivityIndicator
         animating={true} // loading
@@ -78,8 +66,7 @@ export default class ScrollTab extends Component {
         size="large"
       />
     }
-    // this is the content you want to show after the promise has resolved
-
+    
     return (
       <Provider store={store}> 
         <ScrollableTabView
@@ -110,8 +97,8 @@ export default class ScrollTab extends Component {
 const styles = StyleSheet.create({
   loader: {
     flex: 1,
-    alignItems: 'center',     // center horizontally
-    justifyContent: 'center', // center vertically
+    alignItems: 'center',     
+    justifyContent: 'center', 
     backgroundColor: 'white'
   }
 });
