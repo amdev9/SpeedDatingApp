@@ -9,6 +9,8 @@ import {
 
 import { StackNavigator } from 'react-navigation';
 
+import PushNotification from 'react-native-push-notification';
+
 import { createRootNavigator } from "./helpers/router";
 import { isSignedIn } from "./helpers/auth";
 
@@ -38,6 +40,20 @@ export default class App extends Component {
       checkedSignIn: false
     };
   }
+
+
+  componentDidMount() {
+    PushNotification.configure({
+        onRegister: function(token) {
+            console.log( 'TOKEN:', token );
+        },
+        onNotification: function(notification) {
+            console.log( 'NOTIFICATION:', notification );
+        },
+    });
+  }
+
+  
   componentWillMount() {
     console.log('componentWillMount')
     isSignedIn()

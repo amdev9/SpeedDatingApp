@@ -7,6 +7,7 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+#import "RCTPushNotificationManager.h"
 #import "AppDelegate.h"
 
 #import <React/RCTLinkingManager.h> // Add this
@@ -36,17 +37,6 @@
 {
   NSURL *jsCodeLocation;
   
-  //
-//  for (NSString* family in [UIFont familyNames])
-//  {
-//    NSLog(@"%@", family);
-//    for (NSString* name in [UIFont fontNamesForFamilyName: family])
-//    {
-//      NSLog(@" %@", name);
-//    }
-//  }
-  //
-
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
@@ -61,6 +51,27 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+// Required to register for notifications
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+  [RCTPushNotificationManager didRegisterUserNotificationSettings:notificationSettings];
+}
+// Required for the register event.
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+  [RCTPushNotificationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+// Required for the notification event.
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification
+{
+  [RCTPushNotificationManager didReceiveRemoteNotification:notification];
+}
+// Required for the localNotification event.
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+  [RCTPushNotificationManager didReceiveLocalNotification:notification];
 }
 
 @end

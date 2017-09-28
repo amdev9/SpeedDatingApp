@@ -41,6 +41,7 @@
 		E971C0A438C04B918E75CEDB /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E85CDDDBAC2B4C87BAE92CF9 /* Entypo.ttf */; };
 		FA8838301F3EBC5300E899F1 /* YandexPay.m in Sources */ = {isa = PBXBuildFile; fileRef = FA88382F1F3EBC5300E899F1 /* YandexPay.m */; };
 		FA92AE781F3000D900B1B1DA /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA92AE771F30007800B1B1DA /* libRCTCameraRoll.a */; };
+		FA944A401F7D042C00C45642 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA944A3D1F7D03F400C45642 /* libRCTPushNotification.a */; };
 		FAA638C11F68C1E10095D339 /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAA638C01F68C1E10095D339 /* ProximaNova-Semibold.ttf */; };
 		FF8E11BB735D40BBB88CA845 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF6D61D67C48F780B346A0 /* libRNFetchBlob.a */; };
 /* End PBXBuildFile section */
@@ -284,6 +285,20 @@
 			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
 			remoteInfo = RCTCameraRoll;
 		};
+		FA944A3C1F7D03F400C45642 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA944A371F7D03F400C45642 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
+		FA944A3E1F7D03F400C45642 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA944A371F7D03F400C45642 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
+			remoteInfo = "RCTPushNotification-tvOS";
+		};
 		FAC257C91F68E38B00FF5A64 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 69E16283A1D54F3FA97B8E6E /* FastImage.xcodeproj */;
@@ -342,11 +357,13 @@
 		E37C17B266304816BFA2C880 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		E85CDDDBAC2B4C87BAE92CF9 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		EF259882654D4D4E912C9C0C /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		FA8766AA1F7A7B2A0099015D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = OAuthLogin/Assets.xcassets; sourceTree = "<group>"; };
-		FA8767221F7A80220099015D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = OAuthLogin/Assets.xcassets; sourceTree = "<group>"; };
 		FA88382E1F3EBC5300E899F1 /* YandexPay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YandexPay.h; sourceTree = "<group>"; };
 		FA88382F1F3EBC5300E899F1 /* YandexPay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YandexPay.m; sourceTree = "<group>"; };
 		FA92AE721F30007800B1B1DA /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		FA944A351F7D01F300C45642 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = OAuthLogin/Images.xcassets; sourceTree = "<group>"; };
+		FA944A361F7D02B400C45642 /* OAuthLogin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = OAuthLogin.entitlements; path = OAuthLogin/OAuthLogin.entitlements; sourceTree = "<group>"; };
+		FA944A371F7D03F400C45642 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		FA944A411F7D0ACD00C45642 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = OAuthLogin/Images.xcassets; sourceTree = "<group>"; };
 		FAA638C01F68C1E10095D339 /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
 		FE13A27E01694416A02C3C6C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -356,6 +373,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA944A401F7D042C00C45642 /* libRCTPushNotification.a in Frameworks */,
 				FA92AE781F3000D900B1B1DA /* libRCTCameraRoll.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
@@ -462,7 +480,8 @@
 		13B07FAE1A68108700A75B9A /* OAuthLogin */ = {
 			isa = PBXGroup;
 			children = (
-				FA8767221F7A80220099015D /* Assets.xcassets */,
+				FA944A361F7D02B400C45642 /* OAuthLogin.entitlements */,
+				FA944A351F7D01F300C45642 /* Images.xcassets */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -493,7 +512,7 @@
 		32C008A284A24DD49E079DBF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FA8766AA1F7A7B2A0099015D /* Assets.xcassets */,
+				FA944A411F7D0ACD00C45642 /* Images.xcassets */,
 				E85CDDDBAC2B4C87BAE92CF9 /* Entypo.ttf */,
 				A9178EC16B3F4F81824F1138 /* EvilIcons.ttf */,
 				FE13A27E01694416A02C3C6C /* FontAwesome.ttf */,
@@ -538,6 +557,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				FA944A371F7D03F400C45642 /* RCTPushNotification.xcodeproj */,
 				FA92AE721F30007800B1B1DA /* RCTCameraRoll.xcodeproj */,
 				B55ECB891EBA21AB007B8AA4 /* RCTLinking.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -684,6 +704,15 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		FA944A381F7D03F400C45642 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA944A3D1F7D03F400C45642 /* libRCTPushNotification.a */,
+				FA944A3F1F7D03F400C45642 /* libRCTPushNotification-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FAA6389B1F68B05B0095D339 /* fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +764,11 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = CH7JN35YKR;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -793,6 +827,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = FA944A381F7D03F400C45642 /* Products */;
+					ProjectRef = FA944A371F7D03F400C45642 /* RCTPushNotification.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1077,6 +1115,20 @@
 			remoteRef = FA92AE761F30007800B1B1DA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		FA944A3D1F7D03F400C45642 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = FA944A3C1F7D03F400C45642 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FA944A3F1F7D03F400C45642 /* libRCTPushNotification-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTPushNotification-tvOS.a";
+			remoteRef = FA944A3E1F7D03F400C45642 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		FAC257CA1F68E38B00FF5A64 /* libFastImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1212,6 +1264,7 @@
 			baseConfigurationReference = 0F71EB77830B56CDA65DEBC5 /* Pods-OAuthLogin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OAuthLogin/OAuthLogin.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = CH7JN35YKR;
@@ -1223,6 +1276,7 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 				);
 				INFOPLIST_FILE = OAuthLogin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1231,7 +1285,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.speeddate.TestDeploy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speeddate.TestDeployNew;
 				PRODUCT_NAME = OAuthLogin;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1242,6 +1296,7 @@
 			baseConfigurationReference = 7BF5F68E130B66BEFC2CBD0D /* Pods-OAuthLogin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = OAuthLogin/OAuthLogin.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CH7JN35YKR;
 				HEADER_SEARCH_PATHS = (
@@ -1252,6 +1307,7 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 				);
 				INFOPLIST_FILE = OAuthLogin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1260,7 +1316,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.speeddate.TestDeploy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.speeddate.TestDeployNew;
 				PRODUCT_NAME = OAuthLogin;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

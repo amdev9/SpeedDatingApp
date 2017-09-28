@@ -113,11 +113,7 @@ export default class Events extends Component {
     this.props.refresh();
   }
 
-
-  
-
   render() {
-
     const { events, loading, refresh } = this.props;  
     const { user } =  this.props;
     return (
@@ -152,22 +148,20 @@ export default class Events extends Component {
             >
               {events.map((event, index) => {
                 console.log(index)
-                if (this.state.selectedIndex == 0) {
-                  if (event.participant_ids.includes(user._id)  ) { //(  typeof event.participants !== 'undefined' && event.participants.length > 0 &&  _.map(event.participants, '_id').indexOf(person._id) > -1 ) { 
+                if (this.state.selectedIndex == 0) { // if no my events - show message
+                  if (event.participant_ids.includes(user._id)  ) {  
                     return <EventPoster
-                      event={event} // comment it & pass events - connect
+                      event={event} 
                       person={user}
                       onOpen={this.openEvent}
-                      //index={index}
                       key={index}
                     /> 
                   }  
                 } else {
                   return <EventPoster
-                    event={event} // comment it & pass events - connect
+                    event={event} 
                     person={user}
                     onOpen={this.openEvent}
-                   // index={index}
                     key={index}
                   /> 
                 }

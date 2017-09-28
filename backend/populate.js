@@ -13,6 +13,13 @@ mongoose.connect('mongodb://localhost/events', {
   useMongoClient: true,
   /* other options */
 });
+
+
+// mongoose.connection.collections['events'].drop( function(err) {
+//   console.log('collection dropped');
+// });
+
+
  
 const organizer = new Person ({
   oauth_id: '12312312113',
@@ -50,7 +57,7 @@ organizer.save(function (err) {
 
   event.save(function (err) {
     if (err) return handleError(err);
-    // thats it!
+    console.log('event1 saved')
   });
 //////////
   var event2 = new Event({
@@ -73,7 +80,7 @@ organizer.save(function (err) {
 
   event2.save(function (err) {
     if (err) return handleError(err);
-    // thats it!
+    console.log('event2 saved')
   });
 
 
