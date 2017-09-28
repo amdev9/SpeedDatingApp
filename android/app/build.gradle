@@ -132,9 +132,9 @@ android {
 configurations.all { resolutionStrategy.force 'com.squareup.okhttp3:okhttp:3.4.1' }
 
 dependencies {
+    compile project(':react-native-image-crop-picker')
     compile project(':react-native-fast-image')
     compile project(':library')
-    compile project(':react-native-image-crop-picker')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-vector-icons')
