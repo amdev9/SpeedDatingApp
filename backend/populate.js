@@ -20,7 +20,6 @@ mongoose.connect('mongodb://localhost/events', {
 // });
 
 
- 
 const organizer = new Person ({
   oauth_id: '12312312113',
   name: 'testname',
@@ -69,7 +68,7 @@ organizer.save(function (err) {
     cost_men: 2000,
     cost_women: 600,
     date : Date.now(),
-    show_manage: false,
+    show_manage: true,
     manage_ids: manage_ids,
     participant_ids: [],
     participants: [],

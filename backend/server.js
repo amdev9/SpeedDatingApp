@@ -10,6 +10,8 @@ import WebSocket from 'ws';
 import path from 'path';
 import _ from 'lodash';
 
+import utils from './utils';
+
 import {
   facebookLogin,
   facebookMiddleware,
@@ -17,7 +19,6 @@ import {
   vkontakteMiddleware,
   oauthCallback,
 } from './controllers/auth';
-
 
 import Event from './models/event';
 import Person from './models/person';
@@ -32,6 +33,7 @@ mongoose.connect('mongodb://localhost/events', {
 });
 
 const app = express();
+ 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -42,13 +44,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Set up auth routes
 app.get('/auth/facebook', facebookLogin);
-
 app.get('/auth/vkontakte', vkontakteLogin);
-
 app.get('/auth/facebook/callback', facebookMiddleware, oauthCallback);
-
 app.get('/auth/vkontakte/callback', vkontakteMiddleware, oauthCallback);
 
 app.get('/logout', function(req, res) {
@@ -68,6 +66,8 @@ app.use('/v1', router);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
+app.use('/admin', utils.basicAuth('ratm', 'qwe123qwe§§'));
 app.get('/admin', async (req, res) => {
     // add auth with login and password
     var events = await Event.find().exec();
