@@ -8,9 +8,9 @@ import Person from '../models/person';
 // Import Facebook and Google OAuth apps configs
 import { facebook, google, vkontakte } from '../config';
 
-////
+
 import request from 'request-promise';  
-////
+
 
 
 // Transform Facebook profile because Facebook and Google profile objects look different
@@ -168,27 +168,3 @@ export const oauthCallback = async (req, res) => {
 };
 
 
-// export const update_user = async (req, res) => {
- 
-//   const { user } = req.body;
-//   Person.findById(user._id, function (err, person) {
-//     if (err) {
-//       console.log(err);
-//     }
-    
-//     person.current_work = user.current_work;
-//     person.about = user.about;
-//     person.age = user.age;
-//     person.avatar = user.avatar;
-    
-//     person.save(function (err, updatedPerson) {
-//       if (err) {
-//         console.log(err);
-//       }
-//       res.send(updatedPerson);
-//     });
-//   });
-
-
-
-// }

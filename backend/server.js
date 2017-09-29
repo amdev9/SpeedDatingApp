@@ -17,7 +17,7 @@ import {
   vkontakteMiddleware,
   oauthCallback,
 } from './controllers/auth';
-import { list } from './controllers/events';
+
 
 import Event from './models/event';
 import Person from './models/person';
