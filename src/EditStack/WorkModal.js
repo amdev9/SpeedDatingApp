@@ -14,6 +14,19 @@ import { defaultStyles } from '../styles';
 import { put, get } from '../helpers/api';
 const { width,height } = Dimensions.get('window')
 
+
+import { connect } from 'react-redux';
+import { updateUser } from '../helpers/actions';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    update_user: (user) => dispatch(updateUser(user)), 
+  }),
+)
 export default class WorkModal extends Component {
   constructor(props) {
     super(props);
@@ -28,11 +41,12 @@ export default class WorkModal extends Component {
     const { user } = this.props.navigation.state.params;
     user.current_work = this.state.current_work;
     try {
-      const response = await put('user', {
-        user: user
-      });
-      const json = await response.json(); 
-      console.log( JSON.stringify(json) );
+      this.props.update_user(user);
+      // const response = await put('user', {
+      //   user: user
+      // });
+      // const json = await response.json(); 
+      // console.log( JSON.stringify(json) );
     }
     catch (error) {
       alert(error);

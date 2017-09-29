@@ -53,8 +53,8 @@ router.post('/', upload.any(), function(req, res, next) {
 // router.route('/events').put(create);
 //   .get(list)  // 
 
-router.route('/events/:eventId/manage')
-  .put(manage); // стать организатором
+// router.route('/events/:eventId/manage')
+//   .put(manage); // стать организатором
 
 // router.route('/events/:eventId/:decision/:manageQueueId')
 //   .post(approve);
@@ -63,8 +63,8 @@ router.route('/events/:eventId/manage')
 // router.route('/likes')
 //   .put(post);
 
-router.route('/user') // edit screen - update user info
-  .put(update_user);
+// router.route('/user') // edit screen - update user info
+//   .put(update_user);
 
 export default router;
 

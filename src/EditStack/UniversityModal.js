@@ -15,6 +15,19 @@ import { defaultStyles } from '../styles';
 import { put, get } from '../helpers/api';
 const { width, height } = Dimensions.get('window')
 
+
+import { connect } from 'react-redux';
+import { updateUser } from '../helpers/actions';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    update_user: (user) => dispatch(updateUser(user)), 
+  }),
+)
 export default class UniversityModal extends Component {
   constructor(props) {
     super(props);
@@ -29,11 +42,14 @@ export default class UniversityModal extends Component {
     const { user } = this.props.navigation.state.params;
     user.current_university = this.state.current_university;
     try {
-      const response = await put('user', {
-        user: user
-      }); 
-      const json = await response.json(); 
-      console.log( JSON.stringify(json) );
+
+      this.props.update_user(user);
+    
+      // const response = await put('user', {
+      //   user: user
+      // }); 
+      // const json = await response.json(); 
+      // console.log( JSON.stringify(json) );
     }
     catch (error) {
       alert(error);

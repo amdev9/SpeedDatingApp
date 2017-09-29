@@ -103,7 +103,6 @@ app.get('/images/:id', function(req, res) {
 const server = http.createServer(app);
 export const wss = new WebSocket.Server({ server });
 
-
 function start(ws, obj) {
     CLIENTS_QUEUE = [];
     var counter = 0;
@@ -266,10 +265,7 @@ function calculate(ws, obj) {
     });
 }
 
-
-
 function events_decision(ws, obj) {
-
     const eventId = obj.eventId;
     const decision = obj.decision;
     const manageQueueId = obj.manageQueueId;
@@ -324,42 +320,10 @@ function events_list(ws, obj) {
     });
 }
 
-function update_event(ws, obj) { 
-    const event_id = obj.event_id;
-    const participant_id = obj.participant_id;
-    const participantsRelation = {
-        path: 'participants', 
-        select: ['name', 'avatar', 'likes'],
-        model: 'Person',
-    };
-    Event.find().populate(participantsRelation).exec( function(err, events) {  
-        if (err) {
-            console.log(err);
-        }
-        let event = _.find(events, function(obj) { return obj._id == event_id })
-        event.participant_ids.push(participant_id);
-        event.participants.push(participant_id);
-        event.save(function (err, updatedEvent) {
-            ws.send(JSON.stringify({ 
-                type: "EVENTS_LIST", 
-                events: JSON.stringify(events)
-            })); 
-        });
-    });
-}
-
-
 function likes(ws, obj) {
-// export const post = async (req, res, next) => {
-    // const { likes, person_id, event_id } = req.body;  
-    // console.log(person_id, likes);
-
-
     const likes = obj.likes;
     const person_id = obj.person_id;
     const event_id = obj.event_id;
-
-
     Event.findById(event_id, function (err, event) {
       if (err) {
         console.log(err);
@@ -392,11 +356,84 @@ function likes(ws, obj) {
         
         // res.send(updatedEvent);
       });
-    });
-  
+    });  
 }
 
-  
+function update_user(ws, obj) {
+// export const update_user = async (req, res) => {
+
+    //  const { user } = req.body;
+
+    const user = obj.user;
+    
+     Person.findById(user._id, function (err, person) {
+       if (err) {
+         console.log(err);
+       }
+       
+       person.current_work = user.current_work;
+       person.about = user.about;
+       person.age = user.age;
+       person.avatar = user.avatar;
+       
+       person.save(function (err, updatedPerson) {
+         if (err) {
+           console.log(err);
+         }
+        //  res.send(updatedPerson);
+       });
+     });
+}
+
+function update_event(ws, obj) { 
+    const event_id = obj.event_id;
+    const participant_id = obj.participant_id;
+    const participantsRelation = {
+        path: 'participants', 
+        select: ['name', 'avatar', 'likes'],
+        model: 'Person',
+    };
+    Event.find().populate(participantsRelation).exec( function(err, events) {  
+        if (err) {
+            console.log(err);
+        }
+        let event = _.find(events, function(obj) { return obj._id == event_id })
+        event.participant_ids.push(participant_id);
+        event.participants.push(participant_id);
+        event.save(function (err, updatedEvent) {
+            ws.send(JSON.stringify({ 
+                type: "EVENTS_LIST", 
+                events: JSON.stringify(events)
+            })); 
+        });
+    });
+}
+
+function manage_event(ws, obj) {  
+    const person_id = obj.person_id;
+    const event_id = obj.event_id;
+    const participantsRelation = {
+        path: 'participants', 
+        select: ['name', 'avatar', 'likes'],
+        model: 'Person',
+    };
+    Event.find().populate(participantsRelation).exec( function(err, events) {  
+        if (err) {
+            console.log(err);
+        }
+        let event = _.find(events, function(obj) { return obj._id == event_id });
+        event.manage_queue_ids.push(person_id); 
+        event.save(function (err, updatedEvent) {
+            if (err) {
+            console.log(err);
+            }
+            ws.send(JSON.stringify({ 
+                type: "EVENTS_LIST", 
+                events: JSON.stringify(events)
+            })); 
+        });
+    });
+}
 
 function mainLogic(ws, obj) { 
   switch(obj.command) {
@@ -408,7 +445,9 @@ function mainLogic(ws, obj) {
       case 'events_decision': events_decision(ws, obj); break;
       case 'events_list': events_list(ws, obj); break;
       case 'update_event': update_event(ws, obj); break;
+      case 'manage_event': manage_event(ws, obj); break;
       case 'likes': likes(ws, obj); break;
+      case 'update_user': update_user(ws, obj); break;
       default: 
         console.log('command not found');
   }
@@ -435,8 +474,6 @@ wss.on('connection', function connection(ws, req) {
   });
 });
 
-
-// Launch the server on the port 3000
 server.listen(3000, () => {
   const { address, port } = server.address();
   console.log(`Listening at http://${address}:${port}`);

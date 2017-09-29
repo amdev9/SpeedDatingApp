@@ -106,30 +106,30 @@ const participantsRelation = {
 // };
 
 
-export const manage = async (req, res, next) => {
-  const {  person_id } = req.body; 
-  // form details
+// export const manage = async (req, res, next) => {
+//   const {  person_id } = req.body; 
+//   // form details
 
-  Event.findById(req.params.eventId, function (err, event) {
-    if (err) {
-      console.log(err);
-    }
-    event.manage_queue_ids.push(person_id); 
-    event.save(function (err, updatedEvent) {
-      if (err) {
-        console.log(err);
-      }
-      // make broadcast request // figure out
-      // var likes_post = JSON.stringify({
-      //   type: "likes_post",
-      //   data: JSON.stringify(obj)
-      // });
-      // wss.broadcast(likes_post);
+//   Event.findById(req.params.eventId, function (err, event) {
+//     if (err) {
+//       console.log(err);
+//     }
+//     event.manage_queue_ids.push(person_id); 
+//     event.save(function (err, updatedEvent) {
+//       if (err) {
+//         console.log(err);
+//       }
+//       // make broadcast request // figure out
+//       // var likes_post = JSON.stringify({
+//       //   type: "likes_post",
+//       //   data: JSON.stringify(obj)
+//       // });
+//       // wss.broadcast(likes_post);
       
-      res.send(updatedEvent);
-    });
-  });
-};
+//       res.send(updatedEvent);
+//     });
+//   });
+// };
 
 
 // export const approve = async (req, res, next) => { 

@@ -35,12 +35,21 @@ const { width,height } = Dimensions.get('window')
 const AVATAR_URL = 'http://192.168.1.33:3000';
 const USER_KEY = "auth-demo-key";
 
-const URL = Platform.OS === 'android'
-? 'http://10.0.3.2:3000' // works for Genymotion
-: 'http://192.168.1.33:3000';
-// : 'http://localhost:3000';
+const URL = 'http://192.168.1.33:3000';
 
 
+import { connect } from 'react-redux';
+import { updateUser } from '../helpers/actions';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    update_user: (user) => dispatch(updateUser(user)), 
+  }),
+)
 class Edit extends React.Component {
  
   constructor(props) {
@@ -81,11 +90,14 @@ class Edit extends React.Component {
     user.current_university = this.state.current_university;
     
     try {
-      const response = await put('user', {
-        user: user
-      }); 
-      const json = await response.json(); 
-      // console.log( JSON.stringify(json) );
+     
+      this.props.update_user(user);
+      
+      // const response = await put('user', {
+      //   user: user
+      // }); 
+      // const json = await response.json(); 
+      // // console.log( JSON.stringify(json) );
       
       AsyncStorage.setItem(USER_KEY, JSON.stringify(user), () => {
         navigate('ScrollTab');

@@ -15,17 +15,35 @@ import {
 import { defaultStyles } from '../styles';
 import { put, get } from '../helpers/api';
 
+
+
+import { connect } from 'react-redux';
+import { manageEvent } from '../helpers/actions';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    update_user: (person_id, event_id) => dispatch(manageEvent(person_id, event_id)), 
+  }),
+)
 export default class ManagePermissionScreen extends Component {
     
   onAttend = async () => {
     const { person, participants, event } = this.props.navigation.state.params;
     try {
       
-      const response = await put('events/'+ event._id + '/manage', {
-        person_id: person._id
-      }); 
-      const json = await response.json();
-      console.log(json);
+      this.props.update_user(person._id, event._id)
+      // const response = await put('events/'+ event._id + '/manage', {
+      //   person_id: person._id
+      // }); 
+      // const json = await response.json();
+      // console.log(json);
+
+
+
       this.props.navigation.goBack(); 
       // refresh(); // add reload here <- refresh func
 

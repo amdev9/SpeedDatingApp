@@ -168,28 +168,27 @@ export const oauthCallback = async (req, res) => {
 };
 
 
-export const update_user = async (req, res) => {
+// export const update_user = async (req, res) => {
  
-
-  const { user } = req.body;
-  Person.findById(user._id, function (err, person) {
-    if (err) {
-      console.log(err);
-    }
+//   const { user } = req.body;
+//   Person.findById(user._id, function (err, person) {
+//     if (err) {
+//       console.log(err);
+//     }
     
-    person.current_work = user.current_work;
-    person.about = user.about;
-    person.age = user.age;
-    person.avatar = user.avatar;
+//     person.current_work = user.current_work;
+//     person.about = user.about;
+//     person.age = user.age;
+//     person.avatar = user.avatar;
     
-    person.save(function (err, updatedPerson) {
-      if (err) {
-        console.log(err);
-      }
-      res.send(updatedPerson);
-    });
-  });
+//     person.save(function (err, updatedPerson) {
+//       if (err) {
+//         console.log(err);
+//       }
+//       res.send(updatedPerson);
+//     });
+//   });
 
 
 
-}
+// }

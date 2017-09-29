@@ -16,6 +16,20 @@ import { put, get } from '../helpers/api';
 
 
 const { width,height } = Dimensions.get('window')
+
+
+import { connect } from 'react-redux';
+import { updateUser } from '../helpers/actions';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    update_user: (user) => dispatch(updateUser(user)), 
+  }),
+)
 export default class GenderModal extends Component {
   //  1 - женский, 2 - мужской, 0 - без указания пола. 
   constructor(props) {
@@ -30,11 +44,13 @@ export default class GenderModal extends Component {
     const { user } = this.props.navigation.state.params;
     user.gender = this.state.gender;
     try {
-      const response = await put('user', {
-        user: user
-      }); 
-      const json = await response.json(); 
-      console.log( JSON.stringify(json) );
+      this.props.update_user(user);
+      
+      // const response = await put('user', {
+      //   user: user
+      // }); 
+      // const json = await response.json(); 
+      // console.log( JSON.stringify(json) );
     }
     catch (error) {
       alert(error);

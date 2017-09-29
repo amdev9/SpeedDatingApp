@@ -1,4 +1,4 @@
-import { WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPEN, WEBSOCKET_CLOSED, WEBSOCKET_MESSAGE } from './constants';
+import { WEBSOCKET_SEND, WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPEN, WEBSOCKET_CLOSED, WEBSOCKET_MESSAGE } from './constants';
 
 
 export default actions = {
@@ -87,7 +87,7 @@ export function fetchEvents() { // fetchEvents
 export function updateEvent(event_id, participant_id) { 
     const action = () => {
         return {
-          type: 'WEBSOCKET:SEND',
+          type: WEBSOCKET_SEND,
           command: 'update_event',
           event_id: event_id,
           participant_id: participant_id
@@ -99,14 +99,37 @@ export function updateEvent(event_id, participant_id) {
     }
 }
 
+export function manageEvent(person_id, event_id) { 
+    const action = () => {
+        return {
+          type: WEBSOCKET_SEND,
+          command: 'manage_event',
+          person_id: person_id,
+          event_id: event_id
+        }
+    }
+    return (dispatch) => { dispatch(action()) }
+}
+
 export function likesFunc(person_id, event_id, likes) { 
     const action = () => {
         return {
-          type: 'WEBSOCKET:SEND',
+          type: WEBSOCKET_SEND,
           command: 'likes',
           person_id: person_id,
           event_id: event_id,
           likes: likes
+        }
+    }
+    return (dispatch) => { dispatch(action()) }
+}
+
+export function updateUser(user) { 
+    const action = () => {
+        return {
+          type: WEBSOCKET_SEND,
+          command: 'update_user',
+          user: user
         }
     }
     return (dispatch) => { dispatch(action()) }
