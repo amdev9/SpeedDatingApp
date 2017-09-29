@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -684,7 +685,6 @@
 				76FF6D61D67C48F780B346A0 /* libRNFetchBlob.a */,
 				456E4B10066F484B89061574 /* libRNUploader.a */,
 				1B34A19B8E7943A3A7DC2DD8 /* libBVLinearGradient.a */,
-				D28BAC77A5AE46F3BD47854C /* libFastImage.a */,
 				7715C22D56E64BE7B2017CE5 /* libimageCropPicker.a */,
 			);
 			name = "Recovered References";
@@ -1247,9 +1247,7 @@
 				);
 				INFOPLIST_FILE = OAuthLogin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1280,9 +1278,7 @@
 				);
 				INFOPLIST_FILE = OAuthLogin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
