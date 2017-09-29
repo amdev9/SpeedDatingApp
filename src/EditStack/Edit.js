@@ -32,10 +32,11 @@ var RNUploader = NativeModules.RNUploader;
 let styles
 const { width,height } = Dimensions.get('window')
 
-const AVATAR_URL = 'http://192.168.1.33:3000';
+
 const USER_KEY = "auth-demo-key";
 
-const URL = 'http://192.168.1.33:3000';
+
+import { URL } from "../helpers/constants";
 
 
 import { connect } from 'react-redux';
@@ -139,7 +140,7 @@ class Edit extends React.Component {
       console.log('----------- _picker');
       
       let opts = {
-        url: `${AVATAR_URL}/v1/`,
+        url: `${URL}/v1/`,
         files: [{
           name: image.filename,//'file',
           filename: _generateUUID() + '.png',
@@ -160,7 +161,7 @@ class Edit extends React.Component {
         //console.log('Upload complete with status ' + status);
         //console.log(responseString);
         this.setState({ 
-          avatar: `${AVATAR_URL}/images/${JSON.parse(responseString).images}` 
+          avatar: `${URL}/images/${JSON.parse(responseString).images}` 
         });
         // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
         

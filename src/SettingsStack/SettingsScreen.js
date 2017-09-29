@@ -26,11 +26,7 @@ import { defaultStyles } from '../styles';
 import { onSignOut } from "../helpers/auth";
 import { ResetToSignedOut } from "../helpers/router";
 
-
-// const URL = 'http://localhost:3000';
-const URL = Platform.OS === 'android'
-? 'http://10.0.3.2:3000' // works for Genymotion
-: 'http://192.168.1.33:3000';
+import { URL } from "../helpers/constants";
 
 
 class Settings extends Component {

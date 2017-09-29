@@ -15,6 +15,8 @@ import _ from 'lodash';
 
 import { defaultStyles } from '../styles';
 
+import { WS_URL } from "../helpers/constants";
+
 export default class VotingStatusScreen extends Component {
 
 
@@ -133,7 +135,7 @@ export default class VotingStatusScreen extends Component {
   };
 
   componentWillMount() {
-    this.ws = new WebSocket('ws://192.168.1.33:3000'); // localhost
+    this.ws = new WebSocket(WS_URL);
     this.ws.onopen = this.onOpenConnection;
     this.ws.onmessage = this.onMessageRecieved;
     this.ws.onerror = this.onError;

@@ -17,8 +17,8 @@ import { ResetToSignedIn } from "../helpers/router";
 
 const { width, height } = Dimensions.get('window');
 
-const URL = 'http://192.168.1.33:3000';
 
+import { URL } from "../helpers/constants";
 
 export default class Login extends Component { 
   

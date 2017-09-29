@@ -15,6 +15,9 @@ import { createRootNavigator } from "./helpers/router";
 import { isSignedIn } from "./helpers/auth";
 
 
+import { WS_URL } from "./helpers/constants";
+
+
 import { Provider } from 'react-redux';
 import configureStore from './helpers/store';
 const store = configureStore({})
@@ -22,7 +25,7 @@ const store = configureStore({})
 const action = () => {
   return {
     type: 'WEBSOCKET:CONNECT',
-    url: 'ws://192.168.1.33:3000'
+    url: WS_URL 
   }
 }
 

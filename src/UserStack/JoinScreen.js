@@ -23,6 +23,9 @@ import Participant from '../Participant';
 
 const { width, height } = Dimensions.get('window');
 
+import { WS_URL } from "../helpers/constants";
+
+
 export default class JoinScreen extends Component {
   //   --main ws--
   // [  JoinScreen -> voting screen -> votingpushscreen  ] -> 'confirm' -> empty mymatches (waiting for admin 'done')
@@ -109,7 +112,7 @@ export default class JoinScreen extends Component {
   };
 
   componentWillMount() {
-    this.ws = new WebSocket('ws://192.168.1.33:3000'); // localhost
+    this.ws = new WebSocket(WS_URL);
     this.ws.onopen = this.onOpenConnection;
     this.ws.onmessage = this.onMessageRecieved;
     this.ws.onerror = this.onError;

@@ -19,6 +19,8 @@ import { defaultStyles } from '../styles';
 import Participant from '../Participant';
 import IntervalPopup from './IntervalPopup';
 
+import { WS_URL } from "../helpers/constants";
+
 
 export default class ManageScreen extends Component {
   //   --main ws--
@@ -127,7 +129,7 @@ export default class ManageScreen extends Component {
   };
 
   componentWillMount() {
-    this.ws = new WebSocket('ws://192.168.1.33:3000'); // localhost
+    this.ws = new WebSocket(WS_URL); // localhost
     this.ws.onopen = this.onOpenConnection;
     this.ws.onmessage = this.onMessageRecieved;
     this.ws.onerror = this.onError;
