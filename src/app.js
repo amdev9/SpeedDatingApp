@@ -41,7 +41,6 @@ export default class App extends Component {
     };
   }
 
-
   componentDidMount() {
     PushNotification.configure({
         onRegister: function(token) {
@@ -53,7 +52,6 @@ export default class App extends Component {
     });
   }
 
-  
   componentWillMount() {
     console.log('componentWillMount')
     isSignedIn()

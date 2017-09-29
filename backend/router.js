@@ -60,8 +60,8 @@ router.route('/events/:eventId/manage')
 //   .post(approve);
 
 
-router.route('/likes')
-  .put(post);
+// router.route('/likes')
+//   .put(post);
 
 router.route('/user') // edit screen - update user info
   .put(update_user);

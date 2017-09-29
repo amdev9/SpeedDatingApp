@@ -10,7 +10,6 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 
-
 import Screens from './Screens';
 import { onSignIn } from "../helpers/auth";
 import { ResetToSignedIn } from "../helpers/router";
@@ -18,9 +17,7 @@ import { ResetToSignedIn } from "../helpers/router";
 
 const { width, height } = Dimensions.get('window');
 
-const URL = Platform.OS === 'android'
-? 'http://192.168.1.33:3000' // works for Genymotion
-: 'http://192.168.1.33:3000';
+const URL = 'http://192.168.1.33:3000';
 
 
 export default class Login extends Component { 
@@ -31,7 +28,6 @@ export default class Login extends Component {
     // Launched from an external URL
     Linking.getInitialURL().then((url) => {
       if (url) {
-        
         this.handleOpenURL({ url });
       }
     });
@@ -47,19 +43,8 @@ export default class Login extends Component {
     const [, user_string] = url.match(/user=([^#]+)/);
     // Decode the user string and parse it into JSON
     const user = JSON.parse(decodeURI(user_string));
-    // Call onLoggedIn function of parent component and pass user object
-    // !
-
+  
     onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) // this.props.onLoggedIn(user); 
-    
-    
-    // const { navigate } = this.props.navigation;
-    // navigate('ScrollTab'); //'Profile', { user: user }); // change to ScrollableTabView 
-    // change to state ? login : ScrollTab 
-    // like here: http://rationalappdev.com/implementing-comments-with-react-native-and-nodejs/
-
-
-
 
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
@@ -69,9 +54,6 @@ export default class Login extends Component {
 
   // Handle Login with Facebook button tap
   loginWithFacebook = () => this.openURL(`${URL}/auth/facebook`);
-
-  // Handle Login with Google button tap
-  loginWithGoogle = () => this.openURL(`${URL}/auth/google`);
 
   // Handle Login with Vk button tap
   loginWithVk = () => this.openURL(`${URL}/auth/vkontakte`);
@@ -95,18 +77,12 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         <Screens />
-        {/* <View style={styles.content}>
-          <Text style={styles.header}>
-            Welcome Stranger!
-          </Text>
-          <View style={styles.avatar}>
+        
+        
+        {/* <View style={styles.avatar}>
             <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" />
           </View>
-          <Text style={styles.text}>
-            Please log in to continue {'\n'}
-            to the awesomness
-          </Text>
-        </View> */}
+           */}
 
 
         <View style={styles.contentNew}>
@@ -143,14 +119,7 @@ export default class Login extends Component {
 const iconStyles = {
   borderRadius: 30,
   iconStyle: { paddingVertical: 10 },
-  
-  // marginLeft: 40
-  // alignItems: 'center',
 };
-
- 
-
-
 const styles = StyleSheet.create({
   buttonText: {
     fontFamily: 'System', 

@@ -268,7 +268,6 @@ function calculate(ws, obj) {
 
 
 
-
 function events_decision(ws, obj) {
 
     const eventId = obj.eventId;
@@ -349,6 +348,56 @@ function update_event(ws, obj) {
     });
 }
 
+
+function likes(ws, obj) {
+// export const post = async (req, res, next) => {
+    // const { likes, person_id, event_id } = req.body;  
+    // console.log(person_id, likes);
+
+
+    const likes = obj.likes;
+    const person_id = obj.person_id;
+    const event_id = obj.event_id;
+
+
+    Event.findById(event_id, function (err, event) {
+      if (err) {
+        console.log(err);
+      }
+  
+      // event.likes check if contains
+  
+      var obj = {};
+      obj.person_id = person_id;
+      obj.person_likes = likes;
+  
+      if (event.likes.length > 0) {
+        if ( !_.map(event.likes, 'person_id').includes(person_id) ) {
+          event.likes.push(obj);
+        }
+      } else {
+        event.likes.push(obj);
+      }
+      
+      event.save(function (err, updatedEvent) {
+        if (err) {
+          console.log(err);
+        }
+        // make broadcast request
+        var likes_post = JSON.stringify({
+          type: "likes_post",
+          data: JSON.stringify(obj)
+        });
+        wss.broadcast(likes_post); // fix to send ?
+        
+        // res.send(updatedEvent);
+      });
+    });
+  
+}
+
+  
+
 function mainLogic(ws, obj) { 
   switch(obj.command) {
       case 'start': start(ws, obj); break;
@@ -359,6 +408,7 @@ function mainLogic(ws, obj) {
       case 'events_decision': events_decision(ws, obj); break;
       case 'events_list': events_list(ws, obj); break;
       case 'update_event': update_event(ws, obj); break;
+      case 'likes': likes(ws, obj); break;
       default: 
         console.log('command not found');
   }

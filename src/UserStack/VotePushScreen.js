@@ -17,6 +17,19 @@ import { defaultStyles } from '../styles';
 import Participant from '../Participant';
 import { put, get } from '../helpers/api';
 
+
+import { connect } from 'react-redux';
+import { likesFunc } from '../helpers/actions';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    likesPost: (person_id, event_id, likes) => dispatch(likesFunc(person_id, event_id, likes)), 
+  }),
+)
 export default class VotingPushScreen extends Component {
   // votingpushscreen  -> 'confirm' -> empty mymatches (waiting for admin 'done')
   constructor(props) {
@@ -39,14 +52,19 @@ export default class VotingPushScreen extends Component {
   onConfirm = async () => {
     const { person, participants, event } = this.props.navigation.state.params;
     try {
+     
+      this.props.likesPost(person._id, event._id, this.state.liked);
+     
       // Make API call
-      const response = await put('likes', {
-        person_id: person._id,
-        likes: this.state.liked,
-        event_id: event._id
-      }); 
-      const json = await response.json();
-      console.log(json);
+      // const response = await put('likes', {
+      //   person_id: person._id,
+      //   likes: this.state.liked,
+      //   event_id: event._id
+      // }); 
+      // const json = await response.json();
+      // console.log(json);
+
+
       const { navigate } = this.props.navigation;
       
       

@@ -99,6 +99,16 @@ export function updateEvent(event_id, participant_id) {
     }
 }
 
+export function likesFunc(person_id, event_id, likes) { 
+    const action = () => {
+        return {
+          type: 'WEBSOCKET:SEND',
+          command: 'likes',
+          person_id: person_id,
+          event_id: event_id,
+          likes: likes
+        }
+    }
+    return (dispatch) => { dispatch(action()) }
+}
 
-
-// add function for userSave , postLike, ..

@@ -67,43 +67,43 @@ const participantsRelation = {
 // };
 
   
-export const post = async (req, res, next) => {
-  const { likes, person_id, event_id } = req.body;  
-  // console.log(person_id, likes);
-  Event.findById(event_id, function (err, event) {
-    if (err) {
-      console.log(err);
-    }
+// export const post = async (req, res, next) => {
+//   const { likes, person_id, event_id } = req.body;  
+//   // console.log(person_id, likes);
+//   Event.findById(event_id, function (err, event) {
+//     if (err) {
+//       console.log(err);
+//     }
 
-    // event.likes check if contains
+//     // event.likes check if contains
 
-    var obj = {};
-    obj.person_id = person_id;
-    obj.person_likes = likes;
+//     var obj = {};
+//     obj.person_id = person_id;
+//     obj.person_likes = likes;
 
-    if (event.likes.length > 0) {
-      if ( !_.map(event.likes, 'person_id').includes(person_id) ) {
-        event.likes.push(obj);
-      }
-    } else {
-      event.likes.push(obj);
-    }
+//     if (event.likes.length > 0) {
+//       if ( !_.map(event.likes, 'person_id').includes(person_id) ) {
+//         event.likes.push(obj);
+//       }
+//     } else {
+//       event.likes.push(obj);
+//     }
     
-    event.save(function (err, updatedEvent) {
-      if (err) {
-        console.log(err);
-      }
-      // make broadcast request
-      var likes_post = JSON.stringify({
-        type: "likes_post",
-        data: JSON.stringify(obj)
-      });
-      wss.broadcast(likes_post);
+//     event.save(function (err, updatedEvent) {
+//       if (err) {
+//         console.log(err);
+//       }
+//       // make broadcast request
+//       var likes_post = JSON.stringify({
+//         type: "likes_post",
+//         data: JSON.stringify(obj)
+//       });
+//       wss.broadcast(likes_post);
       
-      res.send(updatedEvent);
-    });
-  });
-};
+//       res.send(updatedEvent);
+//     });
+//   });
+// };
 
 
 export const manage = async (req, res, next) => {

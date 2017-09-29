@@ -33,7 +33,6 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new ReactNativePushNotificationPackage(),
             new PickerPackage(),
-            //new FastImageViewPackage(),
               new LinearGradientPackage(),
                 new RNFetchBlobPackage(),
                   new VectorIconsPackage(),
