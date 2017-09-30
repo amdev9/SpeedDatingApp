@@ -59,7 +59,6 @@ export default class JoinScreen extends Component {
           break;
         }
       }
-
       this.setState({
         participant: participant[this.state.index]
       })

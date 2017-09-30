@@ -29,21 +29,28 @@ const socketMiddleware = (function(){
       case "EVENT_DECISION": 
         store.dispatch(actions.eventDecision(msg));
         break;
-      case "response_queue": 
+      case "RESPONSE_QUEUE": 
+        store.dispatch(actions.responseQueue(msg));
         break;
-      case "connected":
+      case "CONNECTED":
+        store.dispatch(actions.connected(msg));
         break;
-      case "closed":
+      case "CLOSED":
+        store.dispatch(actions.closed(msg));
         break;
-      case "selected":
+      case "SELECTED":
+        store.dispatch(actions.selected(msg))
         break;
       case "calculate": // votingStatusScreen // myMatchScreen // 
         break;
-      case "likes_post":
+      case "LIKES_POST":
+        store.dispatch(actions.likesPost(msg))
         break;
-      case "next":
+      case "NEXT":
+        store.dispatch(actions.next(msg))
         break;
-      case "last":
+      case "LAST":
+        store.dispatch(actions.last(msg))
         break;
 
       default:

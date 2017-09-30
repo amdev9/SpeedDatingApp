@@ -120,11 +120,6 @@ export default class VotingStatusScreen extends Component {
   _calculate = async () => {
     const { event } =  this.props.navigation.state.params;
     this.props.calculate(event._id);
-  //   let json = JSON.stringify({
-  //     command: "calculate",
-  //     event_id: event._id
-  //   });
-  //   this.ws.send(json);
   }
 
   render() {

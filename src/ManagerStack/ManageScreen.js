@@ -79,15 +79,12 @@ export default class ManageScreen extends Component {
 
     // change to listen each on websocket , not all together
     if (obj.type == 'connected') {
-      // var participant = JSON.parse(obj.data);
       this.state.participants.push(obj.data);
       this.setState({
         participants: this.state.participants
       })
     }
     if (obj.type == 'closed') {
-
-      // var participant = JSON.parse(obj.data);
       for (var i = 0; i < this.state.participants.length; i++) {
         if (this.state.participants[i]._id == obj.data._id) {
           this.state.participants.splice(i, 1); 

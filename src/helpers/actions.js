@@ -1,35 +1,30 @@
-import { WEBSOCKET_SEND, WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPEN, WEBSOCKET_CLOSED, WEBSOCKET_MESSAGE } from './constants';
+import { WEBSOCKET_NEXT, WEBSOCKET_LAST, WEBSOCKET_LIKES_POST, WEBSOCKET_SELECTED, WEBSOCKET_CLOSED, WEBSOCKET_CONNECTED, WEBSOCKET_RESPONSE_QUEUE, WEBSOCKET_SEND, WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPENED, WEBSOCKET_DISCONNECTED, WEBSOCKET_MESSAGE } from './constants';
 
 
 export default actions = {
-    connecting: () => ({  // event, websocket
+    connecting: () => ({  
         type: WEBSOCKET_CONNECTING,
         payload: {
           timestamp: new Date(),
-          // event,
-          // websocket
         }
     }),
-    connected: () => ({  // event
-        type: WEBSOCKET_OPEN,
+    opened: () => ({  
+        type: WEBSOCKET_OPENED,
         payload: {
           timestamp: new Date(),
-          // event
         }
     }),
-    disconnected: () => ({  // event
-        type: WEBSOCKET_CLOSED,
+    disconnected: () => ({ 
+        type: WEBSOCKET_DISCONNECTED,
         payload: {
           timestamp: new Date(),
-          // event
         }
     }),
-    messageReceived: (msg) => ({  // event
+    messageReceived: (msg) => ({ 
         type: WEBSOCKET_MESSAGE,
         payload: {
           timestamp: new Date(),
           data: msg,
-          // event
         }
     }),
     eventsList: (msg) => ({  
@@ -51,13 +46,62 @@ export default actions = {
         payload: {
           timestamp: new Date(),
         }
-    })
+    }),
+    responseQueue: (msg) => ({  
+        type: WEBSOCKET_RESPONSE_QUEUE,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    connected: (msg) => ({  
+        type: WEBSOCKET_CONNECTED,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    closed: (msg) => ({  
+        type: WEBSOCKET_CLOSED,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    selected: (msg) => ({  
+        type: WEBSOCKET_SELECTED,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    likesPost: (msg) => ({  
+        type: WEBSOCKET_LIKES_POST,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    next: (msg) => ({  
+        type: WEBSOCKET_NEXT,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    last: (msg) => ({  
+        type: WEBSOCKET_LAST,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
 };
 
 export function fetchEvents() { 
     const action = () => {
         return {
-          type: 'WEBSOCKET:SEND',
+          type: WEBSOCKET_SEND,
           command: 'events_list'
         }
     }
@@ -120,7 +164,7 @@ export function updateUser(user) {
 export function clientsQueue() { 
     const action = () => {
         return {
-            type: 'WEBSOCKET:SEND',
+            type: WEBSOCKET_SEND,
             command: 'clients_queue'
         }
     }
@@ -132,7 +176,7 @@ export function clientsQueue() {
 export function connected() { 
     const action = () => {
         return {
-            type: 'WEBSOCKET:SEND',
+            type: WEBSOCKET_SEND,
             command: 'connected'
         }
     }
@@ -144,7 +188,7 @@ export function connected() {
 export function closed() { 
     const action = () => {
         return {
-            type: 'WEBSOCKET:SEND',
+            type: WEBSOCKET_SEND,
             command: 'closed'
         }
     }
@@ -156,7 +200,7 @@ export function closed() {
 export function calculatePost(event_id) {
     const action = () => {
         return {
-            type: 'WEBSOCKET:SEND',
+            type: WEBSOCKET_SEND,
             command: 'calculate',
             event_id: event_id
         }
@@ -164,18 +208,12 @@ export function calculatePost(event_id) {
     return (dispatch) => {
         dispatch(action())
     }
-    // const { event } =  this.props.navigation.state.params;
-    // let json = JSON.stringify({
-    //   command: "calculate",
-    //   event_id: event._id
-    // });
-    // this.ws.send(json);
 }
 
 export function startPost(timeout, talk_time, selected, event) {
     const action = () => {
         return {
-            type: 'WEBSOCKET:SEND',
+            type: WEBSOCKET_SEND,
             command: 'start',
             timeout: timeout,
             talk_time: talk_time,
@@ -186,13 +224,4 @@ export function startPost(timeout, talk_time, selected, event) {
     return (dispatch) => {
         dispatch(action())
     }
-
-// let json = JSON.stringify({
-//     command: "start",
-//     timeout: 2,
-//     talk_time: this.state.test,
-//     selected: JSON.stringify(this.state.selected),
-//     event: JSON.stringify(event)
-//   });
-//   this.ws.send(json);
 }
