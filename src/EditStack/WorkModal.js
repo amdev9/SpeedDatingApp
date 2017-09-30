@@ -42,11 +42,6 @@ export default class WorkModal extends Component {
     user.current_work = this.state.current_work;
     try {
       this.props.update_user(user);
-      // const response = await put('user', {
-      //   user: user
-      // });
-      // const json = await response.json(); 
-      // console.log( JSON.stringify(json) );
     }
     catch (error) {
       alert(error);
@@ -77,8 +72,7 @@ export default class WorkModal extends Component {
               this.setState({ 
                 current_work: user.work.position_name
               });
-              {/* console.log(this.state.current_work) */}
-              console.log(this.state.current_work, this.state.work.position_name)
+              
             }}>
             <View style={styles.navBarTest}>
               <Text style={styles.item}>{user.work.position_name } at {user.work.employer_name} </Text>
@@ -86,11 +80,10 @@ export default class WorkModal extends Component {
             </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() =>  {
-              {/* console.log(this.state.current_work) */}
+              
               this.setState({ 
                 current_work: ''
               })
-              console.log(this.state.current_work, this.state.work.position_name)
             }}>
             <View style={styles.navBarTest}>
               <Text style={styles.item}>Нет</Text>

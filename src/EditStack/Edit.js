@@ -24,7 +24,6 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 
 
-
 import { defaultStyles } from '../styles';
 
 
@@ -91,21 +90,12 @@ class Edit extends React.Component {
     user.current_university = this.state.current_university;
     
     try {
-     
       this.props.update_user(user);
-      
-      // const response = await put('user', {
-      //   user: user
-      // }); 
-      // const json = await response.json(); 
-      // // console.log( JSON.stringify(json) );
       
       AsyncStorage.setItem(USER_KEY, JSON.stringify(user), () => {
         navigate('ScrollTab');
       }); 
       
-      // events = json; // get events
-      // this.props.navigation.goBack();
     }
     catch (error) {
       alert(error);
@@ -137,8 +127,7 @@ class Edit extends React.Component {
       height: 300,
       cropping: true
     }).then(image => {
-      console.log('----------- _picker');
-      
+  
       let opts = {
         url: `${URL}/v1/`,
         files: [{
@@ -158,13 +147,10 @@ class Edit extends React.Component {
          
         let status = res.status;
         let responseString = res.data;
-        //console.log('Upload complete with status ' + status);
-        //console.log(responseString);
         this.setState({ 
           avatar: `${URL}/images/${JSON.parse(responseString).images}` 
         });
-        // this.props.navigation.state.params.user.avatar = avatar; //.split(',')[0])
-        
+   
         
         this.setState({modalVisible: false});
       });
@@ -174,10 +160,7 @@ class Edit extends React.Component {
   render() {
     const {user} = this.props.navigation.state.params;
     const { navigate } = this.props.navigation;
-    
-    console.log('edit ', user);
-    
-    // console.log('state :', this.state)
+  
     return (
       <View style={styles.container}>
         <View style={styles.navBar}>
@@ -185,7 +168,6 @@ class Edit extends React.Component {
           <Text style={styles.navBarHeader}>Изменить</Text>
           <TouchableOpacity onPress={() => {
               this.saveProfile(navigate);
-            //setTimeout(() => { //}, 3000) // , { user: user } change to AsyncStorage user saving //  goBack() // this.props.navigation.
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
@@ -220,11 +202,8 @@ class Edit extends React.Component {
           </TouchableOpacity>
           
           <Text style={styles.sectionHeader}>Текущая работа</Text>
-          <TouchableOpacity onPress={() => {
-
-            
+          <TouchableOpacity onPress={() => {            
               return navigate('Work', { user: user })
-            
             }
             
             }>

@@ -55,13 +55,6 @@ export default actions = {
     
 };
 
-
-
-
-// data_loading - before send ws message
-// data_received - onmessage received message with data
-// data_error - onerror 
-
 export function fetchEvents() { // fetchEvents
     const action = () => {
         return {
@@ -69,19 +62,9 @@ export function fetchEvents() { // fetchEvents
           command: 'events_list'
         }
     }
-
     return (dispatch) => {
         dispatch(action())
     }
-
-    // return (dispatch) => {
-    //   dispatch(getData())
-    //   getPeople()
-    //     .then((data) => {
-    //       dispatch(getDataSuccess(data))
-    //     })
-    //     .catch((err) => console.log('err:', err))
-    // }
 }
 
 export function updateEvent(event_id, participant_id) { 

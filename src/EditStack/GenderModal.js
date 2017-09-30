@@ -45,12 +45,6 @@ export default class GenderModal extends Component {
     user.gender = this.state.gender;
     try {
       this.props.update_user(user);
-      
-      // const response = await put('user', {
-      //   user: user
-      // }); 
-      // const json = await response.json(); 
-      // console.log( JSON.stringify(json) );
     }
     catch (error) {
       alert(error);

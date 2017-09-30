@@ -21,7 +21,6 @@ const { width, height } = Dimensions.get('window');
 export default class Profile extends Component {
   render() {
     const { user } = this.props;
-    console.log(user);
     return (     
       <View style={styles.container}>
         <View style={styles.content}>  

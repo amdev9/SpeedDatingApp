@@ -37,25 +37,6 @@ export default class MymatchesScreen extends Component {
     }; 
   }
 
-  setSearchText(text) {
-    this.setState({text})
-    let filteredData = this.filterNotes(text, pech);
-    this.setState({
-      persons: filteredData
-    })
-  }
-
-  filterNotes(searchText, notes) {
-    console.log(notes);
-    let text = searchText.toLowerCase();
-    console.log(text);
-    return _.filter(notes, (n) => {
-      let note = n.name.toLowerCase();
-      console.log(note);
-      return note.search(text) !== -1;
-    });
-  }
-  
   componentDidMount() {
     this.fetchData().done()
   }
@@ -64,7 +45,7 @@ export default class MymatchesScreen extends Component {
     try {
       const myArray = await AsyncStorage.getItem('@MySuperStore:persons');
       if (myArray !== null) {
-        console.log('data recieved and not null')
+        
         var persons = JSON.parse(myArray);
         pech = persons;
         
@@ -73,7 +54,6 @@ export default class MymatchesScreen extends Component {
         });
       } else {
         console.log('data null')
-        
       }
     } catch (error) {
       alert('error get from asyncstorage: ' + JSON.stringify(error));
@@ -92,40 +72,28 @@ export default class MymatchesScreen extends Component {
     console.log(' - onopen - ');
   }
   
-  
   onMessageRecieved = async (e) => {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     const { person } = this.props 
 
     if (obj.type == 'calculate') {
-      // if(obj && typeof(obj.data) !== 'undefined') {
-        var founded = JSON.parse(obj.data); // unexpected eof
-        for (var key in founded ) {
-          if (person._id == key) {
-            founded[key].shift();  
-            founded[key].forEach( (item) => {
-              // push if not duplication
-              console.log(this.state.persons)
-              if(!_.some(this.state.persons, item) ) {
-                console.log('not include')
-                this.state.persons.push(item);
-                
-              }
-            })
-    
-            this.saveData(this.state.persons).done()
-    
-            
-            this.setState({
-              persons: this.state.persons
-            })
-          }      
-        }
-      // }
+      var founded = JSON.parse(obj.data); 
+      for (var key in founded ) {
+        if (person._id == key) {
+          founded[key].shift();  
+          founded[key].forEach( (item) => {
+            if(!_.some(this.state.persons, item) ) {
+              this.state.persons.push(item);
+            }
+          })
+          this.saveData(this.state.persons).done()
+          this.setState({
+            persons: this.state.persons
+          })
+        }      
+      }
     }
-    
-    // re render screen with new results
   };
   
   onError = (e) => {
@@ -155,41 +123,12 @@ export default class MymatchesScreen extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { person } = this.props  
     if (this.state.persons.length + pech.length > 0 ) {  //  && this.state.text.length == 0
       return (
         <View style={styles.container}>
           <View style={styles.content}>
-
             
-            {/* <View>
-              <TextInput
-                style={styles.search} 
-                placeholder="Поиск"
-                placeholderTextColor="#888888"
-                selectionColor="#3f88fb"
-                onChangeText={
-                  this.setSearchText.bind(this)
-                }
-                value={this.state.text}
-              />
-              <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
-            </View> */}
-{/*    
-            <View style={{
-              flexDirection: 'row',
-            }}>
-              <Text style={styles.horizontalText}>Новые совпадения</Text>
-              <View style={styles.circle}>
-                <Text style={styles.digitText}>3</Text>
-              </View>
-            </View>
-            <ScrollView style={styles.horizontal} ref={(scrollView) => { this._scrollView = scrollView; }} horizontal={true}>
-               
-              {this.state.persons.map((participant, index) => <Participant vision={'mymatch_horizontal'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
-            </ScrollView> 
-             */}
             <View style={{
               flexDirection: 'row',
             }}>
@@ -200,69 +139,13 @@ export default class MymatchesScreen extends Component {
             </View>
 
             <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
-              {/* this.state.persons + async storage */}
               {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
             </ScrollView>   
   
           </View>
         </View>
       );
-    // } else if(this.state.persons.length + pech.length > 0  && this.state.text.length > 0) { // && this.state.searchFlag == true
-    //   return (
-    //     <View style={styles.container}>
-    //       <View style={styles.content}>
-
- 
-            
-    //         <View style={{ 
-    //           marginTop: 20, 
-    //           flexDirection: 'row',
-    //         }}>
-    //           <View style={{ width: width - 110}}>
-    //             <TextInput
-    //               style={styles.searchActive} 
-    //               placeholder="Поиск"
-    //               placeholderTextColor="#888888"
-    //               selectionColor="#3f88fb"
-    //               onChangeText={this.setSearchText.bind(this)}
-    //               value={this.state.text}
-    //             />
-    //             <Icon style={styles.searchIcon}  name="ios-search" size={20} color="#000"/>
-    //           </View>
-    //           <TouchableOpacity 
-    //             onPress={this._searchCancel}
-    //             style={
-    //             {
-    //               width: 110,
-    //               marginTop: 14
-    //             }
-    //           }>
-    //             <Text style={{
-    //               color: '#3f88fb',
-    //               textAlign:'center',
-    //               fontSize: 17,
-    //               //fontWeight: 'bold'
-    //             }}>Отменить</Text>
-    //           </TouchableOpacity>
-    //         </View>
-            
-  
-    //         <View style={{
-    //           flexDirection: 'row'
-    //         }}>
-    //           <Text style={styles.verticalText}>Найдено</Text>
-    //           <View style={styles.circle}>
-    //             <Text style={styles.digitText}>{this.state.persons.length}</Text>
-    //           </View>
-    //         </View>
-
-    //         <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
-    //           {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
-    //         </ScrollView>   
-  
-    //       </View>
-    //     </View>
-    //   );
+     
 
     } else if( this.state.persons.length + pech.length == 0 ) {
       return (

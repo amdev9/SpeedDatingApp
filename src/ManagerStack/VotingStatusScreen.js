@@ -18,8 +18,6 @@ import { defaultStyles } from '../styles';
 import { WS_URL } from "../helpers/constants";
 
 export default class VotingStatusScreen extends Component {
-
-
   constructor(props) {
     super(props);
     const { person, participants } = this.props.navigation.state.params;
@@ -27,31 +25,19 @@ export default class VotingStatusScreen extends Component {
       participants: participants
     };
   }
-
-  onLiked = (participant) => {
-    // if( !this.state.liked.includes(participant._id) ) {
-    //   this.state.liked.push(participant._id)
-    // } else {
-    //   var index = this.state.liked.indexOf(participant._id);
-    //   this.state.liked.splice(index, 1);
-    // }
-  };
-
+  
   onOpenConnection = () => {
     console.log(' - onopen - ');
   }
 
   onMessageRecieved = (e) => {
-    // when recieved broadcast 'push event' -> rerender VotingStatusScreen
-    // console.log(e.data);
+  
     var obj = JSON.parse(e.data); 
     if (obj.type == 'calculate') {
       const { navigate } = this.props.navigation;
       var founded = JSON.parse(obj.data);
 
-      console.log(founded)
-            
-
+    
       Array.prototype.indexOfForArrays = function(search)
       {
         var searchJson = JSON.stringify(search); // "[3,566,23,79]"
@@ -99,8 +85,6 @@ export default class VotingStatusScreen extends Component {
         final_ob_done.push(final_ob);
       })
 
-      console.log(final_ob_done);
-
       navigate('Match', {
         matches: final_ob_done
       });  
@@ -114,8 +98,6 @@ export default class VotingStatusScreen extends Component {
             person_id: lik.person_id,
             person_likes: lik.person_likes
           };
-           
-          console.log('participant.likes', participant.likes)
         }
         return participant; 
       })

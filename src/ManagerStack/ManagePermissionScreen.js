@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import {
   StyleSheet,
@@ -13,8 +13,6 @@ import {
 } from 'react-native';
 
 import { defaultStyles } from '../styles';
-
-
 
 
 import { connect } from 'react-redux';
@@ -36,17 +34,9 @@ export default class ManagePermissionScreen extends Component {
     try {
       
       this.props.update_user(person._id, event._id)
-      // const response = await put('events/'+ event._id + '/manage', {
-      //   person_id: person._id
-      // }); 
-      // const json = await response.json();
-      // console.log(json);
-
-
-
+     
       this.props.navigation.goBack(); 
-      // refresh(); // add reload here <- refresh func
-
+    
       
     }
     catch (error) {
@@ -58,6 +48,18 @@ export default class ManagePermissionScreen extends Component {
     const { person, participants } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
+        <View style={styles.navBar}>
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
+            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
+            <Text style={ [styles.navBarButton,{
+              fontWeight: 'bold'
+            }]}>Назад к мероприятиям</Text>       
+          </TouchableOpacity>   
+          <Text style={styles.navBarHeader}></Text>
+          <Text style={styles.navBarButton}></Text> 
+        </View>
+
+
         <Text> Form with fields to fill </Text>
         <TouchableHighlight
             underlayColor="#9575CD"
@@ -74,9 +76,39 @@ export default class ManagePermissionScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#FFF'
   },
+  navBar: {
+    flexDirection: 'row',
+    paddingTop: 30,
+    // height: 64,
+    backgroundColor: '#FFFFFF' // '#1EAAF1'
+  },
+  navBarButton: {
+    color: '#262626',
+    textAlign:'center',
+    width: 200,
+    color: '#3f88fb'
+  },
+  navBarButtonIcon: {
+    marginTop: -4,
+    color: '#262626',
+    textAlign:'center',
+    marginLeft: 10,
+    // width: 200,
+    color: '#3f88fb'
+  },
+  navBarHeader: {
+    flex: 1,
+    color: '#262626',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    ...defaultStyles.text,
+    fontSize: 15,
+    // marginTop: 7
+  },
+
+
   header: {
     ...defaultStyles.text,
     color: '#333',

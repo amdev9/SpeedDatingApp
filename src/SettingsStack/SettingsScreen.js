@@ -50,7 +50,6 @@ class Settings extends Component {
 
   render() {
     const {user} = this.props.navigation.state.params;
-    console.log('settings', user);
     return (
 
       <View style={styles.container}>
@@ -65,22 +64,10 @@ class Settings extends Component {
       </TouchableOpacity>
       </View>
 
-
-        {/* <SectionList 
-          renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-          renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-          sections={[
-            { key: 1, title: ' ', data: ['Выйти'] },
-            { key: 2, title: ' ', data: [] },
-          ]}
-          keyExtractor={(item, index) => index}
-        /> */}
-
         <ScrollView
               contentContainerStyle={styles.scrollContent}>
               <Text style={styles.sectionHeader}></Text>
               <TouchableOpacity onPress={() =>  {
-                console.log('onPress exit');
                 this.logout();
               }}>
               <Text style={styles.item}>Выйти</Text>

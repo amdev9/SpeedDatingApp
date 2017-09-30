@@ -11,7 +11,7 @@ import {
   Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import _ from 'lodash';
+
 
 
 import Participant from '../Participant';

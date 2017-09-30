@@ -16,7 +16,6 @@ export default class Participant extends PureComponent {
     } else {
       this.state = { pressStatus: false };
     }
-    //console.log('participant, liked ',participant, liked)
     
   }
 

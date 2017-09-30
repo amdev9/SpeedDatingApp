@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+
 import urllib from 'url';
-
-
+import Icon from 'react-native-vector-icons/Ionicons';
 import {
   StyleSheet,
   Text,
@@ -17,7 +16,7 @@ import {
 import { defaultStyles } from '../styles';
 
 
-import Icon from 'react-native-vector-icons/Ionicons';
+
 const { width, height } = Dimensions.get('window');
 
 
@@ -70,25 +69,11 @@ export default class Confirmation extends Component {
 
   _finalBookEvent = async () => {
     
-    // integrate pay screen
-
-    // const { events, loading, refresh } = this.props;
-    // console.log(events, loading, refresh);
     const { event, participant } = this.props.navigation.state.params;
     // this._scrollView.scrollTo({ y: 0 });
     try {
 
       this.props.update(event._id, participant._id);
-
-      // const response = await put('events', {
-      //   event_id: event._id,
-      //   participant_id: participant._id,
-      // }); 
-
-      // const json = await response.json();
-      // console.log(json);
-
-      // events = json; // get events
       this.props.navigation.goBack(); // test only
        
     }
@@ -98,7 +83,6 @@ export default class Confirmation extends Component {
   };
   
   strippedURL = (uri) => {
-    // console.log(url);
     var obURL = urllib.parse(uri); // new URL(url);
     var scheme = obURL.protocol.toLowerCase();
     var port = obURL.port;
@@ -114,7 +98,7 @@ export default class Confirmation extends Component {
     var path_split = part.split('?')[0];
     var path = path_split.substring(host.length, path_split.length);
     var strippedURL = `${scheme}//${host}:${port}${path}`.toLowerCase();
-    // console.log('strippedURL: ', strippedURL);
+
     return strippedURL;
   }
  
@@ -123,7 +107,7 @@ export default class Confirmation extends Component {
     let strippedSuccessURL = this.strippedURL(kSuccessUrl);
     let strippedFailURL = this.strippedURL(kFailUrl);
     if (strippedURL == strippedSuccessURL) {
-        // console.log('success');
+        
         var req = {};
         req.status = "success";
         this._finalBookEvent();
@@ -133,7 +117,7 @@ export default class Confirmation extends Component {
         
     }
     if (strippedURL == strippedFailURL) {
-        // console.log('fail');
+        
         var req = {};
         req.status = "fail";
         // this._finalBookEvent(); // for test
@@ -215,20 +199,6 @@ export default class Confirmation extends Component {
         <View style={styles.imageContainer}>
           <Image source={{ uri: event.photo }} style={styles.image} />
         </View> 
-
-        {/* <View style={[styles.avatarContainer, {
-          marginLeft: 20, 
-          marginTop: 15,
-          flexDirection: 'row'
-        }]}>
-          <Image source={{ uri: event.manage_ids[1].avatar }} style={styles.avatarOrg} />
-          <Text style={{ 
-            width: 120, 
-            marginLeft: 10, 
-            fontWeight: 'bold', 
-            fontSize: 14 
-          }}> {event.manage_ids[1].name} </Text>
-        </View> */}
         
         <Text style={{ 
           marginLeft: 20, 

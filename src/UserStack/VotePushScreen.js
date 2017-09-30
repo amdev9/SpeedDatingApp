@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+
 
 import {
   StyleSheet,
@@ -16,7 +16,7 @@ import {
 import { defaultStyles } from '../styles';
 import Participant from '../Participant';
 
-
+import _ from 'lodash';
 
 import { connect } from 'react-redux';
 import { likesFunc } from '../helpers/actions';
@@ -54,27 +54,12 @@ export default class VotingPushScreen extends Component {
     try {
      
       this.props.likesPost(person._id, event._id, this.state.liked);
-     
-      // Make API call
-      // const response = await put('likes', {
-      //   person_id: person._id,
-      //   likes: this.state.liked,
-      //   event_id: event._id
-      // }); 
-      // const json = await response.json();
-      // console.log(json);
-
-
+    
       const { navigate } = this.props.navigation;
-      
-      
+    
       navigate('ScrollTab', {
         paramm: 2
-      }); // Mymatches tab
-
-      // 'Mymatches', {
-      //   person: person
-      // });
+      }); 
     }
     catch (error) {
       alert(error);
@@ -83,8 +68,7 @@ export default class VotingPushScreen extends Component {
 
   render() {
     const { person, participants } = this.props.navigation.state.params;
-    //this.onClicked
-    // remove from participants
+
     _.remove(participants, { '_id': person._id }); 
     return (
       <View style={styles.container}>

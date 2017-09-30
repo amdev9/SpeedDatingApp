@@ -54,9 +54,6 @@ export default class ManageScreen extends Component {
     }) 
   }
   
-     
-    
-
   onOpenConnection = () => {
     console.log(' - onopen - ');
     // get participants from server queue and clean it
@@ -129,7 +126,7 @@ export default class ManageScreen extends Component {
   };
 
   componentWillMount() {
-    this.ws = new WebSocket(WS_URL); // localhost
+    this.ws = new WebSocket(WS_URL); 
     this.ws.onopen = this.onOpenConnection;
     this.ws.onmessage = this.onMessageRecieved;
     this.ws.onerror = this.onError;
@@ -229,11 +226,8 @@ export default class ManageScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: "#FFF"
   },
-  //////
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,

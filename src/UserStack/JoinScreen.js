@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+
 
 import {
   StyleSheet,
@@ -31,8 +31,7 @@ export default class JoinScreen extends Component {
   // [  JoinScreen -> voting screen -> votingpushscreen  ] -> 'confirm' -> empty mymatches (waiting for admin 'done')
   
   state = {
-    selected: [], // get from websocket
-    // participant: {},
+    selected: [], 
     index: 0
   };
   
@@ -50,17 +49,7 @@ export default class JoinScreen extends Component {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
-    // if (obj.type == 'selected') {
-    //   var selected_data = JSON.parse(obj.data);
-    //   // 3. remove from selected_data - person object with current person._id
-    //   this.setState({
-    //     selected: selected_data
-    //   })
-    // }
-
     if (obj.type == 'next') {
-      // 4. 
-      // pass from backend next with current participant
       var participant = JSON.parse(obj.data);
       for (var i = 0; i < participant.length; i++) {
         if (participant[i]._id == this.props.navigation.state.params.person._id) {
@@ -74,7 +63,7 @@ export default class JoinScreen extends Component {
       })
       const { navigate } = this.props.navigation;
       navigate('Voting', {
-        participant: this.state.participant,// this.state.selected[this.state.index], 
+        participant: this.state.participant,
         person: this.props.navigation.state.params.person
       });  
       this.state.index++;
@@ -82,7 +71,6 @@ export default class JoinScreen extends Component {
 
     if (obj.type == 'last') {
       var selected_data = JSON.parse(obj.data);
-      // 3. remove from selected_data - person object with current person._id
       this.setState({
         selected: selected_data
       });
@@ -125,16 +113,7 @@ export default class JoinScreen extends Component {
       
 
     <View style={styles.container}>
-      {/* change contents  
-        <Button
-          onPress={() => this.props.navigation.goBack() }
-          title="Go Back"
-        />
-        
-        <Text > Join screen </Text>
-        <Text > Table {person.table} </Text>
-*/}
-
+     
         <View style={styles.navBar}>
           <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
             <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />

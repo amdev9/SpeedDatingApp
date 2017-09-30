@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+
 
 import {
   StyleSheet,
@@ -38,8 +38,7 @@ export default class VotingScreen extends Component {
       participant, 
       person 
     } = this.props.navigation.state.params;
-    console.log(person.likes.person_likes)
-
+  
     if(!person.likes.person_likes.includes(participant._id)) { 
       person.likes.person_likes.push(participant._id); 
     } else {

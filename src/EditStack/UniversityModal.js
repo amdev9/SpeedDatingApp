@@ -42,14 +42,7 @@ export default class UniversityModal extends Component {
     const { user } = this.props.navigation.state.params;
     user.current_university = this.state.current_university;
     try {
-
       this.props.update_user(user);
-    
-      // const response = await put('user', {
-      //   user: user
-      // }); 
-      // const json = await response.json(); 
-      // console.log( JSON.stringify(json) );
     }
     catch (error) {
       alert(error);
