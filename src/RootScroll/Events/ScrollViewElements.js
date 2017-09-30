@@ -9,6 +9,8 @@ import {
 
 import EventPoster from './EventPoster';
 
+
+
 export default class ScrollViewElements extends Component {
   render() {
     const { selected, events, user, onOpenEvent, loading, refresh } = this.props;

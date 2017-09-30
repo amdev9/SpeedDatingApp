@@ -14,11 +14,8 @@ import Profile from './Profile';
 import Events from './Events/Events';
 import Mymatches from './MymatchesScreen';
 
+
  
-
-
-
-
 const USER_KEY = "auth-demo-key";
 export default class ScrollTab extends Component {
 
@@ -67,7 +64,7 @@ export default class ScrollTab extends Component {
           <Profile user={this.state.user} navigation={this.props.navigation}/> 
         </View>
         <View tabLabel='Events'>
-          <Events style={styles.container} user={this.state.user} navigation={this.props.navigation}/>
+          <Events  user={this.state.user} navigation={this.props.navigation}/>
         </View>
         <View tabLabel='Mymatches'>
           <Mymatches person={this.state.user} navigation={this.props.navigation}/>
@@ -77,13 +74,8 @@ export default class ScrollTab extends Component {
   };
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,               // fixed
-    paddingTop: 20,         // start below status bar
-    backgroundColor: '#FFFFFF' 
-  },
 
+const styles = StyleSheet.create({
   loader: {
     flex: 1,
     alignItems: 'center',     

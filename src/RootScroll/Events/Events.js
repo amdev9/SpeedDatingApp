@@ -6,21 +6,24 @@ import {
   Button,
   Text,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  Dimensions
 } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
+
+
 import EventPopup from './EventPopup';
 import { defaultStyles } from '../../styles';
-
 import ScrollViewElements from './ScrollViewElements';
-
 import { fetchEvents } from '../../helpers/actions';
 
 import { connect } from 'react-redux';
+
+const { width, height } = Dimensions.get('window');
 
 @connect(
   state => ({
@@ -152,11 +155,10 @@ export default class Events extends Component {
 }
 
 const styles = StyleSheet.create({
-  
+  container: {
+    height: height - 60 // 60 for ios
+  },
   bottomContent: {
-    // margin: 30,
-    // borderTopColor: '#262626',
-    // borderRadius: 1,
     marginTop: 5, 
     marginRight: 10,
     marginLeft: 10
