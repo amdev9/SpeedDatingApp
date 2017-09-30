@@ -7,7 +7,8 @@ import {
   Text,
   ScrollView,
   RefreshControl,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -24,6 +25,8 @@ import { fetchEvents } from '../../helpers/actions';
 import { connect } from 'react-redux';
 
 const { width, height } = Dimensions.get('window');
+const heightFinal = Platform.OS == 'ios'? height - 60 : height - 90;
+
 
 @connect(
   state => ({
@@ -156,7 +159,7 @@ export default class Events extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: height - 60 // 60 for ios
+    height: heightFinal
   },
   bottomContent: {
     marginTop: 5, 
