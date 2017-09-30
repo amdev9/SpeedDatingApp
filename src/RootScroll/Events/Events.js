@@ -11,8 +11,7 @@ import {
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import _ from 'lodash';
-import EventPoster from './EventPoster';
+
 
 import EventPopup from './EventPopup';
 import { defaultStyles } from '../../styles';
@@ -33,8 +32,6 @@ import { connect } from 'react-redux';
   }),
 )
 export default class Events extends Component {
-  
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -42,16 +39,13 @@ export default class Events extends Component {
       selectedIndex: 1,
       chosenTable: null
     };
-  }
-
-  
+  }  
   openEvent = (event) => {
     this.setState({
       popupIsOpen: true,
       event,	
     });
   }
-  
   closeEvent = () => {
     this.setState({
       popupIsOpen: false,
@@ -60,7 +54,6 @@ export default class Events extends Component {
       chosenTime: null,
     });
   }
-
   bookEvent = () => {
     this.closeEvent();
     const { navigate } = this.props.navigation;
@@ -69,7 +62,6 @@ export default class Events extends Component {
       participant: this.props.user 
     }); 
   }
-
   joinEvent = () => {
     if ( this.state.chosenTable == null) {
       alert('Please select table');
@@ -85,7 +77,6 @@ export default class Events extends Component {
       }); 
     }
   }
-
   manageEvent = () => {
     this.closeEvent();
     const { navigate } = this.props.navigation;
@@ -94,7 +85,6 @@ export default class Events extends Component {
       person: this.props.user 
     }); 
   }
-
   manageEventRequest = () => {
     this.closeEvent();
     const { navigate } = this.props.navigation;
@@ -103,29 +93,24 @@ export default class Events extends Component {
       person: this.props.user,
     }); 
   }
-
   chooseTable = (table) => {
     this.setState({
       chosenTable: table,
     });
   }
-
   componentWillMount() { 
     this.props.refresh();
   }
-
   render() {
     const { events, loading, refresh } = this.props;  
-    const { user } =  this.props;
+    const { user } = this.props;
     return (
       <View style={styles.container}>
-      
         <View style={styles.bottomContent}>
           <SegmentedControlTab 
             tabStyle={styles.tabStyle}
             tabTextStyle={styles.tabTextStyle}
             activeTabStyle={styles.activeTabStyle}
-            
             values={['Мои', 'Найти']}
             selectedIndex={this.state.selectedIndex}
             onTabPress={(index) => {
@@ -133,7 +118,6 @@ export default class Events extends Component {
             }}
           />
         </View>
-
         {events 
           ? 
             <ScrollViewElements 
@@ -150,7 +134,6 @@ export default class Events extends Component {
               size="large"
             />
         }
-
         <EventPopup
           event={this.state.event}
           person={user}
@@ -163,17 +146,28 @@ export default class Events extends Component {
           chosenTable={this.state.chosenTable}
           onChooseTable={this.chooseTable}
         />
-      </View>
-      
+      </View>      
     );
   }
-
 }
 
 const styles = StyleSheet.create({
+  
+  bottomContent: {
+    // margin: 30,
+    // borderTopColor: '#262626',
+    // borderRadius: 1,
+    marginTop: 5, 
+    marginRight: 10,
+    marginLeft: 10
+  },
+  loader: {
+    flex: 1,
+    alignItems: 'center',     // center horizontally
+    justifyContent: 'center', // center vertically
+  },
   tabStyle: {
-    borderColor: '#3f88fb',
-    
+    borderColor: '#3f88fb', 
   },
   activeTabStyle: {
       backgroundColor: '#3f88fb'
@@ -184,46 +178,5 @@ const styles = StyleSheet.create({
   gradient: {
     width: 400,
     height: 200,
-  },
-  navBar: {
-    flexDirection: 'row',
-    paddingTop: 30,
-    // height: 64
-    // backgroundColor: '#FFFFFF' //'#1EAAF1'
-  },
-  navBarButton: {
-    color: '#262626',
-    textAlign:'center',
-    width: 64
-  },
-  navBarHeader: {
-    flex: 1,
-    color: '#262626',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    ...defaultStyles.text,
-    fontSize: 18,
-    // marginTop: 5
-  },
-  container: {
-    height: 500, // change ti flex????
-    // flex: 1,               // fixed
-    //paddingTop: 20,         // start below status bar
-    backgroundColor: '#FFFFFF'
-  },
-  loader: {
-    flex: 1,
-    alignItems: 'center',     // center horizontally
-    justifyContent: 'center', // center vertically
-  },
-  
-
-  bottomContent: {
-    // margin: 30,
-    // borderTopColor: '#262626',
-    // borderRadius: 1,
-    marginTop: 5, 
-    marginRight: 10,
-    marginLeft: 10
   }
 });

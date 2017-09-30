@@ -53,35 +53,37 @@ export default class ScrollTab extends Component {
         size="large"
       />
     }
-    
-    return ( // move provider to app.js? 
-      
-        <ScrollableTabView
-          style={{
-            marginTop: 20,
-            backgroundColor: 'white',
-          }}
-          initialPage={this.state.initialPage} 
-          tabBarBackgroundColor='white'
-          renderTabBar={() => <ScrollableTabBar />}
-        >
-          <View  tabLabel='Profile'>
-            <Profile user={this.state.user} navigation={this.props.navigation}/> 
-          </View>
-          <View tabLabel='Events'>
-            <Events user={this.state.user} navigation={this.props.navigation}/>
-          </View>
-          <View tabLabel='Mymatches'>
-            <Mymatches person={this.state.user} navigation={this.props.navigation}/>
-          </View>
-        </ScrollableTabView> 
-      
+
+    return (
+      <ScrollableTabView
+        style={{
+          backgroundColor: 'white' 
+        }}
+        initialPage={this.state.initialPage} 
+        //tabBarBackgroundColor='white'
+        renderTabBar={() => <ScrollableTabBar style={{ marginTop: 20 }} />}
+      >
+        <View tabLabel='Profile'>
+          <Profile user={this.state.user} navigation={this.props.navigation}/> 
+        </View>
+        <View tabLabel='Events'>
+          <Events style={styles.container} user={this.state.user} navigation={this.props.navigation}/>
+        </View>
+        <View tabLabel='Mymatches'>
+          <Mymatches person={this.state.user} navigation={this.props.navigation}/>
+        </View>
+      </ScrollableTabView> 
     );
   };
-
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,               // fixed
+    paddingTop: 20,         // start below status bar
+    backgroundColor: '#FFFFFF' 
+  },
+
   loader: {
     flex: 1,
     alignItems: 'center',     
