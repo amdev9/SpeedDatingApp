@@ -15,7 +15,7 @@ import {
 
 import { defaultStyles } from '../styles';
 import Participant from '../Participant';
-import { put, get } from '../helpers/api';
+
 
 
 import { connect } from 'react-redux';

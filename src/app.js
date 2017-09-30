@@ -32,7 +32,7 @@ const action = () => {
 store.dispatch(action());
 
 
-AsyncStorage.clear(); 
+// AsyncStorage.clear(); 
 
 export default class App extends Component {
 

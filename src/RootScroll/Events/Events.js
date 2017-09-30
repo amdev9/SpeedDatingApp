@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
-  RefreshControl,
-  ScrollView,
   StyleSheet,
   View,
-  SegmentedControlIOS,
   Button,
-  Text
+  Text,
+  ScrollView,
+  RefreshControl
 } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab'
 import Icon from 'react-native-vector-icons/Ionicons';
-import { connect } from 'react-redux';
+
 import _ from 'lodash';
-
-
 import EventPoster from './EventPoster';
+
 import EventPopup from './EventPopup';
 import { defaultStyles } from '../../styles';
 
+import ScrollViewElements from './ScrollViewElements';
 
 import { fetchEvents } from '../../helpers/actions';
+
+import { connect } from 'react-redux';
 
 @connect(
   state => ({
@@ -134,41 +135,15 @@ export default class Events extends Component {
         </View>
 
         {events 
-          ? <ScrollView
-              contentContainerStyle={styles.scrollContent}
-              // Hide all scroll indicators
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              refreshControl={
-                <RefreshControl
-                  refreshing={loading}
-                  onRefresh={refresh}
-                />
-              }
-            >
-              {events.map((event, index) => {
-                console.log(index)
-                if (this.state.selectedIndex == 0) { // if no my events - show message
-                  if (event.participant_ids.includes(user._id)  ) {  
-                    return <EventPoster
-                      event={event} 
-                      person={user}
-                      onOpen={this.openEvent}
-                      key={index}
-                    /> 
-                  }  
-                } else {
-                  return <EventPoster
-                    event={event} 
-                    person={user}
-                    onOpen={this.openEvent}
-                    key={index}
-                  /> 
-                }
-              }
-
-              )}
-            </ScrollView>
+          ? 
+            <ScrollViewElements 
+              selected={this.state.selectedIndex}
+              events={events}
+              user={user}
+              onOpenEvent={this.openEvent}
+              loading={loading}
+              refresh={refresh}
+            /> 
           : <ActivityIndicator
               animating={loading}
               style={styles.loader}
@@ -241,11 +216,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',     // center horizontally
     justifyContent: 'center', // center vertically
   },
-  scrollContent: {
-    paddingTop: 20, 
-    flexDirection: 'row',   // arrange posters in rows
-    flexWrap: 'wrap',       // allow multiple rows
-  },
+  
 
   bottomContent: {
     // margin: 30,

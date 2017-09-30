@@ -12,5 +12,5 @@ export const WEBSOCKET_EVENTS_LIST =  'WEBSOCKET:EVENTS_LIST';
 export const WEBSOCKET_SENDING = 'WEBSOCKET:SENDING';
 export const WEBSOCKET_EVENT_DECISION = 'WEBSOCKET:EVENT_DECISION';
 
-export const URL = 'http://51.15.66.253:3000';
-export const WS_URL = 'ws://51.15.66.253:3000';
+export const URL = 'http://localhost:3000'; // 51.15.66.253
+export const WS_URL = 'ws://localhost:3000';

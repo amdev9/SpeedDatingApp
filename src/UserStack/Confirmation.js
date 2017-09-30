@@ -15,7 +15,7 @@ import {
   Platform
 } from 'react-native';
 import { defaultStyles } from '../styles';
-import { put, get } from '../helpers/api';
+
 
 import Icon from 'react-native-vector-icons/Ionicons';
 const { width, height } = Dimensions.get('window');
