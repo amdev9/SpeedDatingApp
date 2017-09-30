@@ -12,7 +12,7 @@ export const WEBSOCKET_EVENTS_LIST =  'WEBSOCKET:EVENTS_LIST';
 export const WEBSOCKET_SENDING = 'WEBSOCKET:SENDING';
 export const WEBSOCKET_EVENT_DECISION = 'WEBSOCKET:EVENT_DECISION';
 
-const IP_ADDRESS = '51.15.66.253';
+const IP_ADDRESS = 'localhost';//'51.15.66.253';
 const PORT = '3000';
 export const URL = `http://${IP_ADDRESS}:${PORT}`; 
 export const WS_URL = `ws://${IP_ADDRESS}:${PORT}`;

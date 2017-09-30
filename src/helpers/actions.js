@@ -52,10 +52,9 @@ export default actions = {
           timestamp: new Date(),
         }
     })
-    
 };
 
-export function fetchEvents() { // fetchEvents
+export function fetchEvents() { 
     const action = () => {
         return {
           type: 'WEBSOCKET:SEND',
@@ -118,4 +117,82 @@ export function updateUser(user) {
     return (dispatch) => { dispatch(action()) }
 }
 
- 
+export function clientsQueue() { 
+    const action = () => {
+        return {
+            type: 'WEBSOCKET:SEND',
+            command: 'clients_queue'
+        }
+    }
+    return (dispatch) => {
+        dispatch(action())
+    }
+}
+
+export function connected() { 
+    const action = () => {
+        return {
+            type: 'WEBSOCKET:SEND',
+            command: 'connected'
+        }
+    }
+    return (dispatch) => {
+        dispatch(action())
+    }
+}
+
+export function closed() { 
+    const action = () => {
+        return {
+            type: 'WEBSOCKET:SEND',
+            command: 'closed'
+        }
+    }
+    return (dispatch) => {
+        dispatch(action())
+    }
+}
+
+export function calculatePost(event_id) {
+    const action = () => {
+        return {
+            type: 'WEBSOCKET:SEND',
+            command: 'calculate',
+            event_id: event_id
+        }
+    }
+    return (dispatch) => {
+        dispatch(action())
+    }
+    // const { event } =  this.props.navigation.state.params;
+    // let json = JSON.stringify({
+    //   command: "calculate",
+    //   event_id: event._id
+    // });
+    // this.ws.send(json);
+}
+
+export function startPost(timeout, talk_time, selected, event) {
+    const action = () => {
+        return {
+            type: 'WEBSOCKET:SEND',
+            command: 'start',
+            timeout: timeout,
+            talk_time: talk_time,
+            selected: selected,
+            event: event
+        }
+    }
+    return (dispatch) => {
+        dispatch(action())
+    }
+
+// let json = JSON.stringify({
+//     command: "start",
+//     timeout: 2,
+//     talk_time: this.state.test,
+//     selected: JSON.stringify(this.state.selected),
+//     event: JSON.stringify(event)
+//   });
+//   this.ws.send(json);
+}

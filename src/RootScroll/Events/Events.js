@@ -15,18 +15,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
-
-
 import EventPopup from './EventPopup';
 import { defaultStyles } from '../../styles';
 import ScrollViewElements from './ScrollViewElements';
-import { fetchEvents } from '../../helpers/actions';
 
-import { connect } from 'react-redux';
+
 
 const { width, height } = Dimensions.get('window');
 const heightFinal = Platform.OS == 'ios'? height - 60 : height - 90;
 
+import { fetchEvents } from '../../helpers/actions';
+import { connect } from 'react-redux';
 
 @connect(
   state => ({

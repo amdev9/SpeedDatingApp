@@ -12,11 +12,21 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 
-
 import { defaultStyles } from '../styles';
-
 import { WS_URL } from "../helpers/constants";
+import { calculatePost } from '../helpers/actions';
+import { connect } from 'react-redux';
 
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    calculate: (event_id) => dispatch(calculatePost(event_id))
+  }),
+)
 export default class VotingStatusScreen extends Component {
   constructor(props) {
     super(props);
@@ -26,11 +36,8 @@ export default class VotingStatusScreen extends Component {
     };
   }
   
-  onOpenConnection = () => {
-    console.log(' - onopen - ');
-  }
-
-  onMessageRecieved = (e) => {
+  
+  onMessageRecieved = (e) => { // navigate(final_ob_done) , participants
   
     var obj = JSON.parse(e.data); 
     if (obj.type == 'calculate') {
@@ -108,29 +115,16 @@ export default class VotingStatusScreen extends Component {
     }
   };
 
-  onError = (e) => {
-    console.log(e.message);
-  };
-
-  onClose = (e) => {
-    console.log(e.code, e.reason);
-  };
-
-  componentWillMount() {
-    this.ws = new WebSocket(WS_URL);
-    this.ws.onopen = this.onOpenConnection;
-    this.ws.onmessage = this.onMessageRecieved;
-    this.ws.onerror = this.onError;
-    this.ws.onclose = this.onClose;
-  }
+  
 
   _calculate = async () => {
     const { event } =  this.props.navigation.state.params;
-    let json = JSON.stringify({
-      command: "calculate",
-      event_id: event._id
-    });
-    this.ws.send(json);
+    this.props.calculate(event._id);
+  //   let json = JSON.stringify({
+  //     command: "calculate",
+  //     event_id: event._id
+  //   });
+  //   this.ws.send(json);
   }
 
   render() {
@@ -183,8 +177,8 @@ export default class VotingStatusScreen extends Component {
         <TouchableHighlight
             underlayColor="#9575CD"
             style={styles.buttonContainer}
-            onPress={this._calculate}
-            >
+            onPress={this.props._calculate} 
+        >
             <Text style={styles.button}>Подсчитать совпадения</Text>
         </TouchableHighlight> 
 

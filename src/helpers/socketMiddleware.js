@@ -29,6 +29,23 @@ const socketMiddleware = (function(){
       case "EVENT_DECISION": 
         store.dispatch(actions.eventDecision(msg));
         break;
+      case "response_queue": 
+        break;
+      case "connected":
+        break;
+      case "closed":
+        break;
+      case "selected":
+        break;
+      case "calculate": // votingStatusScreen // myMatchScreen // 
+        break;
+      case "likes_post":
+        break;
+      case "next":
+        break;
+      case "last":
+        break;
+
       default:
         console.log("Received unknown message type: '" + msg.type + "'");
         break;

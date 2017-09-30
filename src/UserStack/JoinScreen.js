@@ -26,26 +26,28 @@ const { width, height } = Dimensions.get('window');
 import { WS_URL } from "../helpers/constants";
 
 
+
+import { fetchEvents } from '../../helpers/actions';
+import { connected, closed } from 'react-redux';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    connect: () => dispatch(connected()), 
+    close: () => dispatch(closed()), 
+  }),
+)
 export default class JoinScreen extends Component {
-  //   --main ws--
-  // [  JoinScreen -> voting screen -> votingpushscreen  ] -> 'confirm' -> empty mymatches (waiting for admin 'done')
-  
+
   state = {
     selected: [], 
     index: 0
   };
-  
-  onOpenConnection = () => {
-    console.log(' - onopen - ');
-    // send that user connected 
-    var connected = JSON.stringify({
-      command: "connected",
-      data: this.props.navigation.state.params.person
-    });
-    this.ws.send(connected);
-  }
 
-  onMessageRecieved = (e) => {
+  onMessageRecieved = (e) => { // participant, selected
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
@@ -84,34 +86,53 @@ export default class JoinScreen extends Component {
     }
   };
 
-  onError = (e) => {
-    console.log(e.message);
-  };
+  // onOpenConnection = () => {
+  //   console.log(' - onopen - ');
+  //   // send that user connected 
+  //   var connected = JSON.stringify({
+  //     command: "connected",
+  //     data: this.props.navigation.state.params.person
+  //   });
+  //   this.ws.send(connected);
+  // }
 
-  onClose = (e) => {
-    console.log(e.code, e.reason);
-    // send that user connected 
-    var closed = JSON.stringify({
-      command: "closed",
-      data: this.props.navigation.state.params.person
-    });
-    this.ws.send(closed);
+  // onError = (e) => {
+  //   console.log(e.message);
+  // };
 
-  };
+  // onClose = (e) => {
+  //   console.log(e.code, e.reason);
+  //   // send that user connected 
+  //   var closed = JSON.stringify({
+  //     command: "closed",
+  //     data: this.props.navigation.state.params.person
+  //   });
+  //   this.ws.send(closed);
+
+  // };
 
   componentWillMount() {
-    this.ws = new WebSocket(WS_URL);
-    this.ws.onopen = this.onOpenConnection;
-    this.ws.onmessage = this.onMessageRecieved;
-    this.ws.onerror = this.onError;
-    this.ws.onclose = this.onClose;
+    this.props.connect(this.props.navigation.state.params.person);
+    // var connected = JSON.stringify({
+    //   command: "connected",
+    //   data: this.props.navigation.state.params.person
+    // });
+    // this.ws.send(connected);
+  }
+
+  componentWillUnmount() {
+    this.props.close(this.props.navigation.state.params.person);
+    // var closed = JSON.stringify({
+    //   command: "closed",
+    //   data: this.props.navigation.state.params.person
+    // });
+    // this.ws.send(closed);
   }
 
   render() {
     const { person } =  this.props.navigation.state.params;     
     return (
       
-
     <View style={styles.container}>
      
         <View style={styles.navBar}>

@@ -68,11 +68,7 @@ export default class MymatchesScreen extends Component {
     }
   }
 
-  onOpenConnection = () => {
-    console.log(' - onopen - ');
-  }
-  
-  onMessageRecieved = async (e) => {
+  onMessageRecieved = async (e) => { // persons
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     const { person } = this.props 
@@ -96,34 +92,15 @@ export default class MymatchesScreen extends Component {
     }
   };
   
-  onError = (e) => {
-    console.log(e.message);
-  };
   
-  onClose = (e) => {
-    console.log(e.code, e.reason);
-  };
-
-  componentWillMount() { 
-    this.ws = new WebSocket(WS_URL); 
-    this.ws.onopen = this.onOpenConnection;
-    this.ws.onmessage = this.onMessageRecieved;
-    this.ws.onerror = this.onError;
-    this.ws.onclose = this.onClose;
-  }
 
   showMoreInfo = () => {
     console.log('show more info')
   }
 
-  _searchCancel = () => {
-    this.setState({
-      text: ''
-    })
-  }
-
   render() {
     const { person } = this.props  
+    const noSimpathy = 'Нет совпадений';
     if (this.state.persons.length + pech.length > 0 ) {  //  && this.state.text.length == 0
       return (
         <View style={styles.container}>
@@ -138,7 +115,7 @@ export default class MymatchesScreen extends Component {
               </View>
             </View>
 
-            <ScrollView style={styles.vertical} ref={(scrollView) => { this._scrollView = scrollView; }}>
+            <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}>
               {this.state.persons.map((participant, index) => <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />)}
             </ScrollView>   
   
@@ -150,10 +127,8 @@ export default class MymatchesScreen extends Component {
     } else if( this.state.persons.length + pech.length == 0 ) {
       return (
         <View style={styles.container}>
-          <View style={styles.content}>
-            <Text style={{textAlign: 'center'}}>{
-              'Начните поиск пар. Когда вы найдете себе несколько пар, они отобразятся здесь и вы сможете отправить им сообщения'
-            }</Text>
+          <View>
+            <Text style={styles.noText}>{noSimpathy}</Text>
           </View>
         </View>
       );
@@ -163,6 +138,12 @@ export default class MymatchesScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  noText: {
+    textAlign: 'center',
+    color: '#3f88fb',
+    fontWeight: 'bold',
+    fontSize: 18
+  },
   circle: {
     marginTop: 10,
     marginLeft: 7,
@@ -176,7 +157,6 @@ const styles = StyleSheet.create({
     marginLeft: 7.5,
     color: "white",
     fontSize: 16,
-    //fontWeight: 'bold',
     fontFamily: 'ProximaNova-Semibold',
     backgroundColor: 'transparent'
   },
@@ -186,7 +166,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 30,
     height: 64,
-    backgroundColor: '#FFFFFF'//'#1EAAF1'
+    backgroundColor: '#FFFFFF'
   },
   navBarButton: {
     color: '#262626',
@@ -202,7 +182,6 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   container: {
-    // flex: 1, // fixed
     backgroundColor: '#FFF',
   },
 
@@ -218,22 +197,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0',
     fontSize: 15,
     textAlign: 'center'
-    // fontColor: '#888888'
   },
   searchActive: {
     height: 30, 
     borderColor: '#F0F0F0', 
     borderWidth: 1,
     marginLeft: 10,
-    // marginRight: 10,
     marginTop: 10,
     borderRadius: 5,
     backgroundColor: '#F0F0F0',
     fontSize: 15,
-
     textAlign: 'center',
-    
-    // fontColor: '#888888'
   },
   searchIcon: {
     position: 'absolute',
@@ -256,7 +230,6 @@ const styles = StyleSheet.create({
     marginTop: 11.5,
     marginLeft: 10,
     fontSize: 16,
-    // fontWeight: 'bold',
     fontFamily: 'ProximaNova-Semibold',
     color: '#3f88fb'
   },
@@ -265,17 +238,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     height: 120
   },
-  vertical: {
-    
-    // marginLeft: 10,
-    // marginRight: 10,
-    // flex: 1
-  },
-  content: {
-    // flex: 1, removed
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  },
+   
   header: {
     ...defaultStyles.text,
     color: '#333',

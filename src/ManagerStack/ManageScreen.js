@@ -22,14 +22,22 @@ import IntervalPopup from './IntervalPopup';
 import { WS_URL } from "../helpers/constants";
 
 
-export default class ManageScreen extends Component {
-  //   --main ws--
-  // [ ManageScreen -> 'start' -> VotingStatusScreen ] -> 'done' ->  MatchScreen
+import { connect } from 'react-redux';
+import { startPost } from '../helpers/actions';
 
- 
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    start_post: (timeout, talk_time, selected, event) => dispatch(startPost(timeout, talk_time, selected, event)),  
+  }),
+)
+export default class ManageScreen extends Component {
   state = {
     selected: [],
-    participants: [], // init on open - get queue from server
+    participants: [],
     index: 0,
     popupIsOpen: false,
     test: 10 // change to default value
@@ -50,27 +58,17 @@ export default class ManageScreen extends Component {
   closeChoose = (test) => {
     this.closeInterval();
     this.setState({
-      test: parseInt(test, 10)  // from string to int
+      test: parseInt(test, 10)  
     }) 
   }
   
-  onOpenConnection = () => {
-    console.log(' - onopen - ');
-    // get participants from server queue and clean it
-    // send clients_queue ws req
-    let json = JSON.stringify({
-      command: "clients_queue"
-    });
-    this.ws.send(json);
-  }
-
-  onMessageRecieved = (e) => {
+  
+  onMessageRecieved = (e) => { // participants, selected
     
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
     if (obj.type == 'response_queue') {
-      console.log('response_queue', '--------------------->', obj.data)
       obj.data.map( (partic)=> {
         this.state.participants.push(partic);
       })
@@ -89,7 +87,6 @@ export default class ManageScreen extends Component {
     }
     if (obj.type == 'closed') {
 
-      console.log('----------CLOSED---------------!!!!!!');
       // var participant = JSON.parse(obj.data);
       for (var i = 0; i < this.state.participants.length; i++) {
         if (this.state.participants[i]._id == obj.data._id) {
@@ -117,33 +114,30 @@ export default class ManageScreen extends Component {
     }
   };
 
-  onError = (e) => {
-    console.log(e.message);
-  };
-
-  onClose = (e) => {
-    console.log(e.code, e.reason);
-  };
+   
 
   componentWillMount() {
-    this.ws = new WebSocket(WS_URL); 
-    this.ws.onopen = this.onOpenConnection;
-    this.ws.onmessage = this.onMessageRecieved;
-    this.ws.onerror = this.onError;
-    this.ws.onclose = this.onClose;
+    this.props.clients_queue()
   }
 
   start = () => {
     const { event } = this.props.navigation.state.params;
     if (this.state.selected.length > 0) {
-      let json = JSON.stringify({
-        command: "start",
-        timeout: 2,
-        talk_time: this.state.test,
-        selected: JSON.stringify(this.state.selected),
-        event: JSON.stringify(event)
-      });
-      this.ws.send(json);
+
+      this.props.start_post(
+        2, 
+          this.state.test, 
+            JSON.stringify(this.state.selected), 
+              JSON.stringify(event))
+
+      // let json = JSON.stringify({
+      //   command: "start",
+      //   timeout: 2,
+      //   talk_time: this.state.test,
+      //   selected: JSON.stringify(this.state.selected),
+      //   event: JSON.stringify(event)
+      // });
+      // this.ws.send(json);
     } else {
       alert('Select participants to start')
     }
