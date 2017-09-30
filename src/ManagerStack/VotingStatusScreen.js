@@ -164,32 +164,33 @@ export default class VotingStatusScreen extends Component {
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
           {this.state.participants.map((participant, index) => {
-            return <TouchableOpacity style={styles.containerPart} >
-              
-                <View style={styles.avatarContainer}>
-                  {participant.avatar && <Image
-                    resizeMode='contain'
-                    style={styles.avatar}
-                    source={{ uri: participant.avatar }}
-                  />}
-                </View>
-                <View style={styles.textContainer}>
-                  <Text style={[styles.text, styles.name]}> {participant.name} </Text>
-                </View>
-                <View style={styles.avatarListContainer}>
-                   {/* <Text style={[styles.text, styles.name]}>  </Text>
-                  render avatars */}
-                  { typeof participant.likes === 'object' ? participant.likes.person_likes.map( (id)=> {
+            return <TouchableOpacity 
+              style={styles.containerPart} 
+              key={index}
+            >
+            
+              <View style={styles.avatarContainer}>
+                {participant.avatar && <Image
+                  resizeMode='contain'
+                  style={styles.avatar}
+                  source={{ uri: participant.avatar }}
+                />}
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={[styles.text, styles.name]}> {participant.name} </Text>
+              </View>
+              <View style={styles.avatarListContainer}>
+                { typeof participant.likes === 'object' ? participant.likes.person_likes.map( (id, ind)=> {
                     var ob = _.find(this.state.participants, function(obj) { return obj._id == id });
                     return <Image
                       resizeMode='contain'
                       style={styles.avatarList}
                       source={{ uri: ob.avatar  }}
+                      key={ind}
                     />
                   }) : <View ></View> }
-                  
-                </View>
-              
+              </View>
+
             </TouchableOpacity>
           }
           

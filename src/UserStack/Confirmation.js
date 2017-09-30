@@ -263,15 +263,20 @@ export default class Confirmation extends Component {
           backgroundColor: '#e6e6e6',
         }}>
           <View style={{ 
-            
             flexDirection: 'row',
           }}> 
             { event.participants.map((participant, index) => {
-                return <View style={styles.avatarContainer}>
-                  <Image source={{ uri: participant.avatar }} style={styles.avatar} />
+                return <View 
+                  style={styles.avatarContainer} 
+                  key={index} 
+                > 
+                  <Image 
+                    source={{ uri: participant.avatar }}
+                    style={styles.avatar}
+                    
+                  />
                 </View>
               }
-              
             )}
           </View>   
         </View>    

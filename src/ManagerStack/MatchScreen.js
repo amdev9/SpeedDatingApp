@@ -27,7 +27,6 @@ export default class MatchScreen extends Component {
         
         <View style={styles.navBar}>
           <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.navigate('ScrollTab') }>
-            {/*   this.props.navigation.goBack() */}
             <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
             <Text style={ [styles.navBarButton,{
               fontWeight: 'bold'
@@ -39,31 +38,37 @@ export default class MatchScreen extends Component {
          
      
       <ScrollView
-          style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  
-        >
+        style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  
+      >
 
         { matches.map((object, index) => {
 
-            return <View style={ styles.containerFull }>{ object.map((participant, index) => {
-              return  (
-                <TouchableOpacity style={styles.containerPart} >
+            return <View 
+              style={styles.containerFull}
+              key={index}
+            >{ object.map((participant, ind) => {
+              return (
+                <TouchableOpacity 
+                  style={styles.containerPart} 
+                  key={ind}
+                >
+                
+                  <View style={styles.avatarContainer}>
+                    {participant.avatar && <Image
+                      resizeMode='contain'
+                      style={styles.avatar}
+                      source={{ uri: participant.avatar }}
+                    />}
+                  </View>
+                  <View style={ styles.textContainer }>
+                    <Text style={[styles.text, styles.name]}> {participant.name} </Text>
+                  </View>
                   
-                    <View style={styles.avatarContainer}>
-                      {participant.avatar && <Image
-                        resizeMode='contain'
-                        style={styles.avatar}
-                        source={{ uri: participant.avatar }}
-                      />}
-                    </View>
-                    <View style={ styles.textContainer }>
-                      <Text style={[styles.text, styles.name]}> {participant.name} </Text>
-                    </View>
-                   
                 </TouchableOpacity>
               );
             })
 
-        }</View>  //////////////
+        }</View>  
 
           })
         } 

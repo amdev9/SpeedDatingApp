@@ -272,7 +272,7 @@ export default class EventPopup extends Component {
               <View style={styles.sectionTables}>
                 <Text style={styles.sectionHeader}>Выберите номер стола</Text>
                 <Options
-                  values={_.range(1, table_max + 1)}
+                  values={_.range(1, table_max + 1).map( (el) => { return el.toString() })}  
                   chosen={chosenTable}
                   onChoose={onChooseTable}
                 />
