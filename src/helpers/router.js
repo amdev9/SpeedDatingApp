@@ -28,6 +28,8 @@ import VotingStatusScreen from '../ManagerStack/VotingStatusScreen';
 import MatchScreen from '../ManagerStack/MatchScreen';
 
 
+import ModalStack from './AppNavigation';
+
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
@@ -42,120 +44,14 @@ export const ResetToSignedIn = NavigationActions.reset({
   index: 0,
   key: null,
   actions: [
-    NavigationActions.navigate({ routeName: 'ModalStack' })
+    NavigationActions.navigate({ routeName: 'ModalStack' }) 
   ]
 })
-
-const EditStack = StackNavigator({
-  Edit: {
-    screen: Edit,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Gender: {
-    screen: GenderModal,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  University: {
-    screen: UniversityModal,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Work: {
-    screen: WorkModal,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-}, {
-  mode: 'modal',
-  headerMode: 'none',
-});
-
-export const ModalStack = StackNavigator({ // wrap with AppNavigator
-  ScrollTab: { 
-    screen: ScrollTab,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Settings: { 
-    screen: SettingsScreen,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Edit: { 
-    screen: EditStack,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Confirmation: { 
-    screen: Confirmation,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  ManagePermission: { 
-    screen: ManagePermissionScreen,
-    navigationOptions: {
-      gesturesEnabled: false
-    } 
-  },
-  // user 
-  Join: { 
-    screen: JoinScreen,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  }, // fix??
-  Voting: { 
-    screen: VotingScreen,
-    navigationOptions: {
-      gesturesEnabled: false
-    } 
-  },
-  VotePush: { 
-    screen: VotePushScreen,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },   
-  // manager
-  Manage: { 
-    screen: ManageScreen,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  }, // fix??
-  VotingStatus: { 
-    screen: VotingStatusScreen,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },
-  Match: { 
-    screen: MatchScreen,
-    navigationOptions: {
-      gesturesEnabled: false
-    }
-  },   
-  
-}, {
-  mode: 'modal',
-  headerMode: 'none',
-});
-
 
 export const createRootNavigator = (signedIn = false) => {
   return StackNavigator(
     {
-      ModalStack: { // change to AppNavigator = wrapped ModalStack
+      ModalStack: { // AppWithNavigationState
         screen: ModalStack,
         navigationOptions: {
           gesturesEnabled: false
@@ -171,7 +67,7 @@ export const createRootNavigator = (signedIn = false) => {
     {
       headerMode: "none",
       mode: "modal",
-      initialRouteName: signedIn ? "ModalStack" : "Login"
+      initialRouteName: signedIn ? "ModalStack" : "Login" 
     }
   );
 };

@@ -19,11 +19,13 @@ const socketMiddleware = (function(){
   }
 
   const onMessage = (ws,store) => evt => {
-    //Parse the JSON message received on the websocket
     var msg = JSON.parse(evt.data);
+    // ADD DISPATCH NAVIGATION 
+    // import { NavigationActions } from 'react-navigation';
+    // store.dispatch(NavigationActions.navigate({ routeName: 'Login' })),
+    // .then(  ----  https://github.com/reactjs/redux/issues/1251
     switch(msg.type) {
       case "EVENTS_LIST": 
-        //Dispatch an action that adds the received message to our state
         store.dispatch(actions.eventsList(msg));
         break;
       case "EVENT_DECISION": 
@@ -54,7 +56,7 @@ const socketMiddleware = (function(){
         store.dispatch(actions.next(msg))
         break;
       case "LAST":
-        store.dispatch(actions.last(msg))
+        store.dispatch(actions.last(msg)) 
         break;
 
       default:

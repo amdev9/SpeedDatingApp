@@ -155,12 +155,78 @@ export default  reducer = (state = { events: [], loading: true }, action) => {
         };
       
       case 'WEBSOCKET:CALCULATE_CLIENT':
-        // update 
-        return {};
+        const data = JSON.parse(action.payload.data);
+        // var founded = JSON.parse(obj.data); 
+        // for (var key in founded ) {
+        //   if (person._id == key) {
+        //     founded[key].shift();  
+        //     founded[key].forEach( (item) => {
+        //       if(!_.some(this.state.persons, item) ) {
+        //         this.state.persons.push(item);
+        //       }
+        //     })
+        //     this.saveData(this.state.persons).done()
+        //     this.setState({
+        //       persons: this.state.persons
+        //     })
+        //   }      
+        // }
+        return {
+          ...state,
+          persons: data
+        };
 
       case 'WEBSOCKET:CALCULATE_MANAGER':
-        // update
-        return {};
+        const data = JSON.parse(action.payload.data);
+        // var obj = JSON.parse(e.data); 
+        // const { navigate } = this.props.navigation;
+        // var founded = JSON.parse(obj.data);
+        // Array.prototype.indexOfForArrays = function(search)
+        // {
+        //   var searchJson = JSON.stringify(search); // "[3,566,23,79]"
+        //   var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
+        //   return arrJson.indexOf(searchJson);
+        // };
+        // for (var key in founded ) { 
+        //     founded[key].shift();  
+        // }
+        // var passed = [];
+        // var final = [];
+        // for (var key in founded ) {
+        //     founded[key].forEach( (item) => {  // null
+        //         founded[item._id].forEach( (found) => {
+        //             if (found._id == key) {
+        //                 var s = [key, item._id].sort();
+        //                 if ( passed.indexOfForArrays(s) < 0 ) { 
+        //                     passed.push(s);
+        //                 } else {
+        //                     final.push(s); // [ s, .. ]
+        //                 }
+        //             }
+        //         })
+        //     })
+        // }
+        // var final_ob_done = []; // array of pairs = 2 item arrays
+        // final.forEach( (fin) => {
+        //   var final_ob = [];
+        //   for (var key in founded ) { 
+        //       founded[key].forEach ( (it) => {
+        //           if ( fin.indexOf(it._id) > -1 ) {
+        //             var ind = fin.indexOf(it._id);
+        //             fin.slice(ind , 1);
+        //             final_ob.push(it);
+        //           }
+        //       })
+        //   }
+        //   final_ob_done.push(final_ob);
+        // })
+        // navigate('Match', {
+        //   matches: final_ob_done
+        // }); 
+        return {
+          ...state,
+          matches: data
+        };
       
       default:
         return state
