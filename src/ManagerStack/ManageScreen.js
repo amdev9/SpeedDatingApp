@@ -41,13 +41,13 @@ export default class ManageScreen extends Component {
     super(props);
     this.state = {
       // selected: [],
-      //   participants: [],
+      // participants: [],
       index: 0,
       popupIsOpen: false,
       test: 10 // change to default value
     };
   }  
- 
+   
   openInterval = () => {
     this.setState({
       popupIsOpen: true,
@@ -125,9 +125,7 @@ export default class ManageScreen extends Component {
     
     const { selected, start_post } = this.props;
 
-    console.log('selected: ', selected);
-    
-    const { event } = this.props.navigation.state.params;
+    const { event, person } = this.props.navigation.state.params;
     if (selected.length > 0) {
     
       start_post(
@@ -135,6 +133,14 @@ export default class ManageScreen extends Component {
           this.state.test, 
             JSON.stringify(selected), 
               JSON.stringify(event))
+
+      const { navigate } = this.props.navigation;
+      navigate('VotingStatus', {
+        participants: selected,
+        person: person,
+        event: event
+      });  
+
 
       // let json = JSON.stringify({
       //   command: "start",

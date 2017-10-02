@@ -68,13 +68,13 @@ export default actions = {
           data: msg,
         }
     }),
-    selected: (msg) => ({  
-        type: WEBSOCKET_SELECTED,
-        payload: {
-          timestamp: new Date(),
-          data: msg,
-        }
-    }),
+    // selected: (msg) => ({  
+    //     type: WEBSOCKET_SELECTED,
+    //     payload: {
+    //       timestamp: new Date(),
+    //       data: msg,
+    //     }
+    // }),
     likesPost: (msg) => ({  
         type: WEBSOCKET_LIKES_POST,
         payload: {

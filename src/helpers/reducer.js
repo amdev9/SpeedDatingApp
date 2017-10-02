@@ -16,20 +16,6 @@ export default  reducer = (state = { events: [], loading: true, participants: []
 
     switch (action.type) {
   
-      case 'WEBSOCKET:CALCULATE_ON_SELECTED':
-        let participant = action.participant;
-        if (state.selected.includes(participant)) {
-          return {
-            ...state,
-            selected: remove(state.selected, participant)
-          }
-        } else {
-          return {
-            ...state,
-            selected: add(state.selected, participant)
-          }
-        }
-
       case 'WEBSOCKET:EVENT_DECISION':
         let updatedEvent = JSON.parse(action.payload.data.event);  
         return { 
@@ -69,22 +55,44 @@ export default  reducer = (state = { events: [], loading: true, participants: []
           participants: state.participants.concat(user)  
         }
       
-      case 'WEBSOCKET:SELECTED':
-        let selected_data = action.payload.data.data;
-        // var selected_data = JSON.parse(obj.data);
-        // this.setState({
-        //   selected: selected_data
-        // })
-        // const { navigate } = this.props.navigation;
-        // navigate('VotingStatus', {
-        //   participants: this.state.selected,
-        //   person: this.props.navigation.state.params.person,
-        //   event: this.props.navigation.state.params.event
-        // });    
-        return {
-          ...state,
-          selected: selected_data
+      case 'WEBSOCKET:CALCULATE_ON_SELECTED':
+        let participant = action.participant;
+        if (state.selected.includes(participant)) {
+          return {
+            ...state,
+            selected: remove(state.selected, participant)
+          }
+        } else {
+          return {
+            ...state,
+            selected: add(state.selected, participant)
+          }
         }
+        
+      // case 'WEBSOCKET:NEXT': 
+        
+      //   // add index!!!
+
+      //   var participant = JSON.parse(obj.data);
+      //   for (var i = 0; i < participant.length; i++) {
+      //     if (participant[i]._id == this.props.navigation.state.params.person._id) {
+      //       participant.splice(i, 1); 
+      //       break;
+      //     }
+      //   }
+      //   // this.setState({
+      //   //   participant: participant[this.state.index]
+      //   // })
+      //   // const { navigate } = this.props.navigation;
+      //   // navigate('Voting', {
+      //   //   participant: this.state.participant,
+      //   //   person: this.props.navigation.state.params.person
+      //   // });  
+      //   // this.state.index++;
+      //   return {
+      //     ...state,
+
+      //   }
 
       default: {
         return {
@@ -93,7 +101,7 @@ export default  reducer = (state = { events: [], loading: true, participants: []
       }
        
 
-   
+      
 
       // case 'WEBSOCKET:CLOSED': 
       //   let data = JSON.parse(action.payload.data);
@@ -113,6 +121,22 @@ export default  reducer = (state = { events: [], loading: true, participants: []
       //     )
       //   }
 
+      // case 'WEBSOCKET:SELECTED':
+      // let selected_data = action.payload.data.data;
+      // // var selected_data = JSON.parse(obj.data);
+      // // this.setState({
+      // //   selected: selected_data
+      // // })
+      // // const { navigate } = this.props.navigation;
+      // // navigate('VotingStatus', {
+      // //   participants: this.state.selected,
+      // //   person: this.props.navigation.state.params.person,
+      // //   event: this.props.navigation.state.params.event
+      // // });    
+      // return {
+      //   ...state,
+      //   selected: selected_data
+      // }
     
       // case 'WEBSOCKET:LIKES_POST':
       //   let data = JSON.parse(action.payload.data);
@@ -144,27 +168,7 @@ export default  reducer = (state = { events: [], loading: true, participants: []
       //     )
       //   }
 
-      // case 'WEBSOCKET:NEXT': 
-      //   let participant = JSON.parse(action.payload.data);
-      //   // add index!!!
-
-      //   // var participant = JSON.parse(obj.data);
-      //   // for (var i = 0; i < participant.length; i++) {
-      //   //   if (participant[i]._id == this.props.navigation.state.params.person._id) {
-      //   //     participant.splice(i, 1); 
-      //   //     break;
-      //   //   }
-      //   // }
-      //   // this.setState({
-      //   //   participant: participant[this.state.index]
-      //   // })
-      //   // const { navigate } = this.props.navigation;
-      //   // navigate('Voting', {
-      //   //   participant: this.state.participant,
-      //   //   person: this.props.navigation.state.params.person
-      //   // });  
-      //   // this.state.index++;
-      //   return {}
+      
 
       // case 'WEBSOCKET:LAST': 
       //   let data = JSON.parse(action.payload.data);

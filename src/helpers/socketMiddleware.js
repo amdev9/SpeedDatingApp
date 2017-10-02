@@ -40,9 +40,9 @@ const socketMiddleware = (function(){
       case "CLOSED":
         store.dispatch(actions.closed(msg));
         break;
-      case "SELECTED":
-        store.dispatch(actions.selected(msg))
-        break;
+      // case "SELECTED":
+      //   store.dispatch(actions.selected(msg))
+      //   break;
       case "CALCULATE_CLIENT": // myMatchScreen - client 
         store.dispatch(actions.calculate_client(msg))
         break;

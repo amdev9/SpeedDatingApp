@@ -50,7 +50,7 @@ export default class JoinScreen extends Component {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
-    if (obj.type == 'next') {
+    if (obj.type == 'NEXT') { // remove myself from selected
       var participant = JSON.parse(obj.data);
       for (var i = 0; i < participant.length; i++) {
         if (participant[i]._id == this.props.navigation.state.params.person._id) {
@@ -69,7 +69,7 @@ export default class JoinScreen extends Component {
       this.state.index++;
     }
 
-    if (obj.type == 'last') {
+    if (obj.type == 'LAST') {
       var selected_data = JSON.parse(obj.data);
       this.setState({
         selected: selected_data
@@ -95,7 +95,7 @@ export default class JoinScreen extends Component {
   // }
 
   // onError = (e) => {
-  //   console.log(e.message);
+    // console.log(e.message);
   // };
 
   // onClose = (e) => {
@@ -111,6 +111,9 @@ export default class JoinScreen extends Component {
 
   componentWillMount() {
     this.props.connect(this.props.navigation.state.params.person);
+
+    
+
     // var connected = JSON.stringify({
     //   command: "connected",
     //   data: this.props.navigation.state.params.person
