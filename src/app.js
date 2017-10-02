@@ -20,7 +20,14 @@ import { WS_URL } from "./helpers/constants";
 
 import { Provider } from 'react-redux';
 import configureStore from './helpers/store';
-const store = configureStore({})
+
+let state = { 
+  events: [], 
+  loading: true, 
+  participants: [],
+  selected: []
+}; // preloadedState - when init from background
+const store = configureStore(state)
 
 const action = () => {
   return {

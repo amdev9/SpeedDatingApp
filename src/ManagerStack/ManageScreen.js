@@ -23,25 +23,30 @@ import { WS_URL } from "../helpers/constants";
 
 
 import { connect } from 'react-redux';
-import { startPost } from '../helpers/actions';
+import { startPost, clientsQueue, onSelected } from '../helpers/actions';
 
 @connect(
   state => ({
-    events: state.events,
-    loading: state.loading,
+    participants: state.participants,
+    selected: state.selected
   }),
   dispatch => ({
     start_post: (timeout, talk_time, selected, event) => dispatch(startPost(timeout, talk_time, selected, event)),  
+    clients_queue: () => dispatch(clientsQueue()),  
+    on_selected: (participant) => dispatch(onSelected(participant)),  
   }),
 )
 export default class ManageScreen extends Component {
-  state = {
-    selected: [],
-    participants: [],
-    index: 0,
-    popupIsOpen: false,
-    test: 10 // change to default value
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      // selected: [],
+      //   participants: [],
+      index: 0,
+      popupIsOpen: false,
+      test: 10 // change to default value
+    };
+  }  
  
   openInterval = () => {
     this.setState({
@@ -63,68 +68,72 @@ export default class ManageScreen extends Component {
   }
   
   
-  onMessageRecieved = (e) => { // participants, selected
+  // onMessageRecieved = (e) => { // participants, selected
     
-    console.log(e.data);
-    var obj = JSON.parse(e.data); 
+  //   console.log(e.data);
+  //   var obj = JSON.parse(e.data); 
     
-    if (obj.type == 'response_queue') {
-      obj.data.map( (partic)=> {
-        this.state.participants.push(partic);
-      })
-      this.setState({
-        participants: this.state.participants
-      })
-    }
+  //   if (obj.type == 'response_queue') {
+  //     obj.data.map( (partic)=> {
+  //       this.state.participants.push(partic);
+  //     })
+  //     this.setState({
+  //       participants: this.state.participants
+  //     })
+  //   }
 
-    // change to listen each on websocket , not all together
-    if (obj.type == 'connected') {
-      this.state.participants.push(obj.data);
-      this.setState({
-        participants: this.state.participants
-      })
-    }
-    if (obj.type == 'closed') {
-      for (var i = 0; i < this.state.participants.length; i++) {
-        if (this.state.participants[i]._id == obj.data._id) {
-          this.state.participants.splice(i, 1); 
-          break;
-        }
-      }
-      this.setState({
-        participants: this.state.participants
-      })
-    }
+  //   // change to listen each on websocket , not all together
+  //   if (obj.type == 'connected') {
+  //     this.state.participants.push(obj.data);
+  //     this.setState({
+  //       participants: this.state.participants
+  //     })
+  //   }
+  //   if (obj.type == 'closed') {
+  //     for (var i = 0; i < this.state.participants.length; i++) {
+  //       if (this.state.participants[i]._id == obj.data._id) {
+  //         this.state.participants.splice(i, 1); 
+  //         break;
+  //       }
+  //     }
+  //     this.setState({
+  //       participants: this.state.participants
+  //     })
+  //   }
 
-    if (obj.type == 'selected') {
-      var selected_data = JSON.parse(obj.data);
-      this.setState({
-        selected: selected_data
-      })
+  //   if (obj.type == 'selected') {
+  //     var selected_data = JSON.parse(obj.data);
+  //     this.setState({
+  //       selected: selected_data
+  //     })
 
-      const { navigate } = this.props.navigation;
-      navigate('VotingStatus', {
-        participants: this.state.selected,
-        person: this.props.navigation.state.params.person,
-        event: this.props.navigation.state.params.event
-      });    
-    }
-  };
+  //     const { navigate } = this.props.navigation;
+  //     navigate('VotingStatus', {
+  //       participants: this.state.selected,
+  //       person: this.props.navigation.state.params.person,
+  //       event: this.props.navigation.state.params.event
+  //     });    
+  //   }
+  // };
 
    
-
   componentWillMount() {
     this.props.clients_queue()
   }
 
   start = () => {
-    const { event } = this.props.navigation.state.params;
-    if (this.state.selected.length > 0) {
+    
+    const { selected, start_post } = this.props;
 
-      this.props.start_post(
+    console.log('selected: ', selected);
+    
+    const { event } = this.props.navigation.state.params;
+    if (selected.length > 0) {
+    
+      start_post(
         2, 
           this.state.test, 
-            JSON.stringify(this.state.selected), 
+            JSON.stringify(selected), 
               JSON.stringify(event))
 
       // let json = JSON.stringify({
@@ -140,32 +149,35 @@ export default class ManageScreen extends Component {
     }
   }
 
-  onSelected = (participant) => {
-    if(!_.includes(this.state.selected, participant)) {
-      this.state.selected.push(participant)
-      // add color
-    } else {
-      _.remove(this.state.selected, participant);
-      // remove color
-    }
-  }
+  // onSelected = (participant) => { // change to action func
+  //   const { selected } = this.props;
+  //   if(!_.includes(selected, participant)) {
+  //     selected.push(participant)
+  //     // add color
+  //   } else {
+  //     _.remove(selected, participant);
+  //     // remove color
+  //   }
+  // }
 
   render() {
-    
+    const { participants, on_selected } = this.props;
+    console.log(participants)
     const { event } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
 
         <View style={styles.navBar}>
-          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
-            {/*   this.props.navigation.goBack() */}
-            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
-            <Text style={ [styles.navBarButton,{
-              fontWeight: 'bold'
-            }]}>Назад к мероприятиям</Text>       
-          </TouchableOpacity>   
-          <Text style={styles.navBarHeader}></Text>
-          <Text style={styles.navBarButton}></Text> 
+        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
+          <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
+          <Text style={ [styles.navBarButton,{
+            fontWeight: 'bold',
+            fontSize: 16,
+            marginLeft: 5
+          }]}>Назад к мероприятиям</Text>       
+        </TouchableOpacity>   
+        <Text style={styles.navBarHeader}></Text>
+        <Text style={styles.navBarButton}></Text> 
         </View>
          
         <View style={{
@@ -192,7 +204,7 @@ export default class ManageScreen extends Component {
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
-          {this.state.participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={this.onSelected}/>)}
+          {participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={on_selected}/>)}
         </ScrollView>
 
 
@@ -222,8 +234,8 @@ const styles = StyleSheet.create({
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
-    height: 64,
-    backgroundColor: '#FFFFFF' // '#1EAAF1'
+    // height: 64,
+    backgroundColor: '#FFFFFF' 
   },
   navBarButton: {
     color: '#262626',
@@ -232,7 +244,7 @@ const styles = StyleSheet.create({
     color: '#3f88fb'
   },
   navBarButtonIcon: {
-    marginTop: -4,
+    marginTop: -2,
     color: '#262626',
     textAlign:'center',
     marginLeft: 10,
@@ -246,7 +258,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     ...defaultStyles.text,
     fontSize: 15,
-    // marginTop: 7
   },
   //////
   header: {

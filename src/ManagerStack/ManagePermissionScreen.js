@@ -48,15 +48,18 @@ export default class ManagePermissionScreen extends Component {
     const { person, participants } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
+        
         <View style={styles.navBar}>
-          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
-            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
-            <Text style={ [styles.navBarButton,{
-              fontWeight: 'bold'
-            }]}>Назад к мероприятиям</Text>       
-          </TouchableOpacity>   
-          <Text style={styles.navBarHeader}></Text>
-          <Text style={styles.navBarButton}></Text> 
+        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
+          <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
+          <Text style={ [styles.navBarButton,{
+            fontWeight: 'bold',
+            fontSize: 16,
+            marginLeft: 5
+          }]}>Назад к мероприятиям</Text>       
+        </TouchableOpacity>   
+        <Text style={styles.navBarHeader}></Text>
+        <Text style={styles.navBarButton}></Text> 
         </View>
 
 
@@ -78,11 +81,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF'
   },
+
+
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
     // height: 64,
-    backgroundColor: '#FFFFFF' // '#1EAAF1'
+    backgroundColor: '#FFFFFF' 
   },
   navBarButton: {
     color: '#262626',
@@ -91,7 +96,7 @@ const styles = StyleSheet.create({
     color: '#3f88fb'
   },
   navBarButtonIcon: {
-    marginTop: -4,
+    marginTop: -2,
     color: '#262626',
     textAlign:'center',
     marginLeft: 10,
@@ -105,7 +110,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     ...defaultStyles.text,
     fontSize: 15,
-    // marginTop: 7
   },
 
 

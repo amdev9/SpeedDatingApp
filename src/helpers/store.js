@@ -19,4 +19,5 @@ export default function configureStore(initialState) {
   return createStore(reducer, initialState,
       applyMiddleware(thunk, socketMiddleware)
   )
+  // createStore(reducer, [preloadedState], [enhancer]) // preloadedState - when init from background
 }

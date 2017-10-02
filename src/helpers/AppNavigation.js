@@ -4,6 +4,31 @@ import { Platform, StatusBar } from "react-native";
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
+
+import Confirmation from '../UserStack/Confirmation';
+import JoinScreen from '../UserStack/JoinScreen';
+import VotingScreen from '../UserStack/VotingScreen';
+import VotePushScreen from '../UserStack/VotePushScreen';
+
+import Profile from '../RootScroll/Profile';
+import MymatchesScreen from '../RootScroll/MymatchesScreen';
+import ScrollTab from '../RootScroll/ScrollTab';
+import Events from '../RootScroll/Events/Events';
+
+import Edit from '../EditStack/Edit';
+import GenderModal from '../EditStack/GenderModal';
+import WorkModal from '../EditStack/WorkModal';
+import UniversityModal from '../EditStack/UniversityModal';
+
+import SettingsScreen from '../SettingsStack/SettingsScreen';
+
+import ManagePermissionScreen from '../ManagerStack/ManagePermissionScreen';
+import ManageScreen from '../ManagerStack/ManageScreen';
+import VotingStatusScreen from '../ManagerStack/VotingStatusScreen';
+import MatchScreen from '../ManagerStack/MatchScreen';
+
+
+
 const EditStack = StackNavigator({
     Edit: {
       screen: Edit,
@@ -119,7 +144,8 @@ export default ModalStack = StackNavigator({
 //     nav: PropTypes.object.isRequired,
 // };
 
-// const mapStateToProps = state => ({
+// const mapStateToProps = state => ({ // (state, props) 
 //     nav: state.nav,
+//     // add params from props to state
 // });
 // export default connect(mapStateToProps)(AppWithNavigationState);

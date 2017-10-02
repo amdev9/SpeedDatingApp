@@ -1,4 +1,4 @@
-import { WEBSOCKET_CALCULATE_MANAGER, WEBSOCKET_CALCULATE_CLIENT, WEBSOCKET_NEXT, WEBSOCKET_LAST, WEBSOCKET_LIKES_POST, WEBSOCKET_SELECTED, WEBSOCKET_CLOSED, WEBSOCKET_CONNECTED, WEBSOCKET_RESPONSE_QUEUE, WEBSOCKET_SEND, WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPENED, WEBSOCKET_DISCONNECTED, WEBSOCKET_MESSAGE } from './constants';
+import { WEBSOCKET_ON_SELECTED, WEBSOCKET_CALCULATE_MANAGER, WEBSOCKET_CALCULATE_CLIENT, WEBSOCKET_NEXT, WEBSOCKET_LAST, WEBSOCKET_LIKES_POST, WEBSOCKET_SELECTED, WEBSOCKET_CLOSED, WEBSOCKET_CONNECTED, WEBSOCKET_RESPONSE_QUEUE, WEBSOCKET_SEND, WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPENED, WEBSOCKET_DISCONNECTED, WEBSOCKET_MESSAGE } from './constants';
 
 
 export default actions = {
@@ -186,11 +186,12 @@ export function clientsQueue() {
     }
 }
 
-export function connected() { 
+export function connected(user) { 
     const action = () => {
         return {
             type: WEBSOCKET_SEND,
-            command: 'connected'
+            command: 'connected',
+            data: user
         }
     }
     return (dispatch) => {
@@ -198,7 +199,7 @@ export function connected() {
     }
 }
 
-export function closed() { 
+export function closed() {  // update!!!
     const action = () => {
         return {
             type: WEBSOCKET_SEND,
@@ -232,6 +233,18 @@ export function startPost(timeout, talk_time, selected, event) {
             talk_time: talk_time,
             selected: selected,
             event: event
+        }
+    }
+    return (dispatch) => {
+        dispatch(action())
+    }
+}
+
+export function onSelected(participant) {
+    const action = () => {
+        return {
+            type: WEBSOCKET_ON_SELECTED,
+            participant: participant
         }
     }
     return (dispatch) => {

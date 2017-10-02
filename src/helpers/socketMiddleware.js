@@ -10,7 +10,7 @@ const socketMiddleware = (function(){
     //Send a handshake, or authenticate with remote end
 
     //Tell the store we're connected
-    store.dispatch(actions.connected());
+    store.dispatch(actions.opened());
   }
 
   const onClose = (ws,store) => evt => {
@@ -22,7 +22,7 @@ const socketMiddleware = (function(){
     var msg = JSON.parse(evt.data);
     // ADD DISPATCH NAVIGATION 
     // import { NavigationActions } from 'react-navigation';
-    // store.dispatch(NavigationActions.navigate({ routeName: 'Login' })),
+    // store.dispatch(NavigationActions.navigate({ routeName: 'Login' })), // params from NavigationActions.navigate.state.params.
     // .then(  ----  https://github.com/reactjs/redux/issues/1251
     switch(msg.type) {
       case "EVENTS_LIST": 

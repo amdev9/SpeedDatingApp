@@ -33,7 +33,7 @@ import { connect } from 'react-redux';
     loading: state.loading,
   }),
   dispatch => ({
-    refresh: () => dispatch(fetchEvents()),  // {type: 'GET_EVENT_DATA'}
+    refresh: () => dispatch(fetchEvents()),   
   }),
 )
 export default class Events extends Component {

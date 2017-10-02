@@ -26,9 +26,8 @@ const { width, height } = Dimensions.get('window');
 import { WS_URL } from "../helpers/constants";
 
 
-
-import { fetchEvents } from '../../helpers/actions';
-import { connected, closed } from 'react-redux';
+import { fetchEvents, connected, closed } from '../helpers/actions';
+import { connect } from 'react-redux';
 
 @connect(
   state => ({
@@ -36,7 +35,7 @@ import { connected, closed } from 'react-redux';
     loading: state.loading,
   }),
   dispatch => ({
-    connect: () => dispatch(connected()), 
+    connect: (user) => dispatch(connected(user)), 
     close: () => dispatch(closed()), 
   }),
 )
@@ -131,9 +130,7 @@ export default class JoinScreen extends Component {
   render() {
     const { person } =  this.props.navigation.state.params;     
     return (
-      
-    <View style={styles.container}>
-     
+      <View style={styles.container}>
         <View style={styles.navBar}>
           <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
             <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
@@ -154,12 +151,10 @@ export default class JoinScreen extends Component {
           <Image source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Red_Bull_Headquarters_1_%28DFdB%29.JPG/1920px-Red_Bull_Headquarters_1_%28DFdB%29.JPG' }} style={styles.image} />
         </View> 
  
-        
-        
         <Text style={{ 
           marginLeft: 20, 
           marginBottom: 10
-        }}> description </Text>
+        }}> Ожидайте начала .. </Text>
       
           
         <View style={{ 
@@ -167,7 +162,7 @@ export default class JoinScreen extends Component {
           marginBottom: 10,
           
         }}>
-          <Text>Ты можешь встетить их</Text>
+          {/* <Text>Ты можешь встетить их</Text> */}
         </View>
         <View style={{ 
           alignItems: 'center',
@@ -176,9 +171,6 @@ export default class JoinScreen extends Component {
            
         </View>      
       </View>
-
-      
-      
     );
   }
 }
