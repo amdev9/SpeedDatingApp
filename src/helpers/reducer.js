@@ -1,13 +1,12 @@
 export default  reducer = (state = { events: [], loading: true, participants: [], selected: [] }, action) => {
     
-    
+ 
     function remove(array, element) {
-      const index = array.indexOf(element);
-      var removeByIndex = (array, index) => array.filter((_, i) => i !== index);
-      if (index !== -1) {
-         var final = removeByIndex(array, index); 
-         return final;
-      } 
+      var index = array.indexOf(element);
+      if(index!== -1) {
+        var arr2 = array.slice(1, index+1);
+        return arr2;
+      }
     }
     
     function add(array, element) {
