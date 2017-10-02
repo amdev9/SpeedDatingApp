@@ -96,20 +96,20 @@ export default actions = {
           data: msg,
         }
     }),
-    calculate_client: (msg) => ({  
-        type: WEBSOCKET_CALCULATE_CLIENT,
-        payload: {
-          timestamp: new Date(),
-          data: msg,
-        }
-    }),
-    calculate_manager: (msg) => ({  
-        type: WEBSOCKET_CALCULATE_MANAGER,
-        payload: {
-          timestamp: new Date(),
-          data: msg,
-        }
-    }),
+    // calculate_client: (msg) => ({  
+    //     type: WEBSOCKET_CALCULATE_CLIENT,
+    //     payload: {
+    //       timestamp: new Date(),
+    //       data: msg,
+    //     }
+    // }),
+    // calculate_manager: (msg) => ({  
+    //     type: WEBSOCKET_CALCULATE_MANAGER,
+    //     payload: {
+    //       timestamp: new Date(),
+    //       data: msg,
+    //     }
+    // }),
 };
 
 export function fetchEvents() { 

@@ -84,50 +84,30 @@ export default class JoinScreen extends Component {
     }
   };
 
-  // onOpenConnection = () => {
-  //   console.log(' - onopen - ');
-  //   // send that user connected 
-  //   var connected = JSON.stringify({
-  //     command: "connected",
-  //     data: this.props.navigation.state.params.person
-  //   });
-  //   this.ws.send(connected);
-  // }
-
-  // onError = (e) => {
-    // console.log(e.message);
-  // };
-
-  // onClose = (e) => {
-  //   console.log(e.code, e.reason);
-  //   // send that user connected 
-  //   var closed = JSON.stringify({
-  //     command: "closed",
-  //     data: this.props.navigation.state.params.person
-  //   });
-  //   this.ws.send(closed);
-
-  // };
-
+  ///
+  onOpenConnection = () => {
+    console.log(' - onopen - ');
+  }
+  onError = (e) => {
+    console.log(e.message);
+  };
+  onClose = (e) => {
+    console.log(e.code, e.reason);
+  };
+    
+  ///
   componentWillMount() {
     this.props.connect(this.props.navigation.state.params.person);
 
-    
-
-    // var connected = JSON.stringify({
-    //   command: "connected",
-    //   data: this.props.navigation.state.params.person
-    // });
-    // this.ws.send(connected);
+    this.ws = new WebSocket('ws://localhost:3000'); // localhost
+    this.ws.onopen = this.onOpenConnection;
+    this.ws.onmessage = this.onMessageRecieved;
+    this.ws.onerror = this.onError;
+    this.ws.onclose = this.onClose;
   }
 
   componentWillUnmount() {
     this.props.close(this.props.navigation.state.params.person);
-    // var closed = JSON.stringify({
-    //   command: "closed",
-    //   data: this.props.navigation.state.params.person
-    // });
-    // this.ws.send(closed);
   }
 
   render() {

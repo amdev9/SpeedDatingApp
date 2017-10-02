@@ -43,21 +43,23 @@ const socketMiddleware = (function(){
       // case "SELECTED":
       //   store.dispatch(actions.selected(msg))
       //   break;
-      case "CALCULATE_CLIENT": // myMatchScreen - client 
-        store.dispatch(actions.calculate_client(msg))
-        break;
-      case "CALCULATE_MANAGER": // votingStatusScreen - manager 
-        store.dispatch(actions.calculate_manager(msg))
-        break;
-      case "LIKES_POST":
-        store.dispatch(actions.likesPost(msg))
-        break;
-      case "NEXT":
-        store.dispatch(actions.next(msg))
-        break;
-      case "LAST":
-        store.dispatch(actions.last(msg)) 
-        break;
+
+
+      // case "CALCULATE_CLIENT": // myMatchScreen - client 
+      //   store.dispatch(actions.calculate_client(msg))
+      //   break;
+      // case "CALCULATE_MANAGER": // votingStatusScreen - manager 
+      //   store.dispatch(actions.calculate_manager(msg))
+      //   break;
+      // case "LIKES_POST":
+      //   store.dispatch(actions.likesPost(msg))
+      //   break;
+      // case "NEXT":
+      //   store.dispatch(actions.next(msg))
+      //   break;
+      // case "LAST":
+      //   store.dispatch(actions.last(msg)) 
+      //   break;
 
       default:
         console.log("Received unknown message type: '" + msg.type + "'");

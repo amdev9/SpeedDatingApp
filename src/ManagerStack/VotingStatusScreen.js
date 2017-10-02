@@ -14,9 +14,10 @@ import _ from 'lodash';
 
 import { defaultStyles } from '../styles';
 import { WS_URL } from "../helpers/constants";
-import { calculatePost } from '../helpers/actions';
+
 import { connect } from 'react-redux';
 
+import { calculatePost } from '../helpers/actions';
 
 @connect(
   state => ({
@@ -40,8 +41,11 @@ export default class VotingStatusScreen extends Component {
   onMessageRecieved = (e) => { // navigate(final_ob_done) , participants
   
     var obj = JSON.parse(e.data); 
-    if (obj.type == 'calculate') {
-      const { navigate } = this.props.navigation;
+    console.log(obj)
+    if (obj.type == 'CALCULATE_MANAGER') {
+      // var final_ob_done = JSON.parse(obj.data);
+      // console.log(final_ob_done);
+
       var founded = JSON.parse(obj.data);
       Array.prototype.indexOfForArrays = function(search)
       {
@@ -82,10 +86,11 @@ export default class VotingStatusScreen extends Component {
         }
         final_ob_done.push(final_ob);
       })
+      const { navigate } = this.props.navigation;
       navigate('Match', {
         matches: final_ob_done
-      });  
-    } else if ( obj.type == 'likes_post' ) {
+      });
+    } else if ( obj.type == 'LIKES_POST' ) {
 
       var lik = JSON.parse(obj.data);
       this.state.participants.map( (participant) => {
@@ -105,12 +110,29 @@ export default class VotingStatusScreen extends Component {
     }
   };
 
-  
-
   _calculate = async () => {
     const { event } =  this.props.navigation.state.params;
     this.props.calculate(event._id);
   }
+  
+  ///
+  onOpenConnection = () => {
+    console.log(' - onopen - ');
+  }
+  onError = (e) => {
+    console.log(e.message);
+  };
+  onClose = (e) => {
+    console.log(e.code, e.reason);
+  };
+  componentWillMount() {
+    this.ws = new WebSocket('ws://localhost:3000'); // localhost
+    this.ws.onopen = this.onOpenConnection;
+    this.ws.onmessage = this.onMessageRecieved;
+    this.ws.onerror = this.onError;
+    this.ws.onclose = this.onClose;
+  }
+  ///
 
   render() {
     
@@ -162,7 +184,7 @@ export default class VotingStatusScreen extends Component {
         <TouchableHighlight
             underlayColor="#9575CD"
             style={styles.buttonContainer}
-            onPress={this.props._calculate} 
+            onPress={this._calculate} 
         >
             <Text style={styles.button}>Подсчитать совпадения</Text>
         </TouchableHighlight> 

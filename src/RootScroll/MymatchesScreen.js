@@ -73,7 +73,7 @@ export default class MymatchesScreen extends Component {
     var obj = JSON.parse(e.data); 
     const { person } = this.props 
 
-    if (obj.type == 'calculate') {
+    if (obj.type == 'CALCULATE_CLIENT') {
       var founded = JSON.parse(obj.data); 
       for (var key in founded ) {
         if (person._id == key) {
@@ -97,6 +97,26 @@ export default class MymatchesScreen extends Component {
   showMoreInfo = () => {
     console.log('show more info')
   }
+
+  ///
+  onOpenConnection = () => {
+    console.log(' - onopen - ');
+  }
+  onError = (e) => {
+    console.log(e.message);
+  };
+  onClose = (e) => {
+    console.log(e.code, e.reason);
+  };
+  componentWillMount() {
+    this.ws = new WebSocket('ws://localhost:3000'); // localhost
+    this.ws.onopen = this.onOpenConnection;
+    this.ws.onmessage = this.onMessageRecieved;
+    this.ws.onerror = this.onError;
+    this.ws.onclose = this.onClose;
+  }
+  ///
+
 
   render() {
     const { person } = this.props  

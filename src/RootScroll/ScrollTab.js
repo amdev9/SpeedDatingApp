@@ -14,7 +14,6 @@ import Profile from './Profile';
 import Events from './Events/Events';
 import Mymatches from './MymatchesScreen';
 
-
  
 const USER_KEY = "auth-demo-key";
 export default class ScrollTab extends Component {
