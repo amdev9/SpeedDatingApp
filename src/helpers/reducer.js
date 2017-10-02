@@ -68,7 +68,13 @@ export default  reducer = (state = { events: [], loading: true, participants: []
             selected: add(state.selected, participant)
           }
         }
-        
+      
+      default: {
+        return {
+          ...state
+        }
+      }
+         
       // case 'WEBSOCKET:NEXT': 
         
       //   // add index!!!
@@ -94,12 +100,7 @@ export default  reducer = (state = { events: [], loading: true, participants: []
 
       //   }
 
-      default: {
-        return {
-          ...state
-        }
-      }
-       
+     
 
       
 

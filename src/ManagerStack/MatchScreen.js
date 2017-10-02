@@ -29,13 +29,16 @@ export default class MatchScreen extends Component {
           <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.navigate('ScrollTab') }>
             <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
             <Text style={ [styles.navBarButton,{
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              fontSize: 16,
+              marginLeft: 5
             }]}>Назад к мероприятиям</Text>       
           </TouchableOpacity>   
           <Text style={styles.navBarHeader}></Text>
           <Text style={styles.navBarButton}></Text> 
         </View>
-         
+
+     
      
       <ScrollView
         style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  

@@ -41,8 +41,8 @@ export default class VotingStatusScreen extends Component {
   onMessageRecieved = (e) => { // navigate(final_ob_done) , participants
   
     var obj = JSON.parse(e.data); 
-    console.log(obj)
-    if (obj.type == 'CALCULATE_MANAGER') {
+    // console.log(obj)
+    if (obj.type == 'CALCULATE_CLIENT') { //'CALCULATE_MANAGER'
       // var final_ob_done = JSON.parse(obj.data);
       // console.log(final_ob_done);
 
