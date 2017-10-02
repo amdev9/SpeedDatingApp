@@ -1,31 +1,33 @@
 export default  reducer = (state = { events: [], loading: true, participants: [], selected: [] }, action) => {
     
+    
     function remove(array, element) {
       const index = array.indexOf(element);
+      var removeByIndex = (array, index) => array.filter((_, i) => i !== index);
       if (index !== -1) {
-          array.splice(index, 1);
-      }
-      return array;
+         var final = removeByIndex(array, index); 
+         return final;
+      } 
     }
     
     function add(array, element) {
-      array.push(element);
-      return array;
+      var final = array.concat(element);  
+      return final;
     }
 
     switch (action.type) {
-      
+  
       case 'WEBSOCKET:CALCULATE_ON_SELECTED':
         let participant = action.participant;
         if (state.selected.includes(participant)) {
           return {
             ...state,
-            selected: add(state.selected, participant)
+            selected: remove(state.selected, participant)
           }
         } else {
           return {
             ...state,
-            selected: remove(state.selected, participant)
+            selected: add(state.selected, participant)
           }
         }
 
