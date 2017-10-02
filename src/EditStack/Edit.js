@@ -173,7 +173,11 @@ class Edit extends React.Component {
           </TouchableOpacity>
         </View>
         
-        <View style={styles.content}>
+      
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}>
+
+          <View style={styles.content}>
         <View style={styles.avatar}>
         <TouchableOpacity onPress={() => { 
           this._picker();
@@ -187,13 +191,20 @@ class Edit extends React.Component {
         </View>
       </View>
 
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}>
-          <Text style={styles.sectionHeader}><Text>О пользователе {user.name} </Text></Text>
-          <TextInput style={styles.item} onChangeText={(about) => this.setState({ about })}
-            value={this.state.about}/>
 
-          <Text style={styles.sectionHeader}>Я</Text>
+
+          <Text style={styles.sectionHeader}>Телефон</Text>
+            <TouchableOpacity onPress={() => navigate('PhoneNumber', { user: user })}>
+            <View style={styles.navBarTest}>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Указать телефон' : 'Указать телефон'}</Text>
+              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+            </View>
+          </TouchableOpacity>
+          {/* <Text style={styles.sectionHeader}><Text>О пользователе {user.name} </Text></Text>
+          <TextInput style={styles.item} onChangeText={(about) => this.setState({ about })}
+            value={this.state.about}/> */}
+
+          <Text style={styles.sectionHeader}>Пол</Text>
             <TouchableOpacity onPress={() => navigate('Gender', { user: user })}>
             <View style={styles.navBarTest}>
               <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Мужчина' : 'Женщина'}</Text>
@@ -201,6 +212,20 @@ class Edit extends React.Component {
             </View>
           </TouchableOpacity>
           
+    
+
+          <Text style={styles.sectionHeader}>Возраст</Text>
+          {/* <TextInput style={styles.item} onChangeText={(about) => this.setState({ about })}
+            value={this.state.about}/> */}
+            
+            <TouchableOpacity onPress={() => navigate('Age', { user: user })}>
+            <View style={styles.navBarTest}>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Добавить возраст' : 'Добавить возраст'}</Text>
+              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+            </View>
+          </TouchableOpacity>
+
+
           <Text style={styles.sectionHeader}>Текущая работа</Text>
           <TouchableOpacity onPress={() => {            
               return navigate('Work', { user: user })

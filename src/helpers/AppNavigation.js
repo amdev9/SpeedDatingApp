@@ -19,6 +19,8 @@ import Edit from '../EditStack/Edit';
 import GenderModal from '../EditStack/GenderModal';
 import WorkModal from '../EditStack/WorkModal';
 import UniversityModal from '../EditStack/UniversityModal';
+import AgeModal from '../EditStack/AgeModal';
+import PhoneNumberModal from '../EditStack/PhoneNumberModal';
 
 import SettingsScreen from '../SettingsStack/SettingsScreen';
 
@@ -50,6 +52,18 @@ const EditStack = StackNavigator({
     },
     Work: {
       screen: WorkModal,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    Age: {
+      screen: AgeModal,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    PhoneNumber: {
+      screen: PhoneNumberModal,
       navigationOptions: {
         gesturesEnabled: false
       }
