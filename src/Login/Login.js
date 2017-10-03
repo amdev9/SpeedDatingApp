@@ -116,8 +116,8 @@ export default class Login extends Component {
 
 
             <View style={{
-              marginLeft: 20,
-              marginRight: 20,
+              marginLeft: 15,
+              marginRight: 15,
               //width: 270
             }}>
 
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   buttonTextSMS: {
     fontFamily: 'System', 
     // fontWeight: 'bold', 
-    fontSize: 11, 
+    fontSize: 9, 
     color: '#A29F9F'
   },
  
