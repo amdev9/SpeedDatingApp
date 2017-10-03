@@ -59,6 +59,10 @@ export default class Login extends Component {
   // Handle Login with Vk button tap
   loginWithVk = () => this.openURL(`${URL}/auth/vkontakte`);
   
+  loginWithAccountKit = () => {
+    console.log('loginWithAccountKit')
+  }
+
   // Open URL in a browser
   openURL = (url) => {
     // Use SafariView on iOS
@@ -120,7 +124,7 @@ export default class Login extends Component {
             <Icon.Button
               //name="vk"
               backgroundColor="white"
-              onPress={this.loginWithVk}
+              onPress={this.loginWithAccountKit}
               {...iconStylesSMS}
             >
               <Text style={styles.buttonTextSMS}>ВОЙТИ С ПОМОЩЬЮ НОМЕРА ТЕЛЕФОНА</Text> 
