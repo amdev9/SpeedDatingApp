@@ -5,7 +5,8 @@ import {
   Platform,
   Text,
   View,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
@@ -87,29 +88,47 @@ export default class Login extends Component {
 
         <View style={styles.contentNew}>
 
-        <View style={styles.buttons}>
-          <Icon.Button
-            name="facebook"
-            backgroundColor="#3b5998"
-            onPress={this.loginWithFacebook}
-            {...iconStyles}
-          >
-           
-            <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ FACEBOOK</Text> 
-          </Icon.Button>
-           
-          <Icon.Button
-            name="vk"
-            backgroundColor="#45668e"
-            onPress={this.loginWithVk}
-            {...iconStyles}
-          >
-          <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ VK</Text> 
-          </Icon.Button>
+          <View style={styles.buttons}>
+            <Icon.Button
+              name="facebook"
+              backgroundColor="#3b5998"
+              onPress={this.loginWithFacebook}
+              {...iconStyles}
+            >
+              
+              <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ FACEBOOK</Text> 
+            </Icon.Button>
+              
+            <Icon.Button
+              name="vk"
+              backgroundColor="#45668e"
+              onPress={this.loginWithVk}
+              {...iconStyles}
+            >
+            <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ VK</Text> 
+            </Icon.Button>
+
+            {/* <View style={styles.borderSMS}> */}
+
+
+            <View style={{
+              marginLeft: 20,
+              marginRight: 20,
+              //width: 270
+            }}>
+
+            <Icon.Button
+              //name="vk"
+              backgroundColor="white"
+              onPress={this.loginWithVk}
+              {...iconStylesSMS}
+            >
+              <Text style={styles.buttonTextSMS}>ВОЙТИ С ПОМОЩЬЮ НОМЕРА ТЕЛЕФОНА</Text> 
+              </Icon.Button>
+              </View>
           </View>
 
         </View>
-
       </View>
     );
   }
@@ -120,6 +139,12 @@ const iconStyles = {
   borderRadius: 30,
   iconStyle: { paddingVertical: 10 },
 };
+const iconStylesSMS = {
+  borderRadius: 30,
+  iconStyle: { paddingVertical: 3 },
+  borderWidth: 1.5,
+  borderColor: '#D8D8D8'
+};
 const styles = StyleSheet.create({
   buttonText: {
     fontFamily: 'System', 
@@ -127,6 +152,13 @@ const styles = StyleSheet.create({
     fontSize: 15, 
     color: 'white'
   },
+  buttonTextSMS: {
+    fontFamily: 'System', 
+    // fontWeight: 'bold', 
+    fontSize: 11, 
+    color: '#A29F9F'
+  },
+ 
   container: {
     flex: 1,
     backgroundColor: '#FFF',
@@ -155,7 +187,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   contentNew: {
-    height: 210,
+    height: 250,
     width: width
   },
   buttons: {
