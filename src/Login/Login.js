@@ -147,7 +147,8 @@ const iconStylesSMS = {
   borderRadius: 30,
   iconStyle: { paddingVertical: 3 },
   borderWidth: 1.5,
-  borderColor: '#D8D8D8'
+  borderColor: '#D8D8D8',
+
 };
 const styles = StyleSheet.create({
   buttonText: {
