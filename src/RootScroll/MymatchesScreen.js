@@ -24,6 +24,8 @@ import Participant from '../Participant';
 import { WS_URL } from "../helpers/constants";
 
 
+import Communications from 'react-native-communications';
+
 var pech = [];
 
 const { width,height } = Dimensions.get('window')
@@ -94,8 +96,8 @@ export default class MymatchesScreen extends Component {
   
   
 
-  showMoreInfo = (participant) => {
-    alert(JSON.stringify(participant))
+  phoneCallStart = (participant) => {
+    alert(JSON.stringify(participant)) //Communications.phonecall('+79772563015', true)
   }
 
   ///
@@ -138,7 +140,7 @@ export default class MymatchesScreen extends Component {
             <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}>
               {this.state.persons.map((participant, index) => {
                  console.log(participant)
-                 return <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />
+                 return <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.phoneCallStart}  />
               })}
             </ScrollView>   
   

@@ -67,6 +67,7 @@ export default class Participant extends PureComponent {
       </TouchableOpacity>
 
     } else if (vision == 'mymatch_vertical') {
+      const { name, phoneNumber } = participant; 
       return <TouchableOpacity onPress={ () => { 
           onSelected(participant); 
           this.setState({
@@ -84,6 +85,7 @@ export default class Participant extends PureComponent {
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.text}>{name}</Text>
+            <Text style={styles.phoneText}>{phoneNumber}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -147,6 +149,11 @@ export default class Participant extends PureComponent {
 }
 
 const styles = StyleSheet.create({
+  phoneText: {
+    color: '#8a8b8e',
+    fontSize: 12,
+    fontWeight: 'bold'
+  },
   col_hor: {
     flexDirection: 'column',
     // width: 90,
@@ -206,8 +213,9 @@ const styles = StyleSheet.create({
     fontFamily: 'ProximaNova-Semibold', //'System',
     fontSize: 21,
     // fontWeight: 'bold',
-    marginTop: 25
+    marginTop: 20
   },
+  
   textLiked: {
     color: 'white',
     fontFamily: 'System',
@@ -220,7 +228,6 @@ const styles = StyleSheet.create({
     height: 78,
     // marginLeft: 0,
     alignItems: 'center',
-
   },
   iconic: { 
     marginTop: 15, 
