@@ -94,8 +94,8 @@ export default class MymatchesScreen extends Component {
   
   
 
-  showMoreInfo = () => {
-    console.log('show more info')
+  showMoreInfo = (participant) => {
+    alert(JSON.stringify(participant))
   }
 
   ///
@@ -137,7 +137,7 @@ export default class MymatchesScreen extends Component {
 
             <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}>
               {this.state.persons.map((participant, index) => {
-                 
+                 console.log(participant)
                  return <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.showMoreInfo}  />
               })}
             </ScrollView>   
