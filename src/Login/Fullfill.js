@@ -6,7 +6,9 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Dimensions
+  Dimensions,
+  TextInput,
+  TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -56,42 +58,27 @@ export default class Fullfill extends Component {
           </TouchableOpacity>
         </View>
        
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}>
-          
-
-          <View style={styles.back}>
-          <TouchableOpacity onPress={() =>  {
-            this.setState({ 
-              gender: 2
-            })
-          }}>
-
-          <View style={styles.navBarTest}>
-            <Text style={styles.item}>Мужчина</Text>
-            <Icon style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-          </View>
-          </TouchableOpacity>
-          
-          <TouchableOpacity onPress={() =>  {
-            this.setState({ 
-              gender: 1
-            })
-          }}>
-          <View style={styles.navBarTest}>
-            <Text style={styles.item}>Женщина</Text>
-            <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-          </View>
-          </TouchableOpacity>
-          </View>
-        </ScrollView>
-
+         <View>
+             <Text style={styles.title}>Меня зовут</Text>
+             <TextInput
+                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                onChangeText={(text) => this.setState({text})}
+                value={this.state.text}
+            />
+             </View>
+            <TouchableHighlight onPress={}>Продолжить</TouchableHighlight>
       </View>
     );
   }
 }
     
 const styles = StyleSheet.create({
+
+    title: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: 'black'
+    },
   back: {
     marginTop: 30,
     backgroundColor: '#FFFFFF'
