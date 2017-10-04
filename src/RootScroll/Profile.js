@@ -12,7 +12,8 @@ import {
   Dimensions,
   Platform
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
 
 
 import { defaultStyles } from '../styles';
@@ -26,6 +27,7 @@ export default class Profile extends Component {
         <View style={styles.content}>  
         
           <View style={styles.avatar}>
+            {/* <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
            <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
           </View>
           <Text style={styles.text}>
@@ -36,14 +38,14 @@ export default class Profile extends Component {
             <View style={styles.rightSide}>
               <TouchableOpacity style={styles.circle}
                 onPress={() => this.props.navigation.navigate('Settings', { user: user })}>
-                <Icon style={styles.setting} name="ios-settings" size={25} color="#c4c9d1" />
+                <IconIonicons style={styles.setting} name="ios-settings" size={25} color="#c4c9d1" />
               </TouchableOpacity>
               <Text style={styles.barText}>Настройки</Text>
             </View>
             <View style={styles.leftSide}>
               <TouchableOpacity style={styles.circle}
                 onPress={() => this.props.navigation.navigate('Edit', { user: user })}>
-                <Icon style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
+                <IconIonicons style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
               </TouchableOpacity>
               <Text style={styles.barText}>ИЗМЕНИТЬ</Text>
             </View>

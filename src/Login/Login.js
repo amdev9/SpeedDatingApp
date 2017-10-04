@@ -97,13 +97,40 @@ export default class Login extends Component {
     this.configureAccountKit();
     AccountKit.loginWithPhone()
     .then((token) => {
+      // show loading...
       if (!token) {
         console.log('Login cancelled')
       } else {
         console.log(token)
+       
         AccountKit.getCurrentAccount()
         .then((account) => {
           console.log(account)
+
+          fetch('http://localhost:3000/auth/accountkit', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              accesstoken: token.token
+              // accountId: token.accountId
+            })
+          })
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log(responseJson)
+            // onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) // this.props.onLoggedIn(user); 
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+ 
+
+      
+
+          
         })
       }
     })
