@@ -3,6 +3,7 @@ package com.oauthlogin;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.underscope.react.fbak.RNAccountKitPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
@@ -32,6 +33,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNAccountKitPackage(),
             new FastImageViewPackage(),
             new ReactNativePushNotificationPackage(),
             new PickerPackage(),
