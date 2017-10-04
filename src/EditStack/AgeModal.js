@@ -6,7 +6,8 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Dimensions
+  Dimensions,
+  Picker
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -18,6 +19,7 @@ const { width, height } = Dimensions.get('window')
 
 import { connect } from 'react-redux';
 import { updateUser } from '../helpers/actions';
+import _ from 'lodash';
 
 @connect(
   state => ({
@@ -33,14 +35,13 @@ export default class AgeModal extends Component {
     super(props);
     const { user } = this.props.navigation.state.params;
     this.state = {
-      current_university: user.current_university ? user.current_university : '',
-      university: user.university
+      age: user.age
     }
   }
     
   saveUser = async () => {
     const { user } = this.props.navigation.state.params;
-    user.current_university = this.state.current_university;
+    user.age = this.state.age;
     try {
       this.props.update_user(user);
     }
@@ -72,29 +73,20 @@ export default class AgeModal extends Component {
           
 
           <View style={styles.back}>
-          <TouchableOpacity onPress={() =>  {
-            this.setState({ 
-              current_university: user.university
-            })
-          }}>
-
-          {/* for each from user.university */}
-          <View style={styles.navBarTest}>
-            <Text style={styles.item}>{user.university.education_type } at {user.university.school_name} </Text>
-            <Icon style={ this.state.current_university != '' ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-          </View>
-          </TouchableOpacity>
-          
-          <TouchableOpacity onPress={() =>  {
-            this.setState({ 
-              current_university: ''
-            })
-          }}>
-          <View style={styles.navBarTest}>
-            <Text style={styles.item}>Нет</Text>
-            <Icon  style={ this.state.current_university == '' ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-          </View>
-          </TouchableOpacity>
+          <Picker
+                selectedValue={this.state.age}
+                onValueChange={(itemValue, itemIndex) => {
+                        return this.setState({
+                          age: itemValue
+                        })
+                    }
+                }>{
+                _.range(18, 30).map( (item, i) => {
+                  var item_str = item.toString();
+                  return <Picker.Item label={item_str} value={item_str} key={i} />
+                })
+                
+              }</Picker>
           </View>
         </ScrollView>
 
