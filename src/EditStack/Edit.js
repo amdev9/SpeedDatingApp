@@ -18,7 +18,8 @@ import {
   Platform,
   AsyncStorage
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import IconIonicons from 'react-native-vector-icons/Ionicons';
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import RNFetchBlob from 'react-native-fetch-blob';
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -244,12 +245,20 @@ class Edit extends React.Component {
 
           <View style={styles.content}>
         <View style={styles.avatar}>
+
+      
+
         <TouchableOpacity onPress={() => { 
           this._picker();
         }}>
-            <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />  
+        {this.state.avatar === '' 
+            ? 
+            <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" />
+             : 
+            <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />}
+
             <View style={styles.circle}>
-              <Icon style={styles.setting} name="md-create" size={20} color="#FFFF" /> 
+              <IconIonicons style={styles.setting} name="md-create" size={20} color="#FFFF" /> 
             </View>
           </TouchableOpacity>
             {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
@@ -264,7 +273,7 @@ class Edit extends React.Component {
 
             <View style={styles.navBarTest}>
               <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.phoneNumber === '') ? 'Указать телефон' : this.state.phoneNumber}</Text>
-              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
           {/* <Text style={styles.sectionHeader}><Text>О пользователе {user.name} </Text></Text>
@@ -275,7 +284,7 @@ class Edit extends React.Component {
             <TouchableOpacity onPress={() => navigate('Gender', { user: user })}>
             <View style={styles.navBarTest}>
               <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Мужчина' : 'Женщина'}</Text>
-              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
           
@@ -288,7 +297,7 @@ class Edit extends React.Component {
             <TouchableOpacity onPress={() => navigate('Age', { user: user })}>
             <View style={styles.navBarTest}>
               <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.age === '') ? 'Добавить возраст' : user.age}</Text>
-              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
 
@@ -301,7 +310,7 @@ class Edit extends React.Component {
             }>
             <View style={styles.navBarTest}>
               <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.current_work == '') ? 'Добавить работу' : user.work.position_name }</Text>
-              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
           
@@ -309,7 +318,7 @@ class Edit extends React.Component {
           <TouchableOpacity onPress={() => navigate('University', { user: user })}>
             <View style={styles.navBarTest}>
               <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.current_university == '' ) ? 'Добавить университет' : user.university.school_name }</Text>
-              <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
           <Text style={styles.sectionHeader}><Text> </Text></Text>

@@ -26,10 +26,11 @@ export default class Profile extends Component {
       <View style={styles.container}>
         <View style={styles.content}>  
         
-          <View style={styles.avatar}>
-            {/* <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
-           <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
-          </View>
+          <View style={styles.avatar}>{user.avatar === '' 
+            ? 
+            <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" />
+             : 
+            <Image source={{ uri: user.avatar }} style={styles.avatarImage} />}</View>
           <Text style={styles.text}>
              {user.name} 
           </Text>

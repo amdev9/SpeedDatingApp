@@ -121,7 +121,36 @@ export default class Login extends Component {
           .then((response) => response.json())
           .then((responseJson) => {
             console.log(responseJson)
-            // onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) // this.props.onLoggedIn(user); 
+
+            // console.log(token)
+            // accountId:"131545544257442"
+            // appId:"806797486157972"
+            // lastRefresh:1507134148578.6628
+            // refreshIntervalSeconds:2592000
+            // token:"EMAWdmhE1XsIV0ccTJlxqeBX66rUVPMHdZAFyJAXjTvOHLdeKoYDZCaaX58jfNq20r3ph3B95JPbd4ZCiAK9PWEFdi5Q1S3rEYeJkQhViowZDZD"
+            // console.log(account)
+
+            // id:"131545544257442"
+            // phoneNumber: {
+            //   countryCode:"7"
+            //   number:"9772563015"
+            // }
+
+            // navigate to screen/password fullfilling screen
+            //// after name - password screen
+            var user = {
+              oauth_id: token.accountId,
+              name: '',
+              avatar: '',
+              gender: 2,  
+              work: '',
+              university: '',
+              phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`
+              // name
+            };
+            onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) // this.props.onLoggedIn(user); 
+            /////////
+          
           })
           .catch((error) => {
             console.error(error);
