@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -44,6 +43,8 @@
 		FA944A401F7D042C00C45642 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA944A3D1F7D03F400C45642 /* libRCTPushNotification.a */; };
 		FAA638C11F68C1E10095D339 /* ProximaNova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAA638C01F68C1E10095D339 /* ProximaNova-Semibold.ttf */; };
 		FF8E11BB735D40BBB88CA845 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FF6D61D67C48F780B346A0 /* libRNFetchBlob.a */; };
+		B93778DEAD204A4BB4A8EA62 /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB22BAFCAC347AEB8C819A2 /* libFastImage.a */; };
+		A3BE5D337AA44D02BBB4C8FC /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAC400B1F47F46379CBFE2F2 /* Feather.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -356,6 +357,9 @@
 		FA944A411F7D0ACD00C45642 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = OAuthLogin/Images.xcassets; sourceTree = "<group>"; };
 		FAA638C01F68C1E10095D339 /* ProximaNova-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ProximaNova-Semibold.ttf"; sourceTree = "<group>"; };
 		FE13A27E01694416A02C3C6C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		184AE36B08004ADFA4182038 /* FastImage.xcodeproj */ = {isa = PBXFileReference; name = "FastImage.xcodeproj"; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		9EB22BAFCAC347AEB8C819A2 /* libFastImage.a */ = {isa = PBXFileReference; name = "libFastImage.a"; path = "libFastImage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		FAC400B1F47F46379CBFE2F2 /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -383,6 +387,7 @@
 				CDC4B0925326C2471976FE77 /* Pods_OAuthLogin.framework in Frameworks */,
 				B02199489D1F412EA6D973E8 /* libBVLinearGradient.a in Frameworks */,
 				BA40554C64D944E8950CD2BB /* libimageCropPicker.a in Frameworks */,
+				B93778DEAD204A4BB4A8EA62 /* libFastImage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +517,7 @@
 				EF259882654D4D4E912C9C0C /* SimpleLineIcons.ttf */,
 				1AE026C0ABEA443B830249EA /* Zocial.ttf */,
 				6560C5E7E6684D10BAC3FDEF /* ProximaNova-Semibold.ttf */,
+				FAC400B1F47F46379CBFE2F2 /* Feather.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -565,6 +571,7 @@
 				C84E83662E1448269D066F13 /* RNUploader.xcodeproj */,
 				5C2B2CA07F1B430493DA4493 /* BVLinearGradient.xcodeproj */,
 				DB96C3AAB76541F187745A10 /* imageCropPicker.xcodeproj */,
+				184AE36B08004ADFA4182038 /* FastImage.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1124,6 +1131,7 @@
 				D9F8854463334EB6BD86AD54 /* SimpleLineIcons.ttf in Resources */,
 				43DA04846BC24DBB9A12D45E /* Zocial.ttf in Resources */,
 				66B8F5310EBD46D0BCDA3BB3 /* ProximaNova-Semibold.ttf in Resources */,
+				A3BE5D337AA44D02BBB4C8FC /* Feather.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1244,10 +1252,14 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 				);
 				INFOPLIST_FILE = OAuthLogin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/OAuthLogin\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1275,10 +1287,14 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/react-native-image-crop-picker/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-fast-image/ios/FastImage/**",
 				);
 				INFOPLIST_FILE = OAuthLogin/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/OAuthLogin\"",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

@@ -137,6 +137,7 @@ android {
 configurations.all { resolutionStrategy.force 'com.squareup.okhttp3:okhttp:3.4.1' }
 
 dependencies {
+    compile project(':react-native-fast-image')
     compile project(':react-native-push-notification')
     compile ('com.google.android.gms:play-services-gcm:8.1.0') {
         force = true;
