@@ -8,4 +8,4 @@ Read the full tutorial here http://rationalappdev.com/logging-into-react-native-
 
 ## Demo
 
-<img src="https://github.com/rationalappdev/oauth-login/blob/master/demo.gif" alt="Demo" width="640" />
+<img src="https://github.com/rationalappdev/oauth-login/blob/master/demo.gif" alt="Demo" width="640" />as
