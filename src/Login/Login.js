@@ -100,7 +100,11 @@ export default class Login extends Component {
       if (!token) {
         console.log('Login cancelled')
       } else {
-        console.log(`Logged with phone. Token: ${token}`)
+        console.log(token)
+        AccountKit.getCurrentAccount()
+        .then((account) => {
+          console.log(account)
+        })
       }
     })
 

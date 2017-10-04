@@ -69,7 +69,7 @@ class Edit extends React.Component {
       about: user.about ? user.about  : '',
       age: user.age ? user.age  : '',
       gender: user.gender ? user.gender  : 0,
-
+      phoneNumber: user.phoneNumber ? user.phoneNumber : '',
       work: user.work ? user.work  : '',
       university: user.university ? user.university  : '',
       current_work: user.current_work ? user.current_work  : '',
@@ -89,7 +89,8 @@ class Edit extends React.Component {
     user.university = this.state.university;
     user.current_work = this.state.current_work;
     user.current_university = this.state.current_university;
-    
+    user.phoneNumber = this.state.phoneNumber;
+
     try {
       this.props.update_user(user);
       
@@ -195,7 +196,28 @@ class Edit extends React.Component {
       if (!token) {
         console.log('Login cancelled')
       } else {
-        console.log(`Logged with phone. Token: ${token}`)
+        console.log(token)
+        // accountId:"131545544257442"
+        // appId:"806797486157972"
+        // lastRefresh:1507134148578.6628
+        // refreshIntervalSeconds:2592000
+        // token:"EMAWdmhE1XsIV0ccTJlxqeBX66rUVPMHdZAFyJAXjTvOHLdeKoYDZCaaX58jfNq20r3ph3B95JPbd4ZCiAK9PWEFdi5Q1S3rEYeJkQhViowZDZD"
+
+        
+        AccountKit.getCurrentAccount()
+        .then((account) => {
+          console.log(account)
+          // id:"131545544257442"
+          // phoneNumber: {
+          //   countryCode:"7"
+          //   number:"9772563015"
+          // }
+
+          this.setState({
+            phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}` 
+          })
+          // saveProfile with account phone
+        })
       }
     })
   }
@@ -241,7 +263,7 @@ class Edit extends React.Component {
               {/* // {() =>  navigate('PhoneNumber', { user: user })    }  */}
 
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Указать телефон' : 'Указать телефон'}</Text>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.phoneNumber === '') ? 'Указать телефон' : this.state.phoneNumber}</Text>
               <Icon style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>

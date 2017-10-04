@@ -41,7 +41,13 @@ export default class AgeModal extends Component {
     
   saveUser = async () => {
     const { user } = this.props.navigation.state.params;
-    user.age = this.state.age;
+     
+    if(this.state.age == null) {
+      user.age = '18';
+    } else {
+      user.age = this.state.age;
+    }
+    
     try {
       this.props.update_user(user);
     }
