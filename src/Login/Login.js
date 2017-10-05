@@ -6,11 +6,12 @@ import {
   Text,
   View,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native';
 
 
-
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 import AccountKit, { LoginButton, Color, StatusBarStyle } from 'react-native-facebook-account-kit'
@@ -41,6 +42,10 @@ import { connect } from 'react-redux';
 )
 export default class Login extends Component { 
   
+  state = {
+    isLoading: false
+  };
+
   componentDidMount() {
     // Add event listener to handle OAuthLogin:// URLs
     Linking.addEventListener('url', this.handleOpenURL);
@@ -169,7 +174,9 @@ export default class Login extends Component {
     this.configureAccountKit();
     AccountKit.loginWithPhone()
     .then((token) => {
-      // show loading...
+      this.setState({
+        isLoading: true
+      })
       if (!token) {
         console.log('Login cancelled')
       } else {
@@ -190,7 +197,7 @@ export default class Login extends Component {
         AccountKit.getCurrentAccount()
         .then((account) => {
           console.log(account)
-          // start loading
+          
           this.checkDbExists(token, account)
         })
       }
@@ -215,8 +222,20 @@ export default class Login extends Component {
   };
 
   render() {
+     
     return (
       <View style={styles.container}>
+
+        <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
+        {/* 
+          {this.state.isLoading &&  <ActivityIndicator
+                      animating={true}
+                      style={styles.loading}
+                      size="large"
+                    />}
+
+        */}
+        
         <Screens />
         <View style={styles.contentNew}>
 
@@ -239,9 +258,6 @@ export default class Login extends Component {
             >
             <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ VK</Text> 
             </Icon.Button>
-
-            {/* <View style={styles.borderSMS}> */}
-
 
             <View style={{
               marginLeft: 15,
@@ -279,6 +295,16 @@ const iconStylesSMS = {
 
 };
 const styles = StyleSheet.create({
+  loading: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
   buttonText: {
     fontFamily: 'System', 
     fontWeight: 'bold', 

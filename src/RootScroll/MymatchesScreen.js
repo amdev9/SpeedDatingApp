@@ -77,7 +77,7 @@ export default class MymatchesScreen extends Component {
     if (obj.type == 'CALCULATE_CLIENT') {
       var founded = JSON.parse(obj.data); 
       for (var key in founded ) {
-        if (person._id == key) {
+        if (person._id == key) { // person from store
           founded[key].shift();  
           founded[key].forEach( (item) => {
             if(!_.some(this.state.persons, item) ) {
@@ -86,7 +86,7 @@ export default class MymatchesScreen extends Component {
           })
           this.saveData(this.state.persons).done()
           this.setState({
-            persons: this.state.persons
+            persons: this.state.persons // create matchers in store
           })
         }      
       }
