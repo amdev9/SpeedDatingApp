@@ -92,6 +92,63 @@ export default class Login extends Component {
     })
   }
 
+  checkAccountKitTokens(token, account) {
+    fetch('http://localhost:3000/auth/authchecker', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        accesstoken: token.token
+        // accountId: token.accountId
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      var user = {
+        oauth_id: token.accountId,
+        name: '',
+        avatar: '',
+        gender: 2,  
+        work: '',
+        university: '',
+        phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`
+      };
+      this.props.navigation.navigate('Fullfill', { user: user })
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+  
+  checkDbExists(token, account) {
+    fetch('http://localhost:3000/auth/accountkit', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        accountId: token.accountId
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => { 
+      console.log(responseJson)
+      if(responseJson.status != 500) {  
+        onSignIn(responseJson).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
+      } else {
+        this.checkAccountKitTokens(token, account);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      console.error(error);
+    });
+  }
+
   loginWithAccountKit = () => {
     console.log('loginWithAccountKit')
     this.configureAccountKit();
@@ -119,43 +176,7 @@ export default class Login extends Component {
         .then((account) => {
           console.log(account)
           // start loading
-          // check if backend has account with this id, phone
-          // if exists
-          //   onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
-          // else 
-          fetch('http://localhost:3000/auth/accountkit', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              accesstoken: token.token
-              // accountId: token.accountId
-            })
-          })
-          .then((response) => response.json())
-          .then((responseJson) => {
-            console.log(responseJson)
-            var user = {
-              id: token.accountId,
-              name: '',
-              avatar: '',
-              gender: 2,  
-              work: '',
-              university: '',
-              phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`
-            };
-            this.props.navigation.navigate('Fullfill', { user: user })
-          })
-          .catch((error) => {
-            console.error(error);
-          });
- 
-
-      
-
-          
+          this.checkDbExists(token, account)
         })
       }
     })

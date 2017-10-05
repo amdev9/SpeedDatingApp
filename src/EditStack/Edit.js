@@ -93,7 +93,7 @@ class Edit extends React.Component {
     user.phoneNumber = this.state.phoneNumber;
 
     try {
-      this.props.update_user(user);
+      this.props.update_user(user); // fix for mobile enter
       
       AsyncStorage.setItem(USER_KEY, JSON.stringify(user), () => {
         navigate('ScrollTab');

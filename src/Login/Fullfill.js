@@ -21,6 +21,18 @@ import { defaultStyles } from '../styles';
 
 const { width,height } = Dimensions.get('window')
 
+import { connect } from 'react-redux';
+import { createUser } from '../helpers/actions';
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+  }),
+  dispatch => ({
+    create_user: (user) => dispatch(createUser(user)), 
+  }),
+)
 export default class Fullfill extends Component {
   constructor(props) {
     super(props);
@@ -32,14 +44,11 @@ export default class Fullfill extends Component {
   _continue = () => {
     const { user } = this.props.navigation.state.params;
     user.name = this.state.name;
+    this.props.create_user(user);
     onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
   }
 
-  componentWillMount() {
-     
-    
   
-  }
   render() {
     const { goBack } = this.props.navigation; // go to login
     let continueText = 'ПРОДОЛЖИТЬ';

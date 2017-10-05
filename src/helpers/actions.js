@@ -174,6 +174,17 @@ export function updateUser(user) {
     return (dispatch) => { dispatch(action()) }
 }
 
+export function createUser(user) { 
+    const action = () => {
+        return {
+          type: WEBSOCKET_SEND,
+          command: 'create_user',
+          user: user
+        }
+    }
+    return (dispatch) => { dispatch(action()) }
+}
+
 export function clientsQueue() { 
     const action = () => {
         return {
