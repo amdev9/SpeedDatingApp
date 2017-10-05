@@ -8,7 +8,7 @@ import {
   View, 
   ListView, 
   ScrollView,
-  TextInput,
+
   Button,
   RefreshControl
 } from 'react-native';

@@ -15,7 +15,6 @@ import {
   Dimensions,
   ScrollView,
   RefreshControl,
-  TextInput,
   Picker,
   TouchableOpacity,
   SectionList,

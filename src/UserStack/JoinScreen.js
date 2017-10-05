@@ -9,7 +9,6 @@ import {
   View, 
   ListView, 
   ScrollView,
-  TextInput,
   Button,
   Dimensions,
   RefreshControl,

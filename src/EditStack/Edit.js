@@ -305,9 +305,8 @@ class Edit extends React.Component {
           <Text style={styles.sectionHeader}>Текущая работа</Text>
           <TouchableOpacity onPress={() => {            
               return navigate('Work', { user: user })
-            }
-            
-            }>
+            }  
+          }>
             <View style={styles.navBarTest}>
               <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.current_work == '') ? 'Добавить работу' : user.work.position_name }</Text>
               <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />

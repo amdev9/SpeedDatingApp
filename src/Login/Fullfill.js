@@ -10,81 +10,138 @@ import {
   TextInput,
   TouchableHighlight
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 
+import { onSignIn } from "../helpers/auth";
+import { ResetToSignedIn } from "../helpers/router";
+import Icon from 'react-native-vector-icons/Entypo';
 import { defaultStyles } from '../styles';
 
 
 
 const { width,height } = Dimensions.get('window')
 
- 
 export default class Fullfill extends Component {
-  //  1 - женский, 2 - мужской, 0 - без указания пола. 
   constructor(props) {
     super(props);
-    const { user } = this.props.navigation.state.params;
     this.state = {
-      gender: user.gender
+      name: ''
     }
   }
     
-  saveUser = async () => {
+  _continue = () => {
     const { user } = this.props.navigation.state.params;
-    user.gender = this.state.gender;
-    try {
-      this.props.update_user(user);
-    }
-    catch (error) {
-      alert(error);
-    }
-  };
+    user.name = this.state.name;
+    onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
+  }
 
+  componentWillMount() {
+     
+    
+  
+  }
   render() {
-    const { goBack } = this.props.navigation;
-    const {user} = this.props.navigation.state.params;
+    const { goBack } = this.props.navigation; // go to login
+    let continueText = 'ПРОДОЛЖИТЬ';
     return (
    
       <View style={styles.container}>
-        <View style={styles.navBar}>
-          <Text style={styles.navBarButton}></Text>
-          <Text style={styles.navBarHeader}>Я</Text>
-          <TouchableOpacity onPress={() =>  {
-            this.saveUser();
-            this.props.navigation.navigate('Edit', { user: user });
-          }}>
-            <Text style={styles.navBarButton}>Готово</Text>
-          </TouchableOpacity>
+        <View style={styles.header}>
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
+            <Icon style={styles.headerIcon} name="chevron-left" size={45} color="#c8c8c8"  />    
+            {/* <Icon style={styles.headerIcon} name="chevron-left" size={45} color="#c8c8c8"  />     */}
+          </TouchableOpacity>   
         </View>
-       
-         <View>
-             <Text style={styles.title}>Меня зовут</Text>
-             <TextInput
-                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                onChangeText={(text) => this.setState({text})}
-                value={this.state.text}
-            />
-             </View>
-            <TouchableHighlight onPress={}>Продолжить</TouchableHighlight>
+        <View style={styles.content}>
+          <Text style={styles.title}>Меня зовут</Text>
+          <TextInput
+            autoFocus = {true}
+            style={styles.item}
+            placeholder='Имя'
+            onChangeText={(text) => this.setState({name: text})}
+            value={this.state.name}
+            
+          />
+        
+        {this.state.name.length > 0 
+          ? 
+            <TouchableOpacity style={styles.buttonContainer} onPress={this._continue}>
+              <Text style={styles.button}>{continueText}</Text>
+            </TouchableOpacity>
+          :
+            <TouchableOpacity style={styles.buttonContainerInactive}>
+              <Text style={styles.buttonInactive}>{continueText}</Text>
+            </TouchableOpacity>
+        }
+        </View>
       </View>
     );
   }
 }
     
 const styles = StyleSheet.create({
-
-    title: {
-        fontWeight: 'bold',
-        fontSize: 20,
-        color: 'black'
-    },
-  back: {
-    marginTop: 30,
-    backgroundColor: '#FFFFFF'
+  header: {
+    marginTop: 20,
+    marginBottom: 10
   },
   container: {
     flex: 1,
+    backgroundColor: '#FFF'
+  },
+  content: {
+    marginLeft: 20,
+    marginRight: 20
+  },
+  headerIcon: {
+    marginTop: 15,
+    marginLeft: 20
+  },
+  item: {
+    marginLeft: 30,
+    marginTop: 15,
+    fontSize: 22,
+    height: 44,
+    fontFamily: 'System',
+    textAlign: 'left',
+  },
+  title: {
+    marginLeft: 30,
+    fontWeight: 'bold',
+    fontSize: 40,
+    color: 'black',
+  },
+  
+  
+  buttonContainerInactive: {
+    alignItems: 'center',
+    backgroundColor: '#fafbfd',
+    borderRadius: 100,
+    margin: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+  },
+  buttonInactive: {
+    fontSize: 25,
+    color: '#c8c8c8',
+    fontWeight: 'bold'
+  },
+  buttonContainer: {
+    alignItems: 'center',
+    backgroundColor: '#3f88fb',
+    borderRadius: 100,
+    margin: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+  },
+  button: {
+    fontSize: 25,
+    color: 'white',
+    fontWeight: 'bold'
+  },
+
+  back: {
+    marginTop: 30,
+    backgroundColor: '#FFFFFF'
   },
   transparent: {
     color: 'transparent'
@@ -97,43 +154,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: width - 20
   },
-  navBar: {
-    flexDirection: 'row',
-    paddingTop: 30,
-    height: 64,
-    backgroundColor: '#FFFFFF' // '#1EAAF1'
-  },
-  
-
-  navBarButton: {
-    color: '#3f88fb',
-    textAlign:'center',
-    width: 80,
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-  navBarHeader: {
-    flex: 1,
-    color: '#262626',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    ...defaultStyles.text,
-    fontSize: 18,
-    // marginTop: 5
-  },
-  header: {
-    fontSize: 20,
-    marginVertical: 20,
-  },
+   
   sectionHeader: {
     backgroundColor: 'rgba(247,247,247,1.0)',
   },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-    fontFamily: 'System',
-    textAlign:'center',
-  },
-
+  
 });

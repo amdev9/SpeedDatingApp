@@ -4,9 +4,27 @@ import { StackNavigator, TabNavigator, NavigationActions } from "react-navigatio
 import { FontAwesome } from "react-native-vector-icons";
 
 import Login from '../Login/Login';
+import Fullfill from '../Login/Fullfill';
 import ModalStack from './AppNavigation';
 
 
+const LoginStack = StackNavigator({
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  },
+  Fullfill: {
+    screen: Fullfill,
+    navigationOptions: {
+      gesturesEnabled: false
+    }
+  }
+}, {
+  mode: 'modal',
+  headerMode: 'none',
+});
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -15,7 +33,7 @@ const headerStyle = {
 export const ResetToSignedOut = NavigationActions.reset({
   index: 0,
   key: null,
-  actions: [NavigationActions.navigate({ routeName: 'Login' })],
+  actions: [NavigationActions.navigate({ routeName: 'LoginStack' })], // Login
 })
 
 export const ResetToSignedIn = NavigationActions.reset({ 
@@ -35,8 +53,8 @@ export const createRootNavigator = (signedIn = false) => {
           gesturesEnabled: false
         }
       },
-      Login: {
-        screen: Login,
+      LoginStack: { // Login
+        screen: LoginStack, // login
         navigationOptions: {
           gesturesEnabled: false
         }
@@ -45,7 +63,7 @@ export const createRootNavigator = (signedIn = false) => {
     {
       headerMode: "none",
       mode: "modal",
-      initialRouteName: signedIn ? "ModalStack" : "Login" 
+      initialRouteName: signedIn ? "ModalStack" : "LoginStack" // login 
     }
   );
 };

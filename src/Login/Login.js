@@ -88,7 +88,7 @@ export default class Login extends Component {
       defaultCountry: "RU",
       // initialEmail: 'example.com',
       initialPhoneCountryPrefix: '+7',
-      initialPhoneNumber: '',
+      initialPhoneNumber: '9772563015',
     })
   }
 
@@ -136,10 +136,8 @@ export default class Login extends Component {
             //   number:"9772563015"
             // }
 
-            // navigate to screen/password fullfilling screen
-            //// after name - password screen
             var user = {
-              oauth_id: token.accountId,
+              id: token.accountId,
               name: '',
               avatar: '',
               gender: 2,  
@@ -148,7 +146,11 @@ export default class Login extends Component {
               phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`
               // name
             };
-            onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) // this.props.onLoggedIn(user); 
+            this.props.navigation.navigate('Fullfill', { user: user })
+            // navigate to screen/password fullfilling screen
+            //// after name - password screen
+            
+            //onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
             /////////
           
           })
