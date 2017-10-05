@@ -22,7 +22,7 @@ import ScrollViewElements from './ScrollViewElements';
 
 
 const { width, height } = Dimensions.get('window');
-const heightFinal = Platform.OS == 'ios'? height - 60 : height - 90;
+const heightFinal = Platform.OS == 'ios'? height - 70 : height - 90;
 
 import { fetchEvents } from '../../helpers/actions';
 import { connect } from 'react-redux';
