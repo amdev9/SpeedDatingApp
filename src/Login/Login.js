@@ -9,6 +9,10 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+
+
+
+
 import AccountKit, { LoginButton, Color, StatusBarStyle } from 'react-native-facebook-account-kit'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -24,6 +28,17 @@ const { width, height } = Dimensions.get('window');
 
 import { URL } from "../helpers/constants";
 
+
+
+
+import { connect } from 'react-redux';
+@connect(
+  state => ({
+    person: state.person,
+    loading: state.loading,
+  }),
+  dispatch => ({}),
+)
 export default class Login extends Component { 
   
   componentDidMount() {
@@ -203,14 +218,6 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         <Screens />
-        
-        
-        {/* <View style={styles.avatar}>
-            <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" />
-          </View>
-           */}
-
-
         <View style={styles.contentNew}>
 
           <View style={styles.buttons}>

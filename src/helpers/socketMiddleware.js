@@ -40,6 +40,10 @@ const socketMiddleware = (function(){
       case "CLOSED":
         store.dispatch(actions.closed(msg));
         break;
+      case "CREATED_USER":
+        store.dispatch(actions.createdUser(msg));
+        break;
+
       // case "SELECTED":
       //   store.dispatch(actions.selected(msg))
       //   break;

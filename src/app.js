@@ -25,7 +25,8 @@ let state = {
   events: [], 
   loading: true, 
   participants: [],
-  selected: []
+  selected: [],
+  person: null
 }; // preloadedState - when init from background
 const store = configureStore(state)
 

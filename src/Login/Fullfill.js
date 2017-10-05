@@ -26,8 +26,7 @@ import { createUser } from '../helpers/actions';
 
 @connect(
   state => ({
-    events: state.events,
-    loading: state.loading,
+    person: state.person
   }),
   dispatch => ({
     create_user: (user) => dispatch(createUser(user)), 
@@ -45,12 +44,14 @@ export default class Fullfill extends Component {
     const { user } = this.props.navigation.state.params;
     user.name = this.state.name;
     this.props.create_user(user);
-    onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
   }
 
-  
   render() {
     const { goBack } = this.props.navigation; // go to login
+    const { person } = this.props;
+    if (person != null) {
+      onSignIn(person).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
+    }
     let continueText = 'ПРОДОЛЖИТЬ';
     return (
    
@@ -69,7 +70,6 @@ export default class Fullfill extends Component {
             placeholder='Имя'
             onChangeText={(text) => this.setState({name: text})}
             value={this.state.name}
-            
           />
         
         {this.state.name.length > 0 

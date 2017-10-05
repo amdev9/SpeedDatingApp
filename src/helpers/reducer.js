@@ -1,4 +1,4 @@
-export default  reducer = (state = { events: [], loading: true, participants: [], selected: [] }, action) => {
+export default  reducer = (state = { events: [], loading: true, participants: [], selected: [], person: null }, action) => {
     
  
     function remove(array, element) {
@@ -69,6 +69,13 @@ export default  reducer = (state = { events: [], loading: true, participants: []
           }
         }
       
+      case 'WEBSOCKET:CREATED_USER':
+        let createdUser = JSON.parse(action.payload.data.user); 
+        return {
+          ...state,
+          person: createdUser
+        }
+
       default: {
         return {
           ...state
