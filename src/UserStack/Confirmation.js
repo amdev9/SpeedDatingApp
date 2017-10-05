@@ -174,16 +174,20 @@ export default class Confirmation extends Component {
     } else {
 
       return  <View style={styles.container}>
+      
         <View style={styles.navBar}>
           <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
             <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
             <Text style={ [styles.navBarButton,{
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              fontSize: 16,
+              marginLeft: 5
             }]}>Назад к мероприятиям</Text>       
           </TouchableOpacity>   
           <Text style={styles.navBarHeader}></Text>
           <Text style={styles.navBarButton}></Text> 
         </View>
+
 
         <Text style={styles.title}> {event.title}</Text>
         <View style={{ 

@@ -59,13 +59,13 @@ export default class ScrollTab extends Component {
         //tabBarBackgroundColor='white'
         renderTabBar={() => <ScrollableTabBar style={{ marginTop: 20 }} />}
       >
-        <View tabLabel='Profile'>
+        <View tabLabel='Профиль'>
           <Profile user={this.state.user} navigation={this.props.navigation}/> 
         </View>
-        <View tabLabel='Events'>
+        <View tabLabel='Мероприятия'>
           <Events  user={this.state.user} navigation={this.props.navigation}/>
         </View>
-        <View tabLabel='Mymatches'>
+        <View tabLabel='Совпадения'>
           <Mymatches person={this.state.user} navigation={this.props.navigation}/>
         </View>
       </ScrollableTabView> 

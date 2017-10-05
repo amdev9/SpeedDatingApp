@@ -102,11 +102,27 @@ export default class Login extends Component {
         console.log('Login cancelled')
       } else {
         console.log(token)
-       
+        // console.log(token)
+        // accountId:"131545544257442"
+        // appId:"806797486157972"
+        // lastRefresh:1507134148578.6628
+        // refreshIntervalSeconds:2592000
+        // token:"EMAWdmhE1XsIV0ccTJlxqeBX66rUVPMHdZAFyJAXjTvOHLdeKoYDZCaaX58jfNq20r3ph3B95JPbd4ZCiAK9PWEFdi5Q1S3rEYeJkQhViowZDZD"
+        // console.log(account)
+
+        // id:"131545544257442"
+        // phoneNumber: {
+        //   countryCode:"7"
+        //   number:"9772563015"
+        // }
         AccountKit.getCurrentAccount()
         .then((account) => {
           console.log(account)
-
+          // start loading
+          // check if backend has account with this id, phone
+          // if exists
+          //   onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
+          // else 
           fetch('http://localhost:3000/auth/accountkit', {
             method: 'POST',
             headers: {
@@ -121,21 +137,6 @@ export default class Login extends Component {
           .then((response) => response.json())
           .then((responseJson) => {
             console.log(responseJson)
-
-            // console.log(token)
-            // accountId:"131545544257442"
-            // appId:"806797486157972"
-            // lastRefresh:1507134148578.6628
-            // refreshIntervalSeconds:2592000
-            // token:"EMAWdmhE1XsIV0ccTJlxqeBX66rUVPMHdZAFyJAXjTvOHLdeKoYDZCaaX58jfNq20r3ph3B95JPbd4ZCiAK9PWEFdi5Q1S3rEYeJkQhViowZDZD"
-            // console.log(account)
-
-            // id:"131545544257442"
-            // phoneNumber: {
-            //   countryCode:"7"
-            //   number:"9772563015"
-            // }
-
             var user = {
               id: token.accountId,
               name: '',
@@ -144,15 +145,8 @@ export default class Login extends Component {
               work: '',
               university: '',
               phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`
-              // name
             };
             this.props.navigation.navigate('Fullfill', { user: user })
-            // navigate to screen/password fullfilling screen
-            //// after name - password screen
-            
-            //onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
-            /////////
-          
           })
           .catch((error) => {
             console.error(error);
@@ -166,11 +160,7 @@ export default class Login extends Component {
       }
     })
 
-    
-    // AccountKit.getCurrentAccount().then(account => {
-    //   console.log(account);
-       
-    // })
+  
   }
 
   // Open URL in a browser
