@@ -24,6 +24,8 @@ const { width,height } = Dimensions.get('window')
 import { connect } from 'react-redux';
 import { createUser } from '../helpers/actions';
 
+const NOTIFICATION_TOKEN = "push-notification-token";
+
 @connect(
   state => ({
     person: state.person
@@ -46,10 +48,48 @@ export default class Fullfill extends Component {
     this.props.create_user(user);
   }
 
+  saveTokenServer(userProfile, res) {
+    fetch(`${URL}/auth/token`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        oauth_id: userProfile.oauth_id,
+        token: res.token,
+        platform: res.platform
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson) 
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  postToken(userProfile) {
+    AsyncStorage.getItem(NOTIFICATION_TOKEN)
+    .then(res => {
+      res = JSON.parse(res);
+      if (res !== null) {
+        if (userProfile.token && userProfile.token == res.token) {
+          console.log('Same token exists on server')
+        } else {
+          this.saveTokenServer(userProfile, res);
+        }
+      }  
+    })
+    .catch(err => reject(err));
+  }
+
   render() {
     const { goBack } = this.props.navigation; // go to login
     const { person } = this.props;
     if (person != null) {
+      this.postToken(person);
       onSignIn(person).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
     }
     let continueText = 'ПРОДОЛЖИТЬ';

@@ -4,7 +4,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  AsyncStorage
+  AsyncStorage, 
+  Platform
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
@@ -28,6 +29,8 @@ let state = {
   selected: [],
   person: null
 }; // preloadedState - when init from background
+const NOTIFICATION_TOKEN = "push-notification-token";
+
 const store = configureStore(state)
 
 const action = () => {
@@ -56,6 +59,10 @@ export default class App extends Component {
     PushNotification.configure({
         onRegister: function(token) {
             console.log( 'TOKEN:', token );
+            AsyncStorage.setItem(NOTIFICATION_TOKEN, JSON.stringify({
+              token: token,
+              platform: Platform.OS
+            })); 
         },
         onNotification: function(notification) {
             console.log( 'NOTIFICATION:', notification );

@@ -30,7 +30,7 @@ const { width, height } = Dimensions.get('window');
 import { URL } from "../helpers/constants";
 
 
-
+const NOTIFICATION_TOKEN = "push-notification-token";
 
 import { connect } from 'react-redux';
 @connect(
@@ -62,12 +62,49 @@ export default class Login extends Component {
     Linking.removeEventListener('url', this.handleOpenURL);
   };
 
+  saveTokenServer(userProfile, res) {
+    fetch(`${URL}/auth/token`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        oauth_id: userProfile.oauth_id,
+        token: res.token,
+        platform: res.platform
+      })
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson) 
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  postToken(userProfile) {
+    AsyncStorage.getItem(NOTIFICATION_TOKEN)
+    .then(res => {
+      res = JSON.parse(res);
+      if (res !== null) {
+        if (userProfile.token && userProfile.token == res.token) {
+          console.log('Same token exists on server')
+        } else {
+          this.saveTokenServer(userProfile, res);
+        }
+      }  
+    })
+    .catch(err => reject(err));
+  }
+
   handleOpenURL = ({ url }) => {
     // Extract stringified user string out of the URL
     const [, user_string] = url.match(/user=([^#]+)/);
     // Decode the user string and parse it into JSON
     const user = JSON.parse(decodeURI(user_string));
-  
+    this.postToken(user);
     onSignIn(user).then(() => this.props.navigation.dispatch(ResetToSignedIn)) // this.props.onLoggedIn(user); 
 
     if (Platform.OS === 'ios') {
@@ -113,7 +150,7 @@ export default class Login extends Component {
   }
 
   checkAccountKitTokens(token, account) {
-    fetch('http://localhost:3000/auth/authchecker', {
+    fetch(`${URL}/auth/authchecker`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -144,7 +181,7 @@ export default class Login extends Component {
   }
   
   checkDbExists(token, account) {
-    fetch('http://localhost:3000/auth/accountkit', {
+    fetch(`${URL}/auth/accountkit`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -158,6 +195,8 @@ export default class Login extends Component {
     .then((responseJson) => { 
       console.log(responseJson)
       if(responseJson.status != 500) {  
+        
+        this.postToken(responseJson);
         onSignIn(responseJson).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
       } else {
         this.checkAccountKitTokens(token, account);
