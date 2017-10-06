@@ -98,9 +98,7 @@ export default class EventButton extends Component {
                 </TouchableHighlight>
               </View>
         } else if  ( !manage_ids.includes(person._id) && ( event.participant_ids.includes(person._id)) ) {
-          return <View>
-              <Text style={styles.footer}> Already attend </ Text>
-
+          return  <View>
               <TouchableHighlight
               underlayColor="#9575CD"
               style={styles.buttonContainer}
@@ -108,8 +106,7 @@ export default class EventButton extends Component {
               >
               <Text style={styles.button}>Начать мероприятие</Text>
               </TouchableHighlight> 
-
-            </View>
+          </View>
         } else {
           alert("Error in access rights")
         }

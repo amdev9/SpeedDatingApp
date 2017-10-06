@@ -49,16 +49,17 @@ export default class JoinScreen extends Component {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
+    
     if (obj.type == 'NEXT') { // remove myself from selected
-      var participant = JSON.parse(obj.data);
-      for (var i = 0; i < participant.length; i++) {
-        if (participant[i]._id == this.props.navigation.state.params.person._id) {
-          participant.splice(i, 1); 
+      var participants = JSON.parse(obj.data);
+      for (var i = 0; i < participants.length; i++) {
+        if (participants[i]._id == this.props.navigation.state.params.person._id) {
+          participants.splice(i, 1); 
           break;
         }
       }
       this.setState({
-        participant: participant[this.state.index]
+        participant: participants[this.state.index]
       })
       const { navigate } = this.props.navigation;
       navigate('Voting', {
@@ -79,8 +80,8 @@ export default class JoinScreen extends Component {
         person: this.props.navigation.state.params.person,
         event: this.props.navigation.state.params.event
       });  
-      
     }
+
   };
 
   ///
@@ -114,7 +115,10 @@ export default class JoinScreen extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.navBar}>
-          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => {
+              this.props.navigation.goBack() // fix
+            } 
+          }>
             <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
             <Text style={ [styles.navBarButton,{
               fontWeight: 'bold',

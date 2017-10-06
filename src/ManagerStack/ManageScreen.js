@@ -155,26 +155,19 @@ export default class ManageScreen extends Component {
     }
   }
 
-  // onSelected = (participant) => { // change to action func
-  //   const { selected } = this.props;
-  //   if(!_.includes(selected, participant)) {
-  //     selected.push(participant)
-  //     // add color
-  //   } else {
-  //     _.remove(selected, participant);
-  //     // remove color
-  //   }
-  // }
 
   render() {
     const { participants, on_selected } = this.props;
-    console.log(participants)
+    
     const { event } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
 
         <View style={styles.navBar}>
-        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
+        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => {
+            return this.props.navigation.goBack() // fix
+          }
+        }>
           <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
           <Text style={ [styles.navBarButton,{
             fontWeight: 'bold',

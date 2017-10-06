@@ -104,11 +104,12 @@ export default class Events extends Component {
     });
   }
   componentWillMount() { 
-    this.props.refresh();
+    this.props.refresh(); // fix!
   }
   render() {
     const { events, loading, refresh } = this.props;  
     const { user } = this.props;
+    
     return (
       <View style={styles.container}>
         <View style={styles.bottomContent}>

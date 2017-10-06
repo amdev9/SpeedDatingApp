@@ -45,6 +45,7 @@ export default  reducer = (state = { events: [], loading: true, participants: []
         const data = action.payload.data.data;
         return {
           ...state,
+          loading: false,
           participants: state.participants.concat(data)  
         }
     
@@ -52,6 +53,7 @@ export default  reducer = (state = { events: [], loading: true, participants: []
         const user = action.payload.data.data;
         return {
           ...state,
+          loading: false,
           participants: state.participants.concat(user)  
         }
       
@@ -60,11 +62,13 @@ export default  reducer = (state = { events: [], loading: true, participants: []
         if (state.selected.includes(participant)) {
           return {
             ...state,
+            loading: false,
             selected: remove(state.selected, participant)
           }
         } else {
           return {
             ...state,
+            loading: false,
             selected: add(state.selected, participant)
           }
         }
@@ -73,12 +77,14 @@ export default  reducer = (state = { events: [], loading: true, participants: []
         let createdUser = JSON.parse(action.payload.data.user); 
         return {
           ...state,
+          loading: false,
           person: createdUser
         }
 
       default: {
         return {
-          ...state
+          ...state,
+          loading: false
         }
       }
          
