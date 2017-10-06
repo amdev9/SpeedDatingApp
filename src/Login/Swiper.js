@@ -274,18 +274,25 @@ const styles = StyleSheet.create({
   },
   // Pagination dot
   dot: {
-    backgroundColor: 'rgba(255, 197, 67,.25)',
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginLeft: 3,
-    marginRight: 3,
+    backgroundColor: '#ced1d8',
+    width: 7,
+    height: 7,
+    borderRadius: 3.5,
+    marginLeft: 7,
+    marginRight: 7,
     marginTop: 3,
     marginBottom: 3
   },
   // Active dot
   activeDot: {
-    backgroundColor: '#3f88fb'//'#FFFFFF',
+    backgroundColor: '#3f88fb',
+    width: 9,
+    height: 9,
+    borderRadius: 4.5,
+    marginLeft: 7,
+    marginRight: 7,
+    marginTop: 2,
+    marginBottom: 2
   },
    
 });

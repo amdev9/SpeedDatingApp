@@ -328,7 +328,7 @@ export default class Login extends Component {
 
 const iconStyles = {
   borderRadius: 30,
-  iconStyle: { paddingVertical: 10 },
+  iconStyle: { paddingVertical: 9 },
 };
 const iconStylesSMS = {
   borderRadius: 30,
