@@ -61,12 +61,13 @@ export default class JoinScreen extends Component {
       this.setState({
         participant: participants[this.state.index]
       })
+      this.state.index++;
       const { navigate } = this.props.navigation;
-      navigate('Voting', {
+      navigate('Voting', {  // if this participant
         participant: this.state.participant,
         person: this.props.navigation.state.params.person
       });  
-      this.state.index++;
+      
     }
 
     if (obj.type == 'LAST') {
@@ -75,7 +76,7 @@ export default class JoinScreen extends Component {
         selected: selected_data
       });
       const { navigate } = this.props.navigation;
-      navigate('VotePush', {
+      navigate('VotePush', {  // if this selected
         participants: this.state.selected,  
         person: this.props.navigation.state.params.person,
         event: this.props.navigation.state.params.event
@@ -84,7 +85,7 @@ export default class JoinScreen extends Component {
 
   };
 
-  ///
+  
   onOpenConnection = () => {
     console.log(' - onopen - ');
   }
@@ -95,7 +96,7 @@ export default class JoinScreen extends Component {
     console.log(e.code, e.reason);
   };
     
-  ///
+  
   componentWillMount() {
     this.props.connect(this.props.navigation.state.params.person);
 

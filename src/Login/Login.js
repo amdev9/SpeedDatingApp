@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontFamily: 'System', 
-    fontWeight: 'bold', 
+    fontWeight: '600', 
     fontSize: 15, 
     color: 'white'
   },

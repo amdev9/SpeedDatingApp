@@ -60,6 +60,8 @@ export default class VotingScreen extends Component {
       person 
     } = this.props.navigation.state.params;
     const { avatar, name, table } = participant;
+    let unlike = 'Убрать лайк';
+    let like = 'Поставить лайк';
     return (
       // add table number here
       <View style={styles.container}>
@@ -75,7 +77,7 @@ export default class VotingScreen extends Component {
           underlayColor="#9575CD"
           style={ this.state.liked ? styles.buttonLikeContainer : styles.buttonContainer}
           onPress={this.onClicked}>
-          <Text style={ this.state.liked ? styles.buttonLike : styles.button}> { this.state.liked ? 'Unlike' : 'Like' } </Text>
+          <Text style={ this.state.liked ? styles.buttonLike : styles.button}> { this.state.liked ? unlike : like } </Text>
         </TouchableHighlight> 
       </View>
     );

@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   View,
   AsyncStorage, 
-  Platform
+  Platform,
+  AppState
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
@@ -51,9 +52,13 @@ export default class App extends Component {
     super(props);
     this.state = {
       signedIn: false,
-      checkedSignIn: false
+      checkedSignIn: false,
+      
     };
   }
+
+  
+
 
   componentDidMount() {
     PushNotification.configure({
