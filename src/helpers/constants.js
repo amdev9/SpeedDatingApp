@@ -26,7 +26,7 @@ export const WEBSOCKET_ON_SELECTED = 'WEBSOCKET:CALCULATE_ON_SELECTED';
 
 export const WEBSOCKET_CREATED_USER = 'WEBSOCKET:CREATED_USER';
 
-const IP_ADDRESS = 'localhost'; //'51.15.66.253';
+const IP_ADDRESS = '192.168.1.34'; //'51.15.66.253';
 const PORT = '3000';
 export const URL = `http://${IP_ADDRESS}:${PORT}`; 
 export const WS_URL = `ws://${IP_ADDRESS}:${PORT}`;

@@ -7,7 +7,8 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  AsyncStorage
 } from 'react-native';
 
 
@@ -72,7 +73,7 @@ export default class Login extends Component {
       body: JSON.stringify({
         oauth_id: userProfile.oauth_id,
         token: res.token,
-        platform: res.platform
+        platform: res.os
       })
     })
     .then((response) => response.json())
@@ -163,6 +164,9 @@ export default class Login extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
+      this.setState({
+        isLoading: false
+      });
       console.log(responseJson)
       var user = {
         oauth_id: token.accountId,

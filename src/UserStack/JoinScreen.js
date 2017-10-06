@@ -98,7 +98,7 @@ export default class JoinScreen extends Component {
   componentWillMount() {
     this.props.connect(this.props.navigation.state.params.person);
 
-    this.ws = new WebSocket('ws://localhost:3000'); // localhost
+    this.ws = new WebSocket(WS_URL); 
     this.ws.onopen = this.onOpenConnection;
     this.ws.onmessage = this.onMessageRecieved;
     this.ws.onerror = this.onError;

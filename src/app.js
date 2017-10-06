@@ -59,10 +59,7 @@ export default class App extends Component {
     PushNotification.configure({
         onRegister: function(token) {
             console.log( 'TOKEN:', token );
-            AsyncStorage.setItem(NOTIFICATION_TOKEN, JSON.stringify({
-              token: token,
-              platform: Platform.OS
-            })); 
+            AsyncStorage.setItem(NOTIFICATION_TOKEN, JSON.stringify(token)); 
         },
         onNotification: function(notification) {
             console.log( 'NOTIFICATION:', notification );

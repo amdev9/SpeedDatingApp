@@ -8,7 +8,8 @@ import {
   ScrollView,
   Dimensions,
   TextInput,
-  TouchableHighlight
+  TouchableHighlight,
+  AsyncStorage
 } from 'react-native';
 
 
@@ -17,7 +18,7 @@ import { ResetToSignedIn } from "../helpers/router";
 import Icon from 'react-native-vector-icons/Entypo';
 import { defaultStyles } from '../styles';
 
-
+import { URL } from "../helpers/constants";
 
 const { width,height } = Dimensions.get('window')
 
@@ -58,7 +59,7 @@ export default class Fullfill extends Component {
       body: JSON.stringify({
         oauth_id: userProfile.oauth_id,
         token: res.token,
-        platform: res.platform
+        platform: res.os
       })
     })
     .then((response) => response.json())
