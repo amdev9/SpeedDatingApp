@@ -199,7 +199,9 @@ export default class Login extends Component {
     .then((responseJson) => { 
       console.log(responseJson)
       if(responseJson.status != 500) {  
-        
+        this.setState({
+          isLoading: false
+        });
         this.postToken(responseJson);
         onSignIn(responseJson).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
       } else {
