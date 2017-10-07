@@ -46,7 +46,7 @@ const action = () => {
 store.dispatch(action());//  actions.connect(WS_URL)
 
 
-AsyncStorage.clear(); 
+// AsyncStorage.clear(); 
 
 export default class App extends Component {
 
