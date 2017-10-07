@@ -119,6 +119,21 @@ export default actions = {
     }),
 };
 
+
+
+export function connect(url) { 
+    const action = () => {
+        return {
+            type: 'WEBSOCKET:CONNECT',
+            url: url 
+        }
+    }
+    return (dispatch) => {
+        dispatch(action())
+    }
+}
+
+
 export function fetchEvents() { 
     const action = () => {
         return {

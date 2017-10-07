@@ -19,13 +19,15 @@ import { isSignedIn } from "./helpers/auth";
 
 import { WS_URL } from "./helpers/constants";
 
+import actions from './helpers/actions'
+
 
 import { Provider } from 'react-redux';
 import configureStore from './helpers/store';
 
 let state = { 
   events: [], 
-  loading: true, 
+  loading: false, 
   participants: [],
   selected: [],
   person: null
@@ -41,7 +43,7 @@ const action = () => {
   }
 }
 
-store.dispatch(action());
+store.dispatch(action());//  actions.connect(WS_URL)
 
 
 AsyncStorage.clear(); 

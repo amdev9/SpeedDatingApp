@@ -1,4 +1,4 @@
-export default  reducer = (state = { events: [], loading: true, participants: [], selected: [], person: null }, action) => {
+export default  reducer = (state = { events: [], loading: false, participants: [], selected: [], person: null }, action) => {
     
  
     function remove(array, element) {

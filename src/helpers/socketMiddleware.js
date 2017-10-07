@@ -1,5 +1,8 @@
 
+import { connect } from './actions'
 import actions from './actions'
+import { WS_URL } from './constants'
+
 import { WEBSOCKET_CONNECT, WEBSOCKET_DISCONNECT, WEBSOCKET_SEND } from './constants';
 
 const socketMiddleware = (function(){ 
@@ -15,7 +18,12 @@ const socketMiddleware = (function(){
 
   const onClose = (ws,store) => evt => {
     //Tell the store we've disconnected
-    store.dispatch(actions.disconnected());
+    store.dispatch(actions.disconnected()); 
+    //
+    setTimeout(function(){
+      store.dispatch(connect(WS_URL)); 
+    }, 1000);
+    //
   }
 
   const onMessage = (ws,store) => evt => {
