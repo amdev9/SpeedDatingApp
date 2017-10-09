@@ -16,7 +16,7 @@ import Cost from './widgets/Cost';
 import Date from './widgets/Date';
 import { defaultStyles } from '../../styles';
 
-import { connect } from 'react-redux';
+
 
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
@@ -27,17 +27,25 @@ const placesHeight = (height - 20 - 20) / rows - 10;
 
 // connect 1 param - events
  
+import { connect } from 'react-redux';
+
+@connect(
+  state => ({
+    current_user: state.current_user
+  }),
+  dispatch => ({}),
+)
 export default class EventPoster extends Component {
   // Component prop types
   static propTypes = {
     // Movie object with title, genre, and poster
     event: PropTypes.object.isRequired, // comment it
-    person: PropTypes.object.isRequired,
+    // person: PropTypes.object.isRequired,
     // Called when user taps on a poster
     onOpen: PropTypes.func.isRequired,
   }
   render() {
-    var { person, event, person: { gender }, onOpen , event} = this.props;
+    var { current_user, event, current_user: { gender }, onOpen , event} = this.props;
     
     if (gender == 1) {
       var cost = event.cost_women;
@@ -45,7 +53,7 @@ export default class EventPoster extends Component {
       var cost = event.cost_men;
     }
     var left_places = event.places_max - event.participant_ids.length;
-    if (event.participant_ids.includes(person._id) ) {
+    if (event.participant_ids.includes(current_user._id) ) {
       var part = true;
     } else {
       var part = false;
@@ -57,7 +65,7 @@ export default class EventPoster extends Component {
       var manage_ids = event.manage_ids;
     }
     
-    if ( manage_ids.includes(person._id) ) {
+    if ( manage_ids.includes(current_user._id) ) {
       var manage_approve = true;
       
     } else {

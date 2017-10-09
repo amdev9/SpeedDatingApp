@@ -28,27 +28,34 @@ import { ResetToSignedOut } from "../helpers/router";
 import { URL } from "../helpers/constants";
 
 
+import { connect } from 'react-redux';
+
+
+@connect(
+  state => ({
+    current_user: state.current_user
+  }),
+  dispatch => ({}),
+)
 class Settings extends Component {
   
   logout = async () => {
-    // const { navigate } = this.props.navigation;
-    try {
-      let response =  await fetch(`${URL}/logout`);
-      let responseJson = await response.json();
+    // add request ?
+    onSignOut().then(() => this.props.navigation.dispatch(ResetToSignedOut))
+
+    
+    // try {
+      // let response =  await fetch(`${URL}/logout`);
+      // let responseJson = await response.json();
       // alert(responseJson);
-      if (responseJson == 'ok') {
-        
-        onSignOut().then(() => this.props.navigation.dispatch(ResetToSignedOut))
-        // navigate('Login');
-      }
-      
-    } catch(error) {
-      console.error(error);
-    }
+      // if (responseJson == 'ok') {
+    // } catch(error) {
+      // console.error(error);
+    // }
   }
 
   render() {
-    const {user} = this.props.navigation.state.params;
+    const { current_user } = this.props //.navigation.state.params;
     return (
 
       <View style={styles.container}>

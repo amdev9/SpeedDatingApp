@@ -19,33 +19,45 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import { defaultStyles } from '../styles';
 
 const { width, height } = Dimensions.get('window');
+
+import { connect } from 'react-redux';
+
+
+@connect(
+  state => ({
+    current_user: state.current_user
+  }),
+  dispatch => ({}),
+)
 export default class Profile extends Component {
   render() {
-    const { user } = this.props;
+    const { current_user } = this.props;
     return (     
       <View style={styles.container}>
         <View style={styles.content}>  
         
-          <View style={styles.avatar}>{user.avatar === '' 
+          <View style={styles.avatar}>{current_user.avatar === '' 
             ? 
             <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" />
              : 
-            <Image source={{ uri: user.avatar }} style={styles.avatarImage} />}</View>
+            <Image source={{ uri: current_user.avatar }} style={styles.avatarImage} />}</View>
           <Text style={styles.text}>
-             {user.name} 
+             {current_user.name} 
           </Text>
 
           <View style={styles.barContainer}>
             <View style={styles.rightSide}>
               <TouchableOpacity style={styles.circle}
-                onPress={() => this.props.navigation.navigate('Settings', { user: user })}>
+              // , { user: user }
+                onPress={() => this.props.navigation.navigate('Settings')}>
                 <IconIonicons style={styles.setting} name="ios-settings" size={25} color="#c4c9d1" />
               </TouchableOpacity>
               <Text style={styles.barText}>Настройки</Text>
             </View>
             <View style={styles.leftSide}>
               <TouchableOpacity style={styles.circle}
-                onPress={() => this.props.navigation.navigate('Edit', { user: user })}>
+              // , { user: user }
+                onPress={() => this.props.navigation.navigate('Edit')}>
                 <IconIonicons style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
               </TouchableOpacity>
               <Text style={styles.barText}>ИЗМЕНИТЬ</Text>

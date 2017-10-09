@@ -16,6 +16,19 @@ import Mymatches from './MymatchesScreen';
 
  
 const USER_KEY = "auth-demo-key";
+
+
+import { connect } from 'react-redux';
+import { storeUser } from '../helpers/actions';
+
+@connect(
+  state => ({
+    current_user: state.current_user
+  }),
+  dispatch => ({
+    store_user: (user) => dispatch(storeUser(user))
+  }),
+)
 export default class ScrollTab extends Component {
 
   constructor(props) {
@@ -28,9 +41,10 @@ export default class ScrollTab extends Component {
 
   componentWillMount() { 
     AsyncStorage.getItem(USER_KEY).then((user) => {
+      this.props.store_user(JSON.parse(user));
       this.setState({
         isLoading: false,
-        user: JSON.parse(user)
+        // user: JSON.parse(user) // to redux
       });
     });
 
@@ -59,14 +73,14 @@ export default class ScrollTab extends Component {
         //tabBarBackgroundColor='white'
         renderTabBar={() => <ScrollableTabBar style={{ marginTop: 20 }} />}
       >
-        <View tabLabel='Профиль'>
-          <Profile user={this.state.user} navigation={this.props.navigation}/> 
+        <View tabLabel='Профиль'> 
+          <Profile navigation={this.props.navigation}/> 
         </View>
         <View tabLabel='Мероприятия'>
-          <Events  user={this.state.user} navigation={this.props.navigation}/>
+          <Events navigation={this.props.navigation}/>
         </View>
         <View tabLabel='Совпадения'>
-          <Mymatches person={this.state.user} navigation={this.props.navigation}/>
+          <Mymatches navigation={this.props.navigation}/>
         </View>
       </ScrollableTabView> 
     );

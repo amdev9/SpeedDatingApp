@@ -25,6 +25,7 @@ import { updateUser } from '../helpers/actions';
   state => ({
     events: state.events,
     loading: state.loading,
+    current_user: state.current_user
   }),
   dispatch => ({
     update_user: (user) => dispatch(updateUser(user)), 
@@ -34,17 +35,17 @@ export default class GenderModal extends Component {
   //  1 - женский, 2 - мужской, 0 - без указания пола. 
   constructor(props) {
     super(props);
-    const { user } = this.props.navigation.state.params;
+    const { current_user } = this.props;
     this.state = {
-      gender: user.gender
+      gender: current_user.gender
     }
   }
     
   saveUser = async () => {
-    const { user } = this.props.navigation.state.params;
-    user.gender = this.state.gender;
+    const { current_user } = this.props
+    current_user.gender = this.state.gender;
     try {
-      this.props.update_user(user);
+      this.props.update_user(current_user);
     }
     catch (error) {
       alert(error);
@@ -53,7 +54,7 @@ export default class GenderModal extends Component {
 
   render() {
     const { goBack } = this.props.navigation;
-    const {user} = this.props.navigation.state.params;
+    const {current_user} = this.props //.navigation.state.params;
     return (
    
       <View style={styles.container}>
@@ -62,7 +63,7 @@ export default class GenderModal extends Component {
           <Text style={styles.navBarHeader}>Я</Text>
           <TouchableOpacity onPress={() =>  {
             this.saveUser();
-            this.props.navigation.navigate('Edit', { user: user });
+            this.props.navigation.navigate('Edit');
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>

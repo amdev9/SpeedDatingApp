@@ -24,6 +24,16 @@ const { width, height } = Dimensions.get('window');
 // Set default popup height to 67% of screen height
 const defaultHeight = height * 0.67; // 67
 
+
+
+import { connect } from 'react-redux';
+
+@connect(
+  state => ({
+    current_user: state.current_user
+  }),
+  dispatch => ({}),
+)
 export default class EventPopup extends Component {
 
   static propTypes = {
@@ -219,7 +229,7 @@ export default class EventPopup extends Component {
   render() {
     const {
       event,
-      person,
+      current_user,
       onBook,
       onJoin,
       onManage,
@@ -267,7 +277,7 @@ export default class EventPopup extends Component {
           </View>
 
           {/* Showtables - add if condition */}
-          { ( !event.manage_ids.includes(person._id) && ( event.participant_ids.includes(person._id)) ) 
+          { ( !event.manage_ids.includes(current_user._id) && ( event.participant_ids.includes(current_user._id)) ) 
             ? 
               <View style={styles.sectionTables}>
                 <Text style={styles.sectionHeader}>Выберите номер стола</Text>
@@ -284,7 +294,7 @@ export default class EventPopup extends Component {
           <View style={styles.footer}>
             <EventButton 
               event={event}
-              person={person}
+              //person={person}
               onBook={onBook}
               onJoin={onJoin}
               onManage={onManage}

@@ -67,64 +67,13 @@ export default class ManageScreen extends Component {
     }) 
   }
   
-  
-  // onMessageRecieved = (e) => { // participants, selected
-    
-  //   console.log(e.data);
-  //   var obj = JSON.parse(e.data); 
-    
-  //   if (obj.type == 'response_queue') {
-  //     obj.data.map( (partic)=> {
-  //       this.state.participants.push(partic);
-  //     })
-  //     this.setState({
-  //       participants: this.state.participants
-  //     })
-  //   }
-
-  //   // change to listen each on websocket , not all together
-  //   if (obj.type == 'connected') {
-  //     this.state.participants.push(obj.data);
-  //     this.setState({
-  //       participants: this.state.participants
-  //     })
-  //   }
-  //   if (obj.type == 'closed') {
-  //     for (var i = 0; i < this.state.participants.length; i++) {
-  //       if (this.state.participants[i]._id == obj.data._id) {
-  //         this.state.participants.splice(i, 1); 
-  //         break;
-  //       }
-  //     }
-  //     this.setState({
-  //       participants: this.state.participants
-  //     })
-  //   }
-
-  //   if (obj.type == 'selected') {
-  //     var selected_data = JSON.parse(obj.data);
-  //     this.setState({
-  //       selected: selected_data
-  //     })
-
-  //     const { navigate } = this.props.navigation;
-  //     navigate('VotingStatus', {
-  //       participants: this.state.selected,
-  //       person: this.props.navigation.state.params.person,
-  //       event: this.props.navigation.state.params.event
-  //     });    
-  //   }
-  // };
-
-   
   componentWillMount() {
     this.props.clients_queue()
   }
 
   start = () => {
-    
     const { selected, start_post } = this.props;
-
+    
     const { event, person } = this.props.navigation.state.params;
     if (selected.length > 0) {
     
@@ -140,16 +89,6 @@ export default class ManageScreen extends Component {
         person: person,
         event: event
       });  
-
-
-      // let json = JSON.stringify({
-      //   command: "start",
-      //   timeout: 2,
-      //   talk_time: this.state.test,
-      //   selected: JSON.stringify(this.state.selected),
-      //   event: JSON.stringify(event)
-      // });
-      // this.ws.send(json);
     } else {
       alert('Select participants to start')
     }

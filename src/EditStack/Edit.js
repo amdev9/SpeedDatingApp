@@ -47,6 +47,7 @@ import { updateUser } from '../helpers/actions';
   state => ({
     events: state.events,
     loading: state.loading,
+    current_user: state.current_user
   }),
   dispatch => ({
     update_user: (user) => dispatch(updateUser(user)), 
@@ -56,7 +57,7 @@ class Edit extends React.Component {
  
   constructor(props) {
     super(props);
-    const { user } = this.props.navigation.state.params;
+    const { current_user } = this.props //.navigation.state.params;
     this.state = {
       modalVisible: false,
       photos: [],
@@ -66,36 +67,36 @@ class Edit extends React.Component {
       uploadTotal: 0,
       uploadWritten: 0,
       
-      avatar: user.avatar ? user.avatar  : '',
-      about: user.about ? user.about  : '',
-      age: user.age ? user.age  : '',
-      gender: user.gender ? user.gender  : 0,
-      phoneNumber: user.phoneNumber ? user.phoneNumber : '',
-      work: user.work ? user.work  : '',
-      university: user.university ? user.university  : '',
-      current_work: user.current_work ? user.current_work  : '',
-      current_university: user.current_university ? user.current_university  : '',
+      // avatar: current_user.avatar ? current_user.avatar  : '',
+      // about: current_user.about ? current_user.about  : '',
+      // age: current_user.age ? current_user.age  : '',
+      // gender: current_user.gender ? current_user.gender  : 0,
+      // phoneNumber: current_user.phoneNumber ? current_user.phoneNumber : '',
+      // work: current_user.work ? current_user.work  : '',
+      // university: current_user.university ? current_user.university  : '',
+      // current_work: current_user.current_work ? current_user.current_work  : '',
+      // current_university: current_user.current_university ? current_user.current_university  : '',
       
     }
   }
 
   saveProfile = async (navigate) => {
     
-    const { user } = this.props.navigation.state.params;
-    user.about = this.state.about;
-    user.age = this.state.age;
-    user.avatar = this.state.avatar;
-    user.gender = this.state.gender;
-    user.work = this.state.work;
-    user.university = this.state.university;
-    user.current_work = this.state.current_work;
-    user.current_university = this.state.current_university;
-    user.phoneNumber = this.state.phoneNumber;
+    const { current_user } = this.props //.navigation.state.params;
+    // user.about = this.state.about;
+    // user.age = this.state.age;
+    // user.avatar = this.state.avatar;
+    // user.gender = this.state.gender;
+    // user.work = this.state.work;
+    // user.university = this.state.university;
+    // user.current_work = this.state.current_work;
+    // user.current_university = this.state.current_university;
+    // user.phoneNumber = this.state.phoneNumber;
 
     try {
-      this.props.update_user(user); // fix for mobile enter
+      this.props.update_user(current_user); // fix for mobile enter
       
-      AsyncStorage.setItem(USER_KEY, JSON.stringify(user), () => {
+      AsyncStorage.setItem(USER_KEY, JSON.stringify(current_user), () => {
         navigate('ScrollTab');
       }); 
       
@@ -224,7 +225,7 @@ class Edit extends React.Component {
   }
   //
   render() {
-    const {user} = this.props.navigation.state.params;
+    const { current_user } = this.props //.navigation.state.params;
     const { navigate } = this.props.navigation;
   
     return (
@@ -233,7 +234,7 @@ class Edit extends React.Component {
           <Text style={styles.navBarButton}></Text>
           <Text style={styles.navBarHeader}>Изменить</Text>
           <TouchableOpacity onPress={() => {
-              this.saveProfile(navigate);
+              this.saveProfile(navigate); // remove?
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
@@ -251,12 +252,14 @@ class Edit extends React.Component {
         <TouchableOpacity onPress={() => { 
           this._picker();
         }}>
-        {this.state.avatar === '' 
-            ? 
-            <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" />
-             : 
-            <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />}
-
+        {
+          current_user.avatar 
+          ? 
+            <Image source={{ uri: current_user.avatar }} style={styles.avatarImage} />
+          :
+            <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" /> 
+        }
+            
             <View style={styles.circle}>
               <IconIonicons style={styles.setting} name="md-create" size={20} color="#FFFF" /> 
             </View>
@@ -272,7 +275,7 @@ class Edit extends React.Component {
               {/* // {() =>  navigate('PhoneNumber', { user: user })    }  */}
 
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.phoneNumber === '') ? 'Указать телефон' : this.state.phoneNumber}</Text>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.phoneNumber ? current_user.phoneNumber : 'Указать телефон' }</Text>
               <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
@@ -281,9 +284,9 @@ class Edit extends React.Component {
             value={this.state.about}/> */}
 
           <Text style={styles.sectionHeader}>Пол</Text>
-            <TouchableOpacity onPress={() => navigate('Gender', { user: user })}>
+            <TouchableOpacity onPress={() => navigate('Gender')}>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.gender == 2) ? 'Мужчина' : 'Женщина'}</Text>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.gender == 2 ? 'Мужчина' : 'Женщина'}</Text>
               <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
@@ -294,9 +297,9 @@ class Edit extends React.Component {
           {/* <TextInput style={styles.item} onChangeText={(about) => this.setState({ about })}
             value={this.state.about}/> */}
             
-            <TouchableOpacity onPress={() => navigate('Age', { user: user })}>
+            <TouchableOpacity onPress={() => navigate('Age')}>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.age === '') ? 'Добавить возраст' : user.age}</Text>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.age ? current_user.age : 'Добавить возраст'}</Text>
               <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
@@ -304,19 +307,19 @@ class Edit extends React.Component {
 
           <Text style={styles.sectionHeader}>Текущая работа</Text>
           <TouchableOpacity onPress={() => {            
-              return navigate('Work', { user: user })
+              return navigate('Work')
             }  
           }>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.current_work == '') ? 'Добавить работу' : user.work.position_name }</Text>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.current_work ? current_user.work.position_name : 'Добавить работу' }</Text>
               <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
           
           <Text style={styles.sectionHeader}>Университет</Text>
-          <TouchableOpacity onPress={() => navigate('University', { user: user })}>
+          <TouchableOpacity onPress={() => navigate('University')}>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ (this.state.current_university == '' ) ? 'Добавить университет' : user.university.school_name }</Text>
+              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.current_university ? current_user.university.school_name : 'Добавить университет' }</Text>
               <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>

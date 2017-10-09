@@ -10,20 +10,34 @@ import {
 import EventPoster from './EventPoster';
 
 
+import { fetchEvents } from '../../helpers/actions';
+import { connect } from 'react-redux';
 
+
+@connect(
+  state => ({
+    events: state.events,
+    loading: state.loading,
+    current_user: state.current_user
+  }),
+  dispatch => ({
+    refresh: () => dispatch(fetchEvents()),   
+  }),
+)
 export default class ScrollViewElements extends Component {
   render() {
-    const { selected, events, user, onOpenEvent, loading, refresh } = this.props;
+    const { events, loading, refresh, current_user } = this.props;  
+    const { selected, onOpenEvent } = this.props; // events, loading, refresh 
     let elements = [];
     let counter = 0;
 
     if (selected == 0) { 
       noEventsText = 'Нет моих мероприятий';
       elements = events.map((event, index) => {
-        if (event.participant_ids.includes(user._id)) {  
+        if (event.participant_ids.includes(current_user._id)) {  
           return <EventPoster
             event={event} 
-            person={user}
+            //person={user}
             onOpen={onOpenEvent}
             key={index}
           /> 
@@ -36,7 +50,7 @@ export default class ScrollViewElements extends Component {
       elements = events.map((event, index) => {
         return <EventPoster
           event={event} 
-          person={user}
+          //person={user}
           onOpen={onOpenEvent}
           key={index}
         /> 

@@ -1,4 +1,4 @@
-export default  reducer = (state = { events: [], loading: false, participants: [], selected: [], person: null }, action) => {
+export default  reducer = (state = { events: [], loading: false, participants: [], selected: [], person: null, matches: [], admin_matches: [] }, action) => {
     
  
     function remove(array, element) {
@@ -54,8 +54,36 @@ export default  reducer = (state = { events: [], loading: false, participants: [
         return {
           ...state,
           loading: false,
-          participants: state.participants.concat(user)  
+          participants: state.participants.concat(user) 
+          
+          // (!state.participants.some((e) => e._id == user._id)) 
+          //   ? state.participants.concat(user) 
+          //   : state.participants.map(
+          //     (participant, i) => participant._id === user._id ? user
+          //                             : participant
+          //     )
         }
+      
+      case 'WEBSOCKET:CLOSED': 
+        console.log('CLOSED');
+        let user_close = JSON.parse(action.payload.data);
+        // for (var i = 0; i < this.state.participants.length; i++) {
+        //   if (this.state.participants[i]._id == obj.data._id) {
+        //     this.state.participants.splice(i, 1); 
+        //     break;
+        //   }
+        // }
+        // this.setState({
+        //   participants: this.state.participants
+        // })
+        return {
+          ...state,
+          loading: false,
+          participants: state.participants.filter(
+            (participant) => participant._id === user_close._id
+          )
+        }
+
       
       case 'WEBSOCKET:CALCULATE_ON_SELECTED':
         let participant = action.participant;
@@ -79,6 +107,104 @@ export default  reducer = (state = { events: [], loading: false, participants: [
           ...state,
           loading: false,
           person: createdUser
+        }
+
+      case 'WEBSOCKET:CALCULATE_CLIENT':
+        
+        // var founded2 = action.payload.data.data;
+        // // console.log(founded2);
+
+        // for (var key in founded2 ) {
+        //   if (state.current_user._id == key) { 
+        //     founded2[key].shift();  
+
+        //     var persons_final = [];
+        //     founded2[key].forEach( (item) => {
+        //       if (!state.persons.some((e) => e == item)) {
+        //         persons_final = state.persons.concat(item) 
+        //       }
+        
+        //       // if(!_.some(this.state.persons, item) ) {
+        //       //   this.state.persons.push(item);
+        //       // }
+        //     })
+        //     // this.saveData(this.state.persons).done() // save to asyncstorage
+        //     // this.setState({
+        //     //   persons: this.state.persons // create matchers in store
+        //     // })
+        //   }      
+        // }
+
+        var founded = JSON.parse(action.payload.data.data);
+        
+
+        Array.prototype.indexOfForArrays = function(search) {
+          var searchJson = JSON.stringify(search); // "[3,566,23,79]"
+          var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
+          return arrJson.indexOf(searchJson);
+        };
+        for (var key in founded ) { 
+            founded[key].shift();  
+        }
+        var passed = [];
+        var final = [];
+        for (var key in founded ) {
+          founded[key].forEach( (item) => {  // null
+            founded[item._id].forEach( (found) => {
+              if (found._id == key) {
+                var s = [key, item._id].sort();
+                if ( passed.indexOfForArrays(s) < 0 ) { 
+                    passed.push(s);
+                } else {
+                    final.push(s); // [ s, .. ]
+                }
+              }
+            })
+          })
+        }
+        var final_ob_done = []; // array of pairs = 2 item arrays
+        final.forEach( (fin) => {
+          var final_ob = [];
+          for (var key in founded ) { 
+            founded[key].forEach ( (it) => {
+              if ( fin.indexOf(it._id) > -1 ) {
+                var ind = fin.indexOf(it._id);
+                fin.slice(ind , 1);
+                final_ob.push(it);
+              }
+            })
+          }
+          final_ob_done.push(final_ob);
+        })
+         
+        return {
+          ...state,
+          admin_matches: final_ob_done,
+          // matches: persons_final
+        }
+
+      case 'STORE_USER':
+        let current_user = action.user;
+        return {
+          ...state,
+          current_user: current_user
+        }
+
+      case 'WEBSOCKET:LIKES_POST':
+        let lik = JSON.parse(action.payload.data.data);
+        return {
+          ...state, 
+          participants: state.participants.map(
+            (participant) => {
+              if (participant._id == lik.person_id) {
+                participant.likes = {
+                  person_id: lik.person_id,
+                  person_likes: lik.person_likes
+                };
+              }
+              return participant; 
+            }
+          )
         }
 
       default: {
@@ -117,24 +243,7 @@ export default  reducer = (state = { events: [], loading: false, participants: [
 
       
 
-      // case 'WEBSOCKET:CLOSED': 
-      //   let data = JSON.parse(action.payload.data);
-      //   // for (var i = 0; i < this.state.participants.length; i++) {
-      //   //   if (this.state.participants[i]._id == obj.data._id) {
-      //   //     this.state.participants.splice(i, 1); 
-      //   //     break;
-      //   //   }
-      //   // }
-      //   // this.setState({
-      //   //   participants: this.state.participants
-      //   // })
-      //   return {
-      //     ...state,
-      //     participants: state.participants.filter(
-      //       (participant) => participant._id === data._id
-      //     )
-      //   }
-
+    
       // case 'WEBSOCKET:SELECTED':
       // let selected_data = action.payload.data.data;
       // // var selected_data = JSON.parse(obj.data);
@@ -152,35 +261,6 @@ export default  reducer = (state = { events: [], loading: false, participants: [
       //   selected: selected_data
       // }
     
-      // case 'WEBSOCKET:LIKES_POST':
-      //   let data = JSON.parse(action.payload.data);
-      //   // var lik = JSON.parse(obj.data);
-      //   // this.state.participants.map( (participant) => {
-      //   //           if (participant._id == lik.person_id) {
-      //   //             participant.likes = {
-      //   //               person_id: lik.person_id,
-      //   //               person_likes: lik.person_likes
-      //   //             };
-      //   //           }
-      //   //           return participant; 
-      //   //         })
-      //   // this.setState({
-      //   //   participants: this.state.participants
-      //   // });
-      //   return {
-      //     ...state, 
-      //     participants: state.participants.map(
-      //       (participant) => {
-      //         if (participant._id == data.person_id) {
-      //           participant.likes = {
-      //             person_id: data.person_id,
-      //             person_likes: data.person_likes
-      //           };
-      //         }
-      //         return participant; 
-      //       }
-      //     )
-      //   }
 
       
 

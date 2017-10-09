@@ -35,7 +35,7 @@ import { connect } from 'react-redux';
   }),
   dispatch => ({
     connect: (user) => dispatch(connected(user)), 
-    close: () => dispatch(closed()), 
+    close: (user) => dispatch(closed(user)), 
   }),
 )
 export default class JoinScreen extends Component {

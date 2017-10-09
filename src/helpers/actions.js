@@ -1,4 +1,4 @@
-import { WEBSOCKET_CREATED_USER,WEBSOCKET_ON_SELECTED, WEBSOCKET_CALCULATE_MANAGER, WEBSOCKET_CALCULATE_CLIENT, WEBSOCKET_NEXT, WEBSOCKET_LAST, WEBSOCKET_LIKES_POST, WEBSOCKET_SELECTED, WEBSOCKET_CLOSED, WEBSOCKET_CONNECTED, WEBSOCKET_RESPONSE_QUEUE, WEBSOCKET_SEND, WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPENED, WEBSOCKET_DISCONNECTED, WEBSOCKET_MESSAGE } from './constants';
+import { STORE_USER, WEBSOCKET_CREATED_USER,WEBSOCKET_ON_SELECTED, WEBSOCKET_CALCULATE_MANAGER, WEBSOCKET_CALCULATE_CLIENT, WEBSOCKET_NEXT, WEBSOCKET_LAST, WEBSOCKET_LIKES_POST, WEBSOCKET_SELECTED, WEBSOCKET_CLOSED, WEBSOCKET_CONNECTED, WEBSOCKET_RESPONSE_QUEUE, WEBSOCKET_SEND, WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPENED, WEBSOCKET_DISCONNECTED, WEBSOCKET_MESSAGE } from './constants';
 
 
 export default actions = {
@@ -96,13 +96,13 @@ export default actions = {
           data: msg,
         }
     }),
-    // calculate_client: (msg) => ({  
-    //     type: WEBSOCKET_CALCULATE_CLIENT,
-    //     payload: {
-    //       timestamp: new Date(),
-    //       data: msg,
-    //     }
-    // }),
+    calculate_client: (msg) => ({  
+        type: WEBSOCKET_CALCULATE_CLIENT,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
     // calculate_manager: (msg) => ({  
     //     type: WEBSOCKET_CALCULATE_MANAGER,
     //     payload: {
@@ -284,3 +284,17 @@ export function onSelected(participant) {
         dispatch(action())
     }
 }
+
+
+export function storeUser(user) {
+    const action = () => {
+        return {
+            type: STORE_USER,
+            user: user
+        }
+    }
+    return (dispatch) => {
+        dispatch(action())
+    }
+}
+

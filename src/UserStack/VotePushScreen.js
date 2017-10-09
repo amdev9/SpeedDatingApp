@@ -9,8 +9,7 @@ import {
   View, 
   ListView, 
   ScrollView,
-  RefreshControl,
-  AsyncStorage
+  RefreshControl
 } from 'react-native';
 
 import { defaultStyles } from '../styles';

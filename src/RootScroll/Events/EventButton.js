@@ -20,9 +20,19 @@ const { width, height } = Dimensions.get('window');
 // Set default popup height to 67% of screen height
 const defaultHeight = height * 0.67;
 
+
+
+import { connect } from 'react-redux';
+
+@connect(
+  state => ({
+    current_user: state.current_user
+  }),
+  dispatch => ({}),
+)
 export default class EventButton extends Component {
     render() {
-      const { event, person, onBook, onManage, onJoin, onManageRequest } = this.props;
+      const { event, current_user, onBook, onManage, onJoin, onManageRequest } = this.props;
 
       //transform manage_ids
       if (event.manage_ids.length > 0 && typeof(event.manage_ids[0]) == 'object' ) {
@@ -31,7 +41,7 @@ export default class EventButton extends Component {
         var manage_ids = event.manage_ids;
       }
     
-      if ( manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id))  ) 
+      if ( manage_ids.includes(current_user._id) && ( !event.participant_ids.includes(current_user._id))  ) 
       {
         return <TouchableHighlight
           underlayColor="#9575CD"
@@ -42,7 +52,7 @@ export default class EventButton extends Component {
           
         </TouchableHighlight> 
             
-      } else if  ( !event.manage_queue_ids.includes(person._id) && !manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id)) ) {
+      } else if  ( !event.manage_queue_ids.includes(current_user._id) && !manage_ids.includes(current_user._id) && ( !event.participant_ids.includes(current_user._id)) ) {
         return  event.show_manage 
           ? 
             <View style={styles.doubleButtonContainer}>
@@ -73,8 +83,8 @@ export default class EventButton extends Component {
               <Text style={styles.button}>Подробнее</Text> 
               </TouchableHighlight>
             </View>
-        } else if  ( !manage_ids.includes(person._id) && ( !event.participant_ids.includes(person._id))
-           && event.manage_queue_ids.includes(person._id) ) {
+        } else if  ( !manage_ids.includes(current_user._id) && ( !event.participant_ids.includes(current_user._id))
+           && event.manage_queue_ids.includes(current_user._id) ) {
           return  event.show_manage 
             ? 
               <View>
@@ -97,7 +107,7 @@ export default class EventButton extends Component {
                 <Text style={styles.button}>Book My Tickets</Text> 
                 </TouchableHighlight>
               </View>
-        } else if  ( !manage_ids.includes(person._id) && ( event.participant_ids.includes(person._id)) ) {
+        } else if  ( !manage_ids.includes(current_user._id) && ( event.participant_ids.includes(current_user._id)) ) {
           return  <View>
               <TouchableHighlight
               underlayColor="#9575CD"

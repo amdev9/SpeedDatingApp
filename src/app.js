@@ -30,7 +30,9 @@ let state = {
   loading: false, 
   participants: [],
   selected: [],
-  person: null
+  person: null,
+  matches: [],
+  admin_matches: []
 }; // preloadedState - when init from background
 const NOTIFICATION_TOKEN = "push-notification-token";
 

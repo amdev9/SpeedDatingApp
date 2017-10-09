@@ -23,6 +23,8 @@ import { calculatePost } from '../helpers/actions';
   state => ({
     events: state.events,
     loading: state.loading,
+    admin_matches: state.admin_matches,
+    participants: state.participants
   }),
   dispatch => ({
     calculate: (event_id) => dispatch(calculatePost(event_id))
@@ -31,111 +33,23 @@ import { calculatePost } from '../helpers/actions';
 export default class VotingStatusScreen extends Component {
   constructor(props) {
     super(props);
-    const { person, participants } = this.props.navigation.state.params;
-    this.state = {
-      participants: participants
-    };
   }
   
-  
-  onMessageRecieved = (e) => { // navigate(final_ob_done) , participants
-  
-    var obj = JSON.parse(e.data); 
-    // console.log(obj)
-    if (obj.type == 'CALCULATE_CLIENT') { //'CALCULATE_MANAGER'
-      // var final_ob_done = JSON.parse(obj.data);
-      // console.log(final_ob_done);
-
-      var founded = JSON.parse(obj.data);
-      Array.prototype.indexOfForArrays = function(search)
-      {
-        var searchJson = JSON.stringify(search); // "[3,566,23,79]"
-        var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
-        return arrJson.indexOf(searchJson);
-      };
-      for (var key in founded ) { 
-          founded[key].shift();  
-      }
-      var passed = [];
-      var final = [];
-      for (var key in founded ) {
-          founded[key].forEach( (item) => {  // null
-              founded[item._id].forEach( (found) => {
-                  if (found._id == key) {
-                      var s = [key, item._id].sort();
-                      if ( passed.indexOfForArrays(s) < 0 ) { 
-                          passed.push(s);
-                      } else {
-                          final.push(s); // [ s, .. ]
-                      }
-                  }
-              })
-          })
-      }
-      var final_ob_done = []; // array of pairs = 2 item arrays
-      final.forEach( (fin) => {
-        var final_ob = [];
-        for (var key in founded ) { 
-            founded[key].forEach ( (it) => {
-                if ( fin.indexOf(it._id) > -1 ) {
-                  var ind = fin.indexOf(it._id);
-                  fin.slice(ind , 1);
-                  final_ob.push(it);
-                }
-            })
-        }
-        final_ob_done.push(final_ob);
-      })
-      const { navigate } = this.props.navigation;
-      navigate('Match', {
-        matches: final_ob_done
-      });
-    } else if ( obj.type == 'LIKES_POST' ) {
-
-      var lik = JSON.parse(obj.data);
-      this.state.participants.map( (participant) => {
-
-        if (participant._id == lik.person_id) {
-          participant.likes = {
-            person_id: lik.person_id,
-            person_likes: lik.person_likes
-          };
-        }
-        return participant; 
-      })
-      this.setState({
-        participants: this.state.participants
-      });
-
-    }
-  };
-
   _calculate = async () => {
     const { event } =  this.props.navigation.state.params;
     this.props.calculate(event._id);
   }
-  
-  ///
-  onOpenConnection = () => {
-    console.log(' - onopen - ');
-  }
-  onError = (e) => {
-    console.log(e.message);
-  };
-  onClose = (e) => {
-    console.log(e.code, e.reason);
-  };
-  componentWillMount() {
-    this.ws = new WebSocket(WS_URL); 
-    this.ws.onopen = this.onOpenConnection;
-    this.ws.onmessage = this.onMessageRecieved;
-    this.ws.onerror = this.onError;
-    this.ws.onclose = this.onClose;
-  }
-  ///
-
+   
   render() {
+    const { admin_matches, participants } = this.props;
+    const { navigate } = this.props.navigation;
     
+    if (admin_matches.length > 0) { // fix 
+      navigate('Match', {
+        matches: admin_matches
+      });  
+    } 
+  
     return (
       <View style={styles.container}>
   
@@ -146,7 +60,7 @@ export default class VotingStatusScreen extends Component {
     <ScrollView style={{ marginTop: 20 }}
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
-          {this.state.participants.map((participant, index) => {
+          {participants.map((participant, index) => {
             return <TouchableOpacity 
               style={styles.containerPart} 
               key={index}
@@ -164,7 +78,7 @@ export default class VotingStatusScreen extends Component {
               </View>
               <View style={styles.avatarListContainer}>
                 { typeof participant.likes === 'object' ? participant.likes.person_likes.map( (id, ind)=> {
-                    var ob = _.find(this.state.participants, function(obj) { return obj._id == id });
+                    var ob = _.find(participants, function(obj) { return obj._id == id });
                     return <Image
                       resizeMode='contain'
                       style={styles.avatarList}

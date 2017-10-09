@@ -13,8 +13,6 @@ import {
   Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import _ from 'lodash';
-
 
 
 import { defaultStyles } from '../styles';
@@ -22,12 +20,22 @@ import Participant from '../Participant';
 
 import { WS_URL } from "../helpers/constants";
 
+import _ from 'lodash';
 
 import Communications from 'react-native-communications';
 
-var pech = [];
 
 const { width,height } = Dimensions.get('window')
+
+import { connect } from 'react-redux';
+
+@connect(
+  state => ({
+    current_user: state.current_user,
+    // matches: state.matches
+  }),
+  dispatch => ({}),
+)
 export default class MymatchesScreen extends Component {
   
   constructor(props) {
@@ -38,53 +46,58 @@ export default class MymatchesScreen extends Component {
     }; 
   }
 
-  componentDidMount() {
-    this.fetchData().done()
-  }
+  // componentDidMount() {
+  //   this.fetchData().done()
+  // }
 
-  async fetchData() {
-    try {
-      const myArray = await AsyncStorage.getItem('@MySuperStore:persons');
-      if (myArray !== null) {
+  // async fetchData() {
+  //   try {
+  //     const myArray = await AsyncStorage.getItem('@MySuperStore:persons');
+  //     if (myArray !== null) {
         
-        var persons = JSON.parse(myArray);
-        pech = persons;
-        
-        this.setState({
-          persons: persons
-        });
-      } else {
-        console.log('data null')
-      }
-    } catch (error) {
-      alert('error get from asyncstorage: ' + JSON.stringify(error));
-    }
+  //       var persons = JSON.parse(myArray);
+         
+  //       this.setState({
+  //         persons: persons
+  //       });
+  //     } else {
+  //       console.log('data null')
+  //     }
+  //   } catch (error) {
+  //     alert('error get from asyncstorage: ' + JSON.stringify(error));
+  //   }
+  // }
+
+  // async saveData(myArray) {
+  //   try {
+  //     await AsyncStorage.setItem('@MySuperStore:persons', JSON.stringify(myArray));
+  //   } catch (error) {
+
+  //   }
+  // }
+
+  
+  phoneCallStart = (participant) => {
+    alert(JSON.stringify(participant)) //Communications.phonecall('+79772563015', true)
   }
 
-  async saveData(myArray) {
-    try {
-      await AsyncStorage.setItem('@MySuperStore:persons', JSON.stringify(myArray));
-    } catch (error) {
-
-    }
-  }
-
+  
   onMessageRecieved = async (e) => { // persons
     console.log(e.data);
     var obj = JSON.parse(e.data); 
-    const { person } = this.props 
+    const { current_user } = this.props 
 
     if (obj.type == 'CALCULATE_CLIENT') {
       var founded = JSON.parse(obj.data); 
       for (var key in founded ) {
-        if (person._id == key) { // person from store
+        if (current_user._id == key) { // person from store
           founded[key].shift();  
           founded[key].forEach( (item) => {
             if(!_.some(this.state.persons, item) ) {
               this.state.persons.push(item);
             }
           })
-          this.saveData(this.state.persons).done()
+          // this.saveData(this.state.persons).done()
           this.setState({
             persons: this.state.persons // create matchers in store
           })
@@ -92,14 +105,6 @@ export default class MymatchesScreen extends Component {
       }
     }
   };
-  
-  
-
-  phoneCallStart = (participant) => {
-    alert(JSON.stringify(participant)) //Communications.phonecall('+79772563015', true)
-  }
-
-  ///
   onOpenConnection = () => {
     console.log(' - onopen - ');
   }
@@ -116,13 +121,11 @@ export default class MymatchesScreen extends Component {
     this.ws.onerror = this.onError;
     this.ws.onclose = this.onClose;
   }
-  ///
-
 
   render() {
-    const { person } = this.props  
+    const { matches } = this.props;
     const noSimpathy = 'Нет совпадений';
-    if (this.state.persons.length + pech.length > 0 ) {  //  && this.state.text.length == 0
+    if (this.state.persons.length  > 0 ) {  //  && this.state.text.length == 0
       return (
         <View style={styles.container}>
           <View style={styles.content}>
@@ -146,9 +149,8 @@ export default class MymatchesScreen extends Component {
           </View>
         </View>
       );
-     
-
-    } else if( this.state.persons.length + pech.length == 0 ) {
+    
+    } else if(this.state.persons.length == 0) {
       return (
         <View style={styles.container}>
           <View>

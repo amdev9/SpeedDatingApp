@@ -22,6 +22,7 @@ import { updateUser } from '../helpers/actions';
   state => ({
     events: state.events,
     loading: state.loading,
+    current_user: state.current_user
   }),
   dispatch => ({
     update_user: (user) => dispatch(updateUser(user)), 
@@ -30,18 +31,18 @@ import { updateUser } from '../helpers/actions';
 export default class WorkModal extends Component {
   constructor(props) {
     super(props);
-    const { user } = this.props.navigation.state.params;
+    const { current_user } = this.props //.navigation.state.params;
     this.state = {
-      current_work: user.current_work ? user.current_work : '',
-      work: user.work
+      current_work: current_user.current_work ? current_user.current_work : '',
+      work: current_user.work
     }
   }
     
   saveUser = async () => {
-    const { user } = this.props.navigation.state.params;
-    user.current_work = this.state.current_work;
+    const { current_user } = this.props //.navigation.state.params;
+    current_user.current_work = this.state.current_work;
     try {
-      this.props.update_user(user);
+      this.props.update_user(current_user);
     }
     catch (error) {
       alert(error);
@@ -50,7 +51,7 @@ export default class WorkModal extends Component {
 
   render() {
     const { goBack } = this.props.navigation;
-    const {user} = this.props.navigation.state.params;
+    const {current_user} = this.props //.navigation.state.params;
     
     return (
       <View style={styles.container}>
@@ -59,7 +60,7 @@ export default class WorkModal extends Component {
           <Text style={styles.navBarHeader}>Текущая работа</Text>
           <TouchableOpacity onPress={() =>  {
             this.saveUser();
-            this.props.navigation.navigate('Edit', { user: user });
+            this.props.navigation.navigate('Edit'); // , { user: user }
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
@@ -70,12 +71,12 @@ export default class WorkModal extends Component {
           <View style={styles.back}>
             <TouchableOpacity onPress={() =>  {
               this.setState({ 
-                current_work: user.work.position_name
+                current_work: current_user.work.position_name
               });
               
             }}>
             <View style={styles.navBarTest}>
-              <Text style={styles.item}>{user.work.position_name } at {user.work.employer_name} </Text>
+              <Text style={styles.item}>{current_user.work.position_name } at {current_user.work.employer_name} </Text>
               <Icon  style={ this.state.current_work != '' ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
             </View>
             </TouchableOpacity>

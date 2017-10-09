@@ -23,6 +23,7 @@ import { updateUser } from '../helpers/actions';
   state => ({
     events: state.events,
     loading: state.loading,
+    current_user: state.current_user
   }),
   dispatch => ({
     update_user: (user) => dispatch(updateUser(user)), 
@@ -31,18 +32,18 @@ import { updateUser } from '../helpers/actions';
 export default class UniversityModal extends Component {
   constructor(props) {
     super(props);
-    const { user } = this.props.navigation.state.params;
+    const { current_user } = this.props //.navigation.state.params;
     this.state = {
-      current_university: user.current_university ? user.current_university : '',
-      university: user.university
+      current_university: current_user.current_university ? current_user.current_university : '',
+      university: current_user.university
     }
   }
     
   saveUser = async () => {
-    const { user } = this.props.navigation.state.params;
-    user.current_university = this.state.current_university;
+    const { current_user } = this.props; //.navigation.state.params;
+    current_user.current_university = this.state.current_university;
     try {
-      this.props.update_user(user);
+      this.props.update_user(current_user);
     }
     catch (error) {
       alert(error);
@@ -51,7 +52,7 @@ export default class UniversityModal extends Component {
 
   render() {
     const { goBack } = this.props.navigation;
-    const {user} = this.props.navigation.state.params;
+    const { current_user } = this.props //.navigation.state.params;
     
     return (
       
@@ -61,7 +62,7 @@ export default class UniversityModal extends Component {
           <Text style={styles.navBarHeader}>Университет</Text>
           <TouchableOpacity onPress={() =>  {
             this.saveUser();
-            this.props.navigation.navigate('Edit', { user: user });
+            this.props.navigation.navigate('Edit'); // , { user: user }
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
@@ -74,13 +75,13 @@ export default class UniversityModal extends Component {
           <View style={styles.back}>
           <TouchableOpacity onPress={() =>  {
             this.setState({ 
-              current_university: user.university
+              current_university: current_user.university
             })
           }}>
 
           {/* for each from user.university */}
           <View style={styles.navBarTest}>
-            <Text style={styles.item}>{user.university.education_type } at {user.university.school_name} </Text>
+            <Text style={styles.item}>{current_user.university.education_type } at {current_user.university.school_name} </Text>
             <Icon style={ this.state.current_university != '' ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
           </View>
           </TouchableOpacity>

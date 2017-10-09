@@ -31,6 +31,7 @@ import { connect } from 'react-redux';
   state => ({
     events: state.events,
     loading: state.loading,
+    current_user: state.current_user
   }),
   dispatch => ({
     refresh: () => dispatch(fetchEvents()),   
@@ -64,7 +65,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Confirmation', {
       event: this.state.event,
-      participant: this.props.user 
+      participant: this.props.current_user  
     }); 
   }
   joinEvent = () => {
@@ -74,11 +75,11 @@ export default class Events extends Component {
       // alert('U Selecte table ' + this.state.chosenTable);
       this.closeEvent();
       const { navigate } = this.props.navigation;
-      this.props.user.table = this.state.chosenTable + 1; // navigation.state.params.person
+      this.props.current_user.table = this.state.chosenTable + 1; // navigation.state.params.person
       navigate('Join', {
         // table: this.state.chosenTable,
         event: this.state.event,
-        person: this.props.user 
+        person: this.props.current_user 
       }); 
     }
   }
@@ -87,7 +88,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Manage', {
       event: this.state.event,
-      person: this.props.user 
+      person: this.props.current_user 
     }); 
   }
   manageEventRequest = () => {
@@ -95,7 +96,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('ManagePermission', {
       event: this.state.event,
-      person: this.props.user,
+      person: this.props.current_user,
     }); 
   }
   chooseTable = (table) => {
@@ -108,7 +109,7 @@ export default class Events extends Component {
   }
   render() {
     const { events, loading, refresh } = this.props;  
-    const { user } = this.props;
+    // const { user } = this.props;
     
     return (
       <View style={styles.container}>
@@ -128,11 +129,11 @@ export default class Events extends Component {
           ? 
             <ScrollViewElements 
               selected={this.state.selectedIndex}
-              events={events}
-              user={user}
+              //events={events}
+              //user={user}
               onOpenEvent={this.openEvent}
-              loading={loading}
-              refresh={refresh}
+              //loading={loading}
+              //refresh={refresh}
             /> 
           : <ActivityIndicator
               animating={loading}
@@ -142,7 +143,7 @@ export default class Events extends Component {
         }
         <EventPopup
           event={this.state.event}
-          person={user}
+          //person={user}
           isOpen={this.state.popupIsOpen}
           onClose={this.closeEvent}
           onBook={this.bookEvent}
