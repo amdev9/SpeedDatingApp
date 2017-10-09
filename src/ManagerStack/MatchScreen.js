@@ -17,16 +17,31 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Participant from '../Participant';
 import { defaultStyles } from '../styles';
 
+import { connect } from 'react-redux';
+
+import { clearAdminMatches } from '../helpers/actions';
+
+@connect(
+  state => ({
+    admin_matches: state.admin_matches
+  }),
+  dispatch => ({
+    clear_admin_matches: () => dispatch(clearAdminMatches())
+  }),
+)
 export default class MatchScreen extends Component {
 
   render() {
-    // const { events } = this.props;
-    const { matches } = this.props.navigation.state.params;
+    const { admin_matches } = this.props;// const { matches } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
         
         <View style={styles.navBar}>
-          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.navigate('ScrollTab') }>
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => {
+              this.props.clear_admin_matches();
+              return this.props.navigation.navigate('ScrollTab'); 
+            }
+          }>
             <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
             <Text style={ [styles.navBarButton,{
               fontWeight: 'bold',
@@ -44,7 +59,7 @@ export default class MatchScreen extends Component {
         style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  
       >
 
-        { matches.map((object, index) => {
+        { admin_matches.map((object, index) => {
 
             return <View 
               style={styles.containerFull}

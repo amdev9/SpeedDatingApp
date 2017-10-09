@@ -39,17 +39,17 @@ export default class VotingStatusScreen extends Component {
     const { event } =  this.props.navigation.state.params;
     this.props.calculate(event._id);
   }
+
+
    
+
   render() {
-    const { admin_matches, participants } = this.props;
-    const { navigate } = this.props.navigation;
+    const { participants, admin_matches } = this.props;
     
     if (admin_matches.length > 0) { // fix 
-      navigate('Match', {
-        matches: admin_matches
-      });  
+      this.props.navigation.navigate('Match');  
     } 
-  
+
     return (
       <View style={styles.container}>
   

@@ -17,34 +17,42 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { defaultStyles } from '../styles';
 
+import { connect } from 'react-redux';
+
+@connect(
+  state => ({
+    current_user: state.current_user
+  }),
+  dispatch => ({}),
+)
 export default class VotingScreen extends Component {
   
   constructor(props) {
     super(props);
-    const { person, participants } = this.props.navigation.state.params;
+    const { current_user } = this.props;
     this.state = {
       liked: false
     };
-    if (!person.likes) {
-      person.likes = {
-        person_id: person._id,
+    if (!current_user.likes) {
+      current_user.likes = {
+        person_id: current_user._id,
         person_likes: []
       };
     }
   }
   
   onClicked = () => {
+    const { current_user } = this.props;
     const { 
       participant, 
-      person 
     } = this.props.navigation.state.params;
   
-    if(!person.likes.person_likes.includes(participant._id)) { 
-      person.likes.person_likes.push(participant._id); 
+    if(!current_user.likes.person_likes.includes(participant._id)) { 
+      current_user.likes.person_likes.push(participant._id); 
     } else {
-      var index = person.likes.person_likes.indexOf(participant._id);
+      var index = current_user.likes.person_likes.indexOf(participant._id);
       if (index > -1) {
-        person.likes.person_likes.splice(index, 1);
+        current_user.likes.person_likes.splice(index, 1);
       }
     }
     
@@ -56,8 +64,7 @@ export default class VotingScreen extends Component {
 
   render() {
     const { 
-      participant, 
-      person 
+      participant
     } = this.props.navigation.state.params;
     const { avatar, name, table } = participant;
     let unlike = 'Убрать лайк';

@@ -24,6 +24,7 @@ import { likesFunc } from '../helpers/actions';
   state => ({
     events: state.events,
     loading: state.loading,
+    current_user: state.current_user
   }),
   dispatch => ({
     likesPost: (person_id, event_id, likes) => dispatch(likesFunc(person_id, event_id, likes)), 
@@ -33,9 +34,10 @@ export default class VotingPushScreen extends Component {
   // votingpushscreen  -> 'confirm' -> empty mymatches (waiting for admin 'done')
   constructor(props) {
     super(props);
-    const { person, participants } = this.props.navigation.state.params;
+    const { current_user } = this.props;
+    const { participants } = this.props.navigation.state.params;
     this.state = {
-      liked: person.likes.person_likes
+      liked: current_user.likes.person_likes
     }
   }
   
@@ -49,10 +51,11 @@ export default class VotingPushScreen extends Component {
   };
  
   onConfirm = async () => {
-    const { person, participants, event } = this.props.navigation.state.params;
+    const {current_user} =this.props;
+    const { participants, event } = this.props.navigation.state.params;
     try {
      
-      this.props.likesPost(person._id, event._id, this.state.liked);
+      this.props.likesPost(current_user._id, event._id, this.state.liked);
     
       const { navigate } = this.props.navigation;
     
@@ -66,9 +69,10 @@ export default class VotingPushScreen extends Component {
   };
 
   render() {
-    const { person, participants } = this.props.navigation.state.params;
+    const {current_user} = this.props;
+    const { participants } = this.props.navigation.state.params;
 
-    _.remove(participants, { '_id': person._id }); 
+    _.remove(participants, { '_id': current_user._id }); 
     return (
       <View style={styles.container}>
         <ScrollView

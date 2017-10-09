@@ -22,6 +22,7 @@ import { manageEvent } from '../helpers/actions';
   state => ({
     events: state.events,
     loading: state.loading,
+    current_user: state.current_user
   }),
   dispatch => ({
     update_user: (person_id, event_id) => dispatch(manageEvent(person_id, event_id)), 
@@ -30,14 +31,11 @@ import { manageEvent } from '../helpers/actions';
 export default class ManagePermissionScreen extends Component {
     
   onAttend = async () => {
-    const { person, participants, event } = this.props.navigation.state.params;
+    const { current_user } = this.props;
+    const { event } = this.props.navigation.state.params;
     try {
-      
-      this.props.update_user(person._id, event._id)
-     
+      this.props.update_user(current_user._id, event._id)   
       this.props.navigation.goBack(); 
-    
-      
     }
     catch (error) {
       alert(error);
@@ -45,7 +43,7 @@ export default class ManagePermissionScreen extends Component {
   };
 
   render() {
-    const { person, participants } = this.props.navigation.state.params;
+    
     return (
       <View style={styles.container}>
         

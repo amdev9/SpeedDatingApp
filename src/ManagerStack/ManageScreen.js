@@ -74,7 +74,7 @@ export default class ManageScreen extends Component {
   start = () => {
     const { selected, start_post } = this.props;
     
-    const { event, person } = this.props.navigation.state.params;
+    const { event } = this.props.navigation.state.params;
     if (selected.length > 0) {
     
       start_post(
@@ -86,7 +86,6 @@ export default class ManageScreen extends Component {
       const { navigate } = this.props.navigation;
       navigate('VotingStatus', {
         participants: selected,
-        person: person,
         event: event
       });  
     } else {

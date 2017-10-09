@@ -65,7 +65,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Confirmation', {
       event: this.state.event,
-      participant: this.props.current_user  
+      // participant: this.props.current_user  
     }); 
   }
   joinEvent = () => {
@@ -79,7 +79,7 @@ export default class Events extends Component {
       navigate('Join', {
         // table: this.state.chosenTable,
         event: this.state.event,
-        person: this.props.current_user 
+        // person: this.props.current_user 
       }); 
     }
   }
@@ -88,7 +88,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Manage', {
       event: this.state.event,
-      person: this.props.current_user 
+      // person: this.props.current_user 
     }); 
   }
   manageEventRequest = () => {
@@ -96,7 +96,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('ManagePermission', {
       event: this.state.event,
-      person: this.props.current_user,
+      // person: this.props.current_user,
     }); 
   }
   chooseTable = (table) => {

@@ -32,6 +32,7 @@ import { connect } from 'react-redux';
   state => ({
     events: state.events,
     loading: state.loading,
+    current_user: state.current_user
   }),
   dispatch => ({
     connect: (user) => dispatch(connected(user)), 
@@ -49,11 +50,12 @@ export default class JoinScreen extends Component {
     console.log(e.data);
     var obj = JSON.parse(e.data); 
     
+    const { current_user } = this.props; 
     
     if (obj.type == 'NEXT') { // remove myself from selected
       var participants = JSON.parse(obj.data);
       for (var i = 0; i < participants.length; i++) {
-        if (participants[i]._id == this.props.navigation.state.params.person._id) {
+        if (participants[i]._id == current_user._id) {
           participants.splice(i, 1); 
           break;
         }
@@ -65,7 +67,7 @@ export default class JoinScreen extends Component {
       const { navigate } = this.props.navigation;
       navigate('Voting', {  // if this participant
         participant: this.state.participant,
-        person: this.props.navigation.state.params.person
+        // person: this.props.navigation.state.params.person
       });  
       
     }
@@ -78,7 +80,7 @@ export default class JoinScreen extends Component {
       const { navigate } = this.props.navigation;
       navigate('VotePush', {  // if this selected
         participants: this.state.selected,  
-        person: this.props.navigation.state.params.person,
+        // person: this.props.navigation.state.params.person,
         event: this.props.navigation.state.params.event
       });  
     }
@@ -98,7 +100,8 @@ export default class JoinScreen extends Component {
     
   
   componentWillMount() {
-    this.props.connect(this.props.navigation.state.params.person);
+    const { current_user } = this.props;
+    this.props.connect(current_user);
 
     this.ws = new WebSocket(WS_URL); 
     this.ws.onopen = this.onOpenConnection;
@@ -108,11 +111,12 @@ export default class JoinScreen extends Component {
   }
 
   componentWillUnmount() {
-    this.props.close(this.props.navigation.state.params.person);
+    const { current_user } = this.props;
+    this.props.close(current_user);
   }
 
   render() {
-    const { person } =  this.props.navigation.state.params;     
+    
     return (
       <View style={styles.container}>
         <View style={styles.navBar}>
