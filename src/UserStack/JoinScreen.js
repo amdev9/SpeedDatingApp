@@ -46,17 +46,15 @@ export default class JoinScreen extends Component { // FIX!
     index: 0
   };
 
-  onMessageRecieved = (e) => { // participant, selected
+  onMessageRecieved = (e) => { 
 
-    // console.log(e.data);
-
-    console.log(';:::::::::::::INDEX: ', this.state.index);
+    console.log(':::::::::::::INDEX: ', this.state.index);
 
     var obj = JSON.parse(e.data); 
     
     const { current_user } = this.props; 
     
-    if (obj.type == 'NEXT') { // remove myself from selected
+    if (obj.type == 'NEXT') { 
       var participants = JSON.parse(obj.data);
       for (var i = 0; i < participants.length; i++) {
         if (participants[i]._id == current_user._id) {
@@ -69,9 +67,8 @@ export default class JoinScreen extends Component { // FIX!
       })
       this.state.index++;
       const { navigate } = this.props.navigation;
-      navigate('Voting', {  // if this participant
-        participant: this.state.participant,
-        // person: this.props.navigation.state.params.person
+      navigate('Voting', { 
+        participant: this.state.participant
       });  
       
     }
@@ -81,12 +78,13 @@ export default class JoinScreen extends Component { // FIX!
       this.setState({
         selected: selected_data
       });
+    
       const { navigate } = this.props.navigation;
       navigate('VotePush', {  // if this selected
-        participants: this.state.selected,  
-        // person: this.props.navigation.state.params.person,
+        participants: this.state.selected,
         event: this.props.navigation.state.params.event
       });  
+
     }
 
   };
