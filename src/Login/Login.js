@@ -175,7 +175,8 @@ export default class Login extends Component {
         gender: 2,  
         work: '',
         university: '',
-        phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`
+        phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`,
+        matches: []
       };
       this.props.navigation.navigate('Fullfill', { user: user })
     })

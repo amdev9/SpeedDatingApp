@@ -1,4 +1,4 @@
-export default  reducer = (state = { events: [], loading: false, participants: [], selected: [], person: null, matches: [], admin_matches: [], current_user: null, vote_participant: null, vote_index: 0, vote_selected: [] }, action) => {
+export default  reducer = (state = { events: [], loading: false, participants: [], selected: [], person: null, admin_matches: [], current_user: null, vote_participant: null, vote_index: 0, vote_selected: [] }, action) => {
     
  
     function remove(array, element) {
@@ -111,29 +111,8 @@ export default  reducer = (state = { events: [], loading: false, participants: [
 
       case 'WEBSOCKET:CALCULATE_CLIENT':
         
-        // var founded2 = action.payload.data.data;
-        // // console.log(founded2);
-
-        // for (var key in founded2 ) {
-        //   if (state.current_user._id == key) { 
-        //     founded2[key].shift();  
-
-        //     var persons_final = [];
-        //     founded2[key].forEach( (item) => {
-        //       if (!state.persons.some((e) => e == item)) {
-        //         persons_final = state.persons.concat(item) 
-        //       }
+        var founded2 = JSON.parse(action.payload.data.data);
         
-        //       // if(!_.some(this.state.persons, item) ) {
-        //       //   this.state.persons.push(item);
-        //       // }
-        //     })
-        //     // this.saveData(this.state.persons).done() // save to asyncstorage
-        //     // this.setState({
-        //     //   persons: this.state.persons // create matchers in store
-        //     // })
-        //   }      
-        // }
 
         var founded = JSON.parse(action.payload.data.data);
         
@@ -176,11 +155,24 @@ export default  reducer = (state = { events: [], loading: false, participants: [
           }
           final_ob_done.push(final_ob);
         })
-         
+
+        
+        var matches_final = [];
+        for (var key in founded2 ) {
+          if (store.current_user._id == key) { 
+            founded2[key].shift();  
+            founded2[key].forEach( (item) => {
+              if(!state.current_user.matches.some(e => e._id == item._id) ) {
+                matches_final.concat(item);
+              }
+            })
+          }      
+        }
+        const current_user_final = state.current_user.concat(matches_final);
         return {
           ...state,
           admin_matches: final_ob_done,
-          // matches: persons_final
+          current_user: current_user_final
         }
 
       case 'STORE_USER':
@@ -196,6 +188,7 @@ export default  reducer = (state = { events: [], loading: false, participants: [
           participants: [],
           selected: [],
           admin_matches: [],
+
           vote_selected: [],
           vote_index: 0
         }
@@ -240,92 +233,5 @@ export default  reducer = (state = { events: [], loading: false, participants: [
           loading: false
         }
       }
-         
-      
-
-     
-
-      
-
-     
-      
-
-    
-      
-      // case 'WEBSOCKET:CALCULATE_CLIENT':
-      //   let data = JSON.parse(action.payload.data);
-      //   // var founded = JSON.parse(obj.data); 
-      //   // for (var key in founded ) {
-      //   //   if (person._id == key) {
-      //   //     founded[key].shift();  
-      //   //     founded[key].forEach( (item) => {
-      //   //       if(!_.some(this.state.persons, item) ) {
-      //   //         this.state.persons.push(item);
-      //   //       }
-      //   //     })
-      //   //     this.saveData(this.state.persons).done()
-      //   //     this.setState({
-      //   //       persons: this.state.persons
-      //   //     })
-      //   //   }      
-      //   // }
-      //   return {
-      //     ...state,
-      //     persons: data
-      //   };
-
-      // case 'WEBSOCKET:CALCULATE_MANAGER':
-      //   let data = JSON.parse(action.payload.data);
-      //   // var obj = JSON.parse(e.data); 
-      //   // const { navigate } = this.props.navigation;
-      //   // var founded = JSON.parse(obj.data);
-      //   // Array.prototype.indexOfForArrays = function(search)
-      //   // {
-      //   //   var searchJson = JSON.stringify(search); // "[3,566,23,79]"
-      //   //   var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
-      //   //   return arrJson.indexOf(searchJson);
-      //   // };
-      //   // for (var key in founded ) { 
-      //   //     founded[key].shift();  
-      //   // }
-      //   // var passed = [];
-      //   // var final = [];
-      //   // for (var key in founded ) {
-      //   //     founded[key].forEach( (item) => {  // null
-      //   //         founded[item._id].forEach( (found) => {
-      //   //             if (found._id == key) {
-      //   //                 var s = [key, item._id].sort();
-      //   //                 if ( passed.indexOfForArrays(s) < 0 ) { 
-      //   //                     passed.push(s);
-      //   //                 } else {
-      //   //                     final.push(s); // [ s, .. ]
-      //   //                 }
-      //   //             }
-      //   //         })
-      //   //     })
-      //   // }
-      //   // var final_ob_done = []; // array of pairs = 2 item arrays
-      //   // final.forEach( (fin) => {
-      //   //   var final_ob = [];
-      //   //   for (var key in founded ) { 
-      //   //       founded[key].forEach ( (it) => {
-      //   //           if ( fin.indexOf(it._id) > -1 ) {
-      //   //             var ind = fin.indexOf(it._id);
-      //   //             fin.slice(ind , 1);
-      //   //             final_ob.push(it);
-      //   //           }
-      //   //       })
-      //   //   }
-      //   //   final_ob_done.push(final_ob);
-      //   // })
-      //   // navigate('Match', {
-      //   //   matches: final_ob_done
-      //   // }); 
-      //   return {
-      //     ...state,
-      //     matches: data
-      //   };
-      
-     
     }
 }

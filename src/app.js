@@ -31,7 +31,6 @@ let state = {
   participants: [],
   selected: [],
   person: null,
-  matches: [],
   admin_matches: [],
   current_user: null,
   vote_participant: null, 

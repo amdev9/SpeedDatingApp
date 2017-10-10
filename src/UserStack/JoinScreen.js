@@ -33,7 +33,8 @@ import { connect } from 'react-redux';
   state => ({
     current_user: state.current_user, // save matches on server
     vote_participant: state.vote_participant,
-    vote_selected: state.vote_selected
+    vote_selected: state.vote_selected,
+    vote_index: state.vote_index
   }),
   dispatch => ({
     connect: (user) => dispatch(connected(user)), 
@@ -45,7 +46,7 @@ export default class JoinScreen extends Component { // FIX!
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     
-    const { vote_participant, vote_selected, current_user } = nextProps; 
+    const { vote_participant, vote_selected, current_user, vote_index } = nextProps; 
     if (vote_participant && vote_selected.length==0) {
       nextProps.navigation.navigate('Voting');  
     } else if (current_user.likes && vote_selected.length > 0 ) {  // fix
