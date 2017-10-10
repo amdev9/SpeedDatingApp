@@ -66,7 +66,12 @@ export default class VotingScreen extends Component {
     const { 
       participant
     } = this.props.navigation.state.params;
+
+    console.log(participant);
+    
     const { avatar, name, table } = participant;
+
+    
     let unlike = 'Убрать лайк';
     let like = 'Поставить лайк';
     return (

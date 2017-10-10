@@ -65,7 +65,7 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Confirmation', {
       event: this.state.event,
-      // participant: this.props.current_user  
+      participant: this.props.current_user  
     }); 
   }
   joinEvent = () => {
@@ -77,9 +77,7 @@ export default class Events extends Component {
       const { navigate } = this.props.navigation;
       this.props.current_user.table = this.state.chosenTable + 1; // navigation.state.params.person
       navigate('Join', {
-        // table: this.state.chosenTable,
         event: this.state.event,
-        // person: this.props.current_user 
       }); 
     }
   }
@@ -87,16 +85,14 @@ export default class Events extends Component {
     this.closeEvent();
     const { navigate } = this.props.navigation;
     navigate('Manage', {
-      event: this.state.event,
-      // person: this.props.current_user 
+      event: this.state.event
     }); 
   }
   manageEventRequest = () => {
     this.closeEvent();
     const { navigate } = this.props.navigation;
     navigate('ManagePermission', {
-      event: this.state.event,
-      // person: this.props.current_user,
+      event: this.state.event
     }); 
   }
   chooseTable = (table) => {
@@ -109,8 +105,7 @@ export default class Events extends Component {
   }
   render() {
     const { events, loading, refresh } = this.props;  
-    // const { user } = this.props;
-    
+  
     return (
       <View style={styles.container}>
         <View style={styles.bottomContent}>
@@ -129,11 +124,7 @@ export default class Events extends Component {
           ? 
             <ScrollViewElements 
               selected={this.state.selectedIndex}
-              //events={events}
-              //user={user}
               onOpenEvent={this.openEvent}
-              //loading={loading}
-              //refresh={refresh}
             /> 
           : <ActivityIndicator
               animating={loading}
@@ -143,7 +134,6 @@ export default class Events extends Component {
         }
         <EventPopup
           event={this.state.event}
-          //person={user}
           isOpen={this.state.popupIsOpen}
           onClose={this.closeEvent}
           onBook={this.bookEvent}

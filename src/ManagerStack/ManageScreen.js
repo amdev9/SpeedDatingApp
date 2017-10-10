@@ -44,7 +44,7 @@ export default class ManageScreen extends Component {
       // participants: [],
       index: 0,
       popupIsOpen: false,
-      test: 10 // change to default value
+      test: 4 // change to default value
     };
   }  
    
@@ -76,7 +76,7 @@ export default class ManageScreen extends Component {
     
     const { event } = this.props.navigation.state.params;
     if (selected.length > 0) {
-    
+      console.log(selected)
       start_post(
         2, 
           this.state.test, 

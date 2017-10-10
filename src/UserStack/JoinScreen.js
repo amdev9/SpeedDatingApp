@@ -47,7 +47,11 @@ export default class JoinScreen extends Component { // FIX!
   };
 
   onMessageRecieved = (e) => { // participant, selected
-    console.log(e.data);
+
+    // console.log(e.data);
+
+    console.log(';:::::::::::::INDEX: ', this.state.index);
+
     var obj = JSON.parse(e.data); 
     
     const { current_user } = this.props; 

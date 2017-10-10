@@ -194,10 +194,10 @@ export default  reducer = (state = { events: [], loading: false, participants: [
         return {
           ...state,
           admin_matches: [],
-          participants: []
+          participants: [],
+          selected: []
         }
 
-      
         
       case 'WEBSOCKET:LIKES_POST':
         let lik = JSON.parse(action.payload.data.data);
