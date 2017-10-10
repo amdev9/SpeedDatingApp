@@ -46,35 +46,35 @@ export default class MymatchesScreen extends Component {
     }; 
   }
 
-  // componentDidMount() {
-  //   this.fetchData().done()
-  // }
+  componentDidMount() {
+    this.fetchData().done()
+  }
 
-  // async fetchData() {
-  //   try {
-  //     const myArray = await AsyncStorage.getItem('@MySuperStore:persons');
-  //     if (myArray !== null) {
+  async fetchData() {
+    try {
+      const myArray = await AsyncStorage.getItem('@MySuperStore:persons');
+      if (myArray !== null) {
         
-  //       var persons = JSON.parse(myArray);
+        var persons = JSON.parse(myArray);
          
-  //       this.setState({
-  //         persons: persons
-  //       });
-  //     } else {
-  //       console.log('data null')
-  //     }
-  //   } catch (error) {
-  //     alert('error get from asyncstorage: ' + JSON.stringify(error));
-  //   }
-  // }
+        this.setState({
+          persons: persons
+        });
+      } else {
+        console.log('data null')
+      }
+    } catch (error) {
+      alert('error get from asyncstorage: ' + JSON.stringify(error));
+    }
+  }
 
-  // async saveData(myArray) {
-  //   try {
-  //     await AsyncStorage.setItem('@MySuperStore:persons', JSON.stringify(myArray));
-  //   } catch (error) {
+  async saveData(myArray) {
+    try {
+      await AsyncStorage.setItem('@MySuperStore:persons', JSON.stringify(myArray));
+    } catch (error) {
 
-  //   }
-  // }
+    }
+  }
 
   
   phoneCallStart = (participant) => {
@@ -97,7 +97,7 @@ export default class MymatchesScreen extends Component {
               this.state.persons.push(item);
             }
           })
-          // this.saveData(this.state.persons).done()
+          this.saveData(this.state.persons).done()
           this.setState({
             persons: this.state.persons // create matchers in store
           })

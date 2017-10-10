@@ -39,7 +39,7 @@ import { connect } from 'react-redux';
     close: (user) => dispatch(closed(user)), 
   }),
 )
-export default class JoinScreen extends Component {
+export default class JoinScreen extends Component { // FIX!
 
   state = {
     selected: [], 
