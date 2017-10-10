@@ -20,6 +20,8 @@ import Participant from '../Participant';
 
 import { WS_URL } from "../helpers/constants";
 
+import { clearAdminMatches } from "../helpers/actions";
+
 import _ from 'lodash';
 
 import Communications from 'react-native-communications';
@@ -34,7 +36,9 @@ import { connect } from 'react-redux';
     current_user: state.current_user,
     // matches: state.matches
   }),
-  dispatch => ({}),
+  dispatch => ({
+    clear_admin_matches: () => dispatch(clearAdminMatches())
+  }),
 )
 export default class MymatchesScreen extends Component {
   
@@ -83,7 +87,7 @@ export default class MymatchesScreen extends Component {
 
   
   onMessageRecieved = async (e) => { // persons
-    console.log(e.data);
+    // console.log(e.data);
     var obj = JSON.parse(e.data); 
     const { current_user } = this.props 
 
@@ -115,6 +119,8 @@ export default class MymatchesScreen extends Component {
     console.log(e.code, e.reason);
   };
   componentWillMount() {
+    this.props.clear_admin_matches();
+
     this.ws = new WebSocket(WS_URL); 
     this.ws.onopen = this.onOpenConnection;
     this.ws.onmessage = this.onMessageRecieved;
@@ -141,7 +147,7 @@ export default class MymatchesScreen extends Component {
 
             <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}>
               {this.state.persons.map((participant, index) => {
-                 console.log(participant)
+                //  console.log(participant)
                  return <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.phoneCallStart}  />
               })}
             </ScrollView>   

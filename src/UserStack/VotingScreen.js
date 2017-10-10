@@ -21,7 +21,8 @@ import { connect } from 'react-redux';
 
 @connect(
   state => ({
-    current_user: state.current_user
+    current_user: state.current_user,
+    vote_participant: state.vote_participant
   }),
   dispatch => ({}),
 )
@@ -29,7 +30,7 @@ export default class VotingScreen extends Component {
   
   constructor(props) {
     super(props);
-    const { current_user } = this.props;
+    const { current_user } = props;
     this.state = {
       liked: false
     };
@@ -42,15 +43,13 @@ export default class VotingScreen extends Component {
   }
   
   onClicked = () => {
-    const { current_user } = this.props;
-    const { 
-      participant, 
-    } = this.props.navigation.state.params;
-  
-    if(!current_user.likes.person_likes.includes(participant._id)) { 
-      current_user.likes.person_likes.push(participant._id); 
+    const { current_user, vote_participant } = this.props;
+    
+
+    if(!current_user.likes.person_likes.includes(vote_participant._id)) { 
+      current_user.likes.person_likes.push(vote_participant._id); 
     } else {
-      var index = current_user.likes.person_likes.indexOf(participant._id);
+      var index = current_user.likes.person_likes.indexOf(vote_participant._id);
       if (index > -1) {
         current_user.likes.person_likes.splice(index, 1);
       }
@@ -63,15 +62,8 @@ export default class VotingScreen extends Component {
   }
 
   render() {
-    const { 
-      participant
-    } = this.props.navigation.state.params;
-
-    console.log(participant);
-    
-    const { avatar, name, table } = participant;
-
-    
+    const { vote_participant } = this.props;
+    const { avatar, name, table } = vote_participant;
     let unlike = 'Убрать лайк';
     let like = 'Поставить лайк';
     return (

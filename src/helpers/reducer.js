@@ -1,4 +1,4 @@
-export default  reducer = (state = { events: [], loading: false, participants: [], selected: [], person: null, matches: [], admin_matches: [] }, action) => {
+export default  reducer = (state = { events: [], loading: false, participants: [], selected: [], person: null, matches: [], admin_matches: [], current_user: null, vote_participant: null, vote_index: 0, vote_selected: [] }, action) => {
     
  
     function remove(array, element) {
@@ -193,12 +193,13 @@ export default  reducer = (state = { events: [], loading: false, participants: [
       case 'CLEAR_ADMIN_MATCHES':
         return {
           ...state,
-          admin_matches: [],
           participants: [],
-          selected: []
+          selected: [],
+          admin_matches: [],
+          vote_selected: [],
+          vote_index: 0
         }
 
-        
       case 'WEBSOCKET:LIKES_POST':
         let lik = JSON.parse(action.payload.data.data);
         return {
@@ -216,6 +217,23 @@ export default  reducer = (state = { events: [], loading: false, participants: [
           )
         }
 
+      case 'WEBSOCKET:NEXT': 
+        const participants = JSON.parse(action.payload.data.data);
+        const participants_filtered = participants.filter(participant => participant._id !== state.current_user._id);
+        return {
+          ...state,
+          vote_participant: participants_filtered[state.vote_index],
+          vote_index: state.vote_index++
+        }
+
+      case 'WEBSOCKET:LAST': 
+        const selected = JSON.parse(action.payload.data.data);
+        const selected_filtered = selected.filter(select => select._id !== state.current_user._id);
+        return {
+          ...state,
+          vote_selected: selected_filtered
+        };
+
       default: {
         return {
           ...state,
@@ -223,72 +241,16 @@ export default  reducer = (state = { events: [], loading: false, participants: [
         }
       }
          
-      // case 'WEBSOCKET:NEXT': 
-        
-      //   // add index!!!
-
-      //   var participant = JSON.parse(obj.data);
-      //   for (var i = 0; i < participant.length; i++) {
-      //     if (participant[i]._id == this.props.navigation.state.params.person._id) {
-      //       participant.splice(i, 1); 
-      //       break;
-      //     }
-      //   }
-      //   // this.setState({
-      //   //   participant: participant[this.state.index]
-      //   // })
-      //   // const { navigate } = this.props.navigation;
-      //   // navigate('Voting', {
-      //   //   participant: this.state.participant,
-      //   //   person: this.props.navigation.state.params.person
-      //   // });  
-      //   // this.state.index++;
-      //   return {
-      //     ...state,
-
-      //   }
+      
 
      
 
       
 
-    
-      // case 'WEBSOCKET:SELECTED':
-      // let selected_data = action.payload.data.data;
-      // // var selected_data = JSON.parse(obj.data);
-      // // this.setState({
-      // //   selected: selected_data
-      // // })
-      // // const { navigate } = this.props.navigation;
-      // // navigate('VotingStatus', {
-      // //   participants: this.state.selected,
-      // //   person: this.props.navigation.state.params.person,
-      // //   event: this.props.navigation.state.params.event
-      // // });    
-      // return {
-      //   ...state,
-      //   selected: selected_data
-      // }
-    
-
+     
       
 
-      // case 'WEBSOCKET:LAST': 
-      //   let data = JSON.parse(action.payload.data);
-      //   // var selected_data = JSON.parse(obj.data);
-      //   // this.setState({
-      //   //   selected: selected_data
-      //   // });
-      //   // const { navigate } = this.props.navigation;
-      //   // navigate('VotePush', {
-      //   //   participants: this.state.selected,  
-      //   //   person: this.props.navigation.state.params.person,
-      //   //   event: this.props.navigation.state.params.event
-      //   // });  
-      //   return {
-      //     ...state,
-      //     selected: data
-      //   };
+    
       
       // case 'WEBSOCKET:CALCULATE_CLIENT':
       //   let data = JSON.parse(action.payload.data);

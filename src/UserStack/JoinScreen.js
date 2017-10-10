@@ -25,14 +25,15 @@ const { width, height } = Dimensions.get('window');
 import { WS_URL } from "../helpers/constants";
 
 
-import { fetchEvents, connected, closed } from '../helpers/actions';
+import { connected, closed } from '../helpers/actions';
 import { connect } from 'react-redux';
+
 
 @connect(
   state => ({
-    events: state.events,
-    loading: state.loading,
-    current_user: state.current_user
+    current_user: state.current_user, // save matches on server
+    vote_participant: state.vote_participant,
+    vote_selected: state.vote_selected
   }),
   dispatch => ({
     connect: (user) => dispatch(connected(user)), 
@@ -41,75 +42,23 @@ import { connect } from 'react-redux';
 )
 export default class JoinScreen extends Component { // FIX!
 
-  state = {
-    selected: [], 
-    index: 0
-  };
-
-  onMessageRecieved = (e) => { 
-
-    console.log(':::::::::::::INDEX: ', this.state.index);
-
-    var obj = JSON.parse(e.data); 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     
-    const { current_user } = this.props; 
-    
-    if (obj.type == 'NEXT') { 
-      var participants = JSON.parse(obj.data);
-      for (var i = 0; i < participants.length; i++) {
-        if (participants[i]._id == current_user._id) {
-          participants.splice(i, 1); 
-          break;
-        }
-      }
-      this.setState({
-        participant: participants[this.state.index]
-      })
-      this.state.index++;
-      const { navigate } = this.props.navigation;
-      navigate('Voting', { 
-        participant: this.state.participant
-      });  
+    const { vote_participant, vote_selected, current_user } = nextProps; 
+    if (vote_participant && vote_selected.length==0) {
+      nextProps.navigation.navigate('Voting');  
+    } else if (current_user.likes && vote_selected.length > 0 ) {  // fix
       
-    }
-
-    if (obj.type == 'LAST') {
-      var selected_data = JSON.parse(obj.data);
-      this.setState({
-        selected: selected_data
-      });
-    
-      const { navigate } = this.props.navigation;
-      navigate('VotePush', {  // if this selected
-        participants: this.state.selected,
-        event: this.props.navigation.state.params.event
+      nextProps.navigation.navigate('VotePush', {  //
+        event: nextProps.navigation.state.params.event
       });  
-
     }
-
-  };
-
-  
-  onOpenConnection = () => {
-    console.log(' - onopen - ');
   }
-  onError = (e) => {
-    console.log(e.message);
-  };
-  onClose = (e) => {
-    console.log(e.code, e.reason);
-  };
-    
   
   componentWillMount() {
     const { current_user } = this.props;
     this.props.connect(current_user);
-
-    this.ws = new WebSocket(WS_URL); 
-    this.ws.onopen = this.onOpenConnection;
-    this.ws.onmessage = this.onMessageRecieved;
-    this.ws.onerror = this.onError;
-    this.ws.onclose = this.onClose;
   }
 
   componentWillUnmount() {

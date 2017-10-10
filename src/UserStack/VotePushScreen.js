@@ -22,22 +22,20 @@ import { likesFunc } from '../helpers/actions';
 
 @connect(
   state => ({
-    events: state.events,
-    loading: state.loading,
-    current_user: state.current_user
+    current_user: state.current_user,
+    vote_selected: state.vote_selected
   }),
   dispatch => ({
-    likesPost: (person_id, event_id, likes) => dispatch(likesFunc(person_id, event_id, likes)), 
+    likes_func: (person_id, event_id, likes) => dispatch(likesFunc(person_id, event_id, likes)), 
+    
   }),
 )
 export default class VotingPushScreen extends Component {
-  // votingpushscreen  -> 'confirm' -> empty mymatches (waiting for admin 'done')
   constructor(props) {
     super(props);
-    const { current_user } = this.props;
-    const { participants } = this.props.navigation.state.params;
+    const { current_user } = props;
     this.state = {
-      liked: current_user.likes.person_likes
+      liked: current_user.likes && current_user.likes.person_likes 
     }
   }
   
@@ -51,17 +49,16 @@ export default class VotingPushScreen extends Component {
   };
  
   onConfirm = async () => {
-    const {current_user} =this.props;
-    const { participants, event } = this.props.navigation.state.params;
+    const { current_user } = this.props;
+    const { event } = this.props.navigation.state.params;
     try {
-     
-      this.props.likesPost(current_user._id, event._id, this.state.liked);
-    
+      this.props.likes_func(current_user._id, event._id, this.state.liked);
+
       const { navigate } = this.props.navigation;
-    
       navigate('ScrollTab', {
         paramm: 2
       }); 
+      // this.props.clear_admin_matches();
     }
     catch (error) {
       alert(error);
@@ -69,16 +66,13 @@ export default class VotingPushScreen extends Component {
   };
 
   render() {
-    const {current_user} = this.props;
-    const { participants } = this.props.navigation.state.params;
-
-    _.remove(participants, { '_id': current_user._id }); 
+    const { current_user, vote_selected } = this.props;
     return (
       <View style={styles.container}>
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}  
         >
-          {participants.map((participant, index) => <Participant vision={'votepush'} participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked}/>)}
+          {vote_selected.map((participant, index) => <Participant vision={'votepush'} participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked}/>)}
         </ScrollView>
         <TouchableHighlight
           underlayColor="#9575CD"
@@ -92,13 +86,10 @@ export default class VotingPushScreen extends Component {
   }
 }
 
-{/* underlayColor="#9575CD" */}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 20
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   header: {
     ...defaultStyles.text,

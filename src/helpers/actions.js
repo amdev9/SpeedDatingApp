@@ -68,29 +68,9 @@ export default actions = {
           data: msg,
         }
     }),
-    // selected: (msg) => ({  
-    //     type: WEBSOCKET_SELECTED,
-    //     payload: {
-    //       timestamp: new Date(),
-    //       data: msg,
-    //     }
-    // }),
+
     likesPost: (msg) => ({  
         type: WEBSOCKET_LIKES_POST,
-        payload: {
-          timestamp: new Date(),
-          data: msg,
-        }
-    }),
-    next: (msg) => ({  
-        type: WEBSOCKET_NEXT,
-        payload: {
-          timestamp: new Date(),
-          data: msg,
-        }
-    }),
-    last: (msg) => ({  
-        type: WEBSOCKET_LAST,
         payload: {
           timestamp: new Date(),
           data: msg,
@@ -112,6 +92,20 @@ export default actions = {
     // }),
     createdUser: (msg) => ({  
         type: WEBSOCKET_CREATED_USER,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    next: (msg) => ({  
+        type: WEBSOCKET_NEXT,
+        payload: {
+          timestamp: new Date(),
+          data: msg,
+        }
+    }),
+    last: (msg) => ({  
+        type: WEBSOCKET_LAST,
         payload: {
           timestamp: new Date(),
           data: msg,

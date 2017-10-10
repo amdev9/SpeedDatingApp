@@ -32,7 +32,11 @@ let state = {
   selected: [],
   person: null,
   matches: [],
-  admin_matches: []
+  admin_matches: [],
+  current_user: null,
+  vote_participant: null, 
+  vote_index: 0,
+  vote_selected: []
 }; // preloadedState - when init from background
 const NOTIFICATION_TOKEN = "push-notification-token";
 
