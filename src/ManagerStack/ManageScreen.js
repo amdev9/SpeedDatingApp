@@ -40,9 +40,6 @@ export default class ManageScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // selected: [],
-      // participants: [],
-      index: 0,
       popupIsOpen: false,
       test: 4 // change to default value
     };
@@ -68,12 +65,11 @@ export default class ManageScreen extends Component {
   }
   
   componentWillMount() {
-    this.props.clients_queue()
+    this.props.clients_queue() // return?
   }
 
   start = () => {
     const { selected, start_post } = this.props;
-    
     const { event } = this.props.navigation.state.params;
     if (selected.length > 0) {
       console.log(selected)
