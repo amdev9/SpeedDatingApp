@@ -209,24 +209,18 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#474747',
-    // color: '#4b4d5c',
     fontFamily: 'ProximaNova-Semibold', //'System',
     fontSize: 21,
-    // fontWeight: 'bold',
     marginTop: 20
   },
-  
   textLiked: {
     color: 'white',
-    fontFamily: 'System',
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'ProximaNova-Semibold', //'System',
+    fontSize: 21,
     marginTop: 20
   },
   textContainer: {
-    // width: 120,
     height: 78,
-    // marginLeft: 0,
     alignItems: 'center',
   },
   iconic: { 
