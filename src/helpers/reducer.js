@@ -159,13 +159,15 @@ export default  reducer = (state = { events: [], loading: false, participants: [
             founded2[key].shift();  
             founded2[key].forEach( (item) => {
               if(!state.current_user.matches.some(e => e._id == item._id) ) {
-                matches_final.concat(item);
+                matches_final.push(item);
               }
             })
           }      
         }
         
-        const addition = { matches: state.current_user.matches.concat(matches_final) };
+        const upd_matches = state.current_user.matches.concat(matches_final);
+        const addition = { matches:  upd_matches };
+        
         return {
           ...state,
           admin_matches: final_ob_done,
