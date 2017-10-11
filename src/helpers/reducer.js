@@ -110,13 +110,9 @@ export default  reducer = (state = { events: [], loading: false, participants: [
         }
 
       case 'WEBSOCKET:CALCULATE_CLIENT':
-        
-        var founded2 = JSON.parse(action.payload.data.data);
-        
-
         var founded = JSON.parse(action.payload.data.data);
+        var founded2 = Object.assign({}, founded);
         
-
         Array.prototype.indexOfForArrays = function(search) {
           var searchJson = JSON.stringify(search); // "[3,566,23,79]"
           var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
@@ -156,10 +152,10 @@ export default  reducer = (state = { events: [], loading: false, participants: [
           final_ob_done.push(final_ob);
         })
 
-        
+
         var matches_final = [];
         for (var key in founded2 ) {
-          if (store.current_user._id == key) { 
+          if (state.current_user._id == key) { 
             founded2[key].shift();  
             founded2[key].forEach( (item) => {
               if(!state.current_user.matches.some(e => e._id == item._id) ) {
@@ -168,11 +164,12 @@ export default  reducer = (state = { events: [], loading: false, participants: [
             })
           }      
         }
-        const current_user_final = state.current_user.concat(matches_final);
+        
+        const addition = { matches: state.current_user.matches.concat(matches_final) };
         return {
           ...state,
           admin_matches: final_ob_done,
-          current_user: current_user_final
+          current_user: { ...state.current_user, addition }
         }
 
       case 'STORE_USER':
