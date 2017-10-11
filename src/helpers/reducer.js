@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export default  reducer = (state = { events: [], loading: false, participants: [], selected: [], person: null, admin_matches: [], current_user: null, vote_participant: null, vote_index: 0, vote_selected: [] }, action) => {
     
  
@@ -112,7 +113,8 @@ export default  reducer = (state = { events: [], loading: false, participants: [
       case 'WEBSOCKET:CALCULATE_CLIENT':
         var founded = JSON.parse(action.payload.data.data);
         var founded2 = Object.assign({}, founded);
-        
+        console.log(founded2);
+
         Array.prototype.indexOfForArrays = function(search) {
           var searchJson = JSON.stringify(search); // "[3,566,23,79]"
           var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
@@ -156,22 +158,23 @@ export default  reducer = (state = { events: [], loading: false, participants: [
         var matches_final = [];
         for (var key in founded2 ) {
           if (state.current_user._id == key) { 
-            founded2[key].shift();  
+            
             founded2[key].forEach( (item) => {
-              if(!state.current_user.matches.some(e => e._id == item._id) ) {
-                matches_final.push(item);
+              console.log(item)
+              if(!_.some(state.current_user.matches, item) ) {
+                matches_final.push(item); 
               }
             })
           }      
         }
-        
         const upd_matches = state.current_user.matches.concat(matches_final);
-        const addition = { matches:  upd_matches };
         
         return {
           ...state,
           admin_matches: final_ob_done,
-          current_user: { ...state.current_user, addition }
+          current_user: Object.assign({}, state.current_user, {
+            matches: upd_matches
+          })
         }
 
       case 'STORE_USER':

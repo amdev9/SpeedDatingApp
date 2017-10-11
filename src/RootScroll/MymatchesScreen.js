@@ -40,26 +40,15 @@ import { connect } from 'react-redux';
   }),
 )
 export default class MymatchesScreen extends Component {
-  
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     persons: [],
-  //     // text: '',
-  //   }; 
+
+  // componentDidMount() {
+  //  this.fetchData().done()
   // }
-
-  componentDidMount() {
-    // this.fetchData().done()
-  }
-
   // async fetchData() {
   //   try {
   //     const myArray = await AsyncStorage.getItem('@MySuperStore:persons');
   //     if (myArray !== null) {
-        
   //       var persons = JSON.parse(myArray);
-         
   //       this.setState({
   //         persons: persons
   //       });
@@ -70,61 +59,19 @@ export default class MymatchesScreen extends Component {
   //     alert('error get from asyncstorage: ' + JSON.stringify(error));
   //   }
   // }
-
   // async saveData(myArray) {
   //   try {
   //     await AsyncStorage.setItem('@MySuperStore:persons', JSON.stringify(myArray));
   //   } catch (error) {
-
   //   }
   // }
-
   
   phoneCallStart = (participant) => {
     alert(JSON.stringify(participant)) //Communications.phonecall('+79772563015', true)
   }
 
-  
-  // onMessageRecieved = async (e) => { // persons
-  //   // console.log(e.data);
-  //   var obj = JSON.parse(e.data); 
-  //   const { current_user } = this.props 
-
-  //   if (obj.type == 'CALCULATE_CLIENT') {
-  //     var founded = JSON.parse(obj.data); 
-  //     for (var key in founded ) {
-  //       if (current_user._id == key) { // person from store
-  //         founded[key].shift();  
-  //         founded[key].forEach( (item) => {
-  //           if(!_.some(this.state.persons, item) ) {
-  //             this.state.persons.push(item); // change to current_user
-  //           }
-  //         })
-  //         // this.saveData(this.state.persons).done()
-  //         this.setState({
-  //           persons: this.state.persons // create matchers in store
-  //         })
-  //       }      
-  //     }
-  //   }
-  // };
-  // onOpenConnection = () => {
-  //   console.log(' - onopen - ');
-  // }
-  // onError = (e) => {
-  //   console.log(e.message);
-  // };
-  // onClose = (e) => {
-  //   console.log(e.code, e.reason);
-  // };
   componentWillMount() {
     // this.props.clear_admin_matches();
-
-    // this.ws = new WebSocket(WS_URL); 
-    // this.ws.onopen = this.onOpenConnection;
-    // this.ws.onmessage = this.onMessageRecieved;
-    // this.ws.onerror = this.onError;
-    // this.ws.onclose = this.onClose;
   }
 
   render() {
@@ -140,13 +87,12 @@ export default class MymatchesScreen extends Component {
             }}>
               <Text style={styles.verticalText}>Все совпадения</Text>
               <View style={styles.circle}>
-                <Text style={styles.digitText}>{this.state.persons.length}</Text>
+                <Text style={styles.digitText}>{current_user.matches.length}</Text>
               </View>
             </View>
 
             <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}>
               {current_user.matches.map((participant, index) => {
-                //  console.log(participant)
                  return <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.phoneCallStart}  />
               })}
             </ScrollView>   
@@ -164,7 +110,6 @@ export default class MymatchesScreen extends Component {
         </View>
       );
     }
-    
   }
 }
 
