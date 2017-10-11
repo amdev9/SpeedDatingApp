@@ -13,59 +13,36 @@ import {
   Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import _ from 'lodash';
+import Communications from 'react-native-communications';
 
 
 import { defaultStyles } from '../styles';
 import Participant from '../Participant';
-
 import { WS_URL } from "../helpers/constants";
-
-import { clearAdminMatches } from "../helpers/actions";
-
-import _ from 'lodash';
-
-import Communications from 'react-native-communications';
-
+import { clearAdminMatches, updateUser } from "../helpers/actions";
+import { connect } from 'react-redux';
 
 const { width,height } = Dimensions.get('window')
-
-import { connect } from 'react-redux';
+const USER_KEY = "auth-demo-key";
 
 @connect(
   state => ({
     current_user: state.current_user
   }),
   dispatch => ({
-    clear_admin_matches: () => dispatch(clearAdminMatches())
+    clear_admin_matches: () => dispatch(clearAdminMatches()),
+    update_user: (user) => dispatch(updateUser(user)), 
   }),
 )
 export default class MymatchesScreen extends Component {
 
-  // componentDidMount() {
-  //  this.fetchData().done()
-  // }
-  // async fetchData() {
-  //   try {
-  //     const myArray = await AsyncStorage.getItem('@MySuperStore:persons');
-  //     if (myArray !== null) {
-  //       var persons = JSON.parse(myArray);
-  //       this.setState({
-  //         persons: persons
-  //       });
-  //     } else {
-  //       console.log('data null')
-  //     }
-  //   } catch (error) {
-  //     alert('error get from asyncstorage: ' + JSON.stringify(error));
-  //   }
-  // }
-  // async saveData(myArray) {
-  //   try {
-  //     await AsyncStorage.setItem('@MySuperStore:persons', JSON.stringify(myArray));
-  //   } catch (error) {
-  //   }
-  // }
-  
+  componentWillReceiveProps(nextProps) {
+    const { update_user, current_user } = nextProps; 
+    update_user(current_user);
+    AsyncStorage.setItem(USER_KEY, JSON.stringify(current_user));
+  }
+
   phoneCallStart = (participant) => {
     alert(JSON.stringify(participant)) //Communications.phonecall('+79772563015', true)
   }
@@ -77,7 +54,7 @@ export default class MymatchesScreen extends Component {
   render() {
     const { current_user } = this.props;
     const noSimpathy = 'Нет совпадений';
-    if (current_user.matches.length  > 0 ) {  //  && this.state.text.length == 0
+    if (current_user.matches.length  > 0 ) {  
       return (
         <View style={styles.container}>
           <View style={styles.content}>
