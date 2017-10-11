@@ -32,7 +32,7 @@ import { connect } from 'react-redux';
 export default class Profile extends Component {
   render() {
     const { current_user } = this.props;
-    
+    console.log(current_user)
     return (     
       <View style={styles.container}>
         <View style={styles.content}>  

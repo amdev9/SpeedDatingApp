@@ -45,8 +45,6 @@ import { updateUser } from '../helpers/actions';
 
 @connect(
   state => ({
-    events: state.events,
-    loading: state.loading,
     current_user: state.current_user
   }),
   dispatch => ({
@@ -57,7 +55,7 @@ class Edit extends React.Component {
  
   constructor(props) {
     super(props);
-    const { current_user } = this.props //.navigation.state.params;
+    const { current_user } = this.props;
     this.state = {
       modalVisible: false,
       photos: [],
@@ -67,35 +65,18 @@ class Edit extends React.Component {
       uploadTotal: 0,
       uploadWritten: 0,
       
-      // avatar: current_user.avatar ? current_user.avatar  : '',
-      // about: current_user.about ? current_user.about  : '',
-      // age: current_user.age ? current_user.age  : '',
-      // gender: current_user.gender ? current_user.gender  : 0,
-      // phoneNumber: current_user.phoneNumber ? current_user.phoneNumber : '',
-      // work: current_user.work ? current_user.work  : '',
-      // university: current_user.university ? current_user.university  : '',
-      // current_work: current_user.current_work ? current_user.current_work  : '',
-      // current_university: current_user.current_university ? current_user.current_university  : '',
-      
+      avatar: current_user.avatar 
+    
     }
   }
 
   saveProfile = async (navigate) => {
-    
-    const { current_user } = this.props //.navigation.state.params;
-    // user.about = this.state.about;
-    // user.age = this.state.age;
-    // user.avatar = this.state.avatar;
-    // user.gender = this.state.gender;
-    // user.work = this.state.work;
-    // user.university = this.state.university;
-    // user.current_work = this.state.current_work;
-    // user.current_university = this.state.current_university;
-    // user.phoneNumber = this.state.phoneNumber;
+    const { current_user } = this.props;
+    current_user.avatar = this.state.avatar;
 
     try {
-      this.props.update_user(current_user); // fix for mobile enter
-      
+      console.log(current_user)
+      this.props.update_user(current_user); 
       AsyncStorage.setItem(USER_KEY, JSON.stringify(current_user), () => {
         navigate('ScrollTab');
       }); 
@@ -151,16 +132,16 @@ class Edit extends React.Component {
          
         let status = res.status;
         let responseString = res.data;
+        console.log(responseString)
         this.setState({ 
           avatar: `${URL}/images/${JSON.parse(responseString).images}` 
         });
-   
-        
+  
         this.setState({modalVisible: false});
       });
     });  
   }
-  //
+  
   configureAccountKit() {
     AccountKit.configure({
       theme: {
@@ -253,9 +234,9 @@ class Edit extends React.Component {
           this._picker();
         }}>
         {
-          current_user.avatar 
+          this.state.avatar 
           ? 
-            <Image source={{ uri: current_user.avatar }} style={styles.avatarImage} />
+            <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />
           :
             <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" /> 
         }
