@@ -43,14 +43,19 @@ import { connect } from 'react-redux';
 )
 export default class JoinScreen extends Component { // FIX!
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextProps.email != this.props.email;
+  // }
+
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
     
     const { vote_participant, vote_selected, current_user, vote_index } = nextProps; 
-    if (vote_participant && vote_selected.length==0) {
+    if (vote_participant && vote_selected.length == 0) {
+      console.log('Voting');
       nextProps.navigation.navigate('Voting');  
     } else if (current_user.likes && vote_selected.length > 0 ) {  // fix
-      
+      console.log('VotePush');
       nextProps.navigation.navigate('VotePush', {  //
         event: nextProps.navigation.state.params.event
       });  

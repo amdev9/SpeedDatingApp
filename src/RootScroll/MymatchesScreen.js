@@ -31,11 +31,16 @@ const USER_KEY = "auth-demo-key";
     current_user: state.current_user
   }),
   dispatch => ({
-    clear_admin_matches: () => dispatch(clearAdminMatches()),
+    // clear_admin_matches: () => dispatch(clearAdminMatches()),
     update_user: (user) => dispatch(updateUser(user)), 
   }),
 )
 export default class MymatchesScreen extends Component {
+
+  
+  componentWillMount() {
+    // this.props.clear_admin_matches();
+  }
 
   componentWillReceiveProps(nextProps) {
     const { update_user, current_user } = nextProps; 
@@ -47,9 +52,6 @@ export default class MymatchesScreen extends Component {
     alert(JSON.stringify(participant)) //Communications.phonecall('+79772563015', true)
   }
 
-  componentWillMount() {
-    // this.props.clear_admin_matches();
-  }
 
   render() {
     const { current_user } = this.props;

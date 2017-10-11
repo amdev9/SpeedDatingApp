@@ -190,7 +190,7 @@ export default  reducer = (state = { events: [], loading: false, participants: [
           participants: [],
           selected: [],
           admin_matches: [],
-
+          vote_participant: null,
           vote_selected: [],
           vote_index: 0
         }
@@ -218,7 +218,8 @@ export default  reducer = (state = { events: [], loading: false, participants: [
         return {
           ...state,
           vote_participant: participants_filtered[state.vote_index],
-          vote_index: state.vote_index++
+          vote_index: state.vote_index++,
+          vote_selected: []
         }
 
       case 'WEBSOCKET:LAST': 
@@ -226,7 +227,7 @@ export default  reducer = (state = { events: [], loading: false, participants: [
         const selected_filtered = selected.filter(select => select._id !== state.current_user._id);
         return {
           ...state,
-          vote_selected: selected_filtered
+          vote_selected: selected_filtered,
         };
 
       default: {

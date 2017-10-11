@@ -40,8 +40,13 @@ export default class VotingStatusScreen extends Component {
     this.props.calculate(event._id);
   }
 
+  // shouldComponentUpdate(nextProps, nextState) {
+    // return nextProps.admin_matches != this.props.admin_matches;
+  // }
+
   componentWillReceiveProps(nextProps) {
-    const { admin_matches } = nextProps; 
+    const { admin_matches } = nextProps;
+    console.log(nextProps); 
     if (admin_matches.length > 0) { // fix 
       nextProps.navigation.navigate('Match');  
     } 
