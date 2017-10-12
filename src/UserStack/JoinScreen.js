@@ -69,7 +69,7 @@ export default class JoinScreen extends Component { // FIX!
 
   componentWillUnmount() {
     const { current_user } = this.props;
-    this.props.close(current_user);
+    // this.props.close(current_user);
   }
 
   render() {
@@ -92,31 +92,26 @@ export default class JoinScreen extends Component { // FIX!
           <Text style={styles.navBarButton}></Text> 
         </View>
 
-        <Text style={styles.title}> title </Text>
-
- 
-        <View style={styles.imageContainer}>
-          <Image source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Red_Bull_Headquarters_1_%28DFdB%29.JPG/1920px-Red_Bull_Headquarters_1_%28DFdB%29.JPG' }} style={styles.image} />
-        </View> 
- 
-        <Text style={{ 
-          marginLeft: 20, 
-          marginBottom: 10
-        }}> Ожидайте начала .. </Text>
-      
-          
-        <View style={{ 
-          alignItems: 'center',
-          marginBottom: 10,
-          
-        }}>
-          {/* <Text>Ты можешь встетить их</Text> */}
-        </View>
-        <View style={{ 
-          alignItems: 'center',
-          backgroundColor: '#e6e6e6',
-        }}>
-           
+        {/* <Text style={styles.title}>Название мероприятия</Text> */}
+          <View style={styles.containerPart} >
+            
+            {/* <View style={styles.imageContainer}>
+              <Image source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Red_Bull_Headquarters_1_%28DFdB%29.JPG/1920px-Red_Bull_Headquarters_1_%28DFdB%29.JPG' }} style={styles.image} />
+            </View>  */}
+            <Text style={{ 
+              textAlign: 'center'
+            }}> Ожидайте начала мероприятия ... (Доп. инструкции)</Text>
+            {/* <View style={{ 
+              alignItems: 'center',
+              marginBottom: 10,
+            }}>
+            <Text>Ты можешь встетить их</Text> 
+            </View> */}
+            <View style={{ 
+              alignItems: 'center',
+              backgroundColor: '#e6e6e6',
+            }}>
+          </View>
         </View>      
       </View>
     );
@@ -124,6 +119,14 @@ export default class JoinScreen extends Component { // FIX!
 }
 
 const styles = StyleSheet.create({
+  containerPart: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
+
   imageContainer: {
     height: height / 3
   },

@@ -137,8 +137,10 @@ export default class Participant extends PureComponent {
                   source={{ uri: avatar }}
                 />}
               </View>
+               
               <View style={styles.textContainer}>
-                <Text style={styles.text}>{name}</Text>
+              <Text style={ this.state.pressStatus ? styles.textLiked : styles.text}> {name} </Text>
+                {/* <Text style={styles.text}>{name}</Text> */}
               </View>
             </View>
           </TouchableOpacity>
