@@ -60,14 +60,15 @@ export default class ManagePermissionScreen extends Component {
           <Text style={styles.navBarButton}></Text> 
         </View>
 
-
-        <Text> Form with fields to fill </Text>
+        <View style={styles.containerPart} >
+          <Text style={{ textAlign: 'center'}}>Информация для потенциальных организаторов мероприятия</Text>
+        </View>
         <TouchableHighlight
             underlayColor="#9575CD"
             style={styles.buttonContainer}
             onPress={this.onAttend}
             >
-            <Text style={styles.button}>Attend</Text>
+            <Text style={styles.button}>Подать заявку</Text>
         </TouchableHighlight> 
       </View>
     );
@@ -79,7 +80,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFF'
   },
-
+  containerPart: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
 
   navBar: {
     flexDirection: 'row',
@@ -123,7 +130,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     alignItems: 'center',
-    backgroundColor: '#673AB7',
+    backgroundColor: '#3f88fb',
     borderRadius: 100,
     margin: 20,
     paddingVertical: 10,
