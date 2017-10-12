@@ -146,7 +146,7 @@ export default class Login extends Component {
       defaultCountry: "RU",
       // initialEmail: 'example.com',
       initialPhoneCountryPrefix: '+7',
-      initialPhoneNumber: '9772563015',
+      initialPhoneNumber: '',
     })
   }
 
