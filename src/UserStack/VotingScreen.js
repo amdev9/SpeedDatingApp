@@ -33,7 +33,10 @@ export default class VotingScreen extends Component {
     const { current_user } = props;
     this.state = {
       liked: false
+
+      // BUGFIX init state from props 
     };
+    
     if (!current_user.likes) {
       current_user.likes = {
         person_id: current_user._id,
@@ -43,8 +46,10 @@ export default class VotingScreen extends Component {
   }
 
   onClicked = () => {
-    const { current_user, vote_participant } = this.props;
+    const { current_user, 
+            vote_participant } = this.props;
 
+    console.log(vote_participant);
 
     if (!current_user.likes.person_likes.includes(vote_participant._id)) {
       current_user.likes.person_likes.push(vote_participant._id);
@@ -55,7 +60,7 @@ export default class VotingScreen extends Component {
       }
     }
 
-    // click again to unlike
+  
     this.setState({
       liked: !this.state.liked
     })

@@ -85,11 +85,8 @@ export default class VotingStatusScreen extends Component {
                   />
                 }) : <View ></View>}
               </View>
-
             </TouchableOpacity>
-          }
-
-          )}
+          })}
         </ScrollView>
 
 
@@ -125,21 +122,17 @@ const styles = StyleSheet.create({
 
   },
   avatarListContainer: {
-    // alignItems: 'center',
     marginLeft: 5,
     paddingTop: 10,
-    // width: 40,
+    flexDirection: 'row',
+    flex: 1,
   },
   avatar: {
-    // borderWidth: 1,
-    // borderColor: '#EEE',
     borderRadius: 25,
     width: 50,
     height: 50,
   },
   avatarList: {
-    // borderWidth: 1,
-    // borderColor: '#EEE',
     borderRadius: 13,
     width: 26,
     height: 26,
@@ -158,10 +151,6 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    // marginTop: 20,
-    // flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: '#FFF'
   },
   header: {

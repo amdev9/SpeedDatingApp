@@ -33,6 +33,8 @@ export default class VotingPushScreen extends Component {
   constructor(props) {
     super(props);
     const { current_user } = props;
+
+    
     this.state = {
       liked: current_user.likes && current_user.likes.person_likes
     }
@@ -71,7 +73,13 @@ export default class VotingPushScreen extends Component {
         <ScrollView
           ref={(scrollView) => { this._scrollView = scrollView; }}
         >
-          {vote_selected.map((participant, index) => <Participant vision={'votepush'} participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked} />)}
+          {vote_selected.map((participant, index) => <Participant 
+              vision={'votepush'} 
+              participant={participant} 
+              key={index} 
+              onSelected={this.onLiked} 
+              liked={this.state.liked} 
+          />)}
         </ScrollView>
         <TouchableHighlight
           underlayColor="#9575CD"
