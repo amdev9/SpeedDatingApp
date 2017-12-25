@@ -140,20 +140,4 @@ export default ModalStack = StackNavigator({
 }, {
     mode: 'modal',
     headerMode: 'none',
-  });
-
-
-// const AppWithNavigationState = ({ dispatch, nav }) => (
-//     <ModalStack navigation={addNavigationHelpers({ dispatch, state: nav })} />
-// );
-
-// AppWithNavigationState.propTypes = {
-//     dispatch: PropTypes.func.isRequired,
-//     nav: PropTypes.object.isRequired,
-// };
-
-// const mapStateToProps = state => ({ // (state, props) 
-//     nav: state.nav,
-//     // add params from props to state
-// });
-// export default connect(mapStateToProps)(AppWithNavigationState);
+});

@@ -47,14 +47,14 @@ export const ResetToSignedIn = NavigationActions.reset({
 export const createRootNavigator = (signedIn = false) => {
   return StackNavigator(
     {
-      ModalStack: { // AppWithNavigationState
+      ModalStack: { 
         screen: ModalStack,
         navigationOptions: {
           gesturesEnabled: false
         }
       },
-      LoginStack: { // Login
-        screen: LoginStack, // login
+      LoginStack: { 
+        screen: LoginStack, 
         navigationOptions: {
           gesturesEnabled: false
         }
@@ -63,7 +63,7 @@ export const createRootNavigator = (signedIn = false) => {
     {
       headerMode: "none",
       mode: "modal",
-      initialRouteName: signedIn ? "ModalStack" : "LoginStack" // login 
+      initialRouteName: signedIn ? "ModalStack" : "LoginStack" 
     }
   );
 };
