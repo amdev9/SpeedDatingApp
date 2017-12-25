@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableHighlight,
-  View, 
-  ListView, 
+  View,
+  ListView,
   ScrollView,
   RefreshControl,
   Button,
@@ -23,7 +23,7 @@ import { WS_URL } from "../helpers/constants";
 import { clearAdminMatches, updateUser } from "../helpers/actions";
 import { connect } from 'react-redux';
 
-const { width,height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 const USER_KEY = "auth-demo-key";
 
 @connect(
@@ -32,18 +32,18 @@ const USER_KEY = "auth-demo-key";
   }),
   dispatch => ({
     // clear_admin_matches: () => dispatch(clearAdminMatches()),
-    update_user: (user) => dispatch(updateUser(user)), 
+    update_user: (user) => dispatch(updateUser(user)),
   }),
 )
 export default class MymatchesScreen extends Component {
 
-  
+
   componentWillMount() {
     // this.props.clear_admin_matches();
   }
 
   componentWillReceiveProps(nextProps) {
-    const { update_user, current_user } = nextProps; 
+    const { update_user, current_user } = nextProps;
     update_user(current_user);
     AsyncStorage.setItem(USER_KEY, JSON.stringify(current_user));
   }
@@ -56,11 +56,11 @@ export default class MymatchesScreen extends Component {
   render() {
     const { current_user } = this.props;
     const noSimpathy = 'Нет совпадений';
-    if (current_user.matches.length  > 0 ) {  
+    if (current_user.matches.length > 0) {
       return (
         <View style={styles.container}>
           <View style={styles.content}>
-            
+
             <View style={{
               flexDirection: 'row',
             }}>
@@ -72,15 +72,15 @@ export default class MymatchesScreen extends Component {
 
             <ScrollView ref={(scrollView) => { this._scrollView = scrollView; }}>
               {current_user.matches.map((participant, index) => {
-                 return <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.phoneCallStart}  />
+                return <Participant vision={'mymatch_vertical'} participant={participant} key={index} onSelected={this.phoneCallStart} />
               })}
-            </ScrollView>   
-  
+            </ScrollView>
+
           </View>
         </View>
       );
-    
-    } else if(current_user.matches.length == 0) {
+
+    } else if (current_user.matches.length == 0) {
       return (
         <View style={styles.container}>
           <View>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     marginLeft: 7,
     width: 24,
     height: 24,
-    borderRadius: 24/2,
+    borderRadius: 24 / 2,
     backgroundColor: '#3f88fb'
   },
   digitText: {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
 
-  
+
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   navBarButton: {
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     width: 64
   },
   navBarHeader: {
@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
 
   ////
   search: {
-    height: 30, 
-    borderColor: '#F0F0F0', 
+    height: 30,
+    borderColor: '#F0F0F0',
     borderWidth: 1,
     marginLeft: 10,
     marginRight: 10,
@@ -154,8 +154,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   searchActive: {
-    height: 30, 
-    borderColor: '#F0F0F0', 
+    height: 30,
+    borderColor: '#F0F0F0',
     borderWidth: 1,
     marginLeft: 10,
     marginTop: 10,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F0F0',
     color: '#888888'
   },
-  
+
 
   ///
   horizontalText: {
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     height: 120
   },
-   
+
   header: {
     ...defaultStyles.text,
     color: '#333',
@@ -221,4 +221,3 @@ const styles = StyleSheet.create({
 
 
 
- 

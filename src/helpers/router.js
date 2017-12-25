@@ -22,9 +22,9 @@ const LoginStack = StackNavigator({
     }
   }
 }, {
-  mode: 'modal',
-  headerMode: 'none',
-});
+    mode: 'modal',
+    headerMode: 'none',
+  });
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -36,11 +36,11 @@ export const ResetToSignedOut = NavigationActions.reset({
   actions: [NavigationActions.navigate({ routeName: 'LoginStack' })], // Login
 })
 
-export const ResetToSignedIn = NavigationActions.reset({ 
+export const ResetToSignedIn = NavigationActions.reset({
   index: 0,
   key: null,
   actions: [
-    NavigationActions.navigate({ routeName: 'ModalStack' }) 
+    NavigationActions.navigate({ routeName: 'ModalStack' })
   ]
 })
 

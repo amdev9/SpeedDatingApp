@@ -6,8 +6,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableHighlight,
-  View, 
-  ListView, 
+  View,
+  ListView,
   ScrollView,
   Button,
   Dimensions,
@@ -37,8 +37,8 @@ import { connect } from 'react-redux';
     vote_index: state.vote_index
   }),
   dispatch => ({
-    connect: (user) => dispatch(connected(user)), 
-    close: (user) => dispatch(closed(user)), 
+    connect: (user) => dispatch(connected(user)),
+    close: (user) => dispatch(closed(user)),
   }),
 )
 export default class JoinScreen extends Component { // FIX!
@@ -49,19 +49,19 @@ export default class JoinScreen extends Component { // FIX!
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
-    
-    const { vote_participant, vote_selected, current_user, vote_index } = nextProps; 
+
+    const { vote_participant, vote_selected, current_user, vote_index } = nextProps;
     if (vote_participant && vote_selected.length == 0) {
       console.log('Voting');
-      nextProps.navigation.navigate('Voting');  
-    } else if (current_user.likes && vote_selected.length > 0 ) {  // fix
+      nextProps.navigation.navigate('Voting');
+    } else if (current_user.likes && vote_selected.length > 0) {  // fix
       console.log('VotePush');
       nextProps.navigation.navigate('VotePush', {  //
         event: nextProps.navigation.state.params.event
-      });  
+      });
     }
   }
-  
+
   componentWillMount() {
     const { current_user } = this.props;
     this.props.connect(current_user);
@@ -73,46 +73,46 @@ export default class JoinScreen extends Component { // FIX!
   }
 
   render() {
-    
+
     return (
       <View style={styles.container}>
         <View style={styles.navBar}>
           <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => {
-              this.props.navigation.goBack() // fix
-            } 
+            this.props.navigation.goBack() // fix
+          }
           }>
-            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
-            <Text style={ [styles.navBarButton,{
+            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900" />
+            <Text style={[styles.navBarButton, {
               fontWeight: 'bold',
               fontSize: 16,
               marginLeft: 5
-            }]}>Назад к мероприятиям</Text>       
-          </TouchableOpacity>   
+            }]}>Назад к мероприятиям</Text>
+          </TouchableOpacity>
           <Text style={styles.navBarHeader}></Text>
-          <Text style={styles.navBarButton}></Text> 
+          <Text style={styles.navBarButton}></Text>
         </View>
 
         {/* <Text style={styles.title}>Название мероприятия</Text> */}
-          <View style={styles.containerPart} >
-            
-            {/* <View style={styles.imageContainer}>
+        <View style={styles.containerPart} >
+
+          {/* <View style={styles.imageContainer}>
               <Image source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Red_Bull_Headquarters_1_%28DFdB%29.JPG/1920px-Red_Bull_Headquarters_1_%28DFdB%29.JPG' }} style={styles.image} />
             </View>  */}
-            <Text style={{ 
-              textAlign: 'center'
-            }}> Ожидайте начала мероприятия ... (Доп. инструкции)</Text>
-            {/* <View style={{ 
+          <Text style={{
+            textAlign: 'center'
+          }}> Ожидайте начала мероприятия ... (Доп. инструкции)</Text>
+          {/* <View style={{ 
               alignItems: 'center',
               marginBottom: 10,
             }}>
             <Text>Ты можешь встетить их</Text> 
             </View> */}
-            <View style={{ 
-              alignItems: 'center',
-              backgroundColor: '#e6e6e6',
-            }}>
+          <View style={{
+            alignItems: 'center',
+            backgroundColor: '#e6e6e6',
+          }}>
           </View>
-        </View>      
+        </View>
       </View>
     );
   }
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    
+
   },
 
   imageContainer: {
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
   },
-  avatarContainer: {        
+  avatarContainer: {
     alignItems: 'center',
     marginTop: 15,
     marginBottom: 15,
@@ -155,18 +155,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 30,
     // height: 64,
-    backgroundColor: '#FFFFFF' 
+    backgroundColor: '#FFFFFF'
   },
   navBarButton: {
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     width: 200,
     color: '#3f88fb'
   },
   navBarButtonIcon: {
     marginTop: -2,
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     marginLeft: 10,
     // width: 200,
     color: '#3f88fb'

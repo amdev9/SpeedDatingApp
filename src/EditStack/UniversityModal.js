@@ -32,7 +32,7 @@ import { updateUser } from '../helpers/actions';
 export default class UniversityModal extends Component {
   constructor(props) {
     super(props);
-    const { current_user } = this.props //.navigation.state.params;
+    const { current_user } = this.props; 
     this.state = {
       current_university: current_user.current_university ? current_user.current_university : '',
       university: current_user.university
@@ -40,7 +40,7 @@ export default class UniversityModal extends Component {
   }
     
   saveUser = async () => {
-    const { current_user } = this.props; //.navigation.state.params;
+    const { current_user } = this.props;
     current_user.current_university = this.state.current_university;
     try {
       this.props.update_user(current_user);
@@ -52,7 +52,7 @@ export default class UniversityModal extends Component {
 
   render() {
     const { goBack } = this.props.navigation;
-    const { current_user } = this.props //.navigation.state.params;
+    const { current_user } = this.props;
     
     return (
       

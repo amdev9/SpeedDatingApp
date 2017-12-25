@@ -5,8 +5,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableHighlight,
-  View, 
-  ListView, 
+  View,
+  ListView,
   ScrollView,
 
   Button,
@@ -31,9 +31,9 @@ import { startPost, clientsQueue, onSelected } from '../helpers/actions';
     selected: state.selected
   }),
   dispatch => ({
-    start_post: (timeout, talk_time, selected, event) => dispatch(startPost(timeout, talk_time, selected, event)),  
-    clients_queue: () => dispatch(clientsQueue()),  
-    on_selected: (participant) => dispatch(onSelected(participant)),  
+    start_post: (timeout, talk_time, selected, event) => dispatch(startPost(timeout, talk_time, selected, event)),
+    clients_queue: () => dispatch(clientsQueue()),
+    on_selected: (participant) => dispatch(onSelected(participant)),
   }),
 )
 export default class ManageScreen extends Component {
@@ -43,14 +43,14 @@ export default class ManageScreen extends Component {
       popupIsOpen: false,
       test: 4 // change to default value
     };
-  }  
-   
+  }
+
   openInterval = () => {
     this.setState({
       popupIsOpen: true,
     });
   }
-  
+
   closeInterval = () => {
     this.setState({
       popupIsOpen: false,
@@ -60,10 +60,10 @@ export default class ManageScreen extends Component {
   closeChoose = (test) => {
     this.closeInterval();
     this.setState({
-      test: parseInt(test, 10)  
-    }) 
+      test: parseInt(test, 10)
+    })
   }
-  
+
   componentWillMount() {
     this.props.clients_queue() // return?
   }
@@ -74,16 +74,16 @@ export default class ManageScreen extends Component {
     if (selected.length > 0) {
       console.log(selected)
       start_post(
-        2, 
-          this.state.test, 
-            JSON.stringify(selected), 
-              JSON.stringify(event))
+        2,
+        this.state.test,
+        JSON.stringify(selected),
+        JSON.stringify(event))
 
       const { navigate } = this.props.navigation;
       navigate('VotingStatus', {
         participants: selected,
         event: event
-      });  
+      });
     } else {
       alert('Select participants to start')
     }
@@ -92,65 +92,65 @@ export default class ManageScreen extends Component {
 
   render() {
     const { participants, on_selected } = this.props;
-    
+
     const { event } = this.props.navigation.state.params;
     return (
       <View style={styles.container}>
 
         <View style={styles.navBar}>
-        <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => {
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => {
             return this.props.navigation.goBack() // fix
           }
-        }>
-          <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
-          <Text style={ [styles.navBarButton,{
-            fontWeight: 'bold',
-            fontSize: 16,
-            marginLeft: 5
-          }]}>Назад к мероприятиям</Text>       
-        </TouchableOpacity>   
-        <Text style={styles.navBarHeader}></Text>
-        <Text style={styles.navBarButton}></Text> 
+          }>
+            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900" />
+            <Text style={[styles.navBarButton, {
+              fontWeight: 'bold',
+              fontSize: 16,
+              marginLeft: 5
+            }]}>Назад к мероприятиям</Text>
+          </TouchableOpacity>
+          <Text style={styles.navBarHeader}></Text>
+          <Text style={styles.navBarButton}></Text>
         </View>
-         
+
         <View style={{
-           flexDirection: 'row',
-           margin: 20,
-           justifyContent: 'center',
+          flexDirection: 'row',
+          margin: 20,
+          justifyContent: 'center',
         }}>
-          <TouchableHighlight 
+          <TouchableHighlight
             underlayColor="#9575CD"
             style={styles.buttonSContainer}
             onPress={this.openInterval}
           >
-            <Text style={{ 
+            <Text style={{
               color: "white",
-              fontWeight: 'bold', 
+              fontWeight: 'bold',
               fontSize: 15
-              }} >Выбрать промежуток </Text>
-              </TouchableHighlight>
+            }} >Выбрать промежуток </Text>
+          </TouchableHighlight>
           <View style={styles.textContainer}>
             <Text style={{ color: "#3f88fb", fontWeight: 'bold', }}> {this.state.test.toString()} </Text>
           </View>
-          
+
         </View>
         <ScrollView
-          ref={(scrollView) => { this._scrollView = scrollView; }}  
+          ref={(scrollView) => { this._scrollView = scrollView; }}
         >
-          {participants.map((participant, index) => <Participant participant={participant} key={index}  onSelected={on_selected}/>)}
+          {participants.map((participant, index) => <Participant participant={participant} key={index} onSelected={on_selected} />)}
         </ScrollView>
 
 
         <TouchableHighlight
-            underlayColor="#9575CD"
-            style={styles.buttonContainer}
-            onPress={this.start}
+          underlayColor="#9575CD"
+          style={styles.buttonContainer}
+          onPress={this.start}
         >
-            <Text style={styles.button}>Начать мероприятие</Text>
-        </TouchableHighlight> 
+          <Text style={styles.button}>Начать мероприятие</Text>
+        </TouchableHighlight>
 
-        <IntervalPopup 
-          isOpen={this.state.popupIsOpen} 
+        <IntervalPopup
+          isOpen={this.state.popupIsOpen}
           onClose={this.closeInterval}
           onChoose={this.closeChoose}
         />
@@ -168,18 +168,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 30,
     // height: 64,
-    backgroundColor: '#FFFFFF' 
+    backgroundColor: '#FFFFFF'
   },
   navBarButton: {
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     width: 200,
     color: '#3f88fb'
   },
   navBarButtonIcon: {
     marginTop: -2,
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     marginLeft: 10,
     // width: 200,
     color: '#3f88fb'
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingLeft: 20,
     paddingRight: 10,
-    
+
     // paddingHorizontal: 30,
   },
   buttonContainer: {
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   textContainer: {
     alignItems: 'center',
     // backgroundColor: '#673AB7', //673AB7
-    
+
     borderRightWidth: 1,
     borderTopWidth: 1,
     borderBottomWidth: 1,

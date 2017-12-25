@@ -6,8 +6,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableHighlight,
-  View, 
-  ListView, 
+  View,
+  ListView,
   ScrollView,
   RefreshControl,
   Image
@@ -27,7 +27,7 @@ import { connect } from 'react-redux';
   dispatch => ({}),
 )
 export default class VotingScreen extends Component {
-  
+
   constructor(props) {
     super(props);
     const { current_user } = props;
@@ -41,20 +41,20 @@ export default class VotingScreen extends Component {
       };
     }
   }
-  
+
   onClicked = () => {
     const { current_user, vote_participant } = this.props;
-    
 
-    if(!current_user.likes.person_likes.includes(vote_participant._id)) { 
-      current_user.likes.person_likes.push(vote_participant._id); 
+
+    if (!current_user.likes.person_likes.includes(vote_participant._id)) {
+      current_user.likes.person_likes.push(vote_participant._id);
     } else {
       var index = current_user.likes.person_likes.indexOf(vote_participant._id);
       if (index > -1) {
         current_user.likes.person_likes.splice(index, 1);
       }
     }
-    
+
     // click again to unlike
     this.setState({
       liked: !this.state.liked
@@ -75,14 +75,14 @@ export default class VotingScreen extends Component {
           </View>
           <Text style={styles.text}>{name}</Text>
 
-          <Text style={styles.text}>Стол #{ table }</Text>
+          <Text style={styles.text}>Стол #{table}</Text>
         </View>
         <TouchableHighlight
           underlayColor="#9575CD"
-          style={ this.state.liked ? styles.buttonLikeContainer : styles.buttonContainer}
+          style={this.state.liked ? styles.buttonLikeContainer : styles.buttonContainer}
           onPress={this.onClicked}>
-          <Text style={ this.state.liked ? styles.buttonLike : styles.button}> { this.state.liked ? unlike : like } </Text>
-        </TouchableHighlight> 
+          <Text style={this.state.liked ? styles.buttonLike : styles.button}> {this.state.liked ? unlike : like} </Text>
+        </TouchableHighlight>
       </View>
     );
   }

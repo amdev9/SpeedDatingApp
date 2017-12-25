@@ -18,7 +18,7 @@ import {
   Picker,
   TouchableOpacity,
   SectionList,
-  
+
 } from 'react-native'
 
 import { defaultStyles } from '../styles';
@@ -38,19 +38,19 @@ import { connect } from 'react-redux';
   dispatch => ({}),
 )
 class Settings extends Component {
-  
+
   logout = async () => {
     // add request ?
     onSignOut().then(() => this.props.navigation.dispatch(ResetToSignedOut))
 
-    
+
     // try {
-      // let response =  await fetch(`${URL}/logout`);
-      // let responseJson = await response.json();
-      // alert(responseJson);
-      // if (responseJson == 'ok') {
+    // let response =  await fetch(`${URL}/logout`);
+    // let responseJson = await response.json();
+    // alert(responseJson);
+    // if (responseJson == 'ok') {
     // } catch(error) {
-      // console.error(error);
+    // console.error(error);
     // }
   }
 
@@ -59,26 +59,26 @@ class Settings extends Component {
     return (
 
       <View style={styles.container}>
-      <View style={styles.navBar}>
-      <Text style={styles.navBarButton}></Text>
-      <Text style={styles.navBarHeader}>Настройки</Text>
-      <TouchableOpacity onPress={() =>  {
+        <View style={styles.navBar}>
+          <Text style={styles.navBarButton}></Text>
+          <Text style={styles.navBarHeader}>Настройки</Text>
+          <TouchableOpacity onPress={() => {
             this.props.navigation.goBack();
             //this.props.navigation.navigate('Profile', { user: user });
-      }}>
-        <Text style={styles.navBarButton}>Готово</Text>
-      </TouchableOpacity>
-      </View>
+          }}>
+            <Text style={styles.navBarButton}>Готово</Text>
+          </TouchableOpacity>
+        </View>
 
         <ScrollView
-              contentContainerStyle={styles.scrollContent}>
-              <Text style={styles.sectionHeader}></Text>
-              <TouchableOpacity onPress={() =>  {
-                this.logout();
-              }}>
-              <Text style={styles.item}>Выйти</Text>
-              </TouchableOpacity>
-              <Text style={styles.sectionHeader}></Text>
+          contentContainerStyle={styles.scrollContent}>
+          <Text style={styles.sectionHeader}></Text>
+          <TouchableOpacity onPress={() => {
+            this.logout();
+          }}>
+            <Text style={styles.item}>Выйти</Text>
+          </TouchableOpacity>
+          <Text style={styles.sectionHeader}></Text>
         </ScrollView>
 
       </View>
@@ -88,7 +88,7 @@ class Settings extends Component {
 
 
 styles = StyleSheet.create({
-  
+
   container: {
     flex: 1,
     // paddingTop: 22,
@@ -110,9 +110,9 @@ styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
     fontFamily: 'System',
-    textAlign:'center',
+    textAlign: 'center',
   },
-  
+
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
@@ -121,7 +121,7 @@ styles = StyleSheet.create({
   },
   navBarButton: {
     color: '#3f88fb',
-    textAlign:'center',
+    textAlign: 'center',
     width: 80,
     fontSize: 18,
     fontWeight: 'bold'
@@ -140,4 +140,3 @@ styles = StyleSheet.create({
 
 export default Settings
 
- 

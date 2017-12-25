@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 import { defaultStyles } from '../styles';
- 
+
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
 // Set default popup height to 50% of screen height
@@ -24,7 +24,7 @@ const defaultHeight = height * 0.5;
 export default class IntervalPopup extends Component {
 
   static propTypes = {
-	isOpen: PropTypes.bool.isRequired,
+    isOpen: PropTypes.bool.isRequired,
     // Movie object that has title, genre, poster, days and times
     event: PropTypes.object,
     // Index of chosen day
@@ -190,23 +190,23 @@ export default class IntervalPopup extends Component {
       imageContainer: this.state.expanded ? {
         width: width / 2,         // half of screen widtj
       } : {
-        maxWidth: 110,            // limit width
-        marginRight: 10,
-      },
+          maxWidth: 110,            // limit width
+          marginRight: 10,
+        },
       movieContainer: this.state.expanded ? {
         flexDirection: 'column',  // arrange image and movie info in a column
         alignItems: 'center',     // and center them
       } : {
-        flexDirection: 'row',     // arrange image and movie info in a row
-      },
+          flexDirection: 'row',     // arrange image and movie info in a row
+        },
       movieInfo: this.state.expanded ? {
         flex: 0,
         alignItems: 'center',     // center horizontally
         paddingTop: 20,
       } : {
-        flex: 1,
-        justifyContent: 'center', // center vertically
-      },
+          flex: 1,
+          justifyContent: 'center', // center vertically
+        },
       title: this.state.expanded ? {
         textAlign: 'center',
       } : {},
@@ -227,46 +227,46 @@ export default class IntervalPopup extends Component {
       <View style={styles.container}>
         {/* Closes popup if user taps on semi-transparent backdrop */}
         <TouchableWithoutFeedback onPress={this.props.onClose}>
-          <Animated.View style={[styles.backdrop, { opacity: this.state.opacity }]}/>
+          <Animated.View style={[styles.backdrop, { opacity: this.state.opacity }]} />
         </TouchableWithoutFeedback>
-        
+
         <Animated.View style={[styles.modal, {
-            // Animates height
-            height: this.state.height,
-            // Animates position on the screen
-            transform: [{ translateY: this.state.position }, { translateX: 0 }]
-          }]}
+          // Animates height
+          height: this.state.height,
+          // Animates position on the screen
+          transform: [{ translateY: this.state.position }, { translateX: 0 }]
+        }]}
         >
 
           {/* .bind(this, this.state.interval) */}
           <View style={styles.content}>
-            <TouchableOpacity onPress={onChoose.bind(this, this.state.interval)}> 
-                <Text style={{
-                  fontWeight: 'bold',
-                  color: '#3f88fb',
-                  fontSize: 18
-                }}>Выбрать</Text>
+            <TouchableOpacity onPress={onChoose.bind(this, this.state.interval)}>
+              <Text style={{
+                fontWeight: 'bold',
+                color: '#3f88fb',
+                fontSize: 18
+              }}>Выбрать</Text>
             </TouchableOpacity>
             <Picker
-                selectedValue={this.state.interval}
-                onValueChange={(itemValue, itemIndex) => {
-                        return this.setState({interval: itemValue})
-                    }
-                }>
-                <Picker.Item label="0:20" value="20" />
-                <Picker.Item label="01:00" value="60" />
-                <Picker.Item label="02:00" value="120" />
-                <Picker.Item label="03:00" value="180" />
-                <Picker.Item label="04:00" value="240" />
-                <Picker.Item label="05:00" value="300" />
-                <Picker.Item label="06:00" value="360" />
+              selectedValue={this.state.interval}
+              onValueChange={(itemValue, itemIndex) => {
+                return this.setState({ interval: itemValue })
+              }
+              }>
+              <Picker.Item label="0:20" value="20" />
+              <Picker.Item label="01:00" value="60" />
+              <Picker.Item label="02:00" value="120" />
+              <Picker.Item label="03:00" value="180" />
+              <Picker.Item label="04:00" value="240" />
+              <Picker.Item label="05:00" value="300" />
+              <Picker.Item label="06:00" value="360" />
             </Picker>
           </View>
-        
+
           <View style={styles.footer}>
-             
+
           </View>
-            
+
         </Animated.View>
       </View>
     );
@@ -337,12 +337,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     alignItems: 'center',
-    
+
   },
   button: {
     ...defaultStyles.text,
     color: '#FFFFFF',
     fontSize: 18,
-     
+
   },
 });

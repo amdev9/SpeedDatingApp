@@ -1,10 +1,10 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  AsyncStorage, 
+  AsyncStorage,
   Platform,
   AppState
 } from 'react-native';
@@ -25,15 +25,15 @@ import actions from './helpers/actions'
 import { Provider } from 'react-redux';
 import configureStore from './helpers/store';
 
-let state = { 
-  events: [], 
-  loading: false, 
+let state = {
+  events: [],
+  loading: false,
   participants: [],
   selected: [],
   person: null,
   admin_matches: [],
   current_user: null,
-  vote_participant: null, 
+  vote_participant: null,
   vote_index: 0,
   vote_selected: []
 }; // preloadedState - when init from background
@@ -44,14 +44,14 @@ const store = configureStore(state)
 const action = () => {
   return {
     type: 'WEBSOCKET:CONNECT',
-    url: WS_URL 
+    url: WS_URL
   }
 }
 
 store.dispatch(action());//  actions.connect(WS_URL)
 
 
-AsyncStorage.clear(); 
+AsyncStorage.clear();
 
 export default class App extends Component {
 
@@ -60,22 +60,19 @@ export default class App extends Component {
     this.state = {
       signedIn: false,
       checkedSignIn: false,
-      
+
     };
   }
 
-  
-
-
   componentDidMount() {
     PushNotification.configure({
-        onRegister: function(token) {
-            console.log( 'TOKEN:', token );
-            AsyncStorage.setItem(NOTIFICATION_TOKEN, JSON.stringify(token)); 
-        },
-        onNotification: function(notification) {
-            console.log( 'NOTIFICATION:', notification );
-        },
+      onRegister: function (token) {
+        console.log('TOKEN:', token);
+        AsyncStorage.setItem(NOTIFICATION_TOKEN, JSON.stringify(token));
+      },
+      onNotification: function (notification) {
+        console.log('NOTIFICATION:', notification);
+      },
     });
   }
 
@@ -94,9 +91,9 @@ export default class App extends Component {
     }
 
     // create store here
-    const Layout = createRootNavigator(signedIn); 
+    const Layout = createRootNavigator(signedIn);
     return (
-      <Provider store={store}> 
+      <Provider store={store}>
         <Layout />
       </Provider>
     );

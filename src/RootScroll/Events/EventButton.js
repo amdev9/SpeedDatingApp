@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 import { defaultStyles } from '../../styles';
- 
+
 // Get screen dimensions
 const { width, height } = Dimensions.get('window');
 // Set default popup height to 67% of screen height
@@ -31,96 +31,95 @@ import { connect } from 'react-redux';
   dispatch => ({}),
 )
 export default class EventButton extends Component {
-    render() {
-      const { event, current_user, onBook, onManage, onJoin, onManageRequest } = this.props;
+  render() {
+    const { event, current_user, onBook, onManage, onJoin, onManageRequest } = this.props;
 
-      //transform manage_ids
-      if (event.manage_ids.length > 0 && typeof(event.manage_ids[0]) == 'object' ) {
-        var manage_ids = event.manage_ids.map(event => event._id); 
-      } else {
-        var manage_ids = event.manage_ids;
-      }
-    
-      if ( manage_ids.includes(current_user._id) && ( !event.participant_ids.includes(current_user._id))  ) 
-      {
-        return <TouchableHighlight
+    //transform manage_ids
+    if (event.manage_ids.length > 0 && typeof (event.manage_ids[0]) == 'object') {
+      var manage_ids = event.manage_ids.map(event => event._id);
+    } else {
+      var manage_ids = event.manage_ids;
+    }
+
+    if (manage_ids.includes(current_user._id) && (!event.participant_ids.includes(current_user._id))) {
+      return <TouchableHighlight
+        underlayColor="#9575CD"
+        style={styles.buttonContainer}
+        onPress={onManage}
+      >
+        <Text style={styles.button}>Управлять мероприятием</Text>
+
+      </TouchableHighlight>
+
+    } else if (!event.manage_queue_ids.includes(current_user._id) && !manage_ids.includes(current_user._id) && (!event.participant_ids.includes(current_user._id))) {
+      return event.show_manage
+        ?
+        <View style={styles.doubleButtonContainer}>
+          <TouchableHighlight
+            underlayColor="#9575CD"
+            style={styles.buttonContainer}
+            onPress={onBook}
+          >
+            <Text style={styles.button}>Подробнее</Text>
+            {/* Book My Tickets */}
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            underlayColor="#9575CD"
+            style={styles.buttonContainer}
+            onPress={onManageRequest}
+          >
+            <Text style={styles.button}>Стать организатором</Text>
+          </TouchableHighlight>
+        </View>
+        :
+        <View>
+          <TouchableHighlight
+            underlayColor="#9575CD"
+            style={styles.buttonContainer}
+            onPress={onBook}
+          >
+            <Text style={styles.button}>Подробнее</Text>
+          </TouchableHighlight>
+        </View>
+    } else if (!manage_ids.includes(current_user._id) && (!event.participant_ids.includes(current_user._id))
+      && event.manage_queue_ids.includes(current_user._id)) {
+      return event.show_manage
+        ?
+        <View>
+          <TouchableHighlight
+            underlayColor="#9575CD"
+            style={styles.buttonContainer}
+            onPress={onBook}
+          >
+            <Text style={styles.button}>Book My Tickets</Text>
+          </TouchableHighlight>
+          <Text style={styles.footer}>Waiting for approval</Text>
+        </View>
+        :
+        <View>
+          <TouchableHighlight
+            underlayColor="#9575CD"
+            style={styles.buttonContainer}
+            onPress={onBook}
+          >
+            <Text style={styles.button}>Book My Tickets</Text>
+          </TouchableHighlight>
+        </View>
+    } else if (!manage_ids.includes(current_user._id) && (event.participant_ids.includes(current_user._id))) {
+      return <View>
+        <TouchableHighlight
           underlayColor="#9575CD"
           style={styles.buttonContainer}
-          onPress={onManage}
+          onPress={onJoin}
         >
-          <Text style={styles.button}>Управлять мероприятием</Text> 
-          
-        </TouchableHighlight> 
-            
-      } else if  ( !event.manage_queue_ids.includes(current_user._id) && !manage_ids.includes(current_user._id) && ( !event.participant_ids.includes(current_user._id)) ) {
-        return  event.show_manage 
-          ? 
-            <View style={styles.doubleButtonContainer}>
-              <TouchableHighlight
-                underlayColor="#9575CD"
-                style={styles.buttonContainer}
-                onPress={onBook}
-              >
-              <Text style={styles.button}>Подробнее</Text> 
-              {/* Book My Tickets */}
-              </TouchableHighlight>
-
-              <TouchableHighlight
-                underlayColor="#9575CD"
-                style={styles.buttonContainer}
-                onPress={onManageRequest}
-              >
-              <Text style={styles.button}>Стать организатором</Text> 
-              </TouchableHighlight>
-            </View>
-          : 
-            <View>
-              <TouchableHighlight
-                underlayColor="#9575CD"
-                style={styles.buttonContainer}
-                onPress={onBook}
-              >
-              <Text style={styles.button}>Подробнее</Text> 
-              </TouchableHighlight>
-            </View>
-        } else if  ( !manage_ids.includes(current_user._id) && ( !event.participant_ids.includes(current_user._id))
-           && event.manage_queue_ids.includes(current_user._id) ) {
-          return  event.show_manage 
-            ? 
-              <View>
-                <TouchableHighlight
-                  underlayColor="#9575CD"
-                  style={styles.buttonContainer}
-                  onPress={onBook}
-                >
-                <Text style={styles.button}>Book My Tickets</Text> 
-                </TouchableHighlight>
-                <Text style={styles.footer}>Waiting for approval</Text> 
-              </View>
-            : 
-              <View>
-                <TouchableHighlight
-                  underlayColor="#9575CD"
-                  style={styles.buttonContainer}
-                  onPress={onBook}
-                >
-                <Text style={styles.button}>Book My Tickets</Text> 
-                </TouchableHighlight>
-              </View>
-        } else if  ( !manage_ids.includes(current_user._id) && ( event.participant_ids.includes(current_user._id)) ) {
-          return  <View>
-              <TouchableHighlight
-              underlayColor="#9575CD"
-              style={styles.buttonContainer}
-              onPress={onJoin}
-              >
-              <Text style={styles.button}>Начать мероприятие</Text>
-              </TouchableHighlight> 
-          </View>
-        } else {
-          alert("Error in access rights")
-        }
+          <Text style={styles.button}>Начать мероприятие</Text>
+        </TouchableHighlight>
+      </View>
+    } else {
+      alert("Error in access rights")
     }
+  }
 }
 
 const styles = StyleSheet.create({
@@ -187,7 +186,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: 100 //  130  fix for android
-   
+
   },
   button: {
     ...defaultStyles.text,

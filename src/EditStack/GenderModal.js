@@ -10,12 +10,9 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
 import { defaultStyles } from '../styles';
 
-
-
-const { width,height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 
 import { connect } from 'react-redux';
@@ -28,7 +25,7 @@ import { updateUser } from '../helpers/actions';
     current_user: state.current_user
   }),
   dispatch => ({
-    update_user: (user) => dispatch(updateUser(user)), 
+    update_user: (user) => dispatch(updateUser(user)),
   }),
 )
 export default class GenderModal extends Component {
@@ -40,7 +37,7 @@ export default class GenderModal extends Component {
       gender: current_user.gender
     }
   }
-    
+
   saveUser = async () => {
     const { current_user } = this.props
     current_user.gender = this.state.gender;
@@ -54,48 +51,48 @@ export default class GenderModal extends Component {
 
   render() {
     const { goBack } = this.props.navigation;
-    const {current_user} = this.props //.navigation.state.params;
+    const { current_user } = this.props //.navigation.state.params;
     return (
-   
+
       <View style={styles.container}>
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}></Text>
           <Text style={styles.navBarHeader}>Я</Text>
-          <TouchableOpacity onPress={() =>  {
+          <TouchableOpacity onPress={() => {
             this.saveUser();
             this.props.navigation.navigate('Edit');
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
         </View>
-       
+
         <ScrollView
           contentContainerStyle={styles.scrollContent}>
-          
+
 
           <View style={styles.back}>
-          <TouchableOpacity onPress={() =>  {
-            this.setState({ 
-              gender: 2
-            })
-          }}>
+            <TouchableOpacity onPress={() => {
+              this.setState({
+                gender: 2
+              })
+            }}>
 
-          <View style={styles.navBarTest}>
-            <Text style={styles.item}>Мужчина</Text>
-            <Icon style={ this.state.gender == 2 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-          </View>
-          </TouchableOpacity>
-          
-          <TouchableOpacity onPress={() =>  {
-            this.setState({ 
-              gender: 1
-            })
-          }}>
-          <View style={styles.navBarTest}>
-            <Text style={styles.item}>Женщина</Text>
-            <Icon  style={ this.state.gender == 1 ? styles.colorfull : styles.transparent } name="ios-checkmark" size={35} />
-          </View>
-          </TouchableOpacity>
+              <View style={styles.navBarTest}>
+                <Text style={styles.item}>Мужчина</Text>
+                <Icon style={this.state.gender == 2 ? styles.colorfull : styles.transparent} name="ios-checkmark" size={35} />
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => {
+              this.setState({
+                gender: 1
+              })
+            }}>
+              <View style={styles.navBarTest}>
+                <Text style={styles.item}>Женщина</Text>
+                <Icon style={this.state.gender == 1 ? styles.colorfull : styles.transparent} name="ios-checkmark" size={35} />
+              </View>
+            </TouchableOpacity>
           </View>
         </ScrollView>
 
@@ -103,7 +100,7 @@ export default class GenderModal extends Component {
     );
   }
 }
-    
+
 const styles = StyleSheet.create({
   back: {
     marginTop: 30,
@@ -132,11 +129,11 @@ const styles = StyleSheet.create({
     height: 64,
     backgroundColor: '#FFFFFF' // '#1EAAF1'
   },
-  
+
 
   navBarButton: {
     color: '#3f88fb',
-    textAlign:'center',
+    textAlign: 'center',
     width: 80,
     fontSize: 18,
     fontWeight: 'bold'
@@ -169,7 +166,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
     fontFamily: 'System',
-    textAlign:'center',
+    textAlign: 'center',
   },
 
 });

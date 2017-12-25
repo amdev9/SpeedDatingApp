@@ -6,8 +6,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableHighlight,
-  View, 
-  ListView, 
+  View,
+  ListView,
   ScrollView,
   RefreshControl
 } from 'react-native';
@@ -26,8 +26,7 @@ import { likesFunc } from '../helpers/actions';
     vote_selected: state.vote_selected
   }),
   dispatch => ({
-    likes_func: (person_id, event_id, likes) => dispatch(likesFunc(person_id, event_id, likes)), 
-    
+    likes_func: (person_id, event_id, likes) => dispatch(likesFunc(person_id, event_id, likes)),
   }),
 )
 export default class VotingPushScreen extends Component {
@@ -35,19 +34,19 @@ export default class VotingPushScreen extends Component {
     super(props);
     const { current_user } = props;
     this.state = {
-      liked: current_user.likes && current_user.likes.person_likes 
+      liked: current_user.likes && current_user.likes.person_likes
     }
   }
-  
+
   onLiked = (participant) => {
-    if( !this.state.liked.includes(participant._id) ) {
+    if (!this.state.liked.includes(participant._id)) {
       this.state.liked.push(participant._id)
     } else {
       var index = this.state.liked.indexOf(participant._id);
       this.state.liked.splice(index, 1);
     }
   };
- 
+
   onConfirm = async () => {
     const { current_user } = this.props;
     const { event } = this.props.navigation.state.params;
@@ -57,7 +56,7 @@ export default class VotingPushScreen extends Component {
       const { navigate } = this.props.navigation;
       navigate('ScrollTab', {
         paramm: 2
-      }); 
+      });
       // this.props.clear_admin_matches();
     }
     catch (error) {
@@ -70,9 +69,9 @@ export default class VotingPushScreen extends Component {
     return (
       <View style={styles.container}>
         <ScrollView
-          ref={(scrollView) => { this._scrollView = scrollView; }}  
+          ref={(scrollView) => { this._scrollView = scrollView; }}
         >
-          {vote_selected.map((participant, index) => <Participant vision={'votepush'} participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked}/>)}
+          {vote_selected.map((participant, index) => <Participant vision={'votepush'} participant={participant} key={index} onSelected={this.onLiked} liked={this.state.liked} />)}
         </ScrollView>
         <TouchableHighlight
           underlayColor="#9575CD"
@@ -80,7 +79,7 @@ export default class VotingPushScreen extends Component {
           onPress={this.onConfirm}
         >
           <Text style={styles.button}>Отправить</Text>
-        </TouchableHighlight> 
+        </TouchableHighlight>
       </View>
     );
   }

@@ -41,8 +41,8 @@ import { connect } from 'react-redux';
   }),
   dispatch => ({}),
 )
-export default class Login extends Component { 
-  
+export default class Login extends Component {
+
   state = {
     isLoading: false
   };
@@ -76,28 +76,28 @@ export default class Login extends Component {
         platform: res.os
       })
     })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson) 
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   postToken(userProfile) {
     AsyncStorage.getItem(NOTIFICATION_TOKEN)
-    .then(res => {
-      res = JSON.parse(res);
-      if (res !== null) {
-        if (userProfile.token && userProfile.token == res.token) {
-          console.log('Same token exists on server')
-        } else {
-          this.saveTokenServer(userProfile, res);
+      .then(res => {
+        res = JSON.parse(res);
+        if (res !== null) {
+          if (userProfile.token && userProfile.token == res.token) {
+            console.log('Same token exists on server')
+          } else {
+            this.saveTokenServer(userProfile, res);
+          }
         }
-      }  
-    })
-    .catch(err => reject(err));
+      })
+      .catch(err => reject(err));
   }
 
   handleOpenURL = ({ url }) => {
@@ -111,7 +111,7 @@ export default class Login extends Component {
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
     }
-    
+
   };
 
   // Handle Login with Facebook button tap
@@ -119,7 +119,7 @@ export default class Login extends Component {
 
   // Handle Login with Vk button tap
   loginWithVk = () => this.openURL(`${URL}/auth/vkontakte`);
-  
+
 
   configureAccountKit() {
     AccountKit.configure({
@@ -162,29 +162,29 @@ export default class Login extends Component {
         // accountId: token.accountId
       })
     })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      this.setState({
-        isLoading: false
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false
+        });
+        console.log(responseJson)
+        var user = {
+          oauth_id: token.accountId,
+          name: '',
+          avatar: '',
+          gender: 2,
+          work: '',
+          university: '',
+          phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`,
+          matches: []
+        };
+        this.props.navigation.navigate('Fullfill', { user: user })
+      })
+      .catch((error) => {
+        console.error(error);
       });
-      console.log(responseJson)
-      var user = {
-        oauth_id: token.accountId,
-        name: '',
-        avatar: '',
-        gender: 2,  
-        work: '',
-        university: '',
-        phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`,
-        matches: []
-      };
-      this.props.navigation.navigate('Fullfill', { user: user })
-    })
-    .catch((error) => {
-      console.error(error);
-    });
   }
-  
+
   checkDbExists(token, account) {
     fetch(`${URL}/auth/accountkit`, {
       method: 'POST',
@@ -196,61 +196,61 @@ export default class Login extends Component {
         accountId: token.accountId
       })
     })
-    .then((response) => response.json())
-    .then((responseJson) => { 
-      console.log(responseJson)
-      if(responseJson.status != 500) {  
-        
-        this.postToken(responseJson);
-        this.setState({
-          isLoading: false
-        });
-        onSignIn(responseJson).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
-      } else {
-        this.checkAccountKitTokens(token, account);
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      console.error(error);
-    });
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        if (responseJson.status != 500) {
+
+          this.postToken(responseJson);
+          this.setState({
+            isLoading: false
+          });
+          onSignIn(responseJson).then(() => this.props.navigation.dispatch(ResetToSignedIn))
+        } else {
+          this.checkAccountKitTokens(token, account);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        console.error(error);
+      });
   }
 
   loginWithAccountKit = () => {
     console.log('loginWithAccountKit')
     this.configureAccountKit();
     AccountKit.loginWithPhone()
-    .then((token) => {
-      this.setState({
-        isLoading: true
-      })
-      if (!token) {
-        console.log('Login cancelled')
-      } else {
-        console.log(token)
-        // console.log(token)
-        // accountId:"131545544257442"
-        // appId:"806797486157972"
-        // lastRefresh:1507134148578.6628
-        // refreshIntervalSeconds:2592000
-        // token:"EMAWdmhE1XsIV0ccTJlxqeBX66rUVPMHdZAFyJAXjTvOHLdeKoYDZCaaX58jfNq20r3ph3B95JPbd4ZCiAK9PWEFdi5Q1S3rEYeJkQhViowZDZD"
-        // console.log(account)
-
-        // id:"131545544257442"
-        // phoneNumber: {
-        //   countryCode:"7"
-        //   number:"9772563015"
-        // }
-        AccountKit.getCurrentAccount()
-        .then((account) => {
-          console.log(account)
-          
-          this.checkDbExists(token, account)
+      .then((token) => {
+        this.setState({
+          isLoading: true
         })
-      }
-    })
+        if (!token) {
+          console.log('Login cancelled')
+        } else {
+          console.log(token)
+          // console.log(token)
+          // accountId:"131545544257442"
+          // appId:"806797486157972"
+          // lastRefresh:1507134148578.6628
+          // refreshIntervalSeconds:2592000
+          // token:"EMAWdmhE1XsIV0ccTJlxqeBX66rUVPMHdZAFyJAXjTvOHLdeKoYDZCaaX58jfNq20r3ph3B95JPbd4ZCiAK9PWEFdi5Q1S3rEYeJkQhViowZDZD"
+          // console.log(account)
 
-  
+          // id:"131545544257442"
+          // phoneNumber: {
+          //   countryCode:"7"
+          //   number:"9772563015"
+          // }
+          AccountKit.getCurrentAccount()
+            .then((account) => {
+              console.log(account)
+
+              this.checkDbExists(token, account)
+            })
+        }
+      })
+
+
   }
 
   // Open URL in a browser
@@ -269,11 +269,11 @@ export default class Login extends Component {
   };
 
   render() {
-     
+
     return (
       <View style={styles.container}>
 
-        <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
+        <Spinner visible={this.state.isLoading} textContent={"Loading..."} textStyle={{ color: '#FFF' }} />
         {/* 
           {this.state.isLoading &&  <ActivityIndicator
                       animating={true}
@@ -282,7 +282,7 @@ export default class Login extends Component {
                     />}
 
         */}
-        
+
         <Screens />
         <View style={styles.contentNew}>
 
@@ -293,17 +293,17 @@ export default class Login extends Component {
               onPress={this.loginWithFacebook}
               {...iconStyles}
             >
-              
-              <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ FACEBOOK</Text> 
+
+              <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ FACEBOOK</Text>
             </Icon.Button>
-              
+
             <Icon.Button
               name="vk"
               backgroundColor="#45668e"
               onPress={this.loginWithVk}
               {...iconStyles}
             >
-            <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ VK</Text> 
+              <Text style={styles.buttonText}>ВОЙТИ ЧЕРЕЗ VK</Text>
             </Icon.Button>
 
             <View style={{
@@ -312,15 +312,15 @@ export default class Login extends Component {
               //width: 270
             }}>
 
-            <Icon.Button
-              //name="vk"
-              backgroundColor="white"
-              onPress={this.loginWithAccountKit}
-              {...iconStylesSMS}
-            >
-              <Text style={styles.buttonTextSMS}>ВОЙТИ С ПОМОЩЬЮ НОМЕРА ТЕЛЕФОНА</Text> 
+              <Icon.Button
+                //name="vk"
+                backgroundColor="white"
+                onPress={this.loginWithAccountKit}
+                {...iconStylesSMS}
+              >
+                <Text style={styles.buttonTextSMS}>ВОЙТИ С ПОМОЩЬЮ НОМЕРА ТЕЛЕФОНА</Text>
               </Icon.Button>
-              </View>
+            </View>
           </View>
 
         </View>
@@ -353,18 +353,18 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontFamily: 'System', 
-    fontWeight: '600', 
-    fontSize: 15, 
+    fontFamily: 'System',
+    fontWeight: '600',
+    fontSize: 15,
     color: 'white'
   },
   buttonTextSMS: {
-    fontFamily: 'System', 
+    fontFamily: 'System',
     // fontWeight: 'bold', 
-    fontSize: 9, 
+    fontSize: 9,
     color: '#A29F9F'
   },
- 
+
   container: {
     flex: 1,
     backgroundColor: '#FFF',
@@ -405,5 +405,5 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     marginRight: 30,
   },
-   
+
 });

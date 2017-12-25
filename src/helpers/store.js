@@ -17,7 +17,7 @@ import socketMiddleware from './socketMiddleware'
 
 export default function configureStore(initialState) {
   return createStore(reducer, initialState,
-      applyMiddleware(thunk, socketMiddleware)
+    applyMiddleware(thunk, socketMiddleware)
   )
   // createStore(reducer, [preloadedState], [enhancer]) // preloadedState - when init from background
 }

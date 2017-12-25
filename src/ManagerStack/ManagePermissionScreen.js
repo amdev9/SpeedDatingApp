@@ -6,8 +6,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableHighlight,
-  View, 
-  ListView, 
+  View,
+  ListView,
   ScrollView,
   RefreshControl
 } from 'react-native';
@@ -25,17 +25,17 @@ import { manageEvent } from '../helpers/actions';
     current_user: state.current_user
   }),
   dispatch => ({
-    update_user: (person_id, event_id) => dispatch(manageEvent(person_id, event_id)), 
+    update_user: (person_id, event_id) => dispatch(manageEvent(person_id, event_id)),
   }),
 )
 export default class ManagePermissionScreen extends Component {
-    
+
   onAttend = async () => {
     const { current_user } = this.props;
     const { event } = this.props.navigation.state.params;
     try {
-      this.props.update_user(current_user._id, event._id)   
-      this.props.navigation.goBack(); 
+      this.props.update_user(current_user._id, event._id)
+      this.props.navigation.goBack();
     }
     catch (error) {
       alert(error);
@@ -43,33 +43,33 @@ export default class ManagePermissionScreen extends Component {
   };
 
   render() {
-    
+
     return (
       <View style={styles.container}>
-        
+
         <View style={styles.navBar}>
-          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
-            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
-            <Text style={ [styles.navBarButton,{
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack()}>
+            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900" />
+            <Text style={[styles.navBarButton, {
               fontWeight: 'bold',
               fontSize: 16,
               marginLeft: 5
-            }]}>Назад к мероприятиям</Text>       
-          </TouchableOpacity>   
+            }]}>Назад к мероприятиям</Text>
+          </TouchableOpacity>
           <Text style={styles.navBarHeader}></Text>
-          <Text style={styles.navBarButton}></Text> 
+          <Text style={styles.navBarButton}></Text>
         </View>
 
         <View style={styles.containerPart} >
-          <Text style={{ textAlign: 'center'}}>Информация для потенциальных организаторов мероприятия</Text>
+          <Text style={{ textAlign: 'center' }}>Информация для потенциальных организаторов мероприятия</Text>
         </View>
         <TouchableHighlight
-            underlayColor="#9575CD"
-            style={styles.buttonContainer}
-            onPress={this.onAttend}
-            >
-            <Text style={styles.button}>Подать заявку</Text>
-        </TouchableHighlight> 
+          underlayColor="#9575CD"
+          style={styles.buttonContainer}
+          onPress={this.onAttend}
+        >
+          <Text style={styles.button}>Подать заявку</Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -85,25 +85,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    
+
   },
 
   navBar: {
     flexDirection: 'row',
     paddingTop: 30,
     // height: 64,
-    backgroundColor: '#FFFFFF' 
+    backgroundColor: '#FFFFFF'
   },
   navBarButton: {
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     width: 200,
     color: '#3f88fb'
   },
   navBarButtonIcon: {
     marginTop: -2,
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     marginLeft: 10,
     // width: 200,
     color: '#3f88fb'

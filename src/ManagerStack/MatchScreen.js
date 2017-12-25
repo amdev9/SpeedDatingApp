@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableHighlight,
-  View, 
-  ListView, 
+  View,
+  ListView,
   ScrollView,
   RefreshControl,
   Image
@@ -32,45 +32,45 @@ import { clearAdminMatches } from '../helpers/actions';
 export default class MatchScreen extends Component {
 
   render() {
-    const { admin_matches } = this.props;// const { matches } = this.props.navigation.state.params;
+    const { admin_matches } = this.props;
     return (
       <View style={styles.container}>
-        
+
         <View style={styles.navBar}>
           <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => {
-              this.props.clear_admin_matches();
-              return this.props.navigation.navigate('ScrollTab'); 
-            }
+            this.props.clear_admin_matches();
+            return this.props.navigation.navigate('ScrollTab');
+          }
           }>
-            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
-            <Text style={ [styles.navBarButton,{
+            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900" />
+            <Text style={[styles.navBarButton, {
               fontWeight: 'bold',
               fontSize: 16,
               marginLeft: 5
-            }]}>Назад к мероприятиям</Text>       
-          </TouchableOpacity>   
+            }]}>Назад к мероприятиям</Text>
+          </TouchableOpacity>
           <Text style={styles.navBarHeader}></Text>
-          <Text style={styles.navBarButton}></Text> 
+          <Text style={styles.navBarButton}></Text>
         </View>
 
-     
-     
-      <ScrollView
-        style={{marginTop: 20}} ref={(scrollView) => { this._scrollView = scrollView; }}  
-      >
 
-        { admin_matches.map((object, index) => {
 
-            return <View 
+        <ScrollView
+          style={{ marginTop: 20 }} ref={(scrollView) => { this._scrollView = scrollView; }}
+        >
+
+          {admin_matches.map((object, index) => {
+
+            return <View
               style={styles.containerFull}
               key={index}
-            >{ object.map((participant, ind) => {
+            >{object.map((participant, ind) => {
               return (
-                <TouchableOpacity 
-                  style={styles.containerPart} 
+                <TouchableOpacity
+                  style={styles.containerPart}
                   key={ind}
                 >
-                
+
                   <View style={styles.avatarContainer}>
                     {participant.avatar && <Image
                       resizeMode='contain'
@@ -78,19 +78,19 @@ export default class MatchScreen extends Component {
                       source={{ uri: participant.avatar }}
                     />}
                   </View>
-                  <View style={ styles.textContainer }>
+                  <View style={styles.textContainer}>
                     <Text style={[styles.text, styles.name]}> {participant.name} </Text>
                   </View>
-                  
+
                 </TouchableOpacity>
               );
             })
 
-        }</View>  
+              }</View>
 
           })
-        } 
-      </ScrollView>
+          }
+        </ScrollView>
 
       </View>
     );
@@ -106,14 +106,14 @@ const styles = StyleSheet.create({
   },
   navBarButton: {
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     width: 200,
     color: '#3f88fb'
   },
   navBarButtonIcon: {
     marginTop: -4,
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     marginLeft: 10,
     // width: 200,
     color: '#3f88fb'
@@ -134,16 +134,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1
   },
-  containerFull: {  
-    flexDirection: 'row', 
-    alignItems:'center'
+  containerFull: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   avatarContainer: {
     alignItems: 'center',
     marginLeft: 5,
     paddingTop: 10,
     width: 40,
-    
+
   },
 
   textContainer: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#EEE',
     padding: 5,
-    
+
   },
   avatar: {
     // borderWidth: 1,
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   created: {
     color: '#BBB',
   },
-/////
+  /////
   container: {
     flex: 1,
     backgroundColor: '#FFF'
@@ -211,4 +211,3 @@ const styles = StyleSheet.create({
 
 
 
- 

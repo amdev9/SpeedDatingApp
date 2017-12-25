@@ -31,7 +31,7 @@ import { defaultStyles } from '../styles';
 
 var RNUploader = NativeModules.RNUploader;
 let styles
-const { width,height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 
 const USER_KEY = "auth-demo-key";
@@ -48,11 +48,11 @@ import { updateUser } from '../helpers/actions';
     current_user: state.current_user
   }),
   dispatch => ({
-    update_user: (user) => dispatch(updateUser(user)), 
+    update_user: (user) => dispatch(updateUser(user)),
   }),
 )
 class Edit extends React.Component {
- 
+
   constructor(props) {
     super(props);
     const { current_user } = this.props;
@@ -60,13 +60,13 @@ class Edit extends React.Component {
       modalVisible: false,
       photos: [],
       index: null,
-       
+
       uploadProgress: 0,
       uploadTotal: 0,
       uploadWritten: 0,
-      
-      avatar: current_user.avatar 
-    
+
+      avatar: current_user.avatar
+
     }
   }
 
@@ -76,11 +76,11 @@ class Edit extends React.Component {
 
     try {
       console.log(current_user)
-      this.props.update_user(current_user); 
+      this.props.update_user(current_user);
       AsyncStorage.setItem(USER_KEY, JSON.stringify(current_user), () => {
         navigate('ScrollTab');
-      }); 
-      
+      });
+
     }
     catch (error) {
       alert(error);
@@ -99,49 +99,49 @@ class Edit extends React.Component {
       first: 20,
       assetType: 'All'
     })
-    .then(r => this.setState({ photos: r.edges }))
+      .then(r => this.setState({ photos: r.edges }))
   }
 
   toggleModal = () => {
     this.setState({ modalVisible: !this.state.modalVisible });
   }
- 
+
   _picker = () => {
     ImagePicker.openPicker({
       width: 300,
       height: 300,
       cropping: true
     }).then(image => {
-  
+
       let opts = {
         url: `${URL}/v1/`,
         files: [{
-          name: image.filename,//'file',
+          name: image.filename,
           filename: _generateUUID() + '.png',
-          filepath: image.path, //file.uri, // change to image.path
-          filetype: 'image/png', // image.mime
-        }],//files,
-        params: {name: 'test-app'}
+          filepath: image.path,
+          filetype: 'image/png',
+        }],
+        params: { name: 'test-app' }
       };
-  
+
       RNUploader.upload(opts, (err, res) => {
         if (err) {
           console.log(err);
           return;
         }
-         
+
         let status = res.status;
         let responseString = res.data;
         console.log(responseString)
-        this.setState({ 
-          avatar: `${URL}/images/${JSON.parse(responseString).images}` 
+        this.setState({
+          avatar: `${URL}/images/${JSON.parse(responseString).images}`
         });
-  
-        this.setState({modalVisible: false});
+
+        this.setState({ modalVisible: false });
       });
-    });  
+    });
   }
-  
+
   configureAccountKit() {
     AccountKit.configure({
       theme: {
@@ -175,89 +175,86 @@ class Edit extends React.Component {
     console.log('loginWithAccountKit')
     this.configureAccountKit();
     AccountKit.loginWithPhone()
-    .then((token) => {
-      if (!token) {
-        console.log('Login cancelled')
-      } else {
-        console.log(token)
-        // accountId:"131545544257442"
-        // appId:"806797486157972"
-        // lastRefresh:1507134148578.6628
-        // refreshIntervalSeconds:2592000
-        // token:"EMAWdmhE1XsIV0ccTJlxqeBX66rUVPMHdZAFyJAXjTvOHLdeKoYDZCaaX58jfNq20r3ph3B95JPbd4ZCiAK9PWEFdi5Q1S3rEYeJkQhViowZDZD"
+      .then((token) => {
+        if (!token) {
+          console.log('Login cancelled')
+        } else {
+          console.log(token)
+          // accountId:"131545544257442"
+          // appId:"806797486157972"
+          // lastRefresh:1507134148578.6628
+          // refreshIntervalSeconds:2592000
+          // token:"EMAWdmhE1XsIV0ccTJlxqeBX66rUVPMHdZAFyJAXjTvOHLdeKoYDZCaaX58jfNq20r3ph3B95JPbd4ZCiAK9PWEFdi5Q1S3rEYeJkQhViowZDZD"
 
-        
-        AccountKit.getCurrentAccount()
-        .then((account) => {
-          console.log(account)
-          // id:"131545544257442"
-          // phoneNumber: {
-          //   countryCode:"7"
-          //   number:"9772563015"
-          // }
 
-          this.setState({
-            phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}` 
-          })
-          // saveProfile with account phone
-        })
-      }
-    })
+          AccountKit.getCurrentAccount()
+            .then((account) => {
+              console.log(account)
+              // id:"131545544257442"
+              // phoneNumber: {
+              //   countryCode:"7"
+              //   number:"9772563015"
+              // }
+
+              this.setState({
+                phoneNumber: `+${account.phoneNumber.countryCode}${account.phoneNumber.number}`
+              })
+              // saveProfile with account phone
+            })
+        }
+      })
   }
   //
   render() {
     const { current_user } = this.props //.navigation.state.params;
     const { navigate } = this.props.navigation;
-  
+
     return (
       <View style={styles.container}>
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}></Text>
           <Text style={styles.navBarHeader}>Изменить</Text>
           <TouchableOpacity onPress={() => {
-              this.saveProfile(navigate); // remove?
+            this.saveProfile(navigate); // remove?
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
         </View>
-        
-      
+
+
         <ScrollView
           contentContainerStyle={styles.scrollContent}>
 
           <View style={styles.content}>
-        <View style={styles.avatar}>
+            <View style={styles.avatar}>
+              <TouchableOpacity onPress={() => {
+                this._picker();
+              }}>
+                {
+                  this.state.avatar
+                    ?
+                    <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />
+                    :
+                    <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" />
+                }
 
-      
-
-        <TouchableOpacity onPress={() => { 
-          this._picker();
-        }}>
-        {
-          this.state.avatar 
-          ? 
-            <Image source={{ uri: this.state.avatar }} style={styles.avatarImage} />
-          :
-            <IconFontAwesome name="user-circle" size={100} color="rgba(0,0,0,.09)" /> 
-        }
-            
-            <View style={styles.circle}>
-              <IconIonicons style={styles.setting} name="md-create" size={20} color="#FFFF" /> 
+                <View style={styles.circle}>
+                  <IconIonicons style={styles.setting} name="md-create" size={20} color="#FFFF" />
+                </View>
+              </TouchableOpacity>
+              {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
             </View>
-          </TouchableOpacity>
-            {/* <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" /> */}
-        </View>
-      </View>
+          </View>
 
 
 
           <Text style={styles.sectionHeader}>Телефон</Text>
-            <TouchableOpacity onPress={this.loginWithAccountKit}> 
-              {/* // {() =>  navigate('PhoneNumber', { user: user })    }  */}
+          <TouchableOpacity onPress={this.loginWithAccountKit}>
+            {/* // {() =>  navigate('PhoneNumber', { user: user })    }  */}
 
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.phoneNumber ? current_user.phoneNumber : 'Указать телефон' }</Text>
-              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <Text style={[styles.item, styles.itemTextChoose]}>{current_user.phoneNumber ? current_user.phoneNumber : 'Указать телефон'}</Text>
+              <IconIonicons style={styles.itemIconChoose} name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
           {/* <Text style={styles.sectionHeader}><Text>О пользователе {user.name} </Text></Text>
@@ -265,43 +262,43 @@ class Edit extends React.Component {
             value={this.state.about}/> */}
 
           <Text style={styles.sectionHeader}>Пол</Text>
-            <TouchableOpacity onPress={() => navigate('Gender')}>
+          <TouchableOpacity onPress={() => navigate('Gender')}>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.gender == 2 ? 'Мужчина' : 'Женщина'}</Text>
-              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <Text style={[styles.item, styles.itemTextChoose]}>{current_user.gender == 2 ? 'Мужчина' : 'Женщина'}</Text>
+              <IconIonicons style={styles.itemIconChoose} name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
-          
-    
+
+
 
           <Text style={styles.sectionHeader}>Возраст</Text>
           {/* <TextInput style={styles.item} onChangeText={(about) => this.setState({ about })}
             value={this.state.about}/> */}
-            
-            <TouchableOpacity onPress={() => navigate('Age')}>
+
+          <TouchableOpacity onPress={() => navigate('Age')}>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.age ? current_user.age : 'Добавить возраст'}</Text>
-              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <Text style={[styles.item, styles.itemTextChoose]}>{current_user.age ? current_user.age : 'Добавить возраст'}</Text>
+              <IconIonicons style={styles.itemIconChoose} name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
 
 
           <Text style={styles.sectionHeader}>Текущая работа</Text>
-          <TouchableOpacity onPress={() => {            
-              return navigate('Work')
-            }  
+          <TouchableOpacity onPress={() => {
+            return navigate('Work')
+          }
           }>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.current_work ? current_user.work.position_name : 'Добавить работу' }</Text>
-              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <Text style={[styles.item, styles.itemTextChoose]}>{current_user.current_work ? current_user.work.position_name : 'Добавить работу'}</Text>
+              <IconIonicons style={styles.itemIconChoose} name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
-          
+
           <Text style={styles.sectionHeader}>Университет</Text>
           <TouchableOpacity onPress={() => navigate('University')}>
             <View style={styles.navBarTest}>
-              <Text style={[styles.item, styles.itemTextChoose]}>{ current_user.current_university ? current_user.university.school_name : 'Добавить университет' }</Text>
-              <IconIonicons style={styles.itemIconChoose } name="ios-arrow-forward" size={25} color="#c4c9d1" />
+              <Text style={[styles.item, styles.itemTextChoose]}>{current_user.current_university ? current_user.university.school_name : 'Добавить университет'}</Text>
+              <IconIonicons style={styles.itemIconChoose} name="ios-arrow-forward" size={25} color="#c4c9d1" />
             </View>
           </TouchableOpacity>
           <Text style={styles.sectionHeader}><Text> </Text></Text>
@@ -309,7 +306,7 @@ class Edit extends React.Component {
         </ScrollView>
 
 
-     
+
         <Modal
           animationType={"slide"}
           transparent={false}
@@ -317,10 +314,10 @@ class Edit extends React.Component {
           onRequestClose={() => console.log('closed')}
         >
           <View style={styles.modalContainer}>
-          <TouchableOpacity onPress={this.toggleModal}>
-            <Text style={styles.closeButton}>Закрыть</Text>
-          </TouchableOpacity>
-           
+            <TouchableOpacity onPress={this.toggleModal}>
+              <Text style={styles.closeButton}>Закрыть</Text>
+            </TouchableOpacity>
+
             <ScrollView
               contentContainerStyle={styles.scrollView}>
               {
@@ -328,17 +325,17 @@ class Edit extends React.Component {
                   return (
                     <TouchableHighlight
                       underlayColor="#9575CD"
-                      style={{opacity: i === this.state.index ? 0.5 : 1}}
+                      style={{ opacity: i === this.state.index ? 0.5 : 1 }}
                       key={i}
                       underlayColor='transparent'
                       onPress={() => this.setIndex(i)}
                     >
                       <Image
                         style={{
-                          width: width/3,
-                          height: width/3
+                          width: width / 3,
+                          height: width / 3
                         }}
-                        source={{uri: p.node.image.uri}}
+                        source={{ uri: p.node.image.uri }}
                       />
                     </TouchableHighlight>
                   )
@@ -346,10 +343,10 @@ class Edit extends React.Component {
               }
             </ScrollView>
             {
-              this.state.index !== null  && (
+              this.state.index !== null && (
                 <View style={styles.shareButton}>
-                <TouchableOpacity onPress={this.upload}>
-                  <Text style={styles.uploadButton}>Загрузить</Text>
+                  <TouchableOpacity onPress={this.upload}>
+                    <Text style={styles.uploadButton}>Загрузить</Text>
                   </TouchableOpacity>
                   {/* <Button
                       title='Upload'
@@ -366,21 +363,19 @@ class Edit extends React.Component {
   }
 }
 
-
-
 function _generateUUID() {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-    });
-    return uuid;
+  var d = new Date().getTime();
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+  return uuid;
 };
 
 
 styles = StyleSheet.create({
-  
+
   sectionHeader: {
     paddingTop: 15,
     paddingLeft: 10,
@@ -410,13 +405,13 @@ styles = StyleSheet.create({
     color: '#a5a9af',
   },
   itemIconChoose: {
-  
+
     marginTop: 10
   },
   circle: {
     width: 30,
     height: 30,
-    borderRadius: 30/2,
+    borderRadius: 30 / 2,
     backgroundColor: '#3f88fb', //'#EFF3F7',
     position: 'absolute',
     marginTop: 70,
@@ -435,7 +430,7 @@ styles = StyleSheet.create({
   },
   navBarButton: {
     color: '#3f88fb',
-    textAlign:'center',
+    textAlign: 'center',
     width: 80,
     fontSize: 18,
     fontWeight: 'bold'
@@ -449,15 +444,8 @@ styles = StyleSheet.create({
     fontSize: 18,
     // marginTop: 5
   },
-  // text_sex: {
-  //   fontSize: 30,
-  //   alignSelf: 'center',
-  //   color: 'red'
-  // },
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: '#FFF'
   },
   modalContainer: {
@@ -477,21 +465,21 @@ styles = StyleSheet.create({
   },
   uploadButton: {
     color: '#3f88fb',
-    textAlign:'center',
+    textAlign: 'center',
     // width: 64,
     fontSize: 18,
     marginBottom: 20,
     fontWeight: 'bold'
-  },  
+  },
   closeButton: {
     color: '#3f88fb',
-    textAlign:'center',
+    textAlign: 'center',
     // width: 64,
     fontSize: 18,
     marginTop: 10,
     marginBottom: 10,
     fontWeight: 'bold'
-  }, 
+  },
   // content: {
   //   flex: 1,
   //   justifyContent: 'center',
@@ -531,4 +519,3 @@ styles = StyleSheet.create({
 
 export default Edit
 
- 

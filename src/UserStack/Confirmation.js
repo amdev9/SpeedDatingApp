@@ -25,7 +25,7 @@ const kFailUrl = "yandexmoneyapp://oauth/authorize/fail";
 const kHttpsScheme = "https:";
 
 import { connect } from 'react-redux';
-import { updateEvent } from '../helpers/actions'; 
+import { updateEvent } from '../helpers/actions';
 
 @connect(
   state => ({
@@ -33,7 +33,7 @@ import { updateEvent } from '../helpers/actions';
     loading: state.loading,
   }),
   dispatch => ({
-    update: (event_id, participant_id) => dispatch(updateEvent(event_id, participant_id)), 
+    update: (event_id, participant_id) => dispatch(updateEvent(event_id, participant_id)),
   }),
 )
 export default class Confirmation extends Component {
@@ -43,9 +43,9 @@ export default class Confirmation extends Component {
   };
 
   _pressFuncANDROID = () => {
-    NativeModules.ImagePicker.pay( 
+    NativeModules.ImagePicker.pay(
       //{}, // no config yet 
-      (uri) => { console.log(uri) }, 
+      (uri) => { console.log(uri) },
       (error) => { console.log(error) }
     );
   }
@@ -56,32 +56,32 @@ export default class Confirmation extends Component {
       if (error) {
         console.error(error);
       } else {
-         
+
         this.setState({
           request: req,
           current_URL: req.uri
         });
         // if success callback returned => _finalBookEvent -> view ('Оплата проведена успешно', кнопка 'Вернуться к мероприятиям')
       }
-    }); 
+    });
   }
 
 
   _finalBookEvent = async () => {
-    
+
     const { event, participant } = this.props.navigation.state.params;
     // this._scrollView.scrollTo({ y: 0 });
     try {
 
       this.props.update(event._id, participant._id);
       this.props.navigation.goBack(); // test only
-       
+
     }
     catch (error) {
       alert(error);
     }
   };
-  
+
   strippedURL = (uri) => {
     var obURL = urllib.parse(uri); // new URL(url);
     var scheme = obURL.protocol.toLowerCase();
@@ -93,7 +93,7 @@ export default class Confirmation extends Component {
         port = 80;
       }
     }
-    var part = obURL.href.substring( scheme.length + 2, obURL.href.length );
+    var part = obURL.href.substring(scheme.length + 2, obURL.href.length);
     var host = part.split('/')[0];
     var path_split = part.split('?')[0];
     var path = path_split.substring(host.length, path_split.length);
@@ -101,29 +101,29 @@ export default class Confirmation extends Component {
 
     return strippedURL;
   }
- 
+
   _onNavigationStateChange(webViewState) {
-    let strippedURL =  this.strippedURL(webViewState.url);
+    let strippedURL = this.strippedURL(webViewState.url);
     let strippedSuccessURL = this.strippedURL(kSuccessUrl);
     let strippedFailURL = this.strippedURL(kFailUrl);
     if (strippedURL == strippedSuccessURL) {
-        
-        var req = {};
-        req.status = "success";
-        this._finalBookEvent();
-        this.setState({
-          request: req
-        });
-        
+
+      var req = {};
+      req.status = "success";
+      this._finalBookEvent();
+      this.setState({
+        request: req
+      });
+
     }
     if (strippedURL == strippedFailURL) {
-        
-        var req = {};
-        req.status = "fail";
-        // this._finalBookEvent(); // for test
-        this.setState({
-          request: req
-        }) 
+
+      var req = {};
+      req.status = "fail";
+      // this._finalBookEvent(); // for test
+      this.setState({
+        request: req
+      })
     }
   }
 
@@ -131,7 +131,7 @@ export default class Confirmation extends Component {
     const { event, participant } = this.props.navigation.state.params;
     const { goBack } = this.props.navigation;
     const { request } = this.state;
-     
+
     if (request.status == 'process') {
       return <WebView
         source={request}
@@ -139,13 +139,13 @@ export default class Confirmation extends Component {
           marginTop: 20,
         }}
         onNavigationStateChange={this._onNavigationStateChange.bind(this)}
-        //onShouldStartLoadWithRequest={ this._onShouldStartLoadWithRequest.bind(this) }
-        
+      //onShouldStartLoadWithRequest={ this._onShouldStartLoadWithRequest.bind(this) }
 
-        // onNavigationStateChange == Function that is invoked when the WebView loading starts or ends.
-        // https://stackoverflow.com/questions/39099444/react-native-webview-get-url
 
-        // onShouldStartLoadWithRequest  -> if successUrl -> 
+      // onNavigationStateChange == Function that is invoked when the WebView loading starts or ends.
+      // https://stackoverflow.com/questions/39099444/react-native-webview-get-url
+
+      // onShouldStartLoadWithRequest  -> if successUrl -> 
       />
     } else if (request.status == 'success') {
       return (
@@ -153,7 +153,7 @@ export default class Confirmation extends Component {
           <Text>Оплата проведена успешно</Text>
           <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={() => goBack()}  
+            onPress={() => goBack()}
           >
             <Text style={styles.button}>Вернуться к мероприятиям</Text>
           </TouchableOpacity>
@@ -165,7 +165,7 @@ export default class Confirmation extends Component {
           <Text>Ошибка при оплате</Text>
           <TouchableOpacity
             style={styles.buttonContainer}
-            onPress={() => goBack()}  
+            onPress={() => goBack()}
           >
             <Text style={styles.button}>Вернуться к мероприятиям</Text>
           </TouchableOpacity>
@@ -173,90 +173,90 @@ export default class Confirmation extends Component {
       );
     } else {
 
-      return  <View style={styles.container}>
-      
+      return <View style={styles.container}>
+
         <View style={styles.navBar}>
-          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
-            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900"  />
-            <Text style={ [styles.navBarButton,{
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack()}>
+            <Icon style={styles.navBarButtonIcon} name="ios-arrow-back" size={25} color="#900" />
+            <Text style={[styles.navBarButton, {
               fontWeight: 'bold',
               fontSize: 16,
               marginLeft: 5
-            }]}>Назад к мероприятиям</Text>       
-          </TouchableOpacity>   
+            }]}>Назад к мероприятиям</Text>
+          </TouchableOpacity>
           <Text style={styles.navBarHeader}></Text>
-          <Text style={styles.navBarButton}></Text> 
+          <Text style={styles.navBarButton}></Text>
         </View>
 
 
         <Text style={styles.title}> {event.title}</Text>
-        <View style={{ 
-          flexDirection: 'row', 
-          marginLeft: 20, 
+        <View style={{
+          flexDirection: 'row',
+          marginLeft: 20,
           marginTop: 10,
           marginBottom: 10
         }}>
-          <Icon name="ios-calendar-outline" size={25} color="#900"  />
-          <Text style={{marginLeft: 10}}> {event.date} </Text>
+          <Icon name="ios-calendar-outline" size={25} color="#900" />
+          <Text style={{ marginLeft: 10 }}> {event.date} </Text>
         </View>
 
         <View style={styles.imageContainer}>
           <Image source={{ uri: event.photo }} style={styles.image} />
-        </View> 
-        
-        <Text style={{ 
-          marginLeft: 20, 
+        </View>
+
+        <Text style={{
+          marginLeft: 20,
           marginBottom: 10
         }}> {event.description} </Text>
-      
+
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() =>  { // add condition android || ios
-            
+          onPress={() => { // add condition android || ios
+
             console.log("pay pressed\n");
             this._finalBookEvent(); // test
-            
+
             // return (Platform.OS === 'android') ? this._pressFuncANDROID() : this._pressFuncIOS(); 
-              
-            
-            
-          } } 
+
+
+
+          }}
         >
           <Text style={styles.button}>Записаться</Text>
         </TouchableOpacity>
 
-        <View style={{ 
+        <View style={{
           alignItems: 'center',
           marginBottom: 10,
-          
+
         }}>
           <Text>Ты можешь встетить их</Text>
         </View>
-        <View style={{ 
+        <View style={{
           alignItems: 'center',
           backgroundColor: '#e6e6e6',
         }}>
-          <View style={{ 
+          <View style={{
             flexDirection: 'row',
-          }}> 
-            { event.participants.map((participant, index) => {
-                return <View 
-                  style={styles.avatarContainer} 
-                  key={index} 
-                > 
-                  <Image 
-                    source={{ uri: participant.avatar }}
-                    style={styles.avatar}
-                    
-                  />
-                </View>
-              }
+          }}>
+            {event.participants.map((participant, index) => {
+              return <View
+                style={styles.avatarContainer}
+                key={index}
+              >
+                <Image
+                  source={{ uri: participant.avatar }}
+                  style={styles.avatar}
+
+                />
+              </View>
+            }
             )}
-          </View>   
-        </View>    
+          </View>
+        </View>
       </View>
-    } 
-  }      
+    }
+  }
 }
 
 
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
     // borderColor: '#FFF',
     // borderWidth: 4
   },
-  avatarContainer: {        
+  avatarContainer: {
     alignItems: 'center',
     marginTop: 15,
     marginBottom: 15,
@@ -302,14 +302,14 @@ const styles = StyleSheet.create({
   },
   navBarButton: {
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     width: 200,
     color: '#3f88fb'
   },
   navBarButtonIcon: {
     marginTop: -4,
     color: '#262626',
-    textAlign:'center',
+    textAlign: 'center',
     marginLeft: 10,
     // width: 200,
     color: '#3f88fb'
@@ -334,7 +334,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF'
-    
+
     // justifyContent: 'center',
     // alignItems: 'center',
   },

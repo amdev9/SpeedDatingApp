@@ -20,7 +20,7 @@ import { defaultStyles } from '../styles';
 
 import { URL } from "../helpers/constants";
 
-const { width,height } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 import { connect } from 'react-redux';
 import { createUser } from '../helpers/actions';
@@ -32,7 +32,7 @@ const NOTIFICATION_TOKEN = "push-notification-token";
     person: state.person
   }),
   dispatch => ({
-    create_user: (user) => dispatch(createUser(user)), 
+    create_user: (user) => dispatch(createUser(user)),
   }),
 )
 export default class Fullfill extends Component {
@@ -42,7 +42,7 @@ export default class Fullfill extends Component {
       name: ''
     }
   }
-    
+
   _continue = () => {
     const { user } = this.props.navigation.state.params;
     user.name = this.state.name;
@@ -62,28 +62,28 @@ export default class Fullfill extends Component {
         platform: res.os
       })
     })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson) 
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   postToken(userProfile) {
     AsyncStorage.getItem(NOTIFICATION_TOKEN)
-    .then(res => {
-      res = JSON.parse(res);
-      if (res !== null) {
-        if (userProfile.token && userProfile.token == res.token) {
-          console.log('Same token exists on server')
-        } else {
-          this.saveTokenServer(userProfile, res);
+      .then(res => {
+        res = JSON.parse(res);
+        if (res !== null) {
+          if (userProfile.token && userProfile.token == res.token) {
+            console.log('Same token exists on server')
+          } else {
+            this.saveTokenServer(userProfile, res);
+          }
         }
-      }  
-    })
-    .catch(err => reject(err));
+      })
+      .catch(err => reject(err));
   }
 
   render() {
@@ -91,44 +91,44 @@ export default class Fullfill extends Component {
     const { person } = this.props;
     if (person != null) {
       this.postToken(person);
-      onSignIn(person).then(() => this.props.navigation.dispatch(ResetToSignedIn)) 
+      onSignIn(person).then(() => this.props.navigation.dispatch(ResetToSignedIn))
     }
     let continueText = 'ПРОДОЛЖИТЬ';
     return (
-   
+
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack() }>
-            <Icon style={styles.headerIcon} name="chevron-left" size={45} color="#c8c8c8"  />    
+          <TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => this.props.navigation.goBack()}>
+            <Icon style={styles.headerIcon} name="chevron-left" size={45} color="#c8c8c8" />
             {/* <Icon style={styles.headerIcon} name="chevron-left" size={45} color="#c8c8c8"  />     */}
-          </TouchableOpacity>   
+          </TouchableOpacity>
         </View>
         <View style={styles.content}>
           <Text style={styles.title}>Меня зовут</Text>
           <TextInput
-            autoFocus = {true}
+            autoFocus={true}
             style={styles.item}
             placeholder='Имя'
-            onChangeText={(text) => this.setState({name: text})}
+            onChangeText={(text) => this.setState({ name: text })}
             value={this.state.name}
           />
-        
-        {this.state.name.length > 0 
-          ? 
+
+          {this.state.name.length > 0
+            ?
             <TouchableOpacity style={styles.buttonContainer} onPress={this._continue}>
               <Text style={styles.button}>{continueText}</Text>
             </TouchableOpacity>
-          :
+            :
             <TouchableOpacity style={styles.buttonContainerInactive}>
               <Text style={styles.buttonInactive}>{continueText}</Text>
             </TouchableOpacity>
-        }
+          }
         </View>
       </View>
     );
   }
 }
-    
+
 const styles = StyleSheet.create({
   header: {
     marginTop: 20,
@@ -160,8 +160,8 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: 'black',
   },
-  
-  
+
+
   buttonContainerInactive: {
     alignItems: 'center',
     backgroundColor: '#fafbfd',
@@ -204,9 +204,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     width: width - 20
   },
-   
+
   sectionHeader: {
     backgroundColor: 'rgba(247,247,247,1.0)',
   },
-  
+
 });

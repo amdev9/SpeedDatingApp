@@ -14,7 +14,7 @@ import Profile from './Profile';
 import Events from './Events/Events';
 import Mymatches from './MymatchesScreen';
 
- 
+
 const USER_KEY = "auth-demo-key";
 
 
@@ -39,7 +39,7 @@ export default class ScrollTab extends Component {
     };
   }
 
-  componentWillMount() { 
+  componentWillMount() {
     AsyncStorage.getItem(USER_KEY).then((user) => {
       this.props.store_user(JSON.parse(user));
       this.setState({
@@ -49,13 +49,13 @@ export default class ScrollTab extends Component {
     });
 
     if (this.props.navigation.state.params && typeof this.props.navigation.state.params.paramm !== 'undefined') {
-       this.setState({
-         initialPage: this.props.navigation.state.params.paramm
-       })
-     } 
+      this.setState({
+        initialPage: this.props.navigation.state.params.paramm
+      })
+    }
   };
 
-  render() {  
+  render() {
     if (this.state.isLoading) {
       return <ActivityIndicator
         animating={true} // loading
@@ -67,22 +67,22 @@ export default class ScrollTab extends Component {
     return (
       <ScrollableTabView
         style={{
-          backgroundColor: 'white' 
+          backgroundColor: 'white'
         }}
-        initialPage={this.state.initialPage} 
+        initialPage={this.state.initialPage}
         //tabBarBackgroundColor='white'
         renderTabBar={() => <ScrollableTabBar style={{ marginTop: 20 }} />}
       >
-        <View tabLabel='Профиль'> 
-          <Profile navigation={this.props.navigation}/> 
+        <View tabLabel='Профиль'>
+          <Profile navigation={this.props.navigation} />
         </View>
         <View tabLabel='Мероприятия'>
-          <Events navigation={this.props.navigation}/>
+          <Events navigation={this.props.navigation} />
         </View>
         <View tabLabel='Совпадения'>
-          <Mymatches navigation={this.props.navigation}/>
+          <Mymatches navigation={this.props.navigation} />
         </View>
-      </ScrollableTabView> 
+      </ScrollableTabView>
     );
   };
 }
@@ -91,8 +91,8 @@ export default class ScrollTab extends Component {
 const styles = StyleSheet.create({
   loader: {
     flex: 1,
-    alignItems: 'center',     
-    justifyContent: 'center', 
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'white'
   }
 });

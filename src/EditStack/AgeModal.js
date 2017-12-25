@@ -28,23 +28,22 @@ import _ from 'lodash';
     current_user: state.current_user
   }),
   dispatch => ({
-    update_user: (user) => dispatch(updateUser(user)), 
+    update_user: (user) => dispatch(updateUser(user)),
   }),
 )
 export default class AgeModal extends Component {
   constructor(props) {
     super(props);
-    const { current_user } = this.props //.navigation.state.params;
+    const { current_user } = this.props
     this.state = {
       age: current_user.age
     }
   }
-    
+
   saveUser = async () => {
-    const { current_user } = this.props //.navigation.state.params;
-    // start age fix
+    const { current_user } = this.props
     current_user.age = this.state.age;
-    
+
     try {
       this.props.update_user(current_user);
     }
@@ -55,40 +54,40 @@ export default class AgeModal extends Component {
 
   render() {
     const { goBack } = this.props.navigation;
-    const { current_user } = this.props //.navigation.state.params;
-    
+    const { current_user } = this.props
+
     return (
-      
+
       <View style={styles.container}>
         <View style={styles.navBar}>
           <Text style={styles.navBarButton}></Text>
           <Text style={styles.navBarHeader}>Возраст</Text>
-          <TouchableOpacity onPress={() =>  {
+          <TouchableOpacity onPress={() => {
             this.saveUser();
             this.props.navigation.navigate('Edit');
           }}>
             <Text style={styles.navBarButton}>Готово</Text>
           </TouchableOpacity>
         </View>
-       
+
         <ScrollView
           contentContainerStyle={styles.scrollContent}>
-          
+
 
           <View style={styles.back}>
-          <Picker
-                selectedValue={this.state.age}
-                onValueChange={(itemValue, itemIndex) => {
-                        return this.setState({
-                          age: itemValue
-                        })
-                    }
-                }>{
-                _.range(18, 30).map( (item, i) => {
+            <Picker
+              selectedValue={this.state.age}
+              onValueChange={(itemValue, itemIndex) => {
+                return this.setState({
+                  age: itemValue
+                })
+              }
+              }>{
+                _.range(18, 30).map((item, i) => {
                   var item_str = item.toString();
                   return <Picker.Item label={item_str} value={item_str} key={i} />
                 })
-                
+
               }</Picker>
           </View>
         </ScrollView>
@@ -97,7 +96,7 @@ export default class AgeModal extends Component {
     );
   }
 }
-    
+
 const styles = StyleSheet.create({
   back: {
     marginTop: 30,
@@ -123,11 +122,11 @@ const styles = StyleSheet.create({
     height: 64,
     backgroundColor: '#FFFFFF' // '#1EAAF1'
   },
-  
+
 
   navBarButton: {
     color: '#3f88fb',
-    textAlign:'center',
+    textAlign: 'center',
     width: 80,
     fontSize: 18,
     fontWeight: 'bold'
@@ -160,7 +159,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
     fontFamily: 'System',
-    textAlign:'center',
+    textAlign: 'center',
   },
 
 });

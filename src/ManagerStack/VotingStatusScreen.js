@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity,
   TouchableHighlight,
-  View, 
-  ListView, 
+  View,
+  ListView,
   ScrollView,
   RefreshControl,
   Image
@@ -34,42 +34,36 @@ export default class VotingStatusScreen extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   _calculate = async () => {
-    const { event } =  this.props.navigation.state.params; 
+    const { event } = this.props.navigation.state.params;
     this.props.calculate(event._id);
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-    // return nextProps.admin_matches != this.props.admin_matches;
-  // }
-
   componentWillReceiveProps(nextProps) {
     const { admin_matches } = nextProps;
-    console.log(nextProps); 
+    console.log(nextProps);
     if (admin_matches.length > 0) { // fix 
-      nextProps.navigation.navigate('Match');  
-    } 
+      nextProps.navigation.navigate('Match');
+    }
   }
 
   render() {
     const { participants } = this.props;
     return (
       <View style={styles.container}>
-  
-  {/* 
-   change to custom votingParticipant
-    */}
 
-    <ScrollView style={{ marginTop: 20 }}
-          ref={(scrollView) => { this._scrollView = scrollView; }}  
+        {/* change to custom votingParticipant */}
+
+        <ScrollView style={{ marginTop: 20 }}
+          ref={(scrollView) => { this._scrollView = scrollView; }}
         >
           {participants.map((participant, index) => {
-            return <TouchableOpacity 
-              style={styles.containerPart} 
+            return <TouchableOpacity
+              style={styles.containerPart}
               key={index}
             >
-            
+
               <View style={styles.avatarContainer}>
                 {participant.avatar && <Image
                   resizeMode='contain'
@@ -81,31 +75,31 @@ export default class VotingStatusScreen extends Component {
                 <Text style={[styles.text, styles.name]}> {participant.name} </Text>
               </View>
               <View style={styles.avatarListContainer}>
-                { typeof participant.likes === 'object' ? participant.likes.person_likes.map( (id, ind)=> {
-                    var ob = _.find(participants, function(obj) { return obj._id == id });
-                    return <Image
-                      resizeMode='contain'
-                      style={styles.avatarList}
-                      source={{ uri: ob.avatar  }}
-                      key={ind}
-                    />
-                  }) : <View ></View> }
+                {typeof participant.likes === 'object' ? participant.likes.person_likes.map((id, ind) => {
+                  var ob = _.find(participants, function (obj) { return obj._id == id });
+                  return <Image
+                    resizeMode='contain'
+                    style={styles.avatarList}
+                    source={{ uri: ob.avatar }}
+                    key={ind}
+                  />
+                }) : <View ></View>}
               </View>
 
             </TouchableOpacity>
           }
-          
+
           )}
-          </ScrollView>
+        </ScrollView>
 
 
         <TouchableHighlight
-            underlayColor="#9575CD"
-            style={styles.buttonContainer}
-            onPress={this._calculate} 
+          underlayColor="#9575CD"
+          style={styles.buttonContainer}
+          onPress={this._calculate}
         >
-            <Text style={styles.button}>Подсчитать совпадения</Text>
-        </TouchableHighlight> 
+          <Text style={styles.button}>Подсчитать совпадения</Text>
+        </TouchableHighlight>
 
       </View>
     );
@@ -116,7 +110,7 @@ const styles = StyleSheet.create({
   containerPart: {
     flex: 1,
     flexDirection: 'row',
-    
+
   },
   avatarContainer: {
     alignItems: 'center',
@@ -128,7 +122,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 60,
     marginLeft: 15,
-    
+
   },
   avatarListContainer: {
     // alignItems: 'center',
@@ -136,12 +130,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     // width: 40,
   },
-  // contentContainer: {
-  //   flex: 1,
-  //   borderBottomWidth: 1,
-  //   borderColor: '#EEE',
-  //   padding: 5,
-  // },
   avatar: {
     // borderWidth: 1,
     // borderColor: '#EEE',

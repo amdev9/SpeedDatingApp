@@ -1,86 +1,85 @@
-import {  CLEAR_ADMIN_MATCHES, STORE_USER, WEBSOCKET_CREATED_USER,WEBSOCKET_ON_SELECTED, WEBSOCKET_CALCULATE_MANAGER, WEBSOCKET_CALCULATE_CLIENT, WEBSOCKET_NEXT, WEBSOCKET_LAST, WEBSOCKET_LIKES_POST, WEBSOCKET_SELECTED, WEBSOCKET_CLOSED, WEBSOCKET_CONNECTED, WEBSOCKET_RESPONSE_QUEUE, WEBSOCKET_SEND, WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPENED, WEBSOCKET_DISCONNECTED, WEBSOCKET_MESSAGE } from './constants';
-
+import { CLEAR_ADMIN_MATCHES, STORE_USER, WEBSOCKET_CREATED_USER, WEBSOCKET_ON_SELECTED, WEBSOCKET_CALCULATE_MANAGER, WEBSOCKET_CALCULATE_CLIENT, WEBSOCKET_NEXT, WEBSOCKET_LAST, WEBSOCKET_LIKES_POST, WEBSOCKET_SELECTED, WEBSOCKET_CLOSED, WEBSOCKET_CONNECTED, WEBSOCKET_RESPONSE_QUEUE, WEBSOCKET_SEND, WEBSOCKET_SENDING, WEBSOCKET_EVENT_DECISION, WEBSOCKET_EVENTS_LIST, WEBSOCKET_CONNECTING, WEBSOCKET_OPENED, WEBSOCKET_DISCONNECTED, WEBSOCKET_MESSAGE } from './constants';
 
 export default actions = {
-    connecting: () => ({  
+    connecting: () => ({
         type: WEBSOCKET_CONNECTING,
         payload: {
-          timestamp: new Date(),
+            timestamp: new Date(),
         }
     }),
-    opened: () => ({  
+    opened: () => ({
         type: WEBSOCKET_OPENED,
         payload: {
-          timestamp: new Date(),
+            timestamp: new Date(),
         }
     }),
-    disconnected: () => ({ 
+    disconnected: () => ({
         type: WEBSOCKET_DISCONNECTED,
         payload: {
-          timestamp: new Date(),
+            timestamp: new Date(),
         }
     }),
-    messageReceived: (msg) => ({ 
+    messageReceived: (msg) => ({
         type: WEBSOCKET_MESSAGE,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
-    eventsList: (msg) => ({  
+    eventsList: (msg) => ({
         type: WEBSOCKET_EVENTS_LIST,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
-    eventDecision: (msg) => ({  
+    eventDecision: (msg) => ({
         type: WEBSOCKET_EVENT_DECISION,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
-    sending: () => ({  
+    sending: () => ({
         type: WEBSOCKET_SENDING,
         payload: {
-          timestamp: new Date(),
+            timestamp: new Date(),
         }
     }),
-    responseQueue: (msg) => ({  
+    responseQueue: (msg) => ({
         type: WEBSOCKET_RESPONSE_QUEUE,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
-    connected: (msg) => ({  
+    connected: (msg) => ({
         type: WEBSOCKET_CONNECTED,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
-    closed: (msg) => ({  
+    closed: (msg) => ({
         type: WEBSOCKET_CLOSED,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
 
-    likesPost: (msg) => ({  
+    likesPost: (msg) => ({
         type: WEBSOCKET_LIKES_POST,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
-    calculate_client: (msg) => ({  
+    calculate_client: (msg) => ({
         type: WEBSOCKET_CALCULATE_CLIENT,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
     // calculate_manager: (msg) => ({  
@@ -90,36 +89,36 @@ export default actions = {
     //       data: msg,
     //     }
     // }),
-    createdUser: (msg) => ({  
+    createdUser: (msg) => ({
         type: WEBSOCKET_CREATED_USER,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
-    next: (msg) => ({  
+    next: (msg) => ({
         type: WEBSOCKET_NEXT,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
-    last: (msg) => ({  
+    last: (msg) => ({
         type: WEBSOCKET_LAST,
         payload: {
-          timestamp: new Date(),
-          data: msg,
+            timestamp: new Date(),
+            data: msg,
         }
     }),
 };
 
 
 
-export function connect(url) { 
+export function connect(url) {
     const action = () => {
         return {
             type: 'WEBSOCKET:CONNECT',
-            url: url 
+            url: url
         }
     }
     return (dispatch) => {
@@ -128,11 +127,11 @@ export function connect(url) {
 }
 
 
-export function fetchEvents() { 
+export function fetchEvents() {
     const action = () => {
         return {
-          type: WEBSOCKET_SEND,
-          command: 'events_list'
+            type: WEBSOCKET_SEND,
+            command: 'events_list'
         }
     }
     return (dispatch) => {
@@ -140,13 +139,13 @@ export function fetchEvents() {
     }
 }
 
-export function updateEvent(event_id, participant_id) { 
+export function updateEvent(event_id, participant_id) {
     const action = () => {
         return {
-          type: WEBSOCKET_SEND,
-          command: 'update_event',
-          event_id: event_id,
-          participant_id: participant_id
+            type: WEBSOCKET_SEND,
+            command: 'update_event',
+            event_id: event_id,
+            participant_id: participant_id
         }
     }
     return (dispatch) => {
@@ -154,54 +153,54 @@ export function updateEvent(event_id, participant_id) {
     }
 }
 
-export function manageEvent(person_id, event_id) { 
+export function manageEvent(person_id, event_id) {
     const action = () => {
         return {
-          type: WEBSOCKET_SEND,
-          command: 'manage_event',
-          person_id: person_id,
-          event_id: event_id
+            type: WEBSOCKET_SEND,
+            command: 'manage_event',
+            person_id: person_id,
+            event_id: event_id
         }
     }
     return (dispatch) => { dispatch(action()) }
 }
 
-export function likesFunc(person_id, event_id, likes) { 
+export function likesFunc(person_id, event_id, likes) {
     const action = () => {
         return {
-          type: WEBSOCKET_SEND,
-          command: 'likes',
-          person_id: person_id,
-          event_id: event_id,
-          likes: likes
+            type: WEBSOCKET_SEND,
+            command: 'likes',
+            person_id: person_id,
+            event_id: event_id,
+            likes: likes
         }
     }
     return (dispatch) => { dispatch(action()) }
 }
 
-export function updateUser(user) { 
+export function updateUser(user) {
     const action = () => {
         return {
-          type: WEBSOCKET_SEND,
-          command: 'update_user',
-          user: user
+            type: WEBSOCKET_SEND,
+            command: 'update_user',
+            user: user
         }
     }
     return (dispatch) => { dispatch(action()) }
 }
 
-export function createUser(user) { 
+export function createUser(user) {
     const action = () => {
         return {
-          type: WEBSOCKET_SEND,
-          command: 'create_user',
-          user: user
+            type: WEBSOCKET_SEND,
+            command: 'create_user',
+            user: user
         }
     }
     return (dispatch) => { dispatch(action()) }
 }
 
-export function clientsQueue() { 
+export function clientsQueue() {
     const action = () => {
         return {
             type: WEBSOCKET_SEND,
@@ -213,7 +212,7 @@ export function clientsQueue() {
     }
 }
 
-export function connected(user) { 
+export function connected(user) {
     const action = () => {
         return {
             type: WEBSOCKET_SEND,
@@ -303,4 +302,3 @@ export function clearAdminMatches() {
     }
 }
 
- 

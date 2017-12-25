@@ -22,7 +22,7 @@ import ScrollViewElements from './ScrollViewElements';
 
 
 const { width, height } = Dimensions.get('window');
-const heightFinal = Platform.OS == 'ios'? height - 70 : height - 90;
+const heightFinal = Platform.OS == 'ios' ? height - 70 : height - 90;
 
 import { fetchEvents } from '../../helpers/actions';
 import { connect } from 'react-redux';
@@ -34,7 +34,7 @@ import { connect } from 'react-redux';
     current_user: state.current_user
   }),
   dispatch => ({
-    refresh: () => dispatch(fetchEvents()),   
+    refresh: () => dispatch(fetchEvents()),
   }),
 )
 export default class Events extends Component {
@@ -45,11 +45,11 @@ export default class Events extends Component {
       selectedIndex: 1,
       chosenTable: null
     };
-  }  
+  }
   openEvent = (event) => {
     this.setState({
       popupIsOpen: true,
-      event,	
+      event,
     });
   }
   closeEvent = () => {
@@ -65,11 +65,11 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Confirmation', {
       event: this.state.event,
-      participant: this.props.current_user  
-    }); 
+      participant: this.props.current_user
+    });
   }
   joinEvent = () => {
-    if ( this.state.chosenTable == null) {
+    if (this.state.chosenTable == null) {
       alert('Please select table');
     } else {
       // alert('U Selecte table ' + this.state.chosenTable);
@@ -78,7 +78,7 @@ export default class Events extends Component {
       this.props.current_user.table = this.state.chosenTable + 1; // navigation.state.params.person
       navigate('Join', {
         event: this.state.event,
-      }); 
+      });
     }
   }
   manageEvent = () => {
@@ -86,51 +86,51 @@ export default class Events extends Component {
     const { navigate } = this.props.navigation;
     navigate('Manage', {
       event: this.state.event
-    }); 
+    });
   }
   manageEventRequest = () => {
     this.closeEvent();
     const { navigate } = this.props.navigation;
     navigate('ManagePermission', {
       event: this.state.event
-    }); 
+    });
   }
   chooseTable = (table) => {
     this.setState({
       chosenTable: table,
     });
   }
-  componentWillMount() { 
+  componentWillMount() {
     this.props.refresh(); // fix!
   }
   render() {
-    const { events, loading, refresh } = this.props;  
-  
+    const { events, loading, refresh } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.bottomContent}>
-          <SegmentedControlTab 
+          <SegmentedControlTab
             tabStyle={styles.tabStyle}
             tabTextStyle={styles.tabTextStyle}
             activeTabStyle={styles.activeTabStyle}
             values={['Мои', 'Найти']}
             selectedIndex={this.state.selectedIndex}
             onTabPress={(index) => {
-              this.setState({selectedIndex: index});
+              this.setState({ selectedIndex: index });
             }}
           />
         </View>
-        {events 
-          ? 
-            <ScrollViewElements 
-              selected={this.state.selectedIndex}
-              onOpenEvent={this.openEvent}
-            /> 
+        {events
+          ?
+          <ScrollViewElements
+            selected={this.state.selectedIndex}
+            onOpenEvent={this.openEvent}
+          />
           : <ActivityIndicator
-              animating={loading}
-              style={styles.loader}
-              size="large"
-            />
+            animating={loading}
+            style={styles.loader}
+            size="large"
+          />
         }
         <EventPopup
           event={this.state.event}
@@ -143,7 +143,7 @@ export default class Events extends Component {
           chosenTable={this.state.chosenTable}
           onChooseTable={this.chooseTable}
         />
-      </View>      
+      </View>
     );
   }
 }
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     height: heightFinal
   },
   bottomContent: {
-    marginTop: 5, 
+    marginTop: 5,
     marginRight: 10,
     marginLeft: 10
   },
@@ -163,13 +163,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center', // center vertically
   },
   tabStyle: {
-    borderColor: '#3f88fb', 
+    borderColor: '#3f88fb',
   },
   activeTabStyle: {
-      backgroundColor: '#3f88fb'
+    backgroundColor: '#3f88fb'
   },
   tabTextStyle: {
-      color: '#3f88fb'
+    color: '#3f88fb'
   },
   gradient: {
     width: 400,

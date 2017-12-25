@@ -16,25 +16,25 @@ export default class Participant extends PureComponent {
     } else {
       this.state = { pressStatus: false };
     }
-    
+
   }
 
   static propTypes = {
     // Comment object shape
     participant: PropTypes.shape({
-    //   content: PropTypes.string.isRequired,
-    //   created: PropTypes.string.isRequired,
-    //   // User object shape
-    //   user: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        avatar: PropTypes.string.isRequired,
-    //   }).isRequired,
+      //   content: PropTypes.string.isRequired,
+      //   created: PropTypes.string.isRequired,
+      //   // User object shape
+      //   user: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      avatar: PropTypes.string.isRequired,
+      //   }).isRequired,
     }).isRequired,
   };
- 
+
 
   render() {
-    
+
     // Pull comment object out of props
     const { participant, onSelected, liked, vision } = this.props;
     // Pull data needed to display a comment out of comment object
@@ -44,16 +44,16 @@ export default class Participant extends PureComponent {
 
     if (vision == 'mymatch_horizontal') {
 
-      return <TouchableOpacity onPress={ () => { 
-          onSelected(participant); 
-          this.setState({
-            pressStatus: !this.state.pressStatus
-          });
-          // change to ios-heart
-        } 
+      return <TouchableOpacity onPress={() => {
+        onSelected(participant);
+        this.setState({
+          pressStatus: !this.state.pressStatus
+        });
+        // change to ios-heart
+      }
       }>
         <View style={styles.col_hor}>
-          <View style={styles.avatarContainer_hor} > 
+          <View style={styles.avatarContainer_hor} >
             {avatar && <Image
               resizeMode='contain'
               style={styles.avatar}
@@ -67,16 +67,16 @@ export default class Participant extends PureComponent {
       </TouchableOpacity>
 
     } else if (vision == 'mymatch_vertical') {
-      const { name, phoneNumber } = participant; 
-      return <TouchableOpacity onPress={ () => { 
-          onSelected(participant); 
-          this.setState({
-            pressStatus: !this.state.pressStatus
-          });
-        } 
+      const { name, phoneNumber } = participant;
+      return <TouchableOpacity onPress={() => {
+        onSelected(participant);
+        this.setState({
+          pressStatus: !this.state.pressStatus
+        });
+      }
       }>
         <View style={styles.col}>
-          <View style={styles.avatarContainer} > 
+          <View style={styles.avatarContainer} >
             {avatar && <Image
               resizeMode='contain'
               style={styles.avatar}
@@ -91,29 +91,29 @@ export default class Participant extends PureComponent {
       </TouchableOpacity>
     } else if (vision == 'votepush') {
       return (
-        <View style={ this.state.pressStatus ? styles.containerPress : styles.container  } >
-          <TouchableOpacity onPress={ () => { 
-              onSelected(participant); 
-              this.setState({
-                pressStatus: !this.state.pressStatus
-              });
-            } 
+        <View style={this.state.pressStatus ? styles.containerPress : styles.container} >
+          <TouchableOpacity onPress={() => {
+            onSelected(participant);
+            this.setState({
+              pressStatus: !this.state.pressStatus
+            });
+          }
           }>
             <View style={styles.col}>
               <View style={[styles.avatarContainer, {
                 marginLeft: 20,
-              }]} > 
+              }]} >
                 {avatar && <Image
                   resizeMode='contain'
                   style={styles.avatar}
                   source={{ uri: avatar }}
                 />}
               </View>
-              <View style={styles.textContainer}> 
-                <Text style={ this.state.pressStatus ? styles.textLiked : styles.text}> {name} </Text>
+              <View style={styles.textContainer}>
+                <Text style={this.state.pressStatus ? styles.textLiked : styles.text}> {name} </Text>
               </View>
               <View style={styles.iconic}>
-                { this.state.pressStatus ? <Icon name="ios-heart" size={30} color="#f2aab8" /> : <Icon name="ios-heart-outline" size={30} color="#4F8EF7" /> }
+                {this.state.pressStatus ? <Icon name="ios-heart" size={30} color="#f2aab8" /> : <Icon name="ios-heart-outline" size={30} color="#4F8EF7" />}
               </View>
             </View>
           </TouchableOpacity>
@@ -121,25 +121,25 @@ export default class Participant extends PureComponent {
       );
     } else {
       return (
-        <View style={ this.state.pressStatus ? styles.containerPress : styles.container  } >
-          <TouchableOpacity onPress={ () => { 
-              onSelected(participant); 
-              this.setState({
-                pressStatus: !this.state.pressStatus
-              });
-            } 
+        <View style={this.state.pressStatus ? styles.containerPress : styles.container} >
+          <TouchableOpacity onPress={() => {
+            onSelected(participant);
+            this.setState({
+              pressStatus: !this.state.pressStatus
+            });
+          }
           }>
             <View style={styles.col}>
-              <View style={styles.avatarContainer} > 
+              <View style={styles.avatarContainer} >
                 {avatar && <Image
                   resizeMode='contain'
                   style={styles.avatar}
                   source={{ uri: avatar }}
                 />}
               </View>
-               
+
               <View style={styles.textContainer}>
-              <Text style={ this.state.pressStatus ? styles.textLiked : styles.text}> {name} </Text>
+                <Text style={this.state.pressStatus ? styles.textLiked : styles.text}> {name} </Text>
                 {/* <Text style={styles.text}>{name}</Text> */}
               </View>
             </View>
@@ -161,16 +161,16 @@ const styles = StyleSheet.create({
     // width: 90,
     flex: 1
   },
-  avatarContainer_hor: {        
+  avatarContainer_hor: {
     alignItems: 'flex-start',
     // marginLeft: 8,
     marginTop: 5,
-    
+
     // height: 78
   },
   text_hor: {
     color: '#474747',
-    
+
     // fontFamily: 'System',
     fontFamily: 'ProximaNova-Semibold', //'System',
     fontSize: 17,
@@ -198,13 +198,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#3f88fb',
   },
   avatar: {
-    borderRadius: 78/2,
+    borderRadius: 78 / 2,
     width: 78,
     height: 78,
   },
-  avatarContainer: {        
+  avatarContainer: {
     // alignItems: 'center',
-    
+
     // paddingTop: 10,
     width: 90, //78,
     height: 78
@@ -225,8 +225,8 @@ const styles = StyleSheet.create({
     height: 78,
     alignItems: 'center',
   },
-  iconic: { 
-    marginTop: 15, 
+  iconic: {
+    marginTop: 15,
     marginLeft: 30
   }
 });
