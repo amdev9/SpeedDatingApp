@@ -40,22 +40,11 @@ import { connect } from 'react-redux';
 class Settings extends Component {
 
   logout = async () => {
-    // add request ?
     onSignOut().then(() => this.props.navigation.dispatch(ResetToSignedOut))
-
-
-    // try {
-    // let response =  await fetch(`${URL}/logout`);
-    // let responseJson = await response.json();
-    // alert(responseJson);
-    // if (responseJson == 'ok') {
-    // } catch(error) {
-    // console.error(error);
-    // }
   }
 
   render() {
-    const { current_user } = this.props //.navigation.state.params;
+    const { current_user } = this.props 
     return (
 
       <View style={styles.container}>

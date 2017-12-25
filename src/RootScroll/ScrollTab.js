@@ -43,8 +43,7 @@ export default class ScrollTab extends Component {
     AsyncStorage.getItem(USER_KEY).then((user) => {
       this.props.store_user(JSON.parse(user));
       this.setState({
-        isLoading: false,
-        // user: JSON.parse(user) // to redux
+        isLoading: false
       });
     });
 
@@ -70,7 +69,6 @@ export default class ScrollTab extends Component {
           backgroundColor: 'white'
         }}
         initialPage={this.state.initialPage}
-        //tabBarBackgroundColor='white'
         renderTabBar={() => <ScrollableTabBar style={{ marginTop: 20 }} />}
       >
         <View tabLabel='Профиль'>

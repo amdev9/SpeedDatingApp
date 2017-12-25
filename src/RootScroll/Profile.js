@@ -49,7 +49,7 @@ export default class Profile extends Component {
           <View style={styles.barContainer}>
             <View style={styles.rightSide}>
               <TouchableOpacity style={styles.circle}
-              // , { user: user }
+              
                 onPress={() => this.props.navigation.navigate('Settings')}>
                 <IconIonicons style={styles.setting} name="ios-settings" size={25} color="#c4c9d1" />
               </TouchableOpacity>
@@ -57,7 +57,7 @@ export default class Profile extends Component {
             </View>
             <View style={styles.leftSide}>
               <TouchableOpacity style={styles.circle}
-              // , { user: user }
+              
                 onPress={() => this.props.navigation.navigate('Edit')}>
                 <IconIonicons style={styles.setting} name="md-create" size={25} color="#c4c9d1" />
               </TouchableOpacity>
@@ -77,7 +77,6 @@ const iconStyles = {
 };
 
 const styles = StyleSheet.create({
-  // header styles
   barText: {
     color: "#c4c9d1",
     fontWeight: 'bold',

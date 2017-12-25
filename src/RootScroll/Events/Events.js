@@ -72,10 +72,9 @@ export default class Events extends Component {
     if (this.state.chosenTable == null) {
       alert('Please select table');
     } else {
-      // alert('U Selecte table ' + this.state.chosenTable);
       this.closeEvent();
       const { navigate } = this.props.navigation;
-      this.props.current_user.table = this.state.chosenTable + 1; // navigation.state.params.person
+      this.props.current_user.table = this.state.chosenTable + 1; 
       navigate('Join', {
         event: this.state.event,
       });
